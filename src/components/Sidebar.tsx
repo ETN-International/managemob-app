@@ -59,7 +59,7 @@ export default function Sidebar({ userName, userEmail, onLogout }: SidebarProps)
       <nav className="sidebar-nav">
         <NavLink to="/" end className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`}>
           <span className="sidebar-nav-icon">🏠</span>
-          <span>Guida</span>
+          <span>{t('nav_home')}</span>
         </NavLink>
         <NavLink to="/dashboard" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`}>
           <span className="sidebar-nav-icon">📊</span>
