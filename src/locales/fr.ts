@@ -7,13 +7,13 @@ const fr: Record<TranslationKeys, string> = {
   nav_individuals: 'Individus',
   nav_travel: 'Détails de voyage',
   nav_transfer: 'Transfert',
-  nav_sendingOrgs: 'Organisations envoyantes',
+  nav_sendingOrgs: 'Organisme d\'envoi',
   nav_accommodation: 'Hébergement',
   nav_financial: 'Info financières',
   nav_mobilityProviders: 'Prestataires de mobilité',
   nav_groups: 'Groupes et participants',
   nav_hostCompanies: 'Entreprises d\'accueil',
-  nav_insurance: 'Assurance',
+  nav_insurance: 'Assurances',
   nav_languageCourseProviders: 'Cours de langue',
 
   // Shared
