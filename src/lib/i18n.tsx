@@ -5,8 +5,10 @@ import it from '../locales/it'
 import fr from '../locales/fr'
 import es from '../locales/es'
 import de from '../locales/de'
+import sv from '../locales/sv'
+import pt from '../locales/pt'
 
-export type Lang = 'en' | 'it' | 'fr' | 'es' | 'de'
+export type Lang = 'en' | 'it' | 'fr' | 'es' | 'de' | 'sv' | 'pt'
 
 export const LANGUAGES: { code: Lang; label: string; flag: string }[] = [
   { code: 'it', label: 'Italiano', flag: '🇮🇹' },
@@ -14,9 +16,11 @@ export const LANGUAGES: { code: Lang; label: string; flag: string }[] = [
   { code: 'fr', label: 'Français', flag: '🇫🇷' },
   { code: 'es', label: 'Español', flag: '🇪🇸' },
   { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
+  { code: 'sv', label: 'Svenska', flag: '🇸🇪' },
+  { code: 'pt', label: 'Português', flag: '🇵🇹' },
 ]
 
-const translations: Record<Lang, Record<TranslationKeys, string>> = { en, it, fr, es, de }
+const translations: Record<Lang, Record<TranslationKeys, string>> = { en, it, fr, es, de, sv, pt }
 
 interface I18nContextType {
   lang: Lang
