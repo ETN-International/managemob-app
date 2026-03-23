@@ -65,6 +65,10 @@ export default function Sidebar({ userName, userEmail, onLogout }: SidebarProps)
           <span className="sidebar-nav-icon">📊</span>
           <span>{t('nav_dashboard')}</span>
         </NavLink>
+        <NavLink to="/calendar" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`}>
+          <span className="sidebar-nav-icon">📅</span>
+          <span>{t('nav_calendar')}</span>
+        </NavLink>
 
         {/* Incoming */}
         <div className="sidebar-section">
