@@ -144,7 +144,7 @@ export default function GuidedHomePage() {
   ]
 
   // Compute completion per phase
-  const phaseStatus = phases.map(phase => {
+  const phaseStatus = phases.map((phase) => {
     const requiredItems = phase.items.filter(i => i.required)
     const done = requiredItems.length === 0
       ? phase.items.every(i => i.count > 0)
@@ -154,7 +154,7 @@ export default function GuidedHomePage() {
   })
 
   const overallProgress = Math.round(
-    (phases.reduce((s, p, i) => s + (phaseStatus[i] === 'done' ? 1 : phaseStatus[i] === 'partial' ? 0.5 : 0), 0) / phases.length) * 100
+    (phases.reduce((s, _p, i) => s + (phaseStatus[i] === 'done' ? 1 : phaseStatus[i] === 'partial' ? 0.5 : 0), 0) / phases.length) * 100
   )
 
   return (
