@@ -1,27 +1,43 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import { useT } from '../lib/i18n'
-import type { FinancialInfo } from '../types'
+import type { Participant } from '../types'
 
 interface Props { typology: 'Incoming' | 'Outgoing' }
 const fmt = (v: number | null) => v != null ? new Intl.NumberFormat('en-EU', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v) : '—'
 
+function calcMargin(p: Participant): number {
+  const g = p.grant_amount || 0
+  const costs = (p.international_transport_cost || 0) + (p.local_transport_cost || 0) + (p.food_allowance_cost || 0) +
+    (p.insurance_cost || 0) + (p.accommodation_1_cost || 0) + (p.accommodation_2_cost || 0) +
+    (p.transfer_cost || 0) + (p.language_course_cost || 0) + (p.cultural_activities_cost || 0) +
+    (p.other_expenses || 0)
+  return g - costs
+}
+
 export default function FinancialInfoPage({ typology }: Props) {
   const { t } = useT()
-  const [records, setRecords] = useState<(FinancialInfo & { participants?: { name: string; surname: string; mobility_typology: string } })[]>([])
+  const [records, setRecords] = useState<Participant[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    supabase.from('financial_info').select('*, participants(name,surname,mobility_typology)').then(({ data }) => {
-      setRecords((data || []).filter((d: any) => d.participants?.mobility_typology === typology))
-      setLoading(false)
-    })
+    supabase.from('participants')
+      .select('*')
+      .eq('mobility_typology', typology)
+      .order('surname')
+      .then(({ data }) => {
+        setRecords((data || []) as Participant[])
+        setLoading(false)
+      })
   }, [typology])
 
-  const filtered = records.filter(r => `${r.participants?.name} ${r.participants?.surname}`.toLowerCase().includes(search.toLowerCase()))
+  const filtered = records.filter(r =>
+    `${r.name} ${r.surname}`.toLowerCase().includes(search.toLowerCase())
+  )
+
   const totalGrant = filtered.reduce((s, r) => s + (r.grant_amount || 0), 0)
-  const totalMargin = filtered.reduce((s, r) => s + (r.margin || 0), 0)
+  const totalMargin = filtered.reduce((s, r) => s + calcMargin(r), 0)
 
   return (
     <div className="page-container">
@@ -41,29 +57,43 @@ export default function FinancialInfoPage({ typology }: Props) {
           <table className="data-table">
             <thead>
               <tr>
-                <th>{t('td_participant')}</th><th>{t('fi_col_grant')}</th><th>{t('fi_col_intl')}</th>
-                <th>{t('fi_col_local')}</th><th>{t('fi_col_food')}</th><th>{t('fi_col_ins')}</th>
-                <th>{t('fi_col_acc')}</th><th>{t('fi_col_acc2')}</th><th>{t('fi_col_tr')}</th>
-                <th>{t('fi_col_other')}</th><th>{t('fi_col_margin')}</th>
+                <th>{t('td_participant')}</th>
+                <th>{t('fi_col_grant')}</th>
+                <th>{t('fi_col_intl')}</th>
+                <th>{t('fi_col_local')}</th>
+                <th>{t('fi_col_food')}</th>
+                <th>{t('fi_col_ins')}</th>
+                <th>{t('fi_col_acc')}</th>
+                <th>{t('fi_col_acc2')}</th>
+                <th>{t('fi_col_tr')}</th>
+                <th>{t('fi_col_lc')}</th>
+                <th>{t('fi_col_cultural')}</th>
+                <th>{t('fi_col_other')}</th>
+                <th>{t('fi_col_margin')}</th>
               </tr>
             </thead>
             <tbody>
-              {filtered.map(r => (
-                <tr key={r.id}>
-                  <td>{r.participants ? `${r.participants.name} ${r.participants.surname}` : '—'}</td>
-                  <td className="num">{fmt(r.grant_amount)}</td>
-                  <td className="num">{fmt(r.international_transport_cost)}</td>
-                  <td className="num">{fmt(r.local_transport_cost)}</td>
-                  <td className="num">{fmt(r.food_allowance_cost)}</td>
-                  <td className="num">{fmt(r.insurance_cost)}</td>
-                  <td className="num">{fmt(r.accommodation_cost)}</td>
-                  <td className="num">{fmt(r.accommodation_2_cost)}</td>
-                  <td className="num">{fmt(r.transfer_cost)}</td>
-                  <td className="num">{fmt(r.other_expenses)}</td>
-                  <td className="num" style={{ fontWeight: 600, color: (r.margin || 0) > 0 ? '#10B981' : '#EF4444' }}>{fmt(r.margin)}</td>
-                </tr>
-              ))}
-              {filtered.length === 0 && <tr><td colSpan={11} className="empty-cell">{t('fi_empty')}</td></tr>}
+              {filtered.map(r => {
+                const margin = calcMargin(r)
+                return (
+                  <tr key={r.id}>
+                    <td>{r.name} {r.surname}</td>
+                    <td className="num">{fmt(r.grant_amount)}</td>
+                    <td className="num">{fmt(r.international_transport_cost)}</td>
+                    <td className="num">{fmt(r.local_transport_cost)}</td>
+                    <td className="num">{fmt(r.food_allowance_cost)}</td>
+                    <td className="num">{fmt(r.insurance_cost)}</td>
+                    <td className="num">{fmt(r.accommodation_1_cost)}</td>
+                    <td className="num">{fmt(r.accommodation_2_cost)}</td>
+                    <td className="num">{fmt(r.transfer_cost)}</td>
+                    <td className="num">{fmt(r.language_course_cost)}</td>
+                    <td className="num">{fmt(r.cultural_activities_cost)}</td>
+                    <td className="num">{fmt(r.other_expenses)}</td>
+                    <td className="num" style={{ fontWeight: 600, color: margin > 0 ? '#10B981' : '#EF4444' }}>{fmt(margin)}</td>
+                  </tr>
+                )
+              })}
+              {filtered.length === 0 && <tr><td colSpan={13} className="empty-cell">{t('fi_empty')}</td></tr>}
             </tbody>
           </table>
         </div>

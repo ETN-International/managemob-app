@@ -4,16 +4,22 @@ import type { LanguageCourseProvider } from '../types'
 import ConfirmDialog from '../components/ConfirmDialog'
 import { useT } from '../lib/i18n'
 
-function FR({ label, name, value, editing, type = 'text', onChange }: { label: string; name: string; value: string | null; editing: boolean; type?: string; onChange: (n: string, v: string) => void }) {
+function FR({ label, name, value, editing, type = 'text', onChange, options }: { label: string; name: string; value: string | null; editing: boolean; type?: string; onChange: (n: string, v: string) => void; options?: string[] }) {
   return (
     <div className="field-row">
       <div className="field-label">{label}</div>
-      {editing ? <input className="form-input form-input-sm" type={type} value={value ?? ''} onChange={e => onChange(name, e.target.value)} /> : <div className="field-value">{value || '—'}</div>}
+      {editing
+        ? options
+          ? <select className="form-input form-input-sm" value={value ?? ''} onChange={e => onChange(name, e.target.value)}><option value="">—</option>{options.map(o => <option key={o} value={o}>{o}</option>)}</select>
+          : <input className="form-input form-input-sm" type={type} value={value ?? ''} onChange={e => onChange(name, e.target.value)} />
+        : <div className="field-value">{value || '—'}</div>}
     </div>
   )
 }
 
-const EMPTY: Partial<LanguageCourseProvider> = { name: '', address: '', city: '', country: '', contact_person: '', email: '', phone: '', language_taught: '' }
+const COUNTRIES = ['Albania', 'Austria', 'Belgium', 'Bosnia and Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Kosovo', 'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Moldova', 'Montenegro', 'Netherlands', 'North Macedonia', 'Norway', 'Poland', 'Portugal', 'Romania', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Turkey', 'Ukraine', 'United Kingdom', 'Other']
+
+const EMPTY: Partial<LanguageCourseProvider> = { name: '', address: '', city: '', country: '', contact_person: '', email: '', phone: '', website: '', language_taught: '' }
 
 export default function LanguageCourseProviderPage() {
   const { t } = useT()
@@ -95,12 +101,13 @@ export default function LanguageCourseProviderPage() {
                 <FR label={t('fld_contact')} name="contact_person" value={v('contact_person')} editing={editing} onChange={handleChange} />
                 <FR label={t('fld_email')} name="email" value={v('email')} editing={editing} type="email" onChange={handleChange} />
                 <FR label={t('fld_phone')} name="phone" value={v('phone')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_website')} name="website" value={v('website')} editing={editing} type="url" onChange={handleChange} />
               </div>
               <div className="detail-section-header">{t('sec_address')}</div>
               <div className="fields-grid">
                 <FR label={t('fld_address')} name="address" value={v('address')} editing={editing} onChange={handleChange} />
                 <FR label={t('fld_city')} name="city" value={v('city')} editing={editing} onChange={handleChange} />
-                <FR label={t('fld_country')} name="country" value={v('country')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_country')} name="country" value={v('country')} editing={editing} onChange={handleChange} options={COUNTRIES} />
               </div>
             </div>
           </div>

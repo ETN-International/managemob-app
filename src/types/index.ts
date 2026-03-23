@@ -59,6 +59,8 @@ export interface Participant {
   accommodation_1_cost: number | null
   accommodation_2_cost: number | null
   transfer_cost: number | null
+  language_course_cost: number | null
+  cultural_activities_cost: number | null
   accommodation_1_start_date: string | null
   accommodation_1_end_date: string | null
   accommodation_1_weeks: number | null
@@ -135,6 +137,7 @@ export interface LanguageCourseProvider {
   contact_person: string | null
   email: string | null
   phone: string | null
+  website: string | null
   language_taught: string | null
   created_at: string | null
 }
@@ -208,8 +211,24 @@ export interface Accommodation {
   price_week_option_3: number | null
   iban: string | null
   swift: string | null
+  bank_sort_code: string | null
   family_rules: string | null
   comments: string | null
+  num_inhabitants: number | null
+  has_infants: boolean | null
+  has_smokers: boolean | null
+  has_wardrobe: boolean | null
+  has_bed: boolean | null
+  bedroom_size_1: string | null
+  bedroom_size_2: string | null
+  bedroom_size_3: string | null
+  bedroom_size_4: string | null
+  num_toilets: number | null
+  has_carpet: boolean | null
+  bathrooms_unisex: string | null
+  has_sheets_towels: boolean | null
+  last_contact_date: string | null
+  family_rating: number | null
   created_at: string | null
 }
 

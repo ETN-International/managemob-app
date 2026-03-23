@@ -454,6 +454,14 @@ a:hover { text-decoration: underline; }
   align-items: center;
   gap: 14px;
 }
+.kpi-clickable {
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.kpi-clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(45,122,111,0.15);
+}
 
 .kpi-icon {
   width: 48px;
