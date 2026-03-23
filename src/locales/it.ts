@@ -7,7 +7,7 @@ const it: Record<TranslationKeys, string> = {
   nav_individuals: 'Individui',
   nav_travel: 'Dettagli Viaggio',
   nav_transfer: 'Transfer',
-  nav_sendingOrgs: 'Organizzazioni Mittenti',
+  nav_sendingOrgs: 'Organizzazioni di Invio',
   nav_accommodation: 'Alloggio',
   nav_financial: 'Info Finanziarie',
   nav_mobilityProviders: 'Provider di Mobilità',
