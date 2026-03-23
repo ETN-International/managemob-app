@@ -55,11 +55,7 @@ export default function SendingOrgsPage() {
 
   return (
     <div className="split-layout">
-<<<<<<< HEAD
       {showConfirm && <ConfirmDialog message={`${t('confirm_delete')} "${selected?.name}"? ${t('confirm_irrev')}`} onConfirm={handleDelete} onCancel={() => setShowConfirm(false)} />}
-=======
-      {showConfirm && <ConfirmDialog message={`${t('confirm_delete_item')} "${selected?.name}"?`} onConfirm={handleDelete} onCancel={() => setShowConfirm(false)} />}
->>>>>>> cac1eb36d15fad1a4788a4c6bef53d679a14536a
       <div className="split-left">
         <div className="split-header"><h2 className="split-title">{t('page_sending_orgs')}</h2><span className="badge-count">{filtered.length}</span></div>
         <div className="search-bar" style={{ display: 'flex', gap: 6 }}>

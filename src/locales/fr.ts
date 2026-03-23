@@ -18,10 +18,6 @@ const fr: Record<TranslationKeys, string> = {
 
   // Shared
   sec_details: 'Détails',
-  sec_notes: 'Notes',
-  fld_website: 'Site Web',
-  fld_contact_email: 'E-mail contact',
-  fld_contact_phone: 'Tél. contact',
   fld_contact_comments: 'Notes contact',
   confirm_delete_item: 'Supprimer',
 
@@ -39,17 +35,6 @@ const fr: Record<TranslationKeys, string> = {
 
   // Mobility providers extra
   sec_msp_org: 'Organisation',
-  sec_msp_contact: 'Contact principal',
-  sec_msp_capacity: 'Capacité et spécialités',
-  fld_pic: 'Numéro PIC',
-  fld_geographic_area: 'Zone géographique',
-  fld_num_offices: 'Nb. de bureaux',
-  fld_num_employees: 'Nb. d\'employés',
-  fld_placement_capacity: 'Capacité de placement',
-  fld_placement_fees: 'Frais de placement',
-  fld_specialty_1: 'Spécialité 1',
-  fld_specialty_2: 'Spécialité 2',
-  fld_specialty_3: 'Spécialité 3',
 
   login_title: 'Managemob',
   login_subtitle: 'Connectez-vous à votre compte',

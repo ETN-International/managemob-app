@@ -17,10 +17,6 @@ const en = {
 
   // Shared
   sec_details: 'Details',
-  sec_notes: 'Notes',
-  fld_website: 'Website',
-  fld_contact_email: 'Contact Email',
-  fld_contact_phone: 'Contact Phone',
   fld_contact_comments: 'Contact Notes',
   confirm_delete_item: 'Delete',
 
@@ -38,17 +34,6 @@ const en = {
 
   // Mobility providers extra
   sec_msp_org: 'Organisation',
-  sec_msp_contact: 'Main Contact',
-  sec_msp_capacity: 'Capacity & Specialties',
-  fld_pic: 'PIC Number',
-  fld_geographic_area: 'Geographic Area',
-  fld_num_offices: 'No. of Offices',
-  fld_num_employees: 'No. of Employees',
-  fld_placement_capacity: 'Placement Capacity',
-  fld_placement_fees: 'Placement Fees',
-  fld_specialty_1: 'Specialty 1',
-  fld_specialty_2: 'Specialty 2',
-  fld_specialty_3: 'Specialty 3',
 
   // Auth
   login_title: 'Managemob',

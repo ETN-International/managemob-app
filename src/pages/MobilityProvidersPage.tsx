@@ -61,11 +61,7 @@ export default function MobilityProvidersPage() {
 
   return (
     <div className="split-layout">
-<<<<<<< HEAD
-      {showConfirm && <ConfirmDialog message={`${t('confirm_delete')} "${selected?.name}"? ${t('confirm_irrev')}`} onConfirm={handleDelete} onCancel={() => setShowConfirm(false)} />}
-=======
       {showConfirm && <ConfirmDialog message={`${t('confirm_delete_item')} "${selected?.name}"?`} onConfirm={handleDelete} onCancel={() => setShowConfirm(false)} />}
->>>>>>> cac1eb36d15fad1a4788a4c6bef53d679a14536a
       <div className="split-left">
         <div className="split-header"><h2 className="split-title">{t('page_mobility_providers')}</h2><span className="badge-count">{filtered.length}</span></div>
         <div className="search-bar" style={{ display: 'flex', gap: 6 }}>
@@ -95,11 +91,7 @@ export default function MobilityProvidersPage() {
             {!isNew && selected && <div className="detail-name-header"><div className="detail-avatar" style={{ background: '#38BDF822', color: '#0284C7' }}>{selected.name.charAt(0)}</div><div><h2 className="detail-name">{selected.name}</h2><p className="detail-id">{t('page_mobility_providers')}</p></div></div>}
             {isNew && <div className="detail-name-header"><div className="detail-avatar" style={{ background: '#0284C7' }}>+</div><div><h2 className="detail-name">{t('msp_new')}</h2></div></div>}
             <div className="detail-sections">
-<<<<<<< HEAD
-              <div className="detail-section-header">{t('sec_so_details')}</div>
-=======
               <div className="detail-section-header">{t('sec_msp_org')}</div>
->>>>>>> cac1eb36d15fad1a4788a4c6bef53d679a14536a
               <div className="fields-grid">
                 <FR label={t('fld_name')} name="name" value={v('name')} editing={editing} onChange={handleChange} />
                 <FR label={t('fld_pic')} name="pic_number" value={v('pic_number')} editing={editing} onChange={handleChange} />
@@ -117,17 +109,10 @@ export default function MobilityProvidersPage() {
               </div>
               <div className="detail-section-header">{t('sec_msp_contact')}</div>
               <div className="fields-grid">
-<<<<<<< HEAD
-                <FR label={t('fld_contact_person')} name="contact_person" value={v('contact_person')} editing={editing} onChange={handleChange} />
-                <FR label={t('fld_contact_email')} name="contact_email" value={v('contact_email')} editing={editing} type="email" onChange={handleChange} />
-                <FR label={t('fld_contact_phone')} name="contact_phone" value={v('contact_phone')} editing={editing} onChange={handleChange} />
-                <FR label={t('fld_contact_notes')} name="contact_comments" value={v('contact_comments')} editing={editing} onChange={handleChange} />
-=======
                 <FR label={t('fld_contact')} name="contact_person" value={v('contact_person')} editing={editing} onChange={handleChange} />
                 <FR label={t('fld_contact_email')} name="contact_email" value={v('contact_email')} editing={editing} type="email" onChange={handleChange} />
                 <FR label={t('fld_contact_phone')} name="contact_phone" value={v('contact_phone')} editing={editing} onChange={handleChange} />
                 <FR label={t('fld_contact_comments')} name="contact_comments" value={v('contact_comments')} editing={editing} onChange={handleChange} />
->>>>>>> cac1eb36d15fad1a4788a4c6bef53d679a14536a
               </div>
               <div className="detail-section-header">{t('sec_msp_capacity')}</div>
               <div className="fields-grid">
