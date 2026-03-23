@@ -149,7 +149,7 @@ export default function AccommodationPage() {
                 <FRBool label={t('fld_acc_desk')} name="has_desk" value={vb('has_desk')} editing={editing} onChange={handleChange} />
                 <FRBool label={t('fld_acc_internet')} name="has_internet" value={vb('has_internet')} editing={editing} onChange={handleChange} />
                 <FRBool label={t('fld_acc_washing')} name="has_washing_machine" value={vb('has_washing_machine')} editing={editing} onChange={handleChange} />
-                <FR label={t('fld_acc_bathrooms')} name="bathrooms_type" value={v('bathrooms_type')} editing={editing} onChange={handleChange} options={['Private Bathrooms', 'Shared Bathrooms']} />
+                <FR label={t('fld_acc_bathrooms')} name="bathrooms_type" value={v('bathrooms_type')} editing={editing} onChange={handleChange} options={[t('acc_bathroom_private'), t('acc_bathroom_shared')]} />
                 <FR label={t('fld_acc_toilets')} name="num_toilets" value={v('num_toilets')} editing={editing} type="number" onChange={handleChange} />
                 <FR label={t('fld_acc_unisex')} name="bathrooms_unisex" value={v('bathrooms_unisex')} editing={editing} onChange={handleChange} options={['Unisex', 'Reserved']} />
                 <FRBool label={t('fld_acc_pets')} name="has_pets" value={vb('has_pets')} editing={editing} onChange={handleChange} />
