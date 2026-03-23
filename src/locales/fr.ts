@@ -13,7 +13,7 @@ const fr: Record<TranslationKeys, string> = {
   nav_mobilityProviders: 'Prestataires de mobilité',
   nav_groups: 'Groupes et participants',
   nav_hostCompanies: 'Entreprises d\'accueil',
-  nav_insurance: 'Assurance',
+  nav_insurance: 'Assurances',
   nav_languageCourseProviders: 'Cours de langue',
 
   login_title: 'Managemob',

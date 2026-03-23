@@ -12,6 +12,8 @@ const sv = {
   nav_mobilityProviders: 'Mobilitetsaktörer',
   nav_groups: 'Grupper och deltagare',
   nav_hostCompanies: 'Värdföretag',
+  nav_insurance: 'Försäkringar',
+  nav_languageCourseProviders: 'Språkkursleverantörer',
 
   // Auth
   login_title: 'Managemob',
