@@ -13,6 +13,43 @@ const pt: Record<TranslationKeys, string> = {
   nav_mobilityProviders: 'Fornecedores de mobilidade',
   nav_groups: 'Grupos e participantes',
   nav_hostCompanies: 'Empresas de acolhimento',
+  nav_insurance: 'Seguro',
+  nav_languageCourseProviders: 'Fornecedores de cursos de idiomas',
+
+  // Shared
+  sec_details: 'Detalhes',
+  sec_notes: 'Notas',
+  fld_website: 'Website',
+  fld_contact_email: 'Email de contacto',
+  fld_contact_phone: 'Tel. de contacto',
+  fld_contact_comments: 'Notas de contacto',
+  confirm_delete_item: 'Eliminar',
+
+  // Insurance page
+  page_insurance: 'Seguro',
+  ins_new: 'Novo fornecedor de seguro',
+  ins_hint: 'Selecione ou crie um fornecedor',
+  sec_ins_details: 'Detalhes do fornecedor',
+
+  // Language Course Provider page
+  page_lc_providers: 'Fornecedores de cursos de idiomas',
+  lcp_new: 'Novo fornecedor',
+  lcp_hint: 'Selecione ou crie um fornecedor',
+  fld_language_taught: 'Língua ensinada',
+
+  // Mobility providers extra
+  sec_msp_org: 'Organização',
+  sec_msp_contact: 'Contacto principal',
+  sec_msp_capacity: 'Capacidade e especialidades',
+  fld_pic: 'Número PIC',
+  fld_geographic_area: 'Área geográfica',
+  fld_num_offices: 'N.º de escritórios',
+  fld_num_employees: 'N.º de funcionários',
+  fld_placement_capacity: 'Capacidade de colocação',
+  fld_placement_fees: 'Taxas de colocação',
+  fld_specialty_1: 'Especialidade 1',
+  fld_specialty_2: 'Especialidade 2',
+  fld_specialty_3: 'Especialidade 3',
 
   login_title: 'Managemob',
   login_subtitle: 'Inicie sessão na sua conta',

@@ -12,6 +12,43 @@ const sv = {
   nav_mobilityProviders: 'Mobilitetsaktörer',
   nav_groups: 'Grupper och deltagare',
   nav_hostCompanies: 'Värdföretag',
+  nav_insurance: 'Försäkring',
+  nav_languageCourseProviders: 'Språkkursleverantörer',
+
+  // Shared
+  sec_details: 'Detaljer',
+  sec_notes: 'Anteckningar',
+  fld_website: 'Hemsida',
+  fld_contact_email: 'Kontakt-e-post',
+  fld_contact_phone: 'Kontakttelefon',
+  fld_contact_comments: 'Kontaktnoteringar',
+  confirm_delete_item: 'Ta bort',
+
+  // Insurance page
+  page_insurance: 'Försäkring',
+  ins_new: 'Ny försäkringsleverantör',
+  ins_hint: 'Välj eller skapa en leverantör',
+  sec_ins_details: 'Leverantörsinformation',
+
+  // Language Course Provider page
+  page_lc_providers: 'Språkkursleverantörer',
+  lcp_new: 'Ny leverantör',
+  lcp_hint: 'Välj eller skapa en leverantör',
+  fld_language_taught: 'Undervisat språk',
+
+  // Mobility providers extra
+  sec_msp_org: 'Organisation',
+  sec_msp_contact: 'Huvudkontakt',
+  sec_msp_capacity: 'Kapacitet och specialiteter',
+  fld_pic: 'PIC-nummer',
+  fld_geographic_area: 'Geografiskt område',
+  fld_num_offices: 'Antal kontor',
+  fld_num_employees: 'Antal anställda',
+  fld_placement_capacity: 'Placeringskapacitet',
+  fld_placement_fees: 'Placeringsavgifter',
+  fld_specialty_1: 'Specialitet 1',
+  fld_specialty_2: 'Specialitet 2',
+  fld_specialty_3: 'Specialitet 3',
 
   // Auth
   login_title: 'Managemob',

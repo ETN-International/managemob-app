@@ -15,6 +15,41 @@ const en = {
   nav_insurance: 'Insurance',
   nav_languageCourseProviders: 'Language Course Providers',
 
+  // Shared
+  sec_details: 'Details',
+  sec_notes: 'Notes',
+  fld_website: 'Website',
+  fld_contact_email: 'Contact Email',
+  fld_contact_phone: 'Contact Phone',
+  fld_contact_comments: 'Contact Notes',
+  confirm_delete_item: 'Delete',
+
+  // Insurance page
+  page_insurance: 'Insurance',
+  ins_new: 'New Insurance Provider',
+  ins_hint: 'Select a provider or create a new one',
+  sec_ins_details: 'Provider Details',
+
+  // Language Course Provider page
+  page_lc_providers: 'Language Course Providers',
+  lcp_new: 'New Provider',
+  lcp_hint: 'Select a provider or create a new one',
+  fld_language_taught: 'Language Taught',
+
+  // Mobility providers extra
+  sec_msp_org: 'Organisation',
+  sec_msp_contact: 'Main Contact',
+  sec_msp_capacity: 'Capacity & Specialties',
+  fld_pic: 'PIC Number',
+  fld_geographic_area: 'Geographic Area',
+  fld_num_offices: 'No. of Offices',
+  fld_num_employees: 'No. of Employees',
+  fld_placement_capacity: 'Placement Capacity',
+  fld_placement_fees: 'Placement Fees',
+  fld_specialty_1: 'Specialty 1',
+  fld_specialty_2: 'Specialty 2',
+  fld_specialty_3: 'Specialty 3',
+
   // Auth
   login_title: 'Managemob',
   login_subtitle: 'Sign in to your account',

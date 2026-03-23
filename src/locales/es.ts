@@ -16,6 +16,41 @@ const es: Record<TranslationKeys, string> = {
   nav_insurance: 'Seguro',
   nav_languageCourseProviders: 'Proveedores de cursos de idiomas',
 
+  // Shared
+  sec_details: 'Detalles',
+  sec_notes: 'Notas',
+  fld_website: 'Sitio Web',
+  fld_contact_email: 'Email de contacto',
+  fld_contact_phone: 'Tel. de contacto',
+  fld_contact_comments: 'Notas de contacto',
+  confirm_delete_item: 'Eliminar',
+
+  // Insurance page
+  page_insurance: 'Seguro',
+  ins_new: 'Nuevo proveedor de seguro',
+  ins_hint: 'Selecciona o crea un proveedor',
+  sec_ins_details: 'Detalles del proveedor',
+
+  // Language Course Provider page
+  page_lc_providers: 'Proveedores de cursos de idiomas',
+  lcp_new: 'Nuevo proveedor',
+  lcp_hint: 'Selecciona o crea un proveedor',
+  fld_language_taught: 'Idioma enseñado',
+
+  // Mobility providers extra
+  sec_msp_org: 'Organización',
+  sec_msp_contact: 'Contacto principal',
+  sec_msp_capacity: 'Capacidad y especialidades',
+  fld_pic: 'Número PIC',
+  fld_geographic_area: 'Área geográfica',
+  fld_num_offices: 'N.º de oficinas',
+  fld_num_employees: 'N.º de empleados',
+  fld_placement_capacity: 'Capacidad de colocación',
+  fld_placement_fees: 'Honorarios de colocación',
+  fld_specialty_1: 'Especialidad 1',
+  fld_specialty_2: 'Especialidad 2',
+  fld_specialty_3: 'Especialidad 3',
+
   login_title: 'Managemob',
   login_subtitle: 'Inicia sesión en tu cuenta',
   login_email: 'Correo electrónico',
