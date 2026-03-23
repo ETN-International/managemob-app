@@ -220,6 +220,31 @@ const en = {
   fld_acc_price3: 'Price/week 3',
   fld_acc_rules: 'House Rules',
 
+  // Field labels - Mobility Service Provider
+  fld_pic: 'PIC Code',
+  fld_geographic_area: 'Geographic Area',
+  fld_website: 'Website',
+  fld_contact_person: 'Contact Person',
+  fld_contact_email: 'Contact Email',
+  fld_contact_phone: 'Contact Phone',
+  fld_contact_notes: 'Contact Notes',
+  fld_num_offices: 'No. of Offices',
+  fld_num_employees: 'No. of Employees',
+  fld_placement_capacity: 'Placement Capacity',
+  fld_placement_fees: 'Placement Fees',
+  fld_specialty_1: 'Specialty 1',
+  fld_specialty_2: 'Specialty 2',
+  fld_specialty_3: 'Specialty 3',
+
+  // Sections - Mobility Service Provider
+  sec_msp_contact: 'Main Contact',
+  sec_msp_capacity: 'Capacity & Specialties',
+  sec_notes: 'Notes',
+
+  // Accommodation options
+  acc_bathroom_private: 'Private Bathrooms',
+  acc_bathroom_shared: 'Shared Bathrooms',
+
   // Sections - Accommodation entity
   sec_acc_basic: 'Basic Information',
   sec_acc_features: 'Features',
