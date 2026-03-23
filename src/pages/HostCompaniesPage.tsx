@@ -54,12 +54,15 @@ export default function HostCompaniesPage() {
   }
 
   const handleDelete = async () => { if (!selected) return; await supabase.from('host_companies').delete().eq('id', selected.id); setSelected(null); setShowConfirm(false); await load() }
-
   const d = (field: keyof HostCompany) => editing ? (editData[field] as string ?? '') : (selected?.[field] as string ?? '')
 
   return (
     <div className="split-layout">
+<<<<<<< HEAD
       {showConfirm && <ConfirmDialog message={`${t('confirm_delete')} "${selected?.name}"? ${t('confirm_irrev')}`} onConfirm={handleDelete} onCancel={() => setShowConfirm(false)} />}
+=======
+      {showConfirm && <ConfirmDialog message={`${t('confirm_delete_item')} "${selected?.name}"?`} onConfirm={handleDelete} onCancel={() => setShowConfirm(false)} />}
+>>>>>>> cac1eb36d15fad1a4788a4c6bef53d679a14536a
       <div className="split-left">
         <div className="split-header"><h2 className="split-title">{t('page_host_companies')}</h2><span className="badge-count">{filtered.length}</span></div>
         <div className="search-bar" style={{ display: 'flex', gap: 6 }}>
@@ -78,7 +81,6 @@ export default function HostCompaniesPage() {
           </div>
         )}
       </div>
-
       <div className="split-right">
         {(selected || isNew) ? (
           <div className="detail-panel">
@@ -92,7 +94,11 @@ export default function HostCompaniesPage() {
             <div className="detail-sections">
               <div className="detail-section-header">{t('sec_hc_details')}</div>
               <div className="fields-grid">
+<<<<<<< HEAD
                 <FR label={t('fld_name')} name="name" value={d('name')} editing={editing} onChange={handleChange} />
+=======
+                <FR label={t('fld_company_name')} name="name" value={d('name')} editing={editing} onChange={handleChange} />
+>>>>>>> cac1eb36d15fad1a4788a4c6bef53d679a14536a
                 <FR label={t('fld_address')} name="address" value={d('address')} editing={editing} onChange={handleChange} />
                 <FR label={t('fld_city')} name="city" value={d('city')} editing={editing} onChange={handleChange} />
                 <FR label={t('fld_sector')} name="sector" value={d('sector')} editing={editing} onChange={handleChange} />

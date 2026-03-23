@@ -15,6 +15,41 @@ const en = {
   nav_insurance: 'Insurance',
   nav_languageCourseProviders: 'Language Course Providers',
 
+  // Shared
+  sec_details: 'Details',
+  sec_notes: 'Notes',
+  fld_website: 'Website',
+  fld_contact_email: 'Contact Email',
+  fld_contact_phone: 'Contact Phone',
+  fld_contact_comments: 'Contact Notes',
+  confirm_delete_item: 'Delete',
+
+  // Insurance page
+  page_insurance: 'Insurance',
+  ins_new: 'New Insurance Provider',
+  ins_hint: 'Select a provider or create a new one',
+  sec_ins_details: 'Provider Details',
+
+  // Language Course Provider page
+  page_lc_providers: 'Language Course Providers',
+  lcp_new: 'New Provider',
+  lcp_hint: 'Select a provider or create a new one',
+  fld_language_taught: 'Language Taught',
+
+  // Mobility providers extra
+  sec_msp_org: 'Organisation',
+  sec_msp_contact: 'Main Contact',
+  sec_msp_capacity: 'Capacity & Specialties',
+  fld_pic: 'PIC Number',
+  fld_geographic_area: 'Geographic Area',
+  fld_num_offices: 'No. of Offices',
+  fld_num_employees: 'No. of Employees',
+  fld_placement_capacity: 'Placement Capacity',
+  fld_placement_fees: 'Placement Fees',
+  fld_specialty_1: 'Specialty 1',
+  fld_specialty_2: 'Specialty 2',
+  fld_specialty_3: 'Specialty 3',
+
   // Auth
   login_title: 'Managemob',
   login_subtitle: 'Sign in to your account',
@@ -219,6 +254,22 @@ const en = {
   fld_acc_board3: 'Option 3',
   fld_acc_price3: 'Price/week 3',
   fld_acc_rules: 'House Rules',
+  fld_acc_inhabitants: 'No. of Inhabitants',
+  fld_acc_infants: 'Infants',
+  fld_acc_smokers: 'Smokers',
+  fld_acc_wardrobe: 'Wardrobe',
+  fld_acc_bed: 'Bed Provided',
+  fld_acc_bedroom_size1: 'Bedroom 1 Size',
+  fld_acc_bedroom_size2: 'Bedroom 2 Size',
+  fld_acc_bedroom_size3: 'Bedroom 3 Size',
+  fld_acc_bedroom_size4: 'Bedroom 4 Size',
+  fld_acc_toilets: 'No. of Toilets',
+  fld_acc_carpet: 'Carpet',
+  fld_acc_unisex: 'Unisex / Reserved',
+  fld_acc_sheets: 'Sheets & Towels',
+  fld_acc_sort_code: 'Sort Code',
+  fld_acc_last_contact: 'Last Contact',
+  fld_acc_rating: 'Family Rating',
 
   // Field labels - Mobility Service Provider
   fld_pic: 'PIC Code',
@@ -248,6 +299,7 @@ const en = {
   // Sections - Accommodation entity
   sec_acc_basic: 'Basic Information',
   sec_acc_features: 'Features',
+  sec_acc_extra: 'Additional Details',
   sec_acc_board: 'Board Options',
   sec_acc_bank: 'Banking',
   sec_acc_rules: 'House Rules',
@@ -310,6 +362,8 @@ const en = {
   fi_col_acc2: 'Accom. 2',
   fi_col_tr: 'Transfer',
   fi_col_other: 'Other',
+  fi_col_lc: 'Lang. Course',
+  fi_col_cultural: 'Cultural',
   fi_col_margin: 'Margin',
 
   // Confirm delete generic

@@ -7,6 +7,7 @@ import { useT } from '../lib/i18n'
 const typologyColors: Record<string, string> = { 'Hostel': '#2D7A6F', 'Hotel': '#1D72B8', 'B&B': '#F59E0B', 'Host Family': '#10B981', 'Shared Flat': '#8B5CF6', 'Lodger': '#EC4899' }
 const TYPOLOGIES = ['Hostel', 'Hotel', 'B&B', 'Host Family', 'Shared Flat', 'Lodger']
 const BOARD_OPTIONS = ['Bed and Breakfast (B&B)', 'Half-Board', 'Full-Board', 'Self-catering']
+const RATING_OPTIONS = ['1', '2', '3', '4', '5']
 
 function FR({ label, name, value, editing, type = 'text', onChange, options }: { label: string; name: string; value: string | number | null; editing: boolean; type?: string; onChange: (n: string, v: string) => void; options?: string[] }) {
   return (
@@ -21,16 +22,28 @@ function FR({ label, name, value, editing, type = 'text', onChange, options }: {
   )
 }
 
+<<<<<<< HEAD
 function FRBool({ label, name, value, editing, onChange, yesLabel, noLabel }: { label: string; name: string; value: boolean | null; editing: boolean; onChange: (n: string, v: string) => void; yesLabel: string; noLabel: string }) {
+=======
+function FRBool({ label, name, value, editing, onChange }: { label: string; name: string; value: boolean | null; editing: boolean; onChange: (n: string, v: string) => void }) {
+  const { t } = useT()
+>>>>>>> cac1eb36d15fad1a4788a4c6bef53d679a14536a
   return (
     <div className="field-row">
       <div className="field-label">{label}</div>
       {editing
+<<<<<<< HEAD
         ? <select className="form-input form-input-sm" value={value === true ? 'true' : value === false ? 'false' : ''} onChange={e => onChange(name, e.target.value)}><option value="">—</option><option value="true">{yesLabel}</option><option value="false">{noLabel}</option></select>
         : <div className="field-value">{value === true ? yesLabel : value === false ? noLabel : '—'}</div>}
+=======
+        ? <select className="form-input form-input-sm" value={value === true ? 'true' : value === false ? 'false' : ''} onChange={e => onChange(name, e.target.value)}><option value="">—</option><option value="true">{t('yes')}</option><option value="false">{t('no')}</option></select>
+        : <div className="field-value">{value === true ? t('yes') : value === false ? t('no') : '—'}</div>}
+>>>>>>> cac1eb36d15fad1a4788a4c6bef53d679a14536a
     </div>
   )
 }
+
+const BOOL_FIELDS = ['has_desk', 'has_internet', 'has_washing_machine', 'has_pets', 'has_air_conditioning', 'has_heating', 'has_infants', 'has_smokers', 'has_wardrobe', 'has_bed', 'has_carpet', 'has_sheets_towels']
 
 const EMPTY: Partial<Accommodation> = { name: '', typology: '', contact_person: '', email: '', phone: '', address: '', postcode: '', city: '', country: '' }
 
@@ -59,9 +72,7 @@ export default function AccommodationPage() {
 
   const handleChange = (n: string, v: string) => {
     setEditData(p => {
-      if (n === 'has_desk' || n === 'has_internet' || n === 'has_washing_machine' || n === 'has_pets' || n === 'has_air_conditioning' || n === 'has_heating') {
-        return { ...p, [n]: v === '' ? null : v === 'true' }
-      }
+      if (BOOL_FIELDS.includes(n)) return { ...p, [n]: v === '' ? null : v === 'true' }
       return { ...p, [n]: v === '' ? null : v }
     })
   }
@@ -87,7 +98,11 @@ export default function AccommodationPage() {
 
   return (
     <div className="split-layout">
+<<<<<<< HEAD
       {showConfirm && <ConfirmDialog message={`${t('confirm_delete')} "${selected?.name}"? ${t('confirm_irrev')}`} onConfirm={handleDelete} onCancel={() => setShowConfirm(false)} />}
+=======
+      {showConfirm && <ConfirmDialog message={`${t('confirm_delete_item')} "${selected?.name}"?`} onConfirm={handleDelete} onCancel={() => setShowConfirm(false)} />}
+>>>>>>> cac1eb36d15fad1a4788a4c6bef53d679a14536a
       <div className="split-left">
         <div className="split-header"><h2 className="split-title">{t('page_accommodation')}</h2><span className="badge-count">{filtered.length}</span></div>
         <div className="search-bar" style={{ display: 'flex', gap: 6 }}>
@@ -117,7 +132,14 @@ export default function AccommodationPage() {
             </div>
             {!isNew && selected && <div className="detail-name-header"><div className="detail-avatar" style={{ background: `${color(selected.typology)}22`, color: color(selected.typology) }}>{(selected.typology || '?').charAt(0)}</div><div><h2 className="detail-name">{selected.name}</h2><p className="detail-id">{selected.typology} · {selected.city}</p></div></div>}
             {isNew && <div className="detail-name-header"><div className="detail-avatar" style={{ background: '#1D72B822', color: '#1D72B8' }}>+</div><div><h2 className="detail-name">{t('acc_new_title')}</h2></div></div>}
+<<<<<<< HEAD
             <div className="detail-sections">
+=======
+
+            <div className="detail-sections">
+
+              {/* Basic */}
+>>>>>>> cac1eb36d15fad1a4788a4c6bef53d679a14536a
               <div className="detail-section-header">{t('sec_acc_basic')}</div>
               <div className="fields-grid">
                 <FR label={t('fld_acc_name')} name="name" value={v('name')} editing={editing} onChange={handleChange} />
@@ -127,6 +149,10 @@ export default function AccommodationPage() {
                 <FR label={t('fld_acc_phone')} name="phone" value={v('phone')} editing={editing} onChange={handleChange} />
                 <FR label={t('fld_acc_mobile')} name="mobile_phone" value={v('mobile_phone')} editing={editing} onChange={handleChange} />
               </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> cac1eb36d15fad1a4788a4c6bef53d679a14536a
               <div className="detail-section-header">{t('sec_address')}</div>
               <div className="fields-grid">
                 <FR label={t('fld_address')} name="address" value={v('address')} editing={editing} onChange={handleChange} />
@@ -134,10 +160,16 @@ export default function AccommodationPage() {
                 <FR label={t('fld_city')} name="city" value={v('city')} editing={editing} onChange={handleChange} />
                 <FR label={t('fld_country')} name="country" value={v('country')} editing={editing} onChange={handleChange} />
               </div>
+<<<<<<< HEAD
+=======
+
+              {/* Features */}
+>>>>>>> cac1eb36d15fad1a4788a4c6bef53d679a14536a
               <div className="detail-section-header">{t('sec_acc_features')}</div>
               <div className="fields-grid">
                 <FR label={t('fld_acc_bedrooms')} name="num_bedrooms" value={v('num_bedrooms')} editing={editing} type="number" onChange={handleChange} />
                 <FR label={t('fld_acc_size')} name="size_m2" value={v('size_m2')} editing={editing} type="number" onChange={handleChange} />
+<<<<<<< HEAD
                 <FRBool label={t('fld_acc_desk')} name="has_desk" value={vb('has_desk')} editing={editing} onChange={handleChange} yesLabel={t('yes')} noLabel={t('no')} />
                 <FRBool label={t('fld_acc_internet')} name="has_internet" value={vb('has_internet')} editing={editing} onChange={handleChange} yesLabel={t('yes')} noLabel={t('no')} />
                 <FRBool label={t('fld_acc_washing')} name="has_washing_machine" value={vb('has_washing_machine')} editing={editing} onChange={handleChange} yesLabel={t('yes')} noLabel={t('no')} />
@@ -159,7 +191,57 @@ export default function AccommodationPage() {
               <div className="fields-grid">
                 <FR label={t('fld_iban')} name="iban" value={v('iban')} editing={editing} onChange={handleChange} />
                 <FR label={t('fld_swift')} name="swift" value={v('swift')} editing={editing} onChange={handleChange} />
+=======
+                <FRBool label={t('fld_acc_desk')} name="has_desk" value={vb('has_desk')} editing={editing} onChange={handleChange} />
+                <FRBool label={t('fld_acc_internet')} name="has_internet" value={vb('has_internet')} editing={editing} onChange={handleChange} />
+                <FRBool label={t('fld_acc_washing')} name="has_washing_machine" value={vb('has_washing_machine')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_acc_bathrooms')} name="bathrooms_type" value={v('bathrooms_type')} editing={editing} onChange={handleChange} options={['Private Bathrooms', 'Shared Bathrooms']} />
+                <FR label={t('fld_acc_toilets')} name="num_toilets" value={v('num_toilets')} editing={editing} type="number" onChange={handleChange} />
+                <FR label={t('fld_acc_unisex')} name="bathrooms_unisex" value={v('bathrooms_unisex')} editing={editing} onChange={handleChange} options={['Unisex', 'Reserved']} />
+                <FRBool label={t('fld_acc_pets')} name="has_pets" value={vb('has_pets')} editing={editing} onChange={handleChange} />
+                <FRBool label={t('fld_acc_ac')} name="has_air_conditioning" value={vb('has_air_conditioning')} editing={editing} onChange={handleChange} />
+                <FRBool label={t('fld_acc_heating')} name="has_heating" value={vb('has_heating')} editing={editing} onChange={handleChange} />
+                <FRBool label={t('fld_acc_carpet')} name="has_carpet" value={vb('has_carpet')} editing={editing} onChange={handleChange} />
+                <FRBool label={t('fld_acc_sheets')} name="has_sheets_towels" value={vb('has_sheets_towels')} editing={editing} onChange={handleChange} />
+                <FRBool label={t('fld_acc_wardrobe')} name="has_wardrobe" value={vb('has_wardrobe')} editing={editing} onChange={handleChange} />
+                <FRBool label={t('fld_acc_bed')} name="has_bed" value={vb('has_bed')} editing={editing} onChange={handleChange} />
               </div>
+
+              {/* Bedroom sizes */}
+              <div className="detail-section-header">{t('sec_acc_extra')}</div>
+              <div className="fields-grid">
+                <FR label={t('fld_acc_inhabitants')} name="num_inhabitants" value={v('num_inhabitants')} editing={editing} type="number" onChange={handleChange} />
+                <FRBool label={t('fld_acc_infants')} name="has_infants" value={vb('has_infants')} editing={editing} onChange={handleChange} />
+                <FRBool label={t('fld_acc_smokers')} name="has_smokers" value={vb('has_smokers')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_acc_bedroom_size1')} name="bedroom_size_1" value={v('bedroom_size_1')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_acc_bedroom_size2')} name="bedroom_size_2" value={v('bedroom_size_2')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_acc_bedroom_size3')} name="bedroom_size_3" value={v('bedroom_size_3')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_acc_bedroom_size4')} name="bedroom_size_4" value={v('bedroom_size_4')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_acc_last_contact')} name="last_contact_date" value={v('last_contact_date')} editing={editing} type="date" onChange={handleChange} />
+                <FR label={t('fld_acc_rating')} name="family_rating" value={v('family_rating')} editing={editing} onChange={handleChange} options={RATING_OPTIONS} />
+              </div>
+
+              {/* Board options */}
+              <div className="detail-section-header">{t('sec_acc_board')}</div>
+              <div className="fields-grid">
+                <FR label={t('fld_acc_board1')} name="board_option_1" value={v('board_option_1')} editing={editing} onChange={handleChange} options={BOARD_OPTIONS} />
+                <FR label={t('fld_acc_price1')} name="price_week_option_1" value={v('price_week_option_1')} editing={editing} type="number" onChange={handleChange} />
+                <FR label={t('fld_acc_board2')} name="board_option_2" value={v('board_option_2')} editing={editing} onChange={handleChange} options={BOARD_OPTIONS} />
+                <FR label={t('fld_acc_price2')} name="price_week_option_2" value={v('price_week_option_2')} editing={editing} type="number" onChange={handleChange} />
+                <FR label={t('fld_acc_board3')} name="board_option_3" value={v('board_option_3')} editing={editing} onChange={handleChange} options={BOARD_OPTIONS} />
+                <FR label={t('fld_acc_price3')} name="price_week_option_3" value={v('price_week_option_3')} editing={editing} type="number" onChange={handleChange} />
+>>>>>>> cac1eb36d15fad1a4788a4c6bef53d679a14536a
+              </div>
+
+              {/* Banking */}
+              <div className="detail-section-header">{t('sec_acc_bank')}</div>
+              <div className="fields-grid">
+                <FR label={t('fld_iban')} name="iban" value={v('iban')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_swift')} name="swift" value={v('swift')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_acc_sort_code')} name="bank_sort_code" value={v('bank_sort_code')} editing={editing} onChange={handleChange} />
+              </div>
+
+              {/* House rules */}
               {(editing || selected?.family_rules) && (
                 <>
                   <div className="detail-section-header">{t('sec_acc_rules')}</div>
@@ -170,6 +252,7 @@ export default function AccommodationPage() {
                   </div>
                 </>
               )}
+
             </div>
           </div>
         ) : (

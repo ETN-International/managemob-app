@@ -4,6 +4,7 @@ import { supabase } from './lib/supabase'
 import type { Session } from '@supabase/supabase-js'
 import Login from './pages/Login'
 import Layout from './components/Layout'
+import GuidedHomePage from './pages/GuidedHomePage'
 import Dashboard from './pages/Dashboard'
 import ParticipantsPage from './pages/ParticipantsPage'
 import HostCompaniesPage from './pages/HostCompaniesPage'
@@ -51,7 +52,8 @@ function App() {
           path="/"
           element={session ? <Layout session={session} /> : <Navigate to="/login" />}
         >
-          <Route index element={<Dashboard />} />
+          <Route index element={<GuidedHomePage />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="incoming/individuals" element={<ParticipantsPage typology="Incoming" />} />
           <Route path="incoming/travel" element={<TravelDetailsPage typology="Incoming" />} />
           <Route path="incoming/transfer" element={<TransferPage />} />

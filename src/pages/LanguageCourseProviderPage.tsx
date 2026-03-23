@@ -2,19 +2,27 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import type { LanguageCourseProvider } from '../types'
 import ConfirmDialog from '../components/ConfirmDialog'
+import { useT } from '../lib/i18n'
 
-function FR({ label, name, value, editing, type = 'text', onChange }: { label: string; name: string; value: string | null; editing: boolean; type?: string; onChange: (n: string, v: string) => void }) {
+function FR({ label, name, value, editing, type = 'text', onChange, options }: { label: string; name: string; value: string | null; editing: boolean; type?: string; onChange: (n: string, v: string) => void; options?: string[] }) {
   return (
     <div className="field-row">
       <div className="field-label">{label}</div>
-      {editing ? <input className="form-input form-input-sm" type={type} value={value ?? ''} onChange={e => onChange(name, e.target.value)} /> : <div className="field-value">{value || '—'}</div>}
+      {editing
+        ? options
+          ? <select className="form-input form-input-sm" value={value ?? ''} onChange={e => onChange(name, e.target.value)}><option value="">—</option>{options.map(o => <option key={o} value={o}>{o}</option>)}</select>
+          : <input className="form-input form-input-sm" type={type} value={value ?? ''} onChange={e => onChange(name, e.target.value)} />
+        : <div className="field-value">{value || '—'}</div>}
     </div>
   )
 }
 
-const EMPTY: Partial<LanguageCourseProvider> = { name: '', address: '', city: '', country: '', contact_person: '', email: '', phone: '', language_taught: '' }
+const COUNTRIES = ['Albania', 'Austria', 'Belgium', 'Bosnia and Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Kosovo', 'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Moldova', 'Montenegro', 'Netherlands', 'North Macedonia', 'Norway', 'Poland', 'Portugal', 'Romania', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Turkey', 'Ukraine', 'United Kingdom', 'Other']
+
+const EMPTY: Partial<LanguageCourseProvider> = { name: '', address: '', city: '', country: '', contact_person: '', email: '', phone: '', website: '', language_taught: '' }
 
 export default function LanguageCourseProviderPage() {
+  const { t } = useT()
   const [items, setItems] = useState<LanguageCourseProvider[]>([])
   const [selected, setSelected] = useState<LanguageCourseProvider | null>(null)
   const [search, setSearch] = useState('')
@@ -53,12 +61,12 @@ export default function LanguageCourseProviderPage() {
 
   return (
     <div className="split-layout">
-      {showConfirm && <ConfirmDialog message={`Eliminare "${selected?.name}"?`} onConfirm={handleDelete} onCancel={() => setShowConfirm(false)} />}
+      {showConfirm && <ConfirmDialog message={`${t('confirm_delete_item')} "${selected?.name}"?`} onConfirm={handleDelete} onCancel={() => setShowConfirm(false)} />}
       <div className="split-left">
-        <div className="split-header"><h2 className="split-title">Corsi di Lingua</h2><span className="badge-count">{filtered.length}</span></div>
+        <div className="split-header"><h2 className="split-title">{t('page_lc_providers')}</h2><span className="badge-count">{filtered.length}</span></div>
         <div className="search-bar" style={{ display: 'flex', gap: 6 }}>
-          <input type="text" className="form-input" placeholder="Cerca..." value={search} onChange={e => setSearch(e.target.value)} style={{ flex: 1 }} />
-          <button className="btn btn-accent btn-sm" onClick={startNew}>+</button>
+          <input type="text" className="form-input" placeholder={t('list_search')} value={search} onChange={e => setSearch(e.target.value)} style={{ flex: 1 }} />
+          <button className="btn btn-accent btn-sm" onClick={startNew}>{t('btn_new')}</button>
         </div>
         {loading ? <div className="list-loading"><div className="spinner-sm"></div></div> : (
           <div className="participant-list">
@@ -71,7 +79,7 @@ export default function LanguageCourseProviderPage() {
                 </div>
               </div>
             ))}
-            {filtered.length === 0 && <div className="empty-state">Nessun provider trovato</div>}
+            {filtered.length === 0 && <div className="empty-state">{t('list_empty')}</div>}
           </div>
         )}
       </div>
@@ -80,30 +88,31 @@ export default function LanguageCourseProviderPage() {
           <div className="detail-panel">
             <div className="detail-action-bar">
               {editing
-                ? <><span style={{ fontWeight: 600, color: '#2D7A6F' }}>{isNew ? 'Nuovo Provider' : 'Modifica'}</span><div className="action-bar-right">{saveError && <span className="save-error">{saveError}</span>}<button className="btn btn-secondary btn-sm" onClick={cancel}>Annulla</button><button className="btn btn-accent btn-sm" onClick={handleSave} disabled={saving}>{saving ? 'Salvo...' : '💾 Salva'}</button></div></>
-                : <><span /><div className="action-bar-right"><button className="btn btn-edit btn-sm" onClick={startEdit}>✏️ Modifica</button><button className="btn btn-danger btn-sm" onClick={() => setShowConfirm(true)}>🗑 Elimina</button></div></>}
+                ? <><span style={{ fontWeight: 600, color: '#2D7A6F' }}>{isNew ? t('lcp_new') : t('detail_mode_edit')}</span><div className="action-bar-right">{saveError && <span className="save-error">{saveError}</span>}<button className="btn btn-secondary btn-sm" onClick={cancel}>{t('btn_cancel')}</button><button className="btn btn-accent btn-sm" onClick={handleSave} disabled={saving}>{saving ? t('btn_saving') : t('btn_save')}</button></div></>
+                : <><span /><div className="action-bar-right"><button className="btn btn-edit btn-sm" onClick={startEdit}>{t('btn_edit')}</button><button className="btn btn-danger btn-sm" onClick={() => setShowConfirm(true)}>{t('btn_delete')}</button></div></>}
             </div>
-            {!isNew && selected && <div className="detail-name-header"><div className="detail-avatar" style={{ background: '#8B5CF622', color: '#7C3AED' }}>{selected.name.charAt(0)}</div><div><h2 className="detail-name">{selected.name}</h2><p className="detail-id">Language Course Provider{selected.language_taught ? ` · ${selected.language_taught}` : ''}</p></div></div>}
-            {isNew && <div className="detail-name-header"><div className="detail-avatar" style={{ background: '#7C3AED' }}>+</div><div><h2 className="detail-name">Nuovo Provider</h2></div></div>}
+            {!isNew && selected && <div className="detail-name-header"><div className="detail-avatar" style={{ background: '#8B5CF622', color: '#7C3AED' }}>{selected.name.charAt(0)}</div><div><h2 className="detail-name">{selected.name}</h2><p className="detail-id">{t('page_lc_providers')}{selected.language_taught ? ` · ${selected.language_taught}` : ''}</p></div></div>}
+            {isNew && <div className="detail-name-header"><div className="detail-avatar" style={{ background: '#7C3AED' }}>+</div><div><h2 className="detail-name">{t('lcp_new')}</h2></div></div>}
             <div className="detail-sections">
-              <div className="detail-section-header">Dati Provider</div>
+              <div className="detail-section-header">{t('sec_ins_details')}</div>
               <div className="fields-grid">
-                <FR label="Nome" name="name" value={v('name')} editing={editing} onChange={handleChange} />
-                <FR label="Lingua Insegnata" name="language_taught" value={v('language_taught')} editing={editing} onChange={handleChange} />
-                <FR label="Contatto" name="contact_person" value={v('contact_person')} editing={editing} onChange={handleChange} />
-                <FR label="Email" name="email" value={v('email')} editing={editing} type="email" onChange={handleChange} />
-                <FR label="Telefono" name="phone" value={v('phone')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_name')} name="name" value={v('name')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_language_taught')} name="language_taught" value={v('language_taught')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_contact')} name="contact_person" value={v('contact_person')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_email')} name="email" value={v('email')} editing={editing} type="email" onChange={handleChange} />
+                <FR label={t('fld_phone')} name="phone" value={v('phone')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_website')} name="website" value={v('website')} editing={editing} type="url" onChange={handleChange} />
               </div>
-              <div className="detail-section-header">Indirizzo</div>
+              <div className="detail-section-header">{t('sec_address')}</div>
               <div className="fields-grid">
-                <FR label="Indirizzo" name="address" value={v('address')} editing={editing} onChange={handleChange} />
-                <FR label="Città" name="city" value={v('city')} editing={editing} onChange={handleChange} />
-                <FR label="Paese" name="country" value={v('country')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_address')} name="address" value={v('address')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_city')} name="city" value={v('city')} editing={editing} onChange={handleChange} />
+                <FR label={t('fld_country')} name="country" value={v('country')} editing={editing} onChange={handleChange} options={COUNTRIES} />
               </div>
             </div>
           </div>
         ) : (
-          <div className="detail-empty"><div className="detail-empty-icon">📚</div><p>Seleziona un provider o creane uno nuovo</p><button className="btn btn-accent" onClick={startNew} style={{ marginTop: 12 }}>+ Nuovo Provider</button></div>
+          <div className="detail-empty"><div className="detail-empty-icon">📚</div><p>{t('lcp_hint')}</p><button className="btn btn-accent" onClick={startNew} style={{ marginTop: 12 }}>+ {t('lcp_new')}</button></div>
         )}
       </div>
     </div>

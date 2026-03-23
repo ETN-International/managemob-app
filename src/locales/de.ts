@@ -16,6 +16,41 @@ const de: Record<TranslationKeys, string> = {
   nav_insurance: 'Versicherung',
   nav_languageCourseProviders: 'Sprachkursanbieter',
 
+  // Shared
+  sec_details: 'Details',
+  sec_notes: 'Notizen',
+  fld_website: 'Website',
+  fld_contact_email: 'Kontakt-E-Mail',
+  fld_contact_phone: 'Kontakt-Tel.',
+  fld_contact_comments: 'Kontaktnotizen',
+  confirm_delete_item: 'Löschen',
+
+  // Insurance page
+  page_insurance: 'Versicherung',
+  ins_new: 'Neuer Versicherungsanbieter',
+  ins_hint: 'Anbieter auswählen oder neu erstellen',
+  sec_ins_details: 'Anbieterdetails',
+
+  // Language Course Provider page
+  page_lc_providers: 'Sprachkursanbieter',
+  lcp_new: 'Neuer Anbieter',
+  lcp_hint: 'Anbieter auswählen oder neu erstellen',
+  fld_language_taught: 'Unterrichtete Sprache',
+
+  // Mobility providers extra
+  sec_msp_org: 'Organisation',
+  sec_msp_contact: 'Hauptkontakt',
+  sec_msp_capacity: 'Kapazität & Spezialgebiete',
+  fld_pic: 'PIC-Nummer',
+  fld_geographic_area: 'Geografisches Gebiet',
+  fld_num_offices: 'Anzahl Büros',
+  fld_num_employees: 'Anzahl Mitarbeiter',
+  fld_placement_capacity: 'Vermittlungskapazität',
+  fld_placement_fees: 'Vermittlungsgebühren',
+  fld_specialty_1: 'Spezialgebiet 1',
+  fld_specialty_2: 'Spezialgebiet 2',
+  fld_specialty_3: 'Spezialgebiet 3',
+
   login_title: 'Managemob',
   login_subtitle: 'Melden Sie sich in Ihrem Konto an',
   login_email: 'E-Mail-Adresse',
@@ -198,6 +233,22 @@ const de: Record<TranslationKeys, string> = {
   fld_acc_board3: 'Option 3',
   fld_acc_price3: 'Preis/Wo. 3',
   fld_acc_rules: 'Hausregeln',
+  fld_acc_inhabitants: 'Einwohnerzahl',
+  fld_acc_infants: 'Säuglinge',
+  fld_acc_smokers: 'Raucher',
+  fld_acc_wardrobe: 'Kleiderschrank',
+  fld_acc_bed: 'Bett vorhanden',
+  fld_acc_bedroom_size1: 'Schlafzimmer 1 Größe',
+  fld_acc_bedroom_size2: 'Schlafzimmer 2 Größe',
+  fld_acc_bedroom_size3: 'Schlafzimmer 3 Größe',
+  fld_acc_bedroom_size4: 'Schlafzimmer 4 Größe',
+  fld_acc_toilets: 'Anzahl Toiletten',
+  fld_acc_carpet: 'Teppich',
+  fld_acc_unisex: 'Unisex / Reserviert',
+  fld_acc_sheets: 'Bettwäsche & Handtücher',
+  fld_acc_sort_code: 'BLZ',
+  fld_acc_last_contact: 'Letzter Kontakt',
+  fld_acc_rating: 'Familie Bewertung',
 
   fld_pic: 'PIC-Code',
   fld_geographic_area: 'Geografischer Bereich',
@@ -221,6 +272,7 @@ const de: Record<TranslationKeys, string> = {
 
   sec_acc_basic: 'Grundinformationen',
   sec_acc_features: 'Ausstattung',
+  sec_acc_extra: 'Weitere Details',
   sec_acc_board: 'Verpflegungsoptionen',
   sec_acc_bank: 'Bank',
   sec_acc_rules: 'Hausregeln',
@@ -276,6 +328,8 @@ const de: Record<TranslationKeys, string> = {
   fi_col_acc2: 'Unterkunft 2',
   fi_col_tr: 'Transfer',
   fi_col_other: 'Sonstige',
+  fi_col_lc: 'Sprachkurs',
+  fi_col_cultural: 'Kulturell',
   fi_col_margin: 'Marge',
 
   confirm_delete: 'Löschen',

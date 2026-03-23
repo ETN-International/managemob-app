@@ -16,6 +16,41 @@ const it: Record<TranslationKeys, string> = {
   nav_insurance: 'Assicurazioni',
   nav_languageCourseProviders: 'Corsi di Lingua',
 
+  // Shared
+  sec_details: 'Dettagli',
+  sec_notes: 'Note',
+  fld_website: 'Sito Web',
+  fld_contact_email: 'Email Contatto',
+  fld_contact_phone: 'Tel. Contatto',
+  fld_contact_comments: 'Note Contatto',
+  confirm_delete_item: 'Eliminare',
+
+  // Insurance page
+  page_insurance: 'Assicurazioni',
+  ins_new: 'Nuovo Provider Assicurativo',
+  ins_hint: 'Seleziona un provider o creane uno nuovo',
+  sec_ins_details: 'Dati Provider',
+
+  // Language Course Provider page
+  page_lc_providers: 'Corsi di Lingua',
+  lcp_new: 'Nuovo Provider',
+  lcp_hint: 'Seleziona un provider o creane uno nuovo',
+  fld_language_taught: 'Lingua Insegnata',
+
+  // Mobility providers extra
+  sec_msp_org: 'Organizzazione',
+  sec_msp_contact: 'Contatto Principale',
+  sec_msp_capacity: 'Capacità e Specialità',
+  fld_pic: 'Codice PIC',
+  fld_geographic_area: 'Area Geografica',
+  fld_num_offices: 'N. Uffici',
+  fld_num_employees: 'N. Dipendenti',
+  fld_placement_capacity: 'Capacità Placement',
+  fld_placement_fees: 'Tariffe Placement',
+  fld_specialty_1: 'Specialità 1',
+  fld_specialty_2: 'Specialità 2',
+  fld_specialty_3: 'Specialità 3',
+
   login_title: 'Managemob',
   login_subtitle: 'Accedi al tuo account',
   login_email: 'Indirizzo email',
@@ -198,6 +233,22 @@ const it: Record<TranslationKeys, string> = {
   fld_acc_board3: 'Opzione 3',
   fld_acc_price3: 'Prezzo/sett. 3',
   fld_acc_rules: 'Regole Casa',
+  fld_acc_inhabitants: 'N. Abitanti',
+  fld_acc_infants: 'Neonati',
+  fld_acc_smokers: 'Fumatori',
+  fld_acc_wardrobe: 'Armadio',
+  fld_acc_bed: 'Letto Incluso',
+  fld_acc_bedroom_size1: 'Camera 1 Dimensione',
+  fld_acc_bedroom_size2: 'Camera 2 Dimensione',
+  fld_acc_bedroom_size3: 'Camera 3 Dimensione',
+  fld_acc_bedroom_size4: 'Camera 4 Dimensione',
+  fld_acc_toilets: 'N. Bagni',
+  fld_acc_carpet: 'Tappeto',
+  fld_acc_unisex: 'Unisex / Riservato',
+  fld_acc_sheets: 'Lenzuola e Asciugamani',
+  fld_acc_sort_code: 'Codice ABI',
+  fld_acc_last_contact: 'Ultimo Contatto',
+  fld_acc_rating: 'Valutazione Famiglia',
 
   fld_pic: 'Codice PIC',
   fld_geographic_area: 'Area Geografica',
@@ -221,6 +272,7 @@ const it: Record<TranslationKeys, string> = {
 
   sec_acc_basic: 'Informazioni Base',
   sec_acc_features: 'Caratteristiche',
+  sec_acc_extra: 'Dettagli Aggiuntivi',
   sec_acc_board: 'Opzioni Pensione',
   sec_acc_bank: 'Banca',
   sec_acc_rules: 'Regole Casa',
@@ -276,6 +328,8 @@ const it: Record<TranslationKeys, string> = {
   fi_col_acc2: 'Alloggio 2',
   fi_col_tr: 'Transfer',
   fi_col_other: 'Altro',
+  fi_col_lc: 'Corso Lingua',
+  fi_col_cultural: 'Culturale',
   fi_col_margin: 'Margine',
 
   confirm_delete: 'Elimina',

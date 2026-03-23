@@ -12,8 +12,43 @@ const sv = {
   nav_mobilityProviders: 'Mobilitetsaktörer',
   nav_groups: 'Grupper och deltagare',
   nav_hostCompanies: 'Värdföretag',
-  nav_insurance: 'Försäkringar',
+  nav_insurance: 'Försäkring',
   nav_languageCourseProviders: 'Språkkursleverantörer',
+
+  // Shared
+  sec_details: 'Detaljer',
+  sec_notes: 'Anteckningar',
+  fld_website: 'Hemsida',
+  fld_contact_email: 'Kontakt-e-post',
+  fld_contact_phone: 'Kontakttelefon',
+  fld_contact_comments: 'Kontaktnoteringar',
+  confirm_delete_item: 'Ta bort',
+
+  // Insurance page
+  page_insurance: 'Försäkring',
+  ins_new: 'Ny försäkringsleverantör',
+  ins_hint: 'Välj eller skapa en leverantör',
+  sec_ins_details: 'Leverantörsinformation',
+
+  // Language Course Provider page
+  page_lc_providers: 'Språkkursleverantörer',
+  lcp_new: 'Ny leverantör',
+  lcp_hint: 'Välj eller skapa en leverantör',
+  fld_language_taught: 'Undervisat språk',
+
+  // Mobility providers extra
+  sec_msp_org: 'Organisation',
+  sec_msp_contact: 'Huvudkontakt',
+  sec_msp_capacity: 'Kapacitet och specialiteter',
+  fld_pic: 'PIC-nummer',
+  fld_geographic_area: 'Geografiskt område',
+  fld_num_offices: 'Antal kontor',
+  fld_num_employees: 'Antal anställda',
+  fld_placement_capacity: 'Placeringskapacitet',
+  fld_placement_fees: 'Placeringsavgifter',
+  fld_specialty_1: 'Specialitet 1',
+  fld_specialty_2: 'Specialitet 2',
+  fld_specialty_3: 'Specialitet 3',
 
   // Auth
   login_title: 'Managemob',
@@ -219,6 +254,22 @@ const sv = {
   fld_acc_board3: 'Alternativ 3',
   fld_acc_price3: 'Pris/vecka 3',
   fld_acc_rules: 'Husregler',
+  fld_acc_inhabitants: 'Antal boende',
+  fld_acc_infants: 'Spädbarn',
+  fld_acc_smokers: 'Rökare',
+  fld_acc_wardrobe: 'Garderob',
+  fld_acc_bed: 'Säng ingår',
+  fld_acc_bedroom_size1: 'Sovrum 1 storlek',
+  fld_acc_bedroom_size2: 'Sovrum 2 storlek',
+  fld_acc_bedroom_size3: 'Sovrum 3 storlek',
+  fld_acc_bedroom_size4: 'Sovrum 4 storlek',
+  fld_acc_toilets: 'Antal toaletter',
+  fld_acc_carpet: 'Matta',
+  fld_acc_unisex: 'Unisex / Reserverat',
+  fld_acc_sheets: 'Lakan och handdukar',
+  fld_acc_sort_code: 'Clearingnummer',
+  fld_acc_last_contact: 'Senaste kontakt',
+  fld_acc_rating: 'Familjebetyg',
 
   fld_pic: 'PIC-kod',
   fld_geographic_area: 'Geografiskt område',
@@ -243,6 +294,7 @@ const sv = {
   // Sections - Accommodation entity
   sec_acc_basic: 'Grundinformation',
   sec_acc_features: 'Egenskaper',
+  sec_acc_extra: 'Ytterligare detaljer',
   sec_acc_board: 'Pensionsalternativ',
   sec_acc_bank: 'Bank',
   sec_acc_rules: 'Husregler',
@@ -305,6 +357,8 @@ const sv = {
   fi_col_acc2: 'Boende 2',
   fi_col_tr: 'Transfer',
   fi_col_other: 'Övrigt',
+  fi_col_lc: 'Språkkurs',
+  fi_col_cultural: 'Kulturellt',
   fi_col_margin: 'Marginal',
 
   // Confirm delete generic
