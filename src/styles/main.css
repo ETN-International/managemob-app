@@ -1122,56 +1122,86 @@ textarea.form-input {
 }
 
 /* ============================================================
-   HOME PAGE
+   HOME PAGE — full-height wizard
    ============================================================ */
-.home-page {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 36px 28px 48px;
+
+/* Slide-in animations */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
-.home-header {
+.home-page {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 28px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
+
+.home-page-loading {
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Top strip ── */
+.home-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 24px 32px 16px;
+  flex-shrink: 0;
+}
+
+.home-top-left {}
+.home-top-right { flex-shrink: 0; padding-top: 2px; }
 
 .home-title {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
   color: #111827;
-  margin: 0 0 4px;
+  margin: 0 0 3px;
   letter-spacing: -0.3px;
 }
 
 .home-subtitle-text {
   color: #6B7280;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
   margin: 0;
+}
+
+/* ── Middle strip: mode + stepper + progress ── */
+.home-strip {
+  flex-shrink: 0;
+  padding: 0 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 1px solid #F0F2F5;
 }
 
 /* Mode tabs */
 .home-mode-tabs {
   display: flex;
   background: #F3F4F6;
-  padding: 4px;
-  border-radius: 10px;
+  padding: 3px;
+  border-radius: 9px;
   width: fit-content;
-  margin-bottom: 32px;
   gap: 2px;
 }
 
 .home-mode-tab {
-  padding: 8px 22px;
+  padding: 7px 20px;
   border: none;
-  border-radius: 8px;
+  border-radius: 7px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   background: transparent;
   color: #6B7280;
   transition: all 0.18s;
@@ -1184,85 +1214,82 @@ textarea.form-input {
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
-/* Flow indicator */
-.home-flow {
+/* Stepper */
+.home-stepper {
   display: flex;
-  align-items: flex-start;
-  margin-bottom: 14px;
+  align-items: center;
   overflow-x: auto;
-  padding: 4px 0 8px;
   gap: 0;
   scrollbar-width: none;
+  padding: 2px 0;
 }
-.home-flow::-webkit-scrollbar { display: none; }
+.home-stepper::-webkit-scrollbar { display: none; }
 
-.home-flow-item {
+.home-stepper-item {
   display: flex;
   align-items: center;
   flex-shrink: 0;
 }
 
-.home-flow-step {
+.home-stepper-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0 6px;
-  min-width: 80px;
+  padding: 0 8px;
+  min-width: 72px;
 }
 
-.home-flow-circle {
-  width: 38px;
-  height: 38px;
+.home-stepper-circle {
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 14px;
-  flex-shrink: 0;
+  font-size: 13px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.home-flow-label {
-  font-size: 11px;
+.home-stepper-label {
+  font-size: 10px;
   font-weight: 600;
   white-space: nowrap;
   text-align: center;
-  line-height: 1.3;
-  max-width: 80px;
+  transition: color 0.2s;
+  line-height: 1.2;
+  max-width: 72px;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: color 0.2s;
 }
 
-.home-flow-connector {
+.home-stepper-line {
   height: 2px;
-  width: 32px;
+  width: 28px;
   flex-shrink: 0;
-  margin-top: -22px; /* align with circle centers */
+  margin-top: -20px;
   transition: background 0.3s;
 }
 
-.home-flow-count {
-  font-size: 12px;
+.home-stepper-count {
+  font-size: 11px;
   font-weight: 700;
   flex-shrink: 0;
-  margin-left: 12px;
-  padding-top: 10px;
+  margin-left: 10px;
+  padding-top: 8px;
   white-space: nowrap;
 }
 
 /* Progress bar */
 .home-progress-bar {
-  height: 5px;
-  background: #F3F4F6;
+  height: 4px;
+  background: #F0F2F5;
   border-radius: 99px;
   overflow: hidden;
-  margin-bottom: 28px;
 }
 
 .home-progress-fill {
@@ -1272,62 +1299,73 @@ textarea.form-input {
   transition: width 0.5s ease;
 }
 
+/* ── Step content area ── */
+.home-step-area {
+  flex: 1;
+  overflow: hidden;
+  padding: 16px 32px 0;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Step card */
 .home-step-card {
+  flex: 1;
+  overflow-y: auto;
   background: white;
-  border-radius: 16px;
-  padding: 28px 32px;
+  border-radius: 14px;
+  padding: 24px 28px;
   border: 2px solid transparent;
-  margin-bottom: 20px;
+  scrollbar-width: thin;
 }
+
+.home-step-card--fwd { animation: slideInRight 0.25s ease; }
+.home-step-card--bwd { animation: slideInLeft  0.25s ease; }
 
 .home-card-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 12px;
+  gap: 14px;
+  margin-bottom: 10px;
 }
 
 .home-card-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 22px;
   flex-shrink: 0;
 }
 
-.home-card-heading {
-  flex: 1;
-  min-width: 0;
-}
+.home-card-heading { flex: 1; min-width: 0; }
 
 .home-card-step-label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .home-done-badge {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  padding: 2px 9px;
+  padding: 2px 8px;
   border-radius: 99px;
-  background: #10B98120;
+  background: #10B98118;
   color: #10B981;
   text-transform: none;
   letter-spacing: 0;
 }
 
 .home-card-title {
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 700;
   color: #111827;
   margin: 0;
@@ -1335,47 +1373,50 @@ textarea.form-input {
 }
 
 .home-card-desc {
-  font-size: 14px;
+  font-size: 13px;
   color: #6B7280;
   line-height: 1.65;
-  margin: 0 0 22px;
-  padding-left: 68px;
+  margin: 0;
+  padding-left: 62px;
+}
+
+.home-card-divider {
+  height: 1px;
+  background: #F0F2F5;
+  margin: 16px 0;
 }
 
 /* Tasks */
 .home-tasks {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
 }
 
 .home-task-row {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
+  gap: 12px;
+  padding: 13px 16px;
   border-radius: 10px;
   cursor: pointer;
   border: 1.5px solid transparent;
-  transition: border-color 0.15s, background 0.15s, transform 0.12s;
+  transition: border-color 0.12s, background 0.12s, transform 0.1s;
 }
 
 .home-task-dot {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   flex-shrink: 0;
 }
 
-.home-task-info {
-  flex: 1;
-  min-width: 0;
-}
+.home-task-info { flex: 1; min-width: 0; }
 
 .home-task-name {
   display: flex;
@@ -1383,7 +1424,7 @@ textarea.form-input {
   gap: 6px;
   flex-wrap: wrap;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   color: #111827;
   margin-bottom: 2px;
 }
@@ -1396,49 +1437,38 @@ textarea.form-input {
   white-space: nowrap;
 }
 
-.home-task-badge-req {
-  background: #FEE2E2 !important;
-  color: #EF4444 !important;
-}
+.home-task-badge-req { background: #FEE2E2 !important; color: #EF4444 !important; }
 
 .home-task-hint {
   font-size: 12px;
   color: #9CA3AF;
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
-.home-task-action {
-  flex-shrink: 0;
-  text-align: right;
-}
+.home-task-action { flex-shrink: 0; text-align: right; }
 
-.home-task-count {
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1;
-}
+.home-task-count { font-size: 20px; font-weight: 700; line-height: 1; }
 
 .home-task-cta {
   font-size: 12px;
   font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 7px;
+  padding: 5px 11px;
+  border-radius: 6px;
   white-space: nowrap;
   display: inline-block;
 }
 
-/* Navigation */
-.home-nav {
+/* ── Bottom navigation ── */
+.home-bottom-nav {
+  flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
+  padding: 14px 32px 22px;
 }
 
-.home-nav .btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
+.home-bottom-nav .btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
 .home-dots {
   display: flex;
