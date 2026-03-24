@@ -4,14 +4,14 @@ const sv = {
   nav_dashboard: 'Dashboard',
   nav_incoming: 'Managemob Incoming',
   nav_outgoing: 'Managemob Outgoing',
-  nav_individuals: 'Individer',
+  nav_individuals: 'Deltagare',
   nav_travel: 'Reseinformation',
   nav_transfer: 'Transfer',
   nav_sendingOrgs: 'Sändande organisationer',
   nav_accommodation: 'Boende',
   nav_financial: 'Ekonomisk info',
   nav_mobilityProviders: 'Mobilitetsaktörer',
-  nav_groups: 'Grupper och deltagare',
+  nav_groups: 'Grupper och Individer',
   nav_hostCompanies: 'Värdföretag',
   nav_insurance: 'Försäkring',
   nav_languageCourseProviders: 'Språkkursleverantörer',
@@ -102,8 +102,8 @@ const sv = {
   detail_select_hint: 'Välj en post eller skapa en ny',
 
   // Participants
-  page_individuals: 'Individer',
-  page_groups: 'Grupper och deltagare',
+  page_individuals: 'Deltagare',
+  page_groups: 'Grupper och Individer',
   part_new: 'Ny deltagare',
   part_hint: 'Välj en deltagare eller skapa en ny',
   part_new_btn: '+ Ny deltagare',
@@ -450,6 +450,12 @@ const sv = {
   card_services_for: 'Tjänster för',
   card_provider_added: 'Leverantör tillagd!',
   home_quick_actions: 'Snabbåtgärder',
+  card_auto_indiv_group: 'automatiskt från Gruppnamn',
+  card_group_name_hint: 'Lämna tomt för Enskild, fyll i för Grupp',
+  cal_add_travel_hint: 'Lägg till resedetaljer från sidan Resedetaljer',
+  cal_open_profile: 'Öppna Profil',
+  td_new: 'Ny Resedetalj',
+  td_edit: 'Redigera Resedetalj',
 } as const
 
 export default sv

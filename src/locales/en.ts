@@ -4,14 +4,14 @@ const en = {
   nav_dashboard: 'Dashboard',
   nav_incoming: 'Managemob Incoming',
   nav_outgoing: 'Managemob Outgoing',
-  nav_individuals: 'Individuals',
+  nav_individuals: 'Participants',
   nav_travel: 'Travel Details',
   nav_transfer: 'Transfer',
   nav_sendingOrgs: 'Sending Organisations',
   nav_accommodation: 'Accommodation',
   nav_financial: 'Financial info',
   nav_mobilityProviders: 'Mobility Service Providers',
-  nav_groups: 'Groups and Participants',
+  nav_groups: 'Groups and Individuals',
   nav_hostCompanies: 'Host companies',
   nav_insurance: 'Insurance',
   nav_languageCourseProviders: 'Language Course Providers',
@@ -87,8 +87,8 @@ const en = {
   detail_select_hint: 'Select a record or create a new one',
 
   // Participants
-  page_individuals: 'Individuals',
-  page_groups: 'Groups & Participants',
+  page_individuals: 'Participants',
+  page_groups: 'Groups & Individuals',
   part_new: 'New Participant',
   part_hint: 'Select a participant or create a new one',
   part_new_btn: '+ New Participant',
@@ -456,6 +456,12 @@ const en = {
   card_services_for: 'Services for',
   card_provider_added: 'Provider added successfully!',
   home_quick_actions: 'Quick Actions',
+  card_auto_indiv_group: 'auto from Group Name',
+  card_group_name_hint: 'Leave empty for Individual, fill for Group',
+  cal_add_travel_hint: 'Add travel details from the Travel Details page',
+  cal_open_profile: 'Open Profile',
+  td_new: 'New Travel Detail',
+  td_edit: 'Edit Travel Detail',
 } as const
 
 export default en

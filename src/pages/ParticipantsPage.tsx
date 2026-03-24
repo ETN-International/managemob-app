@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import type { Participant, SendingOrganisation, HostCompany, InsuranceProvider, TransferProvider, LanguageCourseProvider, Accommodation, MobilityServiceProvider } from '../types'
 import ConfirmDialog from '../components/ConfirmDialog'
@@ -70,7 +71,9 @@ type ViewMode = 'list' | 'detail'
 
 export default function ParticipantsPage({ typology, groupView = false }: ParticipantsPageProps) {
   const { t } = useT()
+  const location = useLocation()
   const [viewMode, setViewMode] = useState<ViewMode>('list')
+  const [groupByGroup, setGroupByGroup] = useState(false)
   const [participants, setParticipants] = useState<Participant[]>([])
   const [selected, setSelected] = useState<Participant | null>(null)
   const [search, setSearch] = useState('')
@@ -94,6 +97,20 @@ export default function ParticipantsPage({ typology, groupView = false }: Partic
     loadParticipants()
     loadRefs()
   }, [typology])
+
+  // Auto-select participant from calendar navigation
+  useEffect(() => {
+    const navState = location.state as { selectParticipantId?: string } | null
+    if (navState?.selectParticipantId && participants.length > 0) {
+      const p = participants.find(x => x.id === navState.selectParticipantId)
+      if (p) {
+        setSelected(p)
+        setViewMode('detail')
+        // Clear state so re-renders don't re-trigger
+        window.history.replaceState({}, '')
+      }
+    }
+  }, [participants, location.state])
 
   const loadRefs = async () => {
     const [so, hc, ins, tr, lcp, acc, msp] = await Promise.all([
@@ -145,6 +162,7 @@ export default function ParticipantsPage({ typology, groupView = false }: Partic
   const startNew = () => {
     setEditData({ ...EMPTY_PARTICIPANT, mobility_typology: typology })
     setSelected(null); setIsNew(true); setEditing(true); setSaveError('')
+    setViewMode('detail')
   }
   const cancelEdit = () => { setEditing(false); setIsNew(false); setSaveError('') }
 
@@ -187,6 +205,8 @@ export default function ParticipantsPage({ typology, groupView = false }: Partic
   const handleSave = async () => {
     setSaving(true); setSaveError('')
     const payload = { ...editData }
+    // Auto-derive indiv_group from group_name
+    payload.indiv_group = payload.group_name?.trim() ? 'Group' : 'Individual'
     delete (payload as any).sending_organisations
     delete (payload as any).host_companies
     delete (payload as any).insurance_providers
@@ -251,6 +271,13 @@ export default function ParticipantsPage({ typology, groupView = false }: Partic
           />
           <button className="btn btn-accent btn-sm" onClick={startNew}>{t('part_new_btn')}</button>
           <button
+            className={`btn btn-sm ${groupByGroup ? 'btn-accent' : 'btn-secondary'}`}
+            onClick={() => setGroupByGroup(g => !g)}
+            title={t('fld_group_name')}
+          >
+            {t('fld_group_name')}
+          </button>
+          <button
             className="btn btn-secondary btn-sm"
             onClick={() => setViewMode('detail')}
             title="Detail view"
@@ -275,37 +302,125 @@ export default function ParticipantsPage({ typology, groupView = false }: Partic
                   <th>{t('fld_departure')}</th>
                   <th>{t('fld_sending_org')}</th>
                   <th>{t('fld_host_company')}</th>
-                  <th>{t('fld_group_name')}</th>
                   <th>{t('fld_indiv_group')}</th>
                 </tr>
               </thead>
               <tbody>
                 {filtered.length === 0 && (
-                  <tr><td colSpan={10} className="empty-cell">{t('list_empty')}</td></tr>
+                  <tr><td colSpan={9} className="empty-cell">{t('list_empty')}</td></tr>
                 )}
-                {filtered.map(p => (
-                  <tr
-                    key={p.id}
-                    onClick={() => openInDetail(p)}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    <td style={{ fontWeight: 600 }}>{p.surname || '\u2014'}</td>
-                    <td>{p.name || '\u2014'}</td>
-                    <td>{p.nationality || '\u2014'}</td>
-                    <td>{p.destination_city || '\u2014'}</td>
-                    <td>{p.arrival_date || '\u2014'}</td>
-                    <td>{p.departure_date || '\u2014'}</td>
-                    <td>{p.sending_organisations?.name || '\u2014'}</td>
-                    <td>{p.host_companies?.name || '\u2014'}</td>
-                    <td>{p.group_name || '\u2014'}</td>
-                    <td>
-                      <Badge
-                        text={p.indiv_group || 'Individual'}
-                        color={p.indiv_group === 'Group' ? '#8B5CF6' : '#2D7A6F'}
-                      />
-                    </td>
-                  </tr>
-                ))}
+                {groupByGroup ? (
+                  (() => {
+                    const individuals = filtered.filter(p => !p.group_name?.trim())
+                    const withGroup = filtered.filter(p => !!p.group_name?.trim())
+                    const byGroup: Record<string, Participant[]> = {}
+                    withGroup.forEach(p => {
+                      const key = p.group_name!
+                      if (!byGroup[key]) byGroup[key] = []
+                      byGroup[key].push(p)
+                    })
+                    const sortedGroupKeys = Object.keys(byGroup).sort((a, b) => a.localeCompare(b))
+                    return (
+                      <>
+                        {/* Named groups first */}
+                        {sortedGroupKeys.map(gn => (
+                          <React.Fragment key={`g-${gn}`}>
+                            <tr>
+                              <td
+                                colSpan={9}
+                                style={{
+                                  background: '#f5f3ff',
+                                  fontWeight: 700,
+                                  fontSize: 12,
+                                  letterSpacing: '0.05em',
+                                  color: '#8B5CF6',
+                                  padding: '10px 14px',
+                                  borderBottom: '2px solid #ddd6fe',
+                                  borderLeft: '4px solid #8B5CF6',
+                                }}
+                              >
+                                {gn}
+                                <span style={{ fontWeight: 500, marginLeft: 8, fontSize: 11, opacity: 0.7 }}>
+                                  ({byGroup[gn].length})
+                                </span>
+                              </td>
+                            </tr>
+                            {byGroup[gn].map(p => (
+                              <tr key={p.id} onClick={() => openInDetail(p)} style={{ cursor: 'pointer' }}>
+                                <td style={{ fontWeight: 600, paddingLeft: 28 }}>{p.surname || '\u2014'}</td>
+                                <td>{p.name || '\u2014'}</td>
+                                <td>{p.nationality || '\u2014'}</td>
+                                <td>{p.destination_city || '\u2014'}</td>
+                                <td>{p.arrival_date || '\u2014'}</td>
+                                <td>{p.departure_date || '\u2014'}</td>
+                                <td>{p.sending_organisations?.name || '\u2014'}</td>
+                                <td>{p.host_companies?.name || '\u2014'}</td>
+                                <td><Badge text="Group" color="#8B5CF6" /></td>
+                              </tr>
+                            ))}
+                          </React.Fragment>
+                        ))}
+                        {/* Individuals at the end */}
+                        {individuals.length > 0 && (
+                          <React.Fragment key="g-individual">
+                            <tr>
+                              <td
+                                colSpan={9}
+                                style={{
+                                  background: '#f0fdf4',
+                                  fontWeight: 700,
+                                  fontSize: 12,
+                                  letterSpacing: '0.05em',
+                                  color: '#2D7A6F',
+                                  padding: '10px 14px',
+                                  borderBottom: '2px solid #bbf7d0',
+                                  borderLeft: '4px solid #2D7A6F',
+                                }}
+                              >
+                                Individual
+                                <span style={{ fontWeight: 500, marginLeft: 8, fontSize: 11, opacity: 0.7 }}>
+                                  ({individuals.length})
+                                </span>
+                              </td>
+                            </tr>
+                            {individuals.map(p => (
+                              <tr key={p.id} onClick={() => openInDetail(p)} style={{ cursor: 'pointer' }}>
+                                <td style={{ fontWeight: 600, paddingLeft: 28 }}>{p.surname || '\u2014'}</td>
+                                <td>{p.name || '\u2014'}</td>
+                                <td>{p.nationality || '\u2014'}</td>
+                                <td>{p.destination_city || '\u2014'}</td>
+                                <td>{p.arrival_date || '\u2014'}</td>
+                                <td>{p.departure_date || '\u2014'}</td>
+                                <td>{p.sending_organisations?.name || '\u2014'}</td>
+                                <td>{p.host_companies?.name || '\u2014'}</td>
+                                <td><Badge text="Individual" color="#2D7A6F" /></td>
+                              </tr>
+                            ))}
+                          </React.Fragment>
+                        )}
+                      </>
+                    )
+                  })()
+                ) : (
+                  filtered.map(p => (
+                    <tr key={p.id} onClick={() => openInDetail(p)} style={{ cursor: 'pointer' }}>
+                      <td style={{ fontWeight: 600 }}>{p.surname || '\u2014'}</td>
+                      <td>{p.name || '\u2014'}</td>
+                      <td>{p.nationality || '\u2014'}</td>
+                      <td>{p.destination_city || '\u2014'}</td>
+                      <td>{p.arrival_date || '\u2014'}</td>
+                      <td>{p.departure_date || '\u2014'}</td>
+                      <td>{p.sending_organisations?.name || '\u2014'}</td>
+                      <td>{p.host_companies?.name || '\u2014'}</td>
+                      <td>
+                        {p.group_name?.trim()
+                          ? <Badge text={p.group_name} color="#8B5CF6" />
+                          : <Badge text="Individual" color="#2D7A6F" />
+                        }
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -343,12 +458,20 @@ export default function ParticipantsPage({ typology, groupView = false }: Partic
                 <div className="org-group-header"><span>{org}</span><span className="org-count">{members.length}</span></div>
                 {members.map(p => (
                   <div key={p.id} className={`participant-item ${sel?.id === p.id ? 'selected' : ''}`} onClick={() => selectParticipant(p)}>
-                    <div className="participant-avatar">{(p.name || '?').charAt(0)}{(p.surname || '').charAt(0)}</div>
+                    <div className="participant-avatar" style={p.group_name?.trim() ? { background: '#8B5CF6' } : {}}>{(p.name || '?').charAt(0)}{(p.surname || '').charAt(0)}</div>
                     <div className="participant-info">
                       <div className="participant-name">{p.name} {p.surname}</div>
-                      <div className="participant-meta">{p.nationality}{p.destination_city ? ` · ${p.destination_city}` : ''}</div>
+                      <div className="participant-meta">
+                        {p.group_name?.trim()
+                          ? <span style={{ color: '#8B5CF6', fontWeight: 600 }}>{p.group_name}</span>
+                          : <span>{p.nationality}{p.destination_city ? ` \u00B7 ${p.destination_city}` : ''}</span>
+                        }
+                      </div>
                     </div>
-                    <Badge text={p.indiv_group || 'Individual'} color={p.indiv_group === 'Group' ? '#8B5CF6' : '#2D7A6F'} />
+                    {p.group_name?.trim()
+                      ? <Badge text="G" color="#8B5CF6" />
+                      : <Badge text="I" color="#2D7A6F" />
+                    }
                   </div>
                 ))}
               </div>
@@ -366,7 +489,10 @@ export default function ParticipantsPage({ typology, groupView = false }: Partic
               <div className="detail-action-bar">
                 <div className="action-bar-left">
                   <Badge text={sel?.mobility_typology || typology} color="#2D7A6F" />
-                  <Badge text={sel?.indiv_group || 'Individual'} color="#1D72B8" />
+                  {sel?.group_name?.trim()
+                    ? <Badge text={sel.group_name} color="#8B5CF6" />
+                    : <Badge text="Individual" color="#1D72B8" />
+                  }
                 </div>
                 <div className="action-bar-right">
                   {sel && <>
@@ -403,6 +529,34 @@ export default function ParticipantsPage({ typology, groupView = false }: Partic
               <div className="detail-name-header">
                 <div className="detail-avatar" style={{ background: '#1D72B8' }}>+</div>
                 <div><h2 className="detail-name">{t('part_new')}</h2></div>
+              </div>
+            )}
+
+            {/* Group banner */}
+            {!isNew && sel && (
+              <div className="group-banner" style={sel.group_name?.trim() ? {
+                background: 'linear-gradient(135deg, #f5f3ff, #ede9fe)',
+                borderLeft: '4px solid #8B5CF6',
+                color: '#5B21B6',
+              } : {
+                background: 'linear-gradient(135deg, #f0fdf4, #ecfdf5)',
+                borderLeft: '4px solid #2D7A6F',
+                color: '#2D7A6F',
+              }}>
+                <span className="group-banner-icon">{sel.group_name?.trim() ? '\u{1F465}' : '\u{1F464}'}</span>
+                <div className="group-banner-text">
+                  <span className="group-banner-label">
+                    {sel.group_name?.trim() ? t('fld_group_name') : t('fld_indiv_group')}
+                  </span>
+                  <span className="group-banner-value">
+                    {sel.group_name?.trim() || 'Individual'}
+                  </span>
+                </div>
+                {sel.group_name?.trim() && (
+                  <span className="group-banner-count">
+                    {participants.filter(p => p.group_name === sel.group_name).length} {t('dash_participants_unit')}
+                  </span>
+                )}
               </div>
             )}
 
@@ -476,16 +630,72 @@ export default function ParticipantsPage({ typology, groupView = false }: Partic
 
               {/* Mobility */}
               <div className="detail-section-header">{t('sec_mobility')}</div>
+
+              {/* Group Name — highlighted field */}
+              <div className="group-input-highlight" style={editing ? {
+                background: (editing ? ed.group_name : sel?.group_name)?.trim() ? '#f5f3ff' : '#f9fafb',
+                border: `2px solid ${(editing ? ed.group_name : sel?.group_name)?.trim() ? '#8B5CF6' : '#e2e8f0'}`,
+                borderRadius: 8,
+                padding: '12px 14px',
+                margin: '0 0 2px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12,
+                transition: 'all 0.2s',
+              } : {
+                background: (sel?.group_name)?.trim() ? '#f5f3ff' : '#f0fdf4',
+                border: `2px solid ${(sel?.group_name)?.trim() ? '#c4b5fd' : '#bbf7d0'}`,
+                borderRadius: 8,
+                padding: '12px 14px',
+                margin: '0 0 2px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12,
+              }}>
+                <span style={{ fontSize: 20, flexShrink: 0 }}>
+                  {(editing ? ed.group_name : sel?.group_name)?.trim() ? '\u{1F465}' : '\u{1F464}'}
+                </span>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#6B7280', marginBottom: 3 }}>
+                    {t('fld_group_name')}
+                    <span style={{ fontSize: 9, fontWeight: 500, marginLeft: 6, textTransform: 'none', letterSpacing: 0, color: '#9CA3AF' }}>
+                      ({t('card_auto_indiv_group')})
+                    </span>
+                  </div>
+                  {editing ? (
+                    <input
+                      className="form-input"
+                      type="text"
+                      value={ed.group_name ?? ''}
+                      onChange={e => handleChange('group_name', e.target.value)}
+                      placeholder={t('card_group_name_hint')}
+                      style={{
+                        fontSize: 15,
+                        fontWeight: 600,
+                        padding: '6px 10px',
+                        border: `1.5px solid ${ed.group_name?.trim() ? '#8B5CF6' : '#e2e8f0'}`,
+                      }}
+                    />
+                  ) : (
+                    <div style={{ fontSize: 15, fontWeight: 700, color: sel?.group_name?.trim() ? '#5B21B6' : '#2D7A6F' }}>
+                      {sel?.group_name?.trim() || 'Individual'}
+                    </div>
+                  )}
+                </div>
+                <Badge
+                  text={(editing ? ed.group_name : sel?.group_name)?.trim() ? 'Group' : 'Individual'}
+                  color={(editing ? ed.group_name : sel?.group_name)?.trim() ? '#8B5CF6' : '#2D7A6F'}
+                />
+              </div>
+
               <div className="fields-grid">
                 <FR label={t('fld_typology')} name="mobility_typology" value={fv('mobility_typology')} editing={editing} onChange={handleChange} options={['Incoming', 'Outgoing']} />
-                <FR label={t('fld_indiv_group')} name="indiv_group" value={fv('indiv_group')} editing={editing} onChange={handleChange} options={['Individual', 'Group']} />
                 <FR label={t('fld_dest_country')} name="destination_country" value={fv('destination_country')} editing={editing} onChange={handleChange} />
                 <FR label={t('fld_dest_city')} name="destination_city" value={fv('destination_city')} editing={editing} onChange={handleChange} />
                 <FR label={t('fld_arrival')} name="arrival_date" value={fv('arrival_date')} editing={editing} type="date" onChange={handleChange} />
                 <FR label={t('fld_departure')} name="departure_date" value={fv('departure_date')} editing={editing} type="date" onChange={handleChange} />
                 <FR label={t('fld_program')} name="program" value={fv('program')} editing={editing} onChange={handleChange} />
                 <FR label={t('fld_project')} name="project_name" value={fv('project_name')} editing={editing} onChange={handleChange} />
-                <FR label={t('fld_group_name')} name="group_name" value={fv('group_name')} editing={editing} onChange={handleChange} />
               </div>
 
               {/* Providers */}

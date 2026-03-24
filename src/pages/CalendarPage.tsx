@@ -14,6 +14,26 @@ interface CalParticipant {
   mobility_typology: string | null
   indiv_group: string | null
   group_name: string | null
+  nationality: string | null
+  destination_city: string | null
+  destination_country: string | null
+  phone: string | null
+  email: string | null
+  program: string | null
+  sending_organisations?: { name: string } | null
+  host_companies?: { name: string; city: string | null } | null
+  transfer_providers?: { name: string; phone: string | null } | null
+  accommodation_1?: { name: string; city: string | null; typology: string | null } | null
+  insurance_providers?: { name: string } | null
+}
+
+interface CalTravelDetail {
+  id: string
+  transport_type: string | null
+  flight_train_number: string | null
+  departure_datetime: string | null
+  arrival_datetime: string | null
+  ticket_price: number | null
 }
 
 interface CalEvent {
@@ -115,13 +135,13 @@ interface SidePanelProps {
   date: Date
   events: CalEvent[]
   onClose: () => void
-  onNavigate: (typology: string | null) => void
+  onEventClick: (ev: CalEvent) => void
   arrivalLabel: string
   departureLabel: string
   noEventsLabel: string
 }
 
-function SidePanel({ date, events, onClose, onNavigate, arrivalLabel, departureLabel, noEventsLabel }: SidePanelProps) {
+function SidePanel({ date, events, onClose, onEventClick, arrivalLabel, departureLabel, noEventsLabel }: SidePanelProps) {
   const day = date.getDate()
   const monthName = MONTH_NAMES_IT[date.getMonth()]
   const year = date.getFullYear()
@@ -148,32 +168,21 @@ function SidePanel({ date, events, onClose, onNavigate, arrivalLabel, departureL
               <div
                 key={`${ev.participantId}-${ev.kind}-${i}`}
                 className="cal-event-card"
-                onClick={() => onNavigate(ev.typology)}
-                title="Vai al partecipante"
+                onClick={() => onEventClick(ev)}
+                title="Dettagli viaggio"
               >
                 <div className="cal-event-name">{ev.label}</div>
                 <div className="cal-event-badges">
-                  <span
-                    className="cal-badge"
-                    style={{ background: kindBg, color: kindColor }}
-                  >
+                  <span className="cal-badge" style={{ background: kindBg, color: kindColor }}>
                     {isArrival ? arrivalLabel : departureLabel}
                   </span>
                   {ev.typology && (
-                    <span
-                      className="cal-badge"
-                      style={{ background: typoBg, color: typoColor }}
-                    >
+                    <span className="cal-badge" style={{ background: typoBg, color: typoColor }}>
                       {ev.typology}
                     </span>
                   )}
-                  {ev.indivGroup && (
-                    <span className="cal-badge cal-badge-neutral">
-                      {ev.indivGroup}
-                    </span>
-                  )}
                   {ev.groupName && (
-                    <span className="cal-badge cal-badge-neutral" style={{ opacity: 0.75 }}>
+                    <span className="cal-badge" style={{ background: '#ede9fe', color: '#8B5CF6' }}>
                       {ev.groupName}
                     </span>
                   )}
@@ -206,6 +215,12 @@ export default function CalendarPage() {
   const [filterIndivGroup, setFilterIndivGroup] = useState<'all' | 'Individual' | 'Group'>('all')
   const [filterGroupName, setFilterGroupName] = useState<string>('all')
 
+  // Detail modal
+  const [detailParticipant, setDetailParticipant] = useState<CalParticipant | null>(null)
+  const [detailTravel, setDetailTravel] = useState<CalTravelDetail[]>([])
+  const [detailLoading, setDetailLoading] = useState(false)
+  const [detailKind, setDetailKind] = useState<'arrival' | 'departure'>('arrival')
+
   // ── Data fetching ──────────────────────────────────────────────────────────
 
   useEffect(() => {
@@ -214,9 +229,9 @@ export default function CalendarPage() {
     ;(async () => {
       const { data } = await supabase
         .from('participants')
-        .select('id, name, surname, arrival_date, departure_date, mobility_typology, indiv_group, group_name')
+        .select('id, name, surname, arrival_date, departure_date, mobility_typology, indiv_group, group_name, nationality, destination_city, destination_country, phone, email, program, sending_organisations(name), host_companies(name, city), transfer_providers(name, phone), accommodation_1:accommodation!participants_accommodation_1_id_fkey(name, city, typology), insurance_providers(name)')
       if (!cancelled) {
-        setParticipants((data as CalParticipant[]) || [])
+        setParticipants((data as unknown as CalParticipant[]) || [])
         setLoading(false)
       }
     })()
@@ -265,10 +280,25 @@ export default function CalendarPage() {
     }
   }
 
-  const handleEventNavigate = (typology: string | null) => {
-    if (typology === 'Incoming') navigate('/incoming/individuals')
-    else if (typology === 'Outgoing') navigate('/outgoing/individuals')
-    else navigate('/incoming/individuals')
+  const handleEventClick = async (ev: CalEvent) => {
+    const p = participants.find(p => p.id === ev.participantId)
+    if (!p) return
+    setDetailParticipant(p)
+    setDetailKind(ev.kind)
+    setDetailLoading(true)
+    setDetailTravel([])
+    const { data } = await supabase
+      .from('travel_details')
+      .select('id, transport_type, flight_train_number, departure_datetime, arrival_datetime, ticket_price')
+      .eq('participant_id', p.id)
+      .order('departure_datetime', { ascending: true })
+    setDetailTravel((data as CalTravelDetail[]) || [])
+    setDetailLoading(false)
+  }
+
+  const closeDetail = () => {
+    setDetailParticipant(null)
+    setDetailTravel([])
   }
 
   // ── Render ─────────────────────────────────────────────────────────────────
@@ -411,13 +441,210 @@ export default function CalendarPage() {
             date={selectedDate}
             events={selectedEvents}
             onClose={() => setSelectedDate(null)}
-            onNavigate={handleEventNavigate}
+            onEventClick={handleEventClick}
             arrivalLabel={t('cal_event_arrival')}
             departureLabel={t('cal_event_departure')}
             noEventsLabel={t('cal_no_events')}
           />
         )}
       </div>
+
+      {/* ── Detail modal ─────────────────────────────────────────────────── */}
+      {detailParticipant && (
+        <div className="hm-modal-overlay" onClick={closeDetail}>
+          <div className="hm-modal hm-modal--wide" onClick={e => e.stopPropagation()} style={{ maxWidth: 640 }}>
+            <div className="hm-modal-header" style={{ borderColor: detailKind === 'arrival' ? COLOR_ARRIVAL : '#D97706' }}>
+              <div className="hm-modal-header-icon" style={{
+                background: detailKind === 'arrival' ? COLOR_ARRIVAL_BG : COLOR_DEPARTURE_BG,
+                color: detailKind === 'arrival' ? COLOR_ARRIVAL : '#D97706',
+              }}>
+                {detailKind === 'arrival' ? '\u2708\uFE0F' : '\u{1F3E0}'}
+              </div>
+              <div style={{ flex: 1 }}>
+                <h2 className="hm-modal-title">{detailParticipant.name} {detailParticipant.surname}</h2>
+                <div style={{ display: 'flex', gap: 6, marginTop: 4, flexWrap: 'wrap' }}>
+                  <span className="cal-badge" style={{
+                    background: detailKind === 'arrival' ? COLOR_ARRIVAL_BG : COLOR_DEPARTURE_BG,
+                    color: detailKind === 'arrival' ? COLOR_ARRIVAL : '#D97706',
+                  }}>
+                    {detailKind === 'arrival' ? t('cal_event_arrival') : t('cal_event_departure')}
+                  </span>
+                  {detailParticipant.mobility_typology && (
+                    <span className="cal-badge" style={{
+                      background: detailParticipant.mobility_typology === 'Incoming' ? '#dbeafe' : '#ede9fe',
+                      color: detailParticipant.mobility_typology === 'Incoming' ? '#1D72B8' : '#8B5CF6',
+                    }}>
+                      {detailParticipant.mobility_typology}
+                    </span>
+                  )}
+                  {detailParticipant.group_name && (
+                    <span className="cal-badge" style={{ background: '#ede9fe', color: '#8B5CF6' }}>
+                      {detailParticipant.group_name}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <button className="hm-modal-close" onClick={closeDetail}>&times;</button>
+            </div>
+
+            <div className="hm-modal-body">
+
+              {/* Key dates — always visible, prominent */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: 12,
+                marginBottom: 16,
+              }}>
+                <div style={{
+                  background: COLOR_ARRIVAL_BG,
+                  border: `1.5px solid ${COLOR_ARRIVAL}44`,
+                  borderRadius: 10,
+                  padding: '14px 16px',
+                }}>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: COLOR_ARRIVAL, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{t('cal_event_arrival')}</div>
+                  <div style={{ fontSize: 17, fontWeight: 700, color: '#065f46', marginTop: 2 }}>{detailParticipant.arrival_date || '\u2014'}</div>
+                </div>
+                <div style={{
+                  background: COLOR_DEPARTURE_BG,
+                  border: '1.5px solid #D9770644',
+                  borderRadius: 10,
+                  padding: '14px 16px',
+                }}>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: '#D97706', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{t('cal_event_departure')}</div>
+                  <div style={{ fontSize: 17, fontWeight: 700, color: '#92400e', marginTop: 2 }}>{detailParticipant.departure_date || '\u2014'}</div>
+                </div>
+              </div>
+
+              {/* Providers — most useful info */}
+              <div className="hw-form-section">
+                <div className="hw-section-title">{t('sec_providers')}</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 16px' }}>
+                  {([
+                    [t('fld_sending_org'), detailParticipant.sending_organisations?.name],
+                    [t('fld_host_company'), detailParticipant.host_companies ? `${detailParticipant.host_companies.name}${detailParticipant.host_companies.city ? ' \u2014 ' + detailParticipant.host_companies.city : ''}` : null],
+                    [t('fld_transfer_prov'), detailParticipant.transfer_providers ? `${detailParticipant.transfer_providers.name}${detailParticipant.transfer_providers.phone ? ' \u00B7 ' + detailParticipant.transfer_providers.phone : ''}` : null],
+                    [t('fld_acc1'), detailParticipant.accommodation_1 ? `${detailParticipant.accommodation_1.name}${detailParticipant.accommodation_1.city ? ' \u2014 ' + detailParticipant.accommodation_1.city : ''}${detailParticipant.accommodation_1.typology ? ' (' + detailParticipant.accommodation_1.typology + ')' : ''}` : null],
+                    [t('fld_insurance_prov'), detailParticipant.insurance_providers?.name],
+                  ] as [string, string | null | undefined][]).map(([label, value], i) => (
+                    <div key={i} style={{ padding: '6px 0', borderBottom: '1px solid #f1f5f9' }}>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
+                      <div style={{ fontSize: 13, fontWeight: 500, color: value ? '#111827' : '#d1d5db' }}>{value || '\u2014'}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Travel details */}
+              <div className="hw-form-section">
+                <div className="hw-section-title">{t('page_travel')}</div>
+                {detailLoading ? (
+                  <div style={{ padding: 20, textAlign: 'center', color: '#9CA3AF' }}>
+                    <div className="spinner-sm" style={{ margin: '0 auto 8px' }} />
+                    {t('list_loading')}
+                  </div>
+                ) : detailTravel.length > 0 ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    {detailTravel.map(td => (
+                      <div key={td.id} style={{
+                        background: '#f9fafb',
+                        border: '1px solid #e2e8f0',
+                        borderRadius: 8,
+                        padding: '12px 16px',
+                        display: 'grid',
+                        gridTemplateColumns: '1fr 1fr',
+                        gap: '8px 16px',
+                      }}>
+                        <div>
+                          <div style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t('td_transport')}</div>
+                          <div style={{ fontSize: 14, fontWeight: 600 }}>
+                            {td.transport_type === 'Airplane' ? '\u2708\uFE0F' : td.transport_type === 'Train' ? '\u{1F686}' : td.transport_type === 'Car' ? '\u{1F697}' : ''} {td.transport_type || '\u2014'}
+                          </div>
+                        </div>
+                        <div>
+                          <div style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t('td_number')}</div>
+                          <div style={{ fontSize: 14, fontWeight: 600 }}>{td.flight_train_number || '\u2014'}</div>
+                        </div>
+                        <div>
+                          <div style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t('td_departure')}</div>
+                          <div style={{ fontSize: 13 }}>{td.departure_datetime ? new Date(td.departure_datetime).toLocaleString('en-GB', { dateStyle: 'short', timeStyle: 'short' }) : '\u2014'}</div>
+                        </div>
+                        <div>
+                          <div style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t('td_arrival')}</div>
+                          <div style={{ fontSize: 13 }}>{td.arrival_datetime ? new Date(td.arrival_datetime).toLocaleString('en-GB', { dateStyle: 'short', timeStyle: 'short' }) : '\u2014'}</div>
+                        </div>
+                        {td.ticket_price != null && (
+                          <div>
+                            <div style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t('td_price')}</div>
+                            <div style={{ fontSize: 14, fontWeight: 600, color: '#2D7A6F' }}>\u20AC {td.ticket_price.toFixed(2)}</div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div style={{
+                    padding: '16px 20px',
+                    background: '#fffbeb',
+                    border: '1px solid #fde68a',
+                    borderRadius: 8,
+                    color: '#92400e',
+                    fontSize: 13,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                  }}>
+                    <span style={{ fontSize: 18 }}>{'\u{26A0}\uFE0F'}</span>
+                    <div>
+                      <div style={{ fontWeight: 600 }}>{t('td_empty')}</div>
+                      <div style={{ fontSize: 12, marginTop: 2, opacity: 0.8 }}>{t('cal_add_travel_hint')}</div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Participant info */}
+              <div className="hw-form-section">
+                <div className="hw-section-title">{t('sec_mobility')}</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 16px' }}>
+                  {([
+                    [t('fld_dest_city'), [detailParticipant.destination_city, detailParticipant.destination_country].filter(Boolean).join(', ')],
+                    [t('fld_nationality'), detailParticipant.nationality],
+                    [t('fld_program'), detailParticipant.program],
+                    [t('fld_phone'), detailParticipant.phone],
+                    [t('fld_email'), detailParticipant.email],
+                  ] as [string, string | null | undefined][]).map(([label, value], i) => (
+                    <div key={i} style={{ padding: '6px 0', borderBottom: '1px solid #f1f5f9' }}>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
+                      <div style={{ fontSize: 13, fontWeight: 500, color: value ? '#111827' : '#d1d5db' }}>{value || '\u2014'}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="hm-modal-footer">
+              <button className="hw-btn-secondary" onClick={closeDetail}>{t('btn_cancel')}</button>
+              <button className="btn btn-secondary btn-sm" onClick={() => {
+                const pid = detailParticipant.id
+                closeDetail()
+                if (detailParticipant.mobility_typology === 'Outgoing') navigate('/outgoing/travel', { state: { forParticipantId: pid } })
+                else navigate('/incoming/travel', { state: { forParticipantId: pid } })
+              }}>
+                + {t('page_travel')}
+              </button>
+              <button className="btn btn-accent btn-sm" onClick={() => {
+                const pid = detailParticipant.id
+                closeDetail()
+                if (detailParticipant.mobility_typology === 'Outgoing') navigate('/outgoing/individuals', { state: { selectParticipantId: pid } })
+                else navigate('/incoming/individuals', { state: { selectParticipantId: pid } })
+              }}>
+                {t('cal_open_profile')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
