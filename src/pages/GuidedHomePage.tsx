@@ -777,6 +777,12 @@ export default function GuidedHomePage() {
           <button className="hm-hero-btn" onClick={() => navigate('/calendar')}>
             {t('home_btn_calendar')}
           </button>
+          <button className="hm-hero-btn" onClick={() => navigate('/guide')}>
+            {t('nav_guide')}
+          </button>
+          <button className="hm-hero-btn" onClick={() => navigate('/manual')}>
+            {t('nav_manual')}
+          </button>
         </div>
       </div>
 

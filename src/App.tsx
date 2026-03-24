@@ -19,6 +19,8 @@ import LanguageCourseProviderPage from './pages/LanguageCourseProviderPage'
 import CalendarPage from './pages/CalendarPage'
 import DocumentsPage from './pages/DocumentsPage'
 import TemplateGuidePage from './pages/TemplateGuidePage'
+import GuidePage from './pages/GuidePage'
+import ManualPage from './pages/ManualPage'
 import './styles/main.css'
 
 function App() {
@@ -60,6 +62,8 @@ function App() {
           <Route path="calendar" element={<CalendarPage />} />
           <Route path="documents" element={<DocumentsPage />} />
           <Route path="documents/guide" element={<TemplateGuidePage />} />
+          <Route path="guide" element={<GuidePage />} />
+          <Route path="manual" element={<ManualPage />} />
           <Route path="incoming/individuals" element={<ParticipantsPage typology="Incoming" />} />
           <Route path="incoming/travel" element={<TravelDetailsPage typology="Incoming" />} />
           <Route path="incoming/transfer" element={<TransferPage />} />
