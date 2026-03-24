@@ -12,16 +12,17 @@ Managemob is a web-based platform for managing international mobility programs. 
 4. [Dashboard](#4-dashboard)
 5. [Participants](#5-participants)
 6. [Calendar](#6-calendar)
-7. [Host Companies](#7-host-companies)
-8. [Accommodation](#8-accommodation)
-9. [Sending Organisations](#9-sending-organisations)
-10. [Transfer Providers](#10-transfer-providers)
-11. [Insurance Providers](#11-insurance-providers)
-12. [Language Course Providers](#12-language-course-providers)
-13. [Mobility Service Providers](#13-mobility-service-providers)
-14. [Travel Details](#14-travel-details)
-15. [Financial Info](#15-financial-info)
-16. [Language Selection](#16-language-selection)
+7. [Documents](#7-documents)
+8. [Host Companies](#8-host-companies)
+9. [Accommodation](#9-accommodation)
+10. [Sending Organisations](#10-sending-organisations)
+11. [Transfer Providers](#11-transfer-providers)
+12. [Insurance Providers](#12-insurance-providers)
+13. [Language Course Providers](#13-language-course-providers)
+14. [Mobility Service Providers](#14-mobility-service-providers)
+15. [Travel Details](#15-travel-details)
+16. [Financial Info](#16-financial-info)
+17. [Language Selection](#17-language-selection)
 
 ---
 
@@ -302,7 +303,94 @@ A **Home** button in the calendar header returns to the Home page.
 
 ---
 
-## 7. Host Companies
+## 7. Documents
+
+The Documents page allows you to upload Word (.docx) templates with placeholder tags and generate filled documents automatically using participant data. This works like a mail merge between Word and Excel.
+
+**Important:** This feature works only with **.docx** (Word) files. PDF templates are not supported because PDFs cannot be edited programmatically. If you only have a PDF, ask the client for the original .docx file.
+
+### Accessing Documents
+
+Click **Documents** in the sidebar, or use the quick-access card from the Home page.
+
+### Uploading a Template
+
+1. Click **Upload Template**.
+2. Enter a name for the template (e.g., "Europass Mobility", "Acceptance Letter").
+3. Optionally add a description.
+4. Select the .docx file.
+5. Click **Save**.
+
+The template is stored in the cloud and available for all users.
+
+### Preparing a Template
+
+Before uploading, the .docx file must contain **placeholder tags** — special markers that Managemob recognises and replaces with participant data. Tags use curly braces: `{tag_name}`.
+
+**Example:** In the Word document, instead of writing a participant's name, write `{name} {surname}`. When you generate the document, Managemob replaces `{name}` with "Mario" and `{surname}` with "Rossi".
+
+#### Key Rules
+
+- Tags are **case-sensitive**: `{name}` works, `{Name}` and `{NAME}` do not.
+- No spaces inside braces: `{name}` is correct, `{ name }` is not.
+- **Formatting is preserved**: if `{name}` is bold in the template, the output will be bold.
+- If a field has no value in the database, the tag is replaced with empty text.
+- Tags work everywhere: body text, tables, headers, footers.
+
+#### Common Tags
+
+| Tag | What it produces |
+|---|---|
+| `{name}` | Participant's first name |
+| `{surname}` | Last name |
+| `{arrival_date}` | Arrival date |
+| `{departure_date}` | Departure date |
+| `{destination_city}` | Destination city |
+| `{program}` | Program name (Erasmus+, etc.) |
+| `{sending_org_name}` | Sending organisation name |
+| `{host_company_name}` | Host company name |
+| `{host_company_tutor}` | Tutor name |
+| `{email}` | Participant email |
+| `{phone}` | Participant phone |
+| `{grant_amount}` | Grant amount in EUR |
+
+There are approximately **80 tags** available covering personal data, contacts, mobility, providers, financials, education, languages, and more.
+
+### Template Guide
+
+Click **Template Guide** in the Documents page header to access a full interactive guide with:
+- Step-by-step instructions for preparing templates
+- A live example showing template input and generated output
+- A specific mapping example for the Europass Mobility template
+- The complete tag reference organised by category
+
+### Exporting the Placeholder List
+
+Click **Export Placeholders (CSV)** to download a CSV file with all available tags, descriptions, and categories. You can open this in Excel and use it as a reference while editing templates in Word.
+
+### Generating Documents
+
+1. Select a template from the list on the left.
+2. On the right panel, search and select one or more participants using checkboxes.
+3. Click **Generate**:
+   - **1 participant** — downloads a single .docx file.
+   - **Multiple participants** — downloads a .zip archive containing one .docx per participant, named `TemplateName_Surname_Name.docx`.
+
+### Deleting a Template
+
+Click the delete button on a template card. A confirmation dialog will appear. The template file is removed from storage.
+
+### Tips for Templates
+
+- **Always test** with one participant before generating a batch.
+- **Combine tags** freely: `Dear {name} {surname}, your internship at {host_company_name} in {host_company_city} starts on {arrival_date}.`
+- **Check data completeness** before generating — missing data produces blank spaces.
+- If the original template has **underlined** placeholder text (common in Europass), remove the underline from the tag before saving; otherwise the generated text will be underlined too.
+- If you need a PDF, generate the .docx first, then open it in Word and save as PDF.
+
+---
+
+## 8. Host Companies
 
 Registry of companies that host participants during their internship.
 
@@ -318,7 +406,7 @@ Host companies appear as dropdown options in the participant form. Add a company
 
 ---
 
-## 8. Accommodation
+## 9. Accommodation
 
 Registry of accommodation facilities available for participants.
 
@@ -340,7 +428,7 @@ Accommodation records are colour-coded by typology for quick identification.
 
 ---
 
-## 9. Sending Organisations
+## 10. Sending Organisations
 
 Registry of organisations that send participants to your programs.
 
@@ -352,7 +440,7 @@ Sending organisations appear as grouping headers in the participant list and as 
 
 ---
 
-## 10. Transfer Providers
+## 11. Transfer Providers
 
 Registry of transport or transfer service providers.
 
@@ -362,7 +450,7 @@ Name, contact person, phone, email, standard price (EUR), notes.
 
 ---
 
-## 11. Insurance Providers
+## 12. Insurance Providers
 
 Registry of insurance providers for participant coverage.
 
@@ -372,7 +460,7 @@ Name, contact person, phone, email, address, city, notes, status.
 
 ---
 
-## 12. Language Course Providers
+## 13. Language Course Providers
 
 Registry of language schools and course providers.
 
@@ -382,7 +470,7 @@ Name, address, city, country, contact person, email, phone, website, language ta
 
 ---
 
-## 13. Mobility Service Providers
+## 14. Mobility Service Providers
 
 Registry of external agencies or intermediaries supporting the mobility programs.
 
@@ -392,7 +480,7 @@ Name, PIC code, address, city, country, website, email, phone, contact person, c
 
 ---
 
-## 14. Travel Details
+## 15. Travel Details
 
 A table showing travel information for participants, now with **full CRUD capabilities**.
 
@@ -431,7 +519,7 @@ Use the search box to filter by participant name or transport number. The view a
 
 ---
 
-## 15. Financial Info
+## 16. Financial Info
 
 A **summary table** showing the financial breakdown for all participants, now with **inline editing**.
 
@@ -457,7 +545,7 @@ Use the search box to filter by participant name.
 
 ---
 
-## 16. Language Selection
+## 17. Language Selection
 
 The interface is available in multiple languages. Click the language selector at the bottom of the sidebar to switch:
 
@@ -484,5 +572,7 @@ Your language preference is saved automatically and restored the next time you o
 - **Add travel details from Calendar** — When viewing a participant in the Calendar modal, click **+ Travel Details** to go directly to the Travel Details page with that participant pre-selected for adding flight/train information.
 - **Margin tracking** — Monitor the Financial Info page regularly. Edit financial values inline and watch the margin update in real time to spot participants with a negative margin before the program ends.
 - **Two views for Participants** — Use the **List View** for a quick overview of all participants with key data. Use the **Detail View** for editing and viewing the full record. Toggle between them with the toolbar button.
+- **Documents are .docx only** — The template system works with Word files (.docx). If a client sends a PDF, ask for the original Word file. You can convert the generated .docx to PDF by opening it in Word and saving as PDF.
+- **Export placeholders** — Use the "Export Placeholders (CSV)" button on the Documents page to get a spreadsheet of all available tags as reference while preparing templates.
 - **Search is per-page** — The search box filters only the list visible on the current page; it does not search across sections.
 - **Deletions are permanent** — There is no undo. Always confirm before deleting a record.
