@@ -1160,7 +1160,10 @@ footer{text-align:center;padding:30px;color:#888;font-size:.85em;border-top:1px 
 </div><!-- end guide-content -->
 
 <script>
+var currentLang='en';
+
 function switchLang(lang){
+  currentLang=lang;
   document.querySelectorAll('.lang-section').forEach(s=>s.classList.remove('active'));
   document.getElementById('lang-'+lang).classList.add('active');
   document.querySelectorAll('.lang-btn').forEach(b=>{
@@ -1171,12 +1174,9 @@ function switchLang(lang){
 function exportPDF(btn){
   btn.disabled=true;
   btn.innerHTML='&#9203; Generating...';
-  const sections=document.querySelectorAll('.lang-section');
-  sections.forEach(s=>s.style.display='block');
-  const el=document.getElementById('guide-content');
-  const opt={margin:[10,10,10,10],filename:'Managemob_Manual_All_Languages.pdf',image:{type:'jpeg',quality:0.95},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['avoid-all','css','legacy']}};
-  html2pdf().set(opt).from(el).save().then(()=>{
-    sections.forEach(s=>{if(!s.classList.contains('active'))s.style.display='none';});
+  var el=document.querySelector('.lang-section.active');
+  var opt={margin:[10,10,10,10],filename:'Managemob_Operational_Guide_'+currentLang.toUpperCase()+'.pdf',image:{type:'jpeg',quality:0.95},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['avoid-all','css','legacy']}};
+  html2pdf().set(opt).from(el).save().then(function(){
     btn.disabled=false;btn.innerHTML='&#128196; PDF';
   });
 }
@@ -1184,14 +1184,12 @@ function exportPDF(btn){
 function exportWord(btn){
   btn.disabled=true;
   btn.innerHTML='&#9203; Generating...';
-  const sections=document.querySelectorAll('.lang-section');
-  let allContent='';
-  sections.forEach(s=>{allContent+=s.innerHTML+'<div style="page-break-before:always"></div>';});
-  const html='<html><head><meta charset="utf-8"><style>body{font-family:Calibri,sans-serif;line-height:1.6}h1{color:#0d6b5e;border-bottom:2px solid #0d6b5e;page-break-before:always}h1:first-child{page-break-before:avoid}h2{color:#0d6b5e;border-bottom:1px solid #ddd}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px}th{background:#0d6b5e;color:#fff}.info-box{background:#e8f5e9;border-left:4px solid #0d6b5e;padding:8px;margin:8px 0}.warn-box{background:#fff3e0;border-left:4px solid #ff9800;padding:8px;margin:8px 0}</style></head><body>'+allContent+'</body></html>';
-  const blob=new Blob(['\ufeff',html],{type:'application/msword'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;a.download='Managemob_Manual_All_Languages.doc';
+  var el=document.querySelector('.lang-section.active');
+  var html='<html><head><meta charset="utf-8"><style>body{font-family:Calibri,sans-serif;line-height:1.6}h1{color:#0d6b5e;border-bottom:2px solid #0d6b5e}h2{color:#0d6b5e;border-bottom:1px solid #ddd}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px}th{background:#0d6b5e;color:#fff}.info-box{background:#e8f5e9;border-left:4px solid #0d6b5e;padding:8px;margin:8px 0}.warn-box{background:#fff3e0;border-left:4px solid #ff9800;padding:8px;margin:8px 0}</style></head><body>'+el.innerHTML+'</body></html>';
+  var blob=new Blob(['\ufeff',html],{type:'application/msword'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download='Managemob_Operational_Guide_'+currentLang.toUpperCase()+'.doc';
   document.body.appendChild(a);a.click();document.body.removeChild(a);
   URL.revokeObjectURL(url);
   btn.disabled=false;btn.innerHTML='&#128196; Word';
