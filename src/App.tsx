@@ -17,6 +17,8 @@ import MobilityProvidersPage from './pages/MobilityProvidersPage'
 import InsurancePage from './pages/InsurancePage'
 import LanguageCourseProviderPage from './pages/LanguageCourseProviderPage'
 import CalendarPage from './pages/CalendarPage'
+import DocumentsPage from './pages/DocumentsPage'
+import TemplateGuidePage from './pages/TemplateGuidePage'
 import './styles/main.css'
 
 function App() {
@@ -56,6 +58,8 @@ function App() {
           <Route index element={<GuidedHomePage />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="calendar" element={<CalendarPage />} />
+          <Route path="documents" element={<DocumentsPage />} />
+          <Route path="documents/guide" element={<TemplateGuidePage />} />
           <Route path="incoming/individuals" element={<ParticipantsPage typology="Incoming" />} />
           <Route path="incoming/travel" element={<TravelDetailsPage typology="Incoming" />} />
           <Route path="incoming/transfer" element={<TransferPage />} />

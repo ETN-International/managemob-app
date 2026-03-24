@@ -2776,6 +2776,119 @@ textarea.form-input {
 }
 
 /* ============================================================
+   TEMPLATE GUIDE PAGE (tg- prefix)
+   ============================================================ */
+
+.tg-section {
+  margin-bottom: 32px;
+}
+
+.tg-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--teal);
+}
+
+.tg-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tg-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.tg-step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.tg-step-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.tg-step-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.tg-rules {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tg-rule {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.tg-rule-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.tg-example-box {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+
+.tg-example-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+
+.tg-example-text {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.8;
+}
+
+.tg-example-text code {
+  background: #ede9fe;
+  color: #5B21B6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+/* ============================================================
    SCROLLBARS
    ============================================================ */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
