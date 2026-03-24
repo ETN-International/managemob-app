@@ -586,6 +586,7 @@ const pt: Record<TranslationKeys, string> = {
   home_guide_desc: 'Conceitos, workflow e visão geral das secções',
   home_operational_guide: 'Guia Operacional',
   home_operational_guide_desc: 'Guia operacional multilingue completo (novo separador)',
+  eu_disclaimer: 'Cofinanciado pela União Europeia. Os pontos de vista e as opiniões expressas são, no entanto, da exclusiva responsabilidade do(s) autor(es) e não refletem necessariamente os da União Europeia ou da Agência de Execução Europeia da Educação e da Cultura (EACEA). Nem a União Europeia nem a EACEA podem ser consideradas responsáveis por essas opiniões.',
 }
 
 export default pt
