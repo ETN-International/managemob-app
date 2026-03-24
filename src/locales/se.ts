@@ -61,6 +61,12 @@ const se = {
   login_btn: 'Logga in',
   login_loading: 'Loggar in...',
   login_footer: 'Managemob — Plattform för mobilitetshantering',
+  register_subtitle: 'Skapa ett nytt konto',
+  register_btn: 'Registrera',
+  register_loading: 'Registrerar...',
+  register_success: 'Registreringen är klar! Du kan nu logga in.',
+  register_no_account: 'Har du inget konto?',
+  register_has_account: 'Har du redan ett konto?',
 
   // Buttons
   btn_edit: '✏️ Redigera',

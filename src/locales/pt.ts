@@ -46,6 +46,12 @@ const pt: Record<TranslationKeys, string> = {
   login_btn: 'Entrar',
   login_loading: 'A entrar...',
   login_footer: 'Managemob — Plataforma de gestão de mobilidade',
+  register_subtitle: 'Criar uma nova conta',
+  register_btn: 'Registrar',
+  register_loading: 'Registrando...',
+  register_success: 'Registro concluído! Agora você pode entrar.',
+  register_no_account: 'Não tem uma conta?',
+  register_has_account: 'Já tem uma conta?',
 
   btn_edit: '✏️ Editar',
   btn_save: '💾 Guardar',

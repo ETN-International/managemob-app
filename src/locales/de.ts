@@ -46,6 +46,12 @@ const de: Record<TranslationKeys, string> = {
   login_btn: 'Anmelden',
   login_loading: 'Anmeldung...',
   login_footer: 'Managemob — Mobilitätsverwaltungsplattform',
+  register_subtitle: 'Neues Konto erstellen',
+  register_btn: 'Registrieren',
+  register_loading: 'Registrierung läuft...',
+  register_success: 'Registrierung abgeschlossen! Sie können sich jetzt anmelden.',
+  register_no_account: 'Noch kein Konto?',
+  register_has_account: 'Bereits ein Konto?',
 
   btn_edit: '✏️ Bearbeiten',
   btn_save: '💾 Speichern',

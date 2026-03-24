@@ -46,6 +46,12 @@ const en = {
   login_btn: 'Sign in',
   login_loading: 'Signing in...',
   login_footer: 'Managemob — Mobility Management Platform',
+  register_subtitle: 'Create a new account',
+  register_btn: 'Sign up',
+  register_loading: 'Signing up...',
+  register_success: 'Registration complete! You can now sign in.',
+  register_no_account: "Don't have an account?",
+  register_has_account: 'Already have an account?',
 
   // Buttons
   btn_edit: '✏️ Edit',

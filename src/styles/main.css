@@ -164,6 +164,37 @@ a:hover { text-decoration: underline; }
   font-size: 13px;
 }
 
+.success-banner {
+  padding: 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+  color: #16a34a;
+  font-size: 13px;
+}
+
+.login-toggle {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.login-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0;
+}
+
+.login-toggle-btn:hover {
+  text-decoration: underline;
+}
+
 /* ============================================================
    APP LAYOUT
    ============================================================ */
