@@ -625,6 +625,8 @@ const en = {
   home_guide_desc: 'Concepts, workflow and app sections overview',
   home_operational_guide: 'Operational Guide',
   home_operational_guide_desc: 'Complete multilingual operational guide (opens in new tab)',
+  home_github_guide: 'GitHub Template Guide',
+  home_github_guide_desc: 'Step-by-step guide: from GitHub template to production (opens in new tab)',
 } as const
 
 export default en

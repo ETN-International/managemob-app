@@ -586,6 +586,8 @@ const es: Record<TranslationKeys, string> = {
   home_guide_desc: 'Conceptos, workflow y resumen de secciones',
   home_operational_guide: 'Guía Operativa',
   home_operational_guide_desc: 'Guía operativa multilingüe completa (nueva pestaña)',
+  home_github_guide: 'Guía Template GitHub',
+  home_github_guide_desc: 'Guía paso a paso: del template GitHub a producción (nueva pestaña)',
 }
 
 export default es

@@ -840,6 +840,20 @@ export default function GuidedHomePage() {
           </div>
           <div className="hm-card-arrow" style={{ color: '#1D72B8' }}>&#8250;</div>
         </a>
+        <a
+          className="hm-action-card"
+          href="/template-guide-github.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ borderLeft: '4px solid #8B5CF6', flex: '1 1 200px', textDecoration: 'none' }}
+        >
+          <div className="hm-card-icon" style={{ background: '#8B5CF614', color: '#8B5CF6' }}>{'\u{1F6E0}\uFE0F'}</div>
+          <div className="hm-card-body">
+            <h3 className="hm-card-title">{t('home_github_guide')}</h3>
+            <p className="hm-card-desc">{t('home_github_guide_desc')}</p>
+          </div>
+          <div className="hm-card-arrow" style={{ color: '#8B5CF6' }}>&#8250;</div>
+        </a>
       </div>
 
       {/* ══════════════════════════════════════════════════════════════════════ */}

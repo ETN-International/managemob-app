@@ -617,6 +617,8 @@ const sv = {
   home_guide_desc: 'Koncept, arbetsflöde och sektionsöversikt',
   home_operational_guide: 'Driftguide',
   home_operational_guide_desc: 'Komplett flerspråkig driftguide (ny flik)',
+  home_github_guide: 'GitHub Mallguide',
+  home_github_guide_desc: 'Steg-för-steg: från GitHub-mall till produktion (ny flik)',
 } as const
 
 export default sv
