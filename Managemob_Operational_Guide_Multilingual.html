@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Managemob — Operational Guide</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;color:#1a1a2e;background:#f8f9fa}
+.top-bar{position:sticky;top:0;z-index:100;background:#0d6b5e;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.lang-switcher{display:flex;gap:4px;flex-wrap:wrap}
+.lang-btn{padding:6px 14px;border:2px solid rgba(255,255,255,.3);border-radius:6px;background:0 0;color:#fff;cursor:pointer;font-size:14px;font-weight:500;transition:all .2s}
+.lang-btn:hover{background:rgba(255,255,255,.15)}
+.lang-btn.active{background:#fff;color:#0d6b5e;border-color:#fff;font-weight:700}
+.export-btns{display:flex;gap:8px}
+.export-btn{padding:8px 18px;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
+.export-btn:hover{transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.btn-pdf{background:#e53935;color:#fff}
+.btn-word{background:#1565c0;color:#fff}
+.btn-pdf:disabled,.btn-word:disabled{opacity:.6;cursor:wait}
+#guide-content{max-width:900px;margin:0 auto;padding:40px 20px 60px}
+h1{font-size:2em;color:#0d6b5e;margin-bottom:8px;border-bottom:3px solid #0d6b5e;padding-bottom:8px}
+h2{font-size:1.5em;color:#0d6b5e;margin-top:40px;margin-bottom:12px;border-bottom:1px solid #ddd;padding-bottom:6px}
+h3{font-size:1.15em;color:#333;margin-top:20px;margin-bottom:8px}
+p{margin-bottom:10px}
+ol,ul{padding-left:28px;margin-bottom:12px}
+li{margin-bottom:6px}
+strong{color:#0d6b5e}
+code{background:#e8f5e9;padding:2px 6px;border-radius:3px;font-size:.9em}
+blockquote{border-left:4px solid #0d6b5e;background:#e8f5e9;padding:12px 16px;margin:12px 0;border-radius:0 6px 6px 0}
+blockquote p{margin:0}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.92em}
+th{background:#0d6b5e;color:#fff;padding:10px;text-align:left}
+td{padding:8px 10px;border-bottom:1px solid #ddd}
+tr:hover{background:#f1f8e9}
+hr{border:none;border-top:2px solid #ddd;margin:32px 0}
+.version{color:#666;font-size:.9em;margin-bottom:4px}
+.tip{background:#fff3e0;border-left:4px solid #ff9800;padding:12px 16px;margin:12px 0;border-radius:0 6px 6px 0}
+.warning{background:#ffebee;border-left:4px solid #f44336;padding:12px 16px;margin:12px 0;border-radius:0 6px 6px 0}
+@media print{.top-bar{display:none!important}body{background:#fff}}
+@media(max-width:600px){.top-bar{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="top-bar">
+<div class="lang-switcher">
+<button class="lang-btn active" onclick="switchLang('en')">🇬🇧 EN</button>
+<button class="lang-btn" onclick="switchLang('it')">🇮🇹 IT</button>
+<button class="lang-btn" onclick="switchLang('fr')">🇫🇷 FR</button>
+<button class="lang-btn" onclick="switchLang('es')">🇪🇸 ES</button>
+<button class="lang-btn" onclick="switchLang('de')">🇩🇪 DE</button>
+<button class="lang-btn" onclick="switchLang('sv')">🇸🇪 SV</button>
+<button class="lang-btn" onclick="switchLang('pt')">🇵🇹 PT</button>
+</div>
+<div class="export-btns">
+<button class="export-btn btn-pdf" onclick="exportPDF()" id="pdfBtn">📄 PDF</button>
+<button class="export-btn btn-word" onclick="exportWord()" id="wordBtn">📝 Word</button>
+</div>
+</div>
+<div id="guide-content"></div>
+<script>
+const T={};
+let currentLang='en';
+T.en=function(){return`
+<h1>Managemob — Operational Tutorial for Partners</h1>
+<p class="version"><strong>Version 1.0 — March 2026</strong> | <strong>Prepared by:</strong> ETN International</p>
+<hr>
+<h2>Before You Begin</h2>
+<p>You will need: 1) The <strong>URL</strong> of the platform; 2) Your <strong>email</strong> and <strong>password</strong> (both provided by ETN International). Managemob works in any modern browser. No installation required.</p>
+<hr>
+<h2>Tutorial 1 — Logging In and Choosing Your Language</h2>
+<ol><li>Open the platform URL in your browser.</li><li>Type your <strong>email</strong> and <strong>password</strong>.</li><li>Click <strong>"Sign in"</strong>.</li><li>If correct, you are redirected to the Home page. If not, a red error banner appears.</li></ol>
+<h3>Change language</h3><p>Supports: English, Italian, French, Spanish, German, Swedish, Portuguese. <strong>Login page:</strong> click a flag icon. <strong>Inside app:</strong> use the language selector at the bottom of the sidebar.</p>
+<h3>Log out</h3><p>Click the <strong>arrow icon (↩)</strong> next to your profile at the bottom-left.</p>
+<hr>
+<h2>Tutorial 2 — Navigation</h2>
+<ul><li><strong>Dashboard</strong> — KPI cards and charts (read-only).</li><li><strong>Managemob Incoming</strong> — Individuals, Groups, Sending Organisations, Host Companies, Accommodation, Travel Details, Transfer, Financial Info, Mobility Service Providers.</li><li><strong>Managemob Outgoing</strong> — Same sub-pages for outgoing mobilities.</li></ul>
+<blockquote><p>Incoming and Outgoing show only data for that mobility direction.</p></blockquote>
+<hr>
+<h2>Tutorial 3 — Home Page Layout</h2>
+<p>Stats bar (Total, Incoming, Outgoing, Recent), quick-nav buttons (Calendar, Dashboard), mode selector (Individual/Group), and a <strong>3-step wizard</strong>: Create Participants → Assign Services → Manage Providers.</p>
+<hr>
+<h2>Tutorial 4 — Register an Individual Participant</h2>
+<ol><li>Go to <strong>Home</strong>, select <strong>"Individual"</strong>.</li><li>Fill in: First Name*, Last Name*, Sex, Date of Birth, Nationality, Email, Phone, Typology (Incoming/Outgoing), Arrival/Departure Dates, Destination, Programme, Project.</li><li>Click <strong>"Save"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 5 — Register a Group</h2>
+<h3>Option A — Paste Names</h3>
+<ol><li>Select <strong>"Group"</strong>. Fill shared details (Group Name, Typology, Dates…).</li><li>Paste names one per line. Click <strong>"Parse Names"</strong>.</li><li>Review table, click <strong>"Create Group"</strong>.</li></ol>
+<h3>Option B — CSV Upload</h3>
+<ol><li>Click <strong>"CSV Upload"</strong> tab. Upload file, map columns.</li><li>Verify preview, click <strong>"Create Group"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 6 — Assign Services (Step 2)</h2>
+<ol><li>Step 2: search and select a participant.</li><li>Assign via dropdowns: Sending Org, Host Company, Accommodation (with dates), Insurance, Transfer, Language Course, Mobility Provider.</li><li>Tick <strong>"Apply to entire group"</strong> if needed. Click <strong>"Save"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 7 — Add a Provider (Step 3)</h2>
+<ol><li>Step 3: click <strong>"+ Quick Add"</strong> next to the desired category.</li><li>Fill the form. Click <strong>"Save"</strong>. Immediately available in all dropdowns.</li></ol>
+<hr>
+<h2>Tutorial 8 — View and Edit Participants</h2>
+<ol><li><strong>Incoming > Individuals</strong>. Click a name.</li><li>Right panel shows: Personal Info, Contact, Documents, Languages, Education, Bank, Mobility, Providers, Language Course, Internship, Accommodation, Financials.</li><li><strong>"Edit"</strong> to modify (weeks auto-calculate). <strong>"Save"</strong> to confirm.</li><li><strong>"+ New"</strong> to create. <strong>"Delete"</strong> (red) = permanent.</li></ol>
+<hr>
+<h2>Tutorial 9 — Generate PDFs</h2>
+<ol><li>Select a participant.</li><li>Click <strong>"Info Voucher"</strong> (teal), <strong>"Financial Report"</strong> (blue), or <strong>"Certificate"</strong> (grey).</li><li>PDF opens in a new tab.</li></ol>
+<hr>
+<h2>Tutorial 10 — Host Companies</h2>
+<ol><li><strong>"+ New"</strong>: Company Name, Address, City, Sector, Contact, Email, Phone.</li><li><strong>Internship Tutor</strong> section: Tutor Name, Phone, Email.</li><li><strong>"Save"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 11 — Accommodation</h2>
+<ol><li><strong>"+ New"</strong>: Name, Typology (Hostel/Hotel/B&B/Host Family/Shared Flat/Lodger), Contact, Address.</li><li>Features (toggles), Room Details, Board Options (up to 3 with weekly price), Banking.</li><li><strong>"Save"</strong>. Colour-coded by typology.</li></ol>
+<hr>
+<h2>Tutorial 12 — Sending Organisations</h2>
+<ol><li><strong>"+ New"</strong>: Name, Contact Person, Email, Phone, Address, City, Country.</li><li><strong>"Save"</strong>. Also serves as group headers in participant lists.</li></ol>
+<hr>
+<h2>Tutorial 13 — Calendar</h2>
+<ol><li>Monthly grid. <strong>Green pills</strong> = arrivals, <strong>Amber pills</strong> = departures.</li><li>Filters: Typology, Individual/Group, Group name.</li><li>Click a day → side panel with event cards. Click a card → go to participant.</li></ol>
+<div class="tip"><p><strong>Tip:</strong> Check the Calendar weekly to coordinate transfers and check-ins.</p></div>
+<hr>
+<h2>Tutorial 14 — Dashboard</h2>
+<ol><li>KPI cards: Total Participants, Total Grant, Total Margin (all clickable).</li><li>Pie chart (Incoming vs Outgoing) — click slices. Bar chart (Countries) — click bars.</li><li>Summary row: Incoming, Outgoing, Average Grant (clickable).</li></ol>
+<hr>
+<h2>Tutorial 15 — Financial Data</h2>
+<ol><li>Total Grant and Total Margin summary cards.</li><li>Table: 13 columns including Grant, all costs, and <strong>Margin</strong>.</li><li><strong>Green</strong> = positive margin. <strong>Red</strong> = negative (review budget).</li><li>Update via participant's Financials section on Individuals page.</li></ol>
+<hr>
+<h2>Tutorial 16 — Transfer Providers</h2>
+<ol><li><strong>"+ New"</strong>: Name, Contact, Phone, Email, Standard Price (EUR), Notes. <strong>"Save"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 17 — Insurance Providers</h2>
+<ol><li><strong>"+ New"</strong>: Name, Status (Active/Inactive/Pending), Contact, Phone, Email, Address, City.</li><li>Badges: <strong>Green</strong>=Active, <strong>Red</strong>=Inactive, <strong>Yellow</strong>=Pending.</li></ol>
+<hr>
+<h2>Tutorial 18 — Language Course Providers</h2>
+<ol><li><strong>"+ New"</strong>: Name, Language Taught, Contact, Email, Phone, Website, Address, City, Country. <strong>"Save"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 19 — Mobility Service Providers</h2>
+<ol><li>4 sections: Organisation (Name, PIC, Area, Website), Address, Contact, Capacity & Specialties.</li><li><strong>"Save"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 20 — Travel Details</h2>
+<p>Read-only table: Participant, Transport Type (✈🚆🚗), Flight/Train Number, Departure/Arrival, Ticket Price. Update via participant record.</p>
+<hr>
+<h2>Recommended Workflow</h2>
+<table><thead><tr><th>Step</th><th>Action</th><th>Where</th></tr></thead><tbody>
+<tr><td>1</td><td>Register providers</td><td>Home → Step 3</td></tr>
+<tr><td>2</td><td>Create participants</td><td>Home → Step 1</td></tr>
+<tr><td>3</td><td>Assign services</td><td>Home → Step 2</td></tr>
+<tr><td>4</td><td>Complete profiles</td><td>Individuals → Edit</td></tr>
+<tr><td>5</td><td>Enter financial data</td><td>Individuals → Financials</td></tr>
+<tr><td>6</td><td>Monitor budget</td><td>Financial Info</td></tr>
+<tr><td>7</td><td>Check logistics</td><td>Calendar</td></tr>
+<tr><td>8</td><td>Generate PDFs</td><td>Individuals → PDF buttons</td></tr>
+</tbody></table>
+<hr>
+<h2>Support</h2>
+<p>Contact ETN International: <strong>claudio@etninternational.com</strong></p>
+<p><em>This guide is intended for external partners of ETN International.</em></p>
+`;};
+T.it=function(){return`
+<h1>Managemob — Guida Operativa per i Partner</h1>
+<p class="version"><strong>Versione 1.0 — Marzo 2026</strong> | <strong>Preparato da:</strong> ETN International</p>
+<hr>
+<h2>Prima di Iniziare</h2>
+<p>Ti serviranno: 1) L'<strong>URL</strong> della piattaforma; 2) La tua <strong>email</strong> e <strong>password</strong> (entrambe fornite da ETN International). Managemob funziona su qualsiasi browser moderno. Non è richiesta alcuna installazione.</p>
+<hr>
+<h2>Tutorial 1 — Accesso e Scelta della Lingua</h2>
+<ol><li>Apri l'URL della piattaforma nel tuo browser.</li><li>Digita la tua <strong>email</strong> e <strong>password</strong>.</li><li>Fai clic su <strong>"Accedi"</strong>.</li><li>Se i dati sono corretti, sarai reindirizzato alla pagina Home. Altrimenti, apparirà un banner di errore rosso.</li></ol>
+<h3>Cambia lingua</h3><p>Lingue disponibili: Inglese, Italiano, Francese, Spagnolo, Tedesco, Svedese, Portoghese. <strong>Pagina di accesso:</strong> fai clic su un'icona della bandiera. <strong>All'interno dell'app:</strong> usa il selettore di lingua in fondo alla barra laterale.</p>
+<h3>Disconnessione</h3><p>Fai clic sulla <strong>freccia (↩)</strong> accanto al tuo profilo in basso a sinistra.</p>
+<hr>
+<h2>Tutorial 2 — Navigazione</h2>
+<ul><li><strong>Dashboard</strong> — Schede KPI e grafici (sola lettura).</li><li><strong>Managemob In Arrivo</strong> — Individui, Gruppi, Organizzazioni di Invio, Aziende Ospitanti, Alloggi, Dettagli di Viaggio, Trasferimento, Informazioni Finanziarie, Provider di Servizi di Mobilità.</li><li><strong>Managemob In Partenza</strong> — Stesse sottopagine per mobilità in partenza.</li></ul>
+<blockquote><p>In Arrivo e In Partenza mostrano solo i dati relativi a quella direzione di mobilità.</p></blockquote>
+<hr>
+<h2>Tutorial 3 — Layout della Pagina Home</h2>
+<p>Barra delle statistiche (Totale, In Arrivo, In Partenza, Recenti), pulsanti di navigazione rapida (Calendario, Dashboard), selettore di modalità (Individuale/Gruppo), e una <strong>procedura guidata in 3 passaggi</strong>: Crea Partecipanti → Assegna Servizi → Gestisci Provider.</p>
+<hr>
+<h2>Tutorial 4 — Registra un Partecipante Individuale</h2>
+<ol><li>Vai a <strong>Home</strong>, seleziona <strong>"Individuale"</strong>.</li><li>Compila: Nome*, Cognome*, Sesso, Data di Nascita, Nazionalità, Email, Telefono, Tipologia (In Arrivo/In Partenza), Date di Arrivo/Partenza, Destinazione, Programma, Progetto.</li><li>Fai clic su <strong>"Salva"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 5 — Registra un Gruppo</h2>
+<h3>Opzione A — Incolla Nomi</h3>
+<ol><li>Seleziona <strong>"Gruppo"</strong>. Compila i dettagli comuni (Nome Gruppo, Tipologia, Date...).</li><li>Incolla i nomi uno per riga. Fai clic su <strong>"Analizza Nomi"</strong>.</li><li>Controlla la tabella, fai clic su <strong>"Crea Gruppo"</strong>.</li></ol>
+<h3>Opzione B — Caricamento CSV</h3>
+<ol><li>Fai clic sulla scheda <strong>"Caricamento CSV"</strong>. Carica il file, mappa le colonne.</li><li>Verifica l'anteprima, fai clic su <strong>"Crea Gruppo"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 6 — Assegna Servizi (Passaggio 2)</h2>
+<ol><li>Passaggio 2: cerca e seleziona un partecipante.</li><li>Assegna tramite menu a discesa: Organizzazione di Invio, Azienda Ospitante, Alloggio (con date), Assicurazione, Trasferimento, Corso di Lingua, Provider di Mobilità.</li><li>Spunta <strong>"Applica a tutto il gruppo"</strong> se necessario. Fai clic su <strong>"Salva"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 7 — Aggiungi un Provider (Passaggio 3)</h2>
+<ol><li>Passaggio 3: fai clic su <strong>"+ Aggiungi Rapido"</strong> accanto alla categoria desiderata.</li><li>Compila il modulo. Fai clic su <strong>"Salva"</strong>. Immediatamente disponibile in tutti i menu a discesa.</li></ol>
+<hr>
+<h2>Tutorial 8 — Visualizza e Modifica Partecipanti</h2>
+<ol><li><strong>In Arrivo > Individui</strong>. Fai clic su un nome.</li><li>Il pannello di destra mostra: Informazioni Personali, Contatti, Documenti, Lingue, Istruzione, Conto Bancario, Mobilità, Provider, Corso di Lingua, Tirocinio, Alloggio, Dati Finanziari.</li><li><strong>"Modifica"</strong> per apportare modifiche (le settimane si calcolano automaticamente). <strong>"Salva"</strong> per confermare.</li><li><strong>"+ Nuovo"</strong> per creare. <strong>"Elimina"</strong> (rosso) = permanente.</li></ol>
+<hr>
+<h2>Tutorial 9 — Genera PDF</h2>
+<ol><li>Seleziona un partecipante.</li><li>Fai clic su <strong>"Info Voucher"</strong> (turchese), <strong>"Rapporto Finanziario"</strong> (blu), o <strong>"Certificato"</strong> (grigio).</li><li>Il PDF si apre in una nuova scheda.</li></ol>
+<hr>
+<h2>Tutorial 10 — Aziende Ospitanti</h2>
+<ol><li><strong>"+ Nuovo"</strong>: Nome Azienda, Indirizzo, Città, Settore, Contatto, Email, Telefono.</li><li>Sezione <strong>Tutor di Tirocinio</strong>: Nome Tutor, Telefono, Email.</li><li><strong>"Salva"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 11 — Alloggi</h2>
+<ol><li><strong>"+ Nuovo"</strong>: Nome, Tipologia (Ostello/Hotel/B&B/Famiglia Ospitante/Appartamento Condiviso/Alloggiamento), Contatto, Indirizzo.</li><li>Caratteristiche (interruttori), Dettagli della Stanza, Opzioni di Vitto (fino a 3 con prezzo settimanale), Dati Bancari.</li><li><strong>"Salva"</strong>. Codificato a colori per tipologia.</li></ol>
+<hr>
+<h2>Tutorial 12 — Organizzazioni di Invio</h2>
+<ol><li><strong>"+ Nuovo"</strong>: Nome, Persona di Contatto, Email, Telefono, Indirizzo, Città, Paese.</li><li><strong>"Salva"</strong>. Funge anche da intestazione di gruppo negli elenchi dei partecipanti.</li></ol>
+<hr>
+<h2>Tutorial 13 — Calendario</h2>
+<ol><li>Griglia mensile. <strong>Pillole verdi</strong> = arrivi, <strong>Pillole ambra</strong> = partenze.</li><li>Filtri: Tipologia, Individuale/Gruppo, Nome Gruppo.</li><li>Fai clic su un giorno → pannello laterale con schede di evento. Fai clic su una scheda → vai al partecipante.</li></ol>
+<div class="tip"><p><strong>Suggerimento:</strong> Controlla il Calendario settimanalmente per coordinare i trasferimenti e gli arrivi.</p></div>
+<hr>
+<h2>Tutorial 14 — Dashboard</h2>
+<ol><li>Schede KPI: Partecipanti Totali, Contributo Totale, Margine Totale (tutti cliccabili).</li><li>Grafico a torta (In Arrivo vs In Partenza) — fai clic sulle fette. Grafico a barre (Paesi) — fai clic sulle barre.</li><li>Riga di riepilogo: In Arrivo, In Partenza, Contributo Medio (cliccabili).</li></ol>
+<hr>
+<h2>Tutorial 15 — Dati Finanziari</h2>
+<ol><li>Schede di riepilogo Contributo Totale e Margine Totale.</li><li>Tabella: 13 colonne che includono Contributo, tutti i costi, e <strong>Margine</strong>.</li><li><strong>Verde</strong> = margine positivo. <strong>Rosso</strong> = negativo (rivedi il budget).</li><li>Aggiorna tramite la sezione Dati Finanziari del partecipante nella pagina Individui.</li></ol>
+<hr>
+<h2>Tutorial 16 — Provider di Trasferimento</h2>
+<ol><li><strong>"+ Nuovo"</strong>: Nome, Contatto, Telefono, Email, Prezzo Standard (EUR), Note. <strong>"Salva"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 17 — Provider di Assicurazione</h2>
+<ol><li><strong>"+ Nuovo"</strong>: Nome, Stato (Attivo/Inattivo/In Sospeso), Contatto, Telefono, Email, Indirizzo, Città.</li><li>Badge: <strong>Verde</strong>=Attivo, <strong>Rosso</strong>=Inattivo, <strong>Giallo</strong>=In Sospeso.</li></ol>
+<hr>
+<h2>Tutorial 18 — Provider di Corsi di Lingua</h2>
+<ol><li><strong>"+ Nuovo"</strong>: Nome, Lingua Insegnata, Contatto, Email, Telefono, Sito Web, Indirizzo, Città, Paese. <strong>"Salva"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 19 — Provider di Servizi di Mobilità</h2>
+<ol><li>4 sezioni: Organizzazione (Nome, PIC, Area, Sito Web), Indirizzo, Contatto, Capacità & Specializzazioni.</li><li><strong>"Salva"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 20 — Dettagli di Viaggio</h2>
+<p>Tabella di sola lettura: Partecipante, Tipo di Trasporto (✈🚆🚗), Numero di Volo/Treno, Partenza/Arrivo, Prezzo del Biglietto. Aggiorna tramite il record del partecipante.</p>
+<hr>
+<h2>Flusso di Lavoro Consigliato</h2>
+<table><thead><tr><th>Passaggio</th><th>Azione</th><th>Dove</th></tr></thead><tbody>
+<tr><td>1</td><td>Registra provider</td><td>Home → Passaggio 3</td></tr>
+<tr><td>2</td><td>Crea partecipanti</td><td>Home → Passaggio 1</td></tr>
+<tr><td>3</td><td>Assegna servizi</td><td>Home → Passaggio 2</td></tr>
+<tr><td>4</td><td>Completa profili</td><td>Individui → Modifica</td></tr>
+<tr><td>5</td><td>Inserisci dati finanziari</td><td>Individui → Dati Finanziari</td></tr>
+<tr><td>6</td><td>Monitora budget</td><td>Informazioni Finanziarie</td></tr>
+<tr><td>7</td><td>Controlla logistica</td><td>Calendario</td></tr>
+<tr><td>8</td><td>Genera PDF</td><td>Individui → Pulsanti PDF</td></tr>
+</tbody></table>
+<hr>
+<h2>Supporto</h2>
+<p>Contatta ETN International: <strong>claudio@etninternational.com</strong></p>
+<p><em>Questa guida è destinata ai partner esterni di ETN International.</em></p>
+`;};
+T.fr=function(){return`
+<h1>Managemob — Guide Opérationnel pour les Partenaires</h1>
+<p class="version"><strong>Version 1.0 — Mars 2026</strong> | <strong>Préparé par :</strong> ETN International</p>
+<hr>
+<h2>Avant de Commencer</h2>
+<p>Vous aurez besoin : 1) L'<strong>URL</strong> de la plateforme ; 2) Votre <strong>email</strong> et <strong>mot de passe</strong> (fournis par ETN International). Managemob fonctionne sur n'importe quel navigateur moderne. Aucune installation requise.</p>
+<hr>
+<h2>Tutoriel 1 — Connexion et Choix de la Langue</h2>
+<ol><li>Ouvrez l'URL de la plateforme dans votre navigateur.</li><li>Saisissez votre <strong>email</strong> et <strong>mot de passe</strong>.</li><li>Cliquez sur <strong>"Se connecter"</strong>.</li><li>Si les identifiants sont corrects, vous êtes redirigé vers la page Accueil. Sinon, une bannière d'erreur rouge apparaît.</li></ol>
+<h3>Changer de langue</h3><p>Langues disponibles : Anglais, Italien, Français, Espagnol, Allemand, Suédois, Portugais. <strong>Page de connexion :</strong> cliquez sur une icône de drapeau. <strong>Dans l'application :</strong> utilisez le sélecteur de langue en bas de la barre latérale.</p>
+<h3>Se déconnecter</h3><p>Cliquez sur la <strong>flèche (↩)</strong> à côté de votre profil en bas à gauche.</p>
+<hr>
+<h2>Tutoriel 2 — Navigation</h2>
+<ul><li><strong>Tableau de Bord</strong> — Cartes KPI et graphiques (lecture seule).</li><li><strong>Managemob Entrant</strong> — Individus, Groupes, Organisations d'Envoi, Entreprises d'Accueil, Hébergement, Détails du Voyage, Transfert, Informations Financières, Prestataires de Services de Mobilité.</li><li><strong>Managemob Sortant</strong> — Mêmes sous-pages pour les mobilités sortantes.</li></ul>
+<blockquote><p>Les sections Entrant et Sortant affichent uniquement les données pour cette direction de mobilité.</p></blockquote>
+<hr>
+<h2>Tutoriel 3 — Disposition de la Page Accueil</h2>
+<p>Barre de statistiques (Total, Entrant, Sortant, Récent), boutons de navigation rapide (Calendrier, Tableau de Bord), sélecteur de mode (Individuel/Groupe), et un <strong>assistant en 3 étapes</strong> : Créer des Participants → Assigner des Services → Gérer les Prestataires.</p>
+<hr>
+<h2>Tutoriel 4 — Enregistrer un Participant Individuel</h2>
+<ol><li>Allez à <strong>Accueil</strong>, sélectionnez <strong>"Individuel"</strong>.</li><li>Remplissez : Prénom*, Nom*, Sexe, Date de Naissance, Nationalité, Email, Téléphone, Typologie (Entrant/Sortant), Dates d'Arrivée/Départ, Destination, Programme, Projet.</li><li>Cliquez sur <strong>"Enregistrer"</strong>.</li></ol>
+<hr>
+<h2>Tutoriel 5 — Enregistrer un Groupe</h2>
+<h3>Option A — Coller les Noms</h3>
+<ol><li>Sélectionnez <strong>"Groupe"</strong>. Remplissez les détails partagés (Nom du Groupe, Typologie, Dates...).</li><li>Collez les noms un par ligne. Cliquez sur <strong>"Analyser les Noms"</strong>.</li><li>Vérifiez le tableau, cliquez sur <strong>"Créer le Groupe"</strong>.</li></ol>
+<h3>Option B — Téléchargement CSV</h3>
+<ol><li>Cliquez sur l'onglet <strong>"Téléchargement CSV"</strong>. Téléchargez le fichier, mappez les colonnes.</li><li>Vérifiez l'aperçu, cliquez sur <strong>"Créer le Groupe"</strong>.</li></ol>
+<hr>
+<h2>Tutoriel 6 — Assigner des Services (Étape 2)</h2>
+<ol><li>Étape 2 : recherchez et sélectionnez un participant.</li><li>Assignez via les listes déroulantes : Organisation d'Envoi, Entreprise d'Accueil, Hébergement (avec dates), Assurance, Transfert, Cours de Langue, Prestataire de Mobilité.</li><li>Cochez <strong>"Appliquer à tout le groupe"</strong> si nécessaire. Cliquez sur <strong>"Enregistrer"</strong>.</li></ol>
+<hr>
+<h2>Tutoriel 7 — Ajouter un Prestataire (Étape 3)</h2>
+<ol><li>Étape 3 : cliquez sur <strong>"+ Ajout Rapide"</strong> à côté de la catégorie souhaitée.</li><li>Remplissez le formulaire. Cliquez sur <strong>"Enregistrer"</strong>. Immédiatement disponible dans toutes les listes déroulantes.</li></ol>
+<hr>
+<h2>Tutoriel 8 — Afficher et Modifier les Participants</h2>
+<ol><li><strong>Entrant > Individus</strong>. Cliquez sur un nom.</li><li>Le panneau droit affiche : Informations Personnelles, Contact, Documents, Langues, Éducation, Bancaire, Mobilité, Prestataires, Cours de Langue, Stages, Hébergement, Données Financières.</li><li><strong>"Modifier"</strong> pour apporter des changements (les semaines se calculent automatiquement). <strong>"Enregistrer"</strong> pour confirmer.</li><li><strong>"+ Nouveau"</strong> pour créer. <strong>"Supprimer"</strong> (rouge) = permanent.</li></ol>
+<hr>
+<h2>Tutoriel 9 — Générer des PDF</h2>
+<ol><li>Sélectionnez un participant.</li><li>Cliquez sur <strong>"Info Bon"</strong> (turquoise), <strong>"Rapport Financier"</strong> (bleu), ou <strong>"Certificat"</strong> (gris).</li><li>Le PDF s'ouvre dans un nouvel onglet.</li></ol>
+<hr>
+<h2>Tutoriel 10 — Entreprises d'Accueil</h2>
+<ol><li><strong>"+ Nouveau"</strong> : Nom de l'Entreprise, Adresse, Ville, Secteur, Contact, Email, Téléphone.</li><li>Section <strong>Tuteur de Stage</strong> : Nom du Tuteur, Téléphone, Email.</li><li><strong>"Enregistrer"</strong>.</li></ol>
+<hr>
+<h2>Tutoriel 11 — Hébergement</h2>
+<ol><li><strong>"+ Nouveau"</strong> : Nom, Typologie (Auberge/Hôtel/Gîte/Famille d'Accueil/Appartement Partagé/Logement), Contact, Adresse.</li><li>Caractéristiques (interrupteurs), Détails de la Chambre, Options de Pension (jusqu'à 3 avec prix hebdomadaire), Données Bancaires.</li><li><strong>"Enregistrer"</strong>. Code couleur par typologie.</li></ol>
+<hr>
+<h2>Tutoriel 12 — Organisations d'Envoi</h2>
+<ol><li><strong>"+ Nouveau"</strong> : Nom, Personne de Contact, Email, Téléphone, Adresse, Ville, Pays.</li><li><strong>"Enregistrer"</strong>. Sert également de titre de groupe dans les listes de participants.</li></ol>
+<hr>
+<h2>Tutoriel 13 — Calendrier</h2>
+<ol><li>Grille mensuelle. <strong>Pastilles vertes</strong> = arrivées, <strong>Pastilles ambre</strong> = départs.</li><li>Filtres : Typologie, Individuel/Groupe, Nom du Groupe.</li><li>Cliquez sur un jour → panneau latéral avec cartes d'événements. Cliquez sur une carte → aller au participant.</li></ol>
+<div class="tip"><p><strong>Conseil :</strong> Vérifiez le Calendrier chaque semaine pour coordonner les transferts et les arrivées.</p></div>
+<hr>
+<h2>Tutoriel 14 — Tableau de Bord</h2>
+<ol><li>Cartes KPI : Participants Total, Subvention Totale, Marge Totale (tous cliquables).</li><li>Graphique circulaire (Entrant vs Sortant) — cliquez sur les parts. Graphique en barres (Pays) — cliquez sur les barres.</li><li>Ligne de synthèse : Entrant, Sortant, Subvention Moyenne (cliquables).</li></ol>
+<hr>
+<h2>Tutoriel 15 — Données Financières</h2>
+<ol><li>Cartes de synthèse Subvention Totale et Marge Totale.</li><li>Tableau : 13 colonnes incluant Subvention, tous les coûts, et <strong>Marge</strong>.</li><li><strong>Vert</strong> = marge positive. <strong>Rouge</strong> = négative (révisez le budget).</li><li>Mettez à jour via la section Données Financières du participant dans la page Individus.</li></ol>
+<hr>
+<h2>Tutoriel 16 — Prestataires de Transfert</h2>
+<ol><li><strong>"+ Nouveau"</strong> : Nom, Contact, Téléphone, Email, Prix Standard (EUR), Notes. <strong>"Enregistrer"</strong>.</li></ol>
+<hr>
+<h2>Tutoriel 17 — Prestataires d'Assurance</h2>
+<ol><li><strong>"+ Nouveau"</strong> : Nom, Statut (Actif/Inactif/En Attente), Contact, Téléphone, Email, Adresse, Ville.</li><li>Badges : <strong>Vert</strong>=Actif, <strong>Rouge</strong>=Inactif, <strong>Jaune</strong>=En Attente.</li></ol>
+<hr>
+<h2>Tutoriel 18 — Prestataires de Cours de Langue</h2>
+<ol><li><strong>"+ Nouveau"</strong> : Nom, Langue Enseignée, Contact, Email, Téléphone, Site Web, Adresse, Ville, Pays. <strong>"Enregistrer"</strong>.</li></ol>
+<hr>
+<h2>Tutoriel 19 — Prestataires de Services de Mobilité</h2>
+<ol><li>4 sections : Organisation (Nom, PIC, Zone, Site Web), Adresse, Contact, Capacités & Spécialités.</li><li><strong>"Enregistrer"</strong>.</li></ol>
+<hr>
+<h2>Tutoriel 20 — Détails du Voyage</h2>
+<p>Tableau en lecture seule : Participant, Type de Transport (✈🚆🚗), Numéro de Vol/Train, Départ/Arrivée, Prix du Billet. Mettez à jour via la fiche du participant.</p>
+<hr>
+<h2>Flux de Travail Recommandé</h2>
+<table><thead><tr><th>Étape</th><th>Action</th><th>Où</th></tr></thead><tbody>
+<tr><td>1</td><td>Enregistrer les prestataires</td><td>Accueil → Étape 3</td></tr>
+<tr><td>2</td><td>Créer les participants</td><td>Accueil → Étape 1</td></tr>
+<tr><td>3</td><td>Assigner les services</td><td>Accueil → Étape 2</td></tr>
+<tr><td>4</td><td>Compléter les profils</td><td>Individus → Modifier</td></tr>
+<tr><td>5</td><td>Saisir les données financières</td><td>Individus → Données Financières</td></tr>
+<tr><td>6</td><td>Surveiller le budget</td><td>Informations Financières</td></tr>
+<tr><td>7</td><td>Vérifier la logistique</td><td>Calendrier</td></tr>
+<tr><td>8</td><td>Générer les PDF</td><td>Individus → Boutons PDF</td></tr>
+</tbody></table>
+<hr>
+<h2>Support</h2>
+<p>Contactez ETN International : <strong>claudio@etninternational.com</strong></p>
+<p><em>Ce guide est destiné aux partenaires externes d'ETN International.</em></p>
+`;};
+T.es=function(){return`
+<h1>Managemob — Tutorial Operacional para Socios</h1>
+<p class="version"><strong>Versión 1.0 — Marzo 2026</strong> | <strong>Preparado por:</strong> ETN International</p>
+<hr>
+<h2>Antes de Comenzar</h2>
+<p>Necesitarás: 1) La <strong>URL</strong> de la plataforma; 2) Tu <strong>correo electrónico</strong> y <strong>contraseña</strong> (ambos proporcionados por ETN International). Managemob funciona en cualquier navegador moderno. No se requiere instalación.</p>
+<hr>
+<h2>Tutorial 1 — Iniciar Sesión y Elegir Tu Idioma</h2>
+<ol><li>Abre la URL de la plataforma en tu navegador.</li><li>Escribe tu <strong>correo electrónico</strong> y <strong>contraseña</strong>.</li><li>Haz clic en <strong>"Iniciar sesión"</strong>.</li><li>Si son correctos, serás redirigido a la página Inicio. Si no, aparecerá un banner de error rojo.</li></ol>
+<h3>Cambiar idioma</h3><p>Soporta: Inglés, Italiano, Francés, Español, Alemán, Sueco, Portugués. <strong>Página de inicio de sesión:</strong> haz clic en un icono de bandera. <strong>Dentro de la aplicación:</strong> utiliza el selector de idioma en la parte inferior de la barra lateral.</p>
+<h3>Cerrar sesión</h3><p>Haz clic en el <strong>icono de flecha (↩)</strong> junto a tu perfil en la esquina inferior izquierda.</p>
+<hr>
+<h2>Tutorial 2 — Navegación</h2>
+<ul><li><strong>Panel de Control</strong> — Tarjetas KPI y gráficos (solo lectura).</li><li><strong>Managemob Entrante</strong> — Individuos, Grupos, Organizaciones Remitentes, Empresas Anfitrionas, Alojamiento, Detalles de Viaje, Traslado, Información Financiera, Proveedores de Servicios de Movilidad.</li><li><strong>Managemob Saliente</strong> — Mismas subpáginas para movilidades salientes.</li></ul>
+<blockquote><p>Entrante y Saliente muestran solo datos para esa dirección de movilidad.</p></blockquote>
+<hr>
+<h2>Tutorial 3 — Diseño de la Página de Inicio</h2>
+<p>Barra de estadísticas (Total, Entrante, Saliente, Reciente), botones de navegación rápida (Calendario, Panel de Control), selector de modo (Individual/Grupo) y un <strong>asistente de 3 pasos</strong>: Crear Participantes → Asignar Servicios → Gestionar Proveedores.</p>
+<hr>
+<h2>Tutorial 4 — Registrar un Participante Individual</h2>
+<ol><li>Ve a <strong>Inicio</strong>, selecciona <strong>"Individual"</strong>.</li><li>Completa: Nombre*, Apellido*, Sexo, Fecha de Nacimiento, Nacionalidad, Correo Electrónico, Teléfono, Tipología (Entrante/Saliente), Fechas de Llegada/Salida, Destino, Programa, Proyecto.</li><li>Haz clic en <strong>"Guardar"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 5 — Registrar un Grupo</h2>
+<h3>Opción A — Pegar Nombres</h3>
+<ol><li>Selecciona <strong>"Grupo"</strong>. Completa los detalles compartidos (Nombre del Grupo, Tipología, Fechas…).</li><li>Pega los nombres uno por línea. Haz clic en <strong>"Analizar Nombres"</strong>.</li><li>Revisa la tabla, haz clic en <strong>"Crear Grupo"</strong>.</li></ol>
+<h3>Opción B — Carga de CSV</h3>
+<ol><li>Haz clic en la pestaña <strong>"Carga CSV"</strong>. Carga el archivo, mapea las columnas.</li><li>Verifica la vista previa, haz clic en <strong>"Crear Grupo"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 6 — Asignar Servicios (Paso 2)</h2>
+<ol><li>Paso 2: busca y selecciona un participante.</li><li>Asigna mediante listas desplegables: Org. Remitente, Empresa Anfitriona, Alojamiento (con fechas), Seguro, Traslado, Curso de Idioma, Proveedor de Movilidad.</li><li>Marca <strong>"Aplicar a todo el grupo"</strong> si es necesario. Haz clic en <strong>"Guardar"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 7 — Añadir un Proveedor (Paso 3)</h2>
+<ol><li>Paso 3: haz clic en <strong>"+ Añadir Rápidamente"</strong> junto a la categoría deseada.</li><li>Completa el formulario. Haz clic en <strong>"Guardar"</strong>. Disponible inmediatamente en todas las listas desplegables.</li></ol>
+<hr>
+<h2>Tutorial 8 — Ver y Editar Participantes</h2>
+<ol><li><strong>Entrante > Individuos</strong>. Haz clic en un nombre.</li><li>El panel derecho muestra: Información Personal, Contacto, Documentos, Idiomas, Educación, Banco, Movilidad, Proveedores, Curso de Idioma, Prácticas, Alojamiento, Datos Financieros.</li><li><strong>"Editar"</strong> para modificar (las semanas se calculan automáticamente). <strong>"Guardar"</strong> para confirmar.</li><li><strong>"+ Nuevo"</strong> para crear. <strong>"Eliminar"</strong> (rojo) = permanente.</li></ol>
+<hr>
+<h2>Tutorial 9 — Generar PDFs</h2>
+<ol><li>Selecciona un participante.</li><li>Haz clic en <strong>"Comprobante de Información"</strong> (azul verdoso), <strong>"Informe Financiero"</strong> (azul), o <strong>"Certificado"</strong> (gris).</li><li>El PDF se abre en una nueva pestaña.</li></ol>
+<hr>
+<h2>Tutorial 10 — Empresas Anfitrionas</h2>
+<ol><li><strong>"+ Nuevo"</strong>: Nombre de la Empresa, Dirección, Ciudad, Sector, Contacto, Correo Electrónico, Teléfono.</li><li>Sección <strong>Tutor de Prácticas</strong>: Nombre del Tutor, Teléfono, Correo Electrónico.</li><li><strong>"Guardar"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 11 — Alojamiento</h2>
+<ol><li><strong>"+ Nuevo"</strong>: Nombre, Tipología (Albergue/Hotel/Casa de Huéspedes/Familia Anfitriona/Apartamento Compartido/Inquilino), Contacto, Dirección.</li><li>Características (interruptores), Detalles de la Habitación, Opciones de Comida (hasta 3 con precio semanal), Banca.</li><li><strong>"Guardar"</strong>. Código de colores por tipología.</li></ol>
+<hr>
+<h2>Tutorial 12 — Organizaciones Remitentes</h2>
+<ol><li><strong>"+ Nuevo"</strong>: Nombre, Persona de Contacto, Correo Electrónico, Teléfono, Dirección, Ciudad, País.</li><li><strong>"Guardar"</strong>. También sirve como encabezados de grupo en listas de participantes.</li></ol>
+<hr>
+<h2>Tutorial 13 — Calendario</h2>
+<ol><li>Cuadrícula mensual. <strong>Píldoras verdes</strong> = llegadas, <strong>Píldoras ámbar</strong> = salidas.</li><li>Filtros: Tipología, Individual/Grupo, Nombre del Grupo.</li><li>Haz clic en un día → panel lateral con tarjetas de eventos. Haz clic en una tarjeta → ve al participante.</li></ol>
+<div class="tip"><p><strong>Consejo:</strong> Verifica el Calendario semanalmente para coordinar traslados y registros de entrada.</p></div>
+<hr>
+<h2>Tutorial 14 — Panel de Control</h2>
+<ol><li>Tarjetas KPI: Total de Participantes, Subvención Total, Margen Total (todas interactivas).</li><li>Gráfico circular (Entrante vs Saliente) — haz clic en las secciones. Gráfico de barras (Países) — haz clic en las barras.</li><li>Fila de resumen: Entrante, Saliente, Subvención Promedio (interactiva).</li></ol>
+<hr>
+<h2>Tutorial 15 — Datos Financieros</h2>
+<ol><li>Tarjetas de resumen de Subvención Total y Margen Total.</li><li>Tabla: 13 columnas incluyendo Subvención, todos los costos y <strong>Margen</strong>.</li><li><strong>Verde</strong> = margen positivo. <strong>Rojo</strong> = negativo (revisa el presupuesto).</li><li>Actualiza mediante la sección Datos Financieros del participante en la página Individuos.</li></ol>
+<hr>
+<h2>Tutorial 16 — Proveedores de Traslado</h2>
+<ol><li><strong>"+ Nuevo"</strong>: Nombre, Contacto, Teléfono, Correo Electrónico, Precio Estándar (EUR), Notas. <strong>"Guardar"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 17 — Proveedores de Seguros</h2>
+<ol><li><strong>"+ Nuevo"</strong>: Nombre, Estado (Activo/Inactivo/Pendiente), Contacto, Teléfono, Correo Electrónico, Dirección, Ciudad.</li><li>Distintivos: <strong>Verde</strong>=Activo, <strong>Rojo</strong>=Inactivo, <strong>Amarillo</strong>=Pendiente.</li></ol>
+<hr>
+<h2>Tutorial 18 — Proveedores de Cursos de Idiomas</h2>
+<ol><li><strong>"+ Nuevo"</strong>: Nombre, Idioma Enseñado, Contacto, Correo Electrónico, Teléfono, Sitio Web, Dirección, Ciudad, País. <strong>"Guardar"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 19 — Proveedores de Servicios de Movilidad</h2>
+<ol><li>4 secciones: Organización (Nombre, PIC, Área, Sitio Web), Dirección, Contacto, Capacidad y Especialidades.</li><li><strong>"Guardar"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 20 — Detalles de Viaje</h2>
+<p>Tabla de solo lectura: Participante, Tipo de Transporte (✈🚆🚗), Número de Vuelo/Tren, Salida/Llegada, Precio del Billete. Actualiza mediante el registro del participante.</p>
+<hr>
+<h2>Flujo de Trabajo Recomendado</h2>
+<table><thead><tr><th>Paso</th><th>Acción</th><th>Dónde</th></tr></thead><tbody>
+<tr><td>1</td><td>Registrar proveedores</td><td>Inicio → Paso 3</td></tr>
+<tr><td>2</td><td>Crear participantes</td><td>Inicio → Paso 1</td></tr>
+<tr><td>3</td><td>Asignar servicios</td><td>Inicio → Paso 2</td></tr>
+<tr><td>4</td><td>Completar perfiles</td><td>Individuos → Editar</td></tr>
+<tr><td>5</td><td>Ingresar datos financieros</td><td>Individuos → Datos Financieros</td></tr>
+<tr><td>6</td><td>Monitorear presupuesto</td><td>Información Financiera</td></tr>
+<tr><td>7</td><td>Verificar logística</td><td>Calendario</td></tr>
+<tr><td>8</td><td>Generar PDFs</td><td>Individuos → Botones PDF</td></tr>
+</tbody></table>
+<hr>
+<h2>Soporte</h2>
+<p>Contacta a ETN International: <strong>claudio@etninternational.com</strong></p>
+<p><em>Esta guía está destinada a socios externos de ETN International.</em></p>
+`;};
+T.de=function(){return`
+<h1>Managemob — Betriebsanleitung für Partner</h1>
+<p class="version"><strong>Version 1.0 — März 2026</strong> | <strong>Vorbereitet von:</strong> ETN International</p>
+<hr>
+<h2>Bevor Sie Beginnen</h2>
+<p>Sie benötigen: 1) Die <strong>URL</strong> der Plattform; 2) Ihre <strong>E-Mail</strong> und <strong>Passwort</strong> (beide von ETN International bereitgestellt). Managemob funktioniert in jedem modernen Browser. Keine Installation erforderlich.</p>
+<hr>
+<h2>Anleitung 1 — Anmelden und Sprache Wählen</h2>
+<ol><li>Öffnen Sie die Plattform-URL in Ihrem Browser.</li><li>Geben Sie Ihre <strong>E-Mail</strong> und <strong>Passwort</strong> ein.</li><li>Klicken Sie auf <strong>"Anmelden"</strong>.</li><li>Falls korrekt, werden Sie zur Startseite weitergeleitet. Wenn nicht, erscheint ein roter Fehlerbanner.</li></ol>
+<h3>Sprache ändern</h3><p>Unterstützt: Englisch, Italienisch, Französisch, Spanisch, Deutsch, Schwedisch, Portugiesisch. <strong>Anmeldeseite:</strong> Klicken Sie auf ein Flaggensymbol. <strong>In der App:</strong> Verwenden Sie den Sprachwähler am unteren Ende der Seitenleiste.</p>
+<h3>Abmelden</h3><p>Klicken Sie auf das <strong>Pfeiltastensymbol (↩)</strong> neben Ihrem Profil unten links.</p>
+<hr>
+<h2>Anleitung 2 — Navigation</h2>
+<ul><li><strong>Dashboard</strong> — KPI-Karten und Diagramme (schreibgeschützt).</li><li><strong>Managemob Eingehend</strong> — Personen, Gruppen, Sendende Organisationen, Gastunternehmen, Unterkunft, Reisedetails, Transfer, Finanzinformationen, Mobilitätsdienstleister.</li><li><strong>Managemob Ausgehend</strong> — Gleiche Unterseiten für ausgehende Mobilitäten.</li></ul>
+<blockquote><p>Eingehend und Ausgehend zeigen nur Daten für diese Mobilitätsrichtung.</p></blockquote>
+<hr>
+<h2>Anleitung 3 — Layout der Startseite</h2>
+<p>Statistikleiste (Gesamt, Eingehend, Ausgehend, Zuletzt), Schnellnavigation-Schaltflächen (Kalender, Dashboard), Moduswahlschalter (Einzeln/Gruppe) und ein <strong>3-Schritte-Assistent</strong>: Teilnehmer erstellen → Dienste zuweisen → Anbieter verwalten.</p>
+<hr>
+<h2>Anleitung 4 — Einen Einzelnen Teilnehmer Registrieren</h2>
+<ol><li>Gehen Sie zu <strong>Startseite</strong>, wählen Sie <strong>"Einzeln"</strong>.</li><li>Ausfüllen: Vorname*, Nachname*, Geschlecht, Geburtsdatum, Nationalität, E-Mail, Telefon, Typologie (Eingehend/Ausgehend), Ankunfts-/Abreisedaten, Ziel, Programm, Projekt.</li><li>Klicken Sie auf <strong>"Speichern"</strong>.</li></ol>
+<hr>
+<h2>Anleitung 5 — Eine Gruppe Registrieren</h2>
+<h3>Option A — Namen Einfügen</h3>
+<ol><li>Wählen Sie <strong>"Gruppe"</strong>. Füllen Sie gemeinsame Details aus (Gruppenname, Typologie, Daten…).</li><li>Fügen Sie Namen ein, jeweils eine pro Zeile. Klicken Sie auf <strong>"Namen Analysieren"</strong>.</li><li>Überprüfen Sie die Tabelle, klicken Sie auf <strong>"Gruppe Erstellen"</strong>.</li></ol>
+<h3>Option B — CSV-Upload</h3>
+<ol><li>Klicken Sie auf die Registerkarte <strong>"CSV-Upload"</strong>. Laden Sie die Datei hoch, ordnen Sie Spalten zu.</li><li>Überprüfen Sie die Vorschau, klicken Sie auf <strong>"Gruppe Erstellen"</strong>.</li></ol>
+<hr>
+<h2>Anleitung 6 — Dienste Zuweisen (Schritt 2)</h2>
+<ol><li>Schritt 2: Suchen und wählen Sie einen Teilnehmer.</li><li>Weisen Sie über Dropdown-Listen zu: Sendende Org., Gastunternehmen, Unterkunft (mit Daten), Versicherung, Transfer, Sprachkurs, Mobilitätsanbieter.</li><li>Markieren Sie <strong>"Auf gesamte Gruppe anwenden"</strong> falls erforderlich. Klicken Sie auf <strong>"Speichern"</strong>.</li></ol>
+<hr>
+<h2>Anleitung 7 — Einen Anbieter Hinzufügen (Schritt 3)</h2>
+<ol><li>Schritt 3: Klicken Sie auf <strong>"+ Schnell Hinzufügen"</strong> neben der gewünschten Kategorie.</li><li>Füllen Sie das Formular aus. Klicken Sie auf <strong>"Speichern"</strong>. Sofort in allen Dropdown-Listen verfügbar.</li></ol>
+<hr>
+<h2>Anleitung 8 — Teilnehmer Anzeigen und Bearbeiten</h2>
+<ol><li><strong>Eingehend > Personen</strong>. Klicken Sie auf einen Namen.</li><li>Das rechte Panel zeigt: Persönliche Informationen, Kontakt, Dokumente, Sprachen, Bildung, Bank, Mobilität, Anbieter, Sprachkurs, Praktikum, Unterkunft, Finanzielle Informationen.</li><li><strong>"Bearbeiten"</strong> zum Ändern (Wochen werden automatisch berechnet). <strong>"Speichern"</strong> zur Bestätigung.</li><li><strong>"+ Neu"</strong> zum Erstellen. <strong>"Löschen"</strong> (rot) = permanent.</li></ol>
+<hr>
+<h2>Anleitung 9 — PDFs Generieren</h2>
+<ol><li>Wählen Sie einen Teilnehmer.</li><li>Klicken Sie auf <strong>"Informationsgutschein"</strong> (Blaugrün), <strong>"Finanzbericht"</strong> (Blau) oder <strong>"Zertifikat"</strong> (Grau).</li><li>PDF wird in einem neuen Tab geöffnet.</li></ol>
+<hr>
+<h2>Anleitung 10 — Gastunternehmen</h2>
+<ol><li><strong>"+ Neu"</strong>: Unternehmensname, Adresse, Stadt, Branche, Kontakt, E-Mail, Telefon.</li><li><strong>Praktikumsbetreuer</strong> Abschnitt: Name des Betreuers, Telefon, E-Mail.</li><li><strong>"Speichern"</strong>.</li></ol>
+<hr>
+<h2>Anleitung 11 — Unterkunft</h2>
+<ol><li><strong>"+ Neu"</strong>: Name, Typologie (Herberge/Hotel/Frühstückspension/Gastfamilie/Gemeinschaftsapartment/Untermieter), Kontakt, Adresse.</li><li>Features (Umschalter), Zimmerdetails, Verpflegungsoptionen (bis zu 3 mit wöchentlichem Preis), Bankwesen.</li><li><strong>"Speichern"</strong>. Farbcodiert nach Typologie.</li></ol>
+<hr>
+<h2>Anleitung 12 — Sendende Organisationen</h2>
+<ol><li><strong>"+ Neu"</strong>: Name, Kontaktperson, E-Mail, Telefon, Adresse, Stadt, Land.</li><li><strong>"Speichern"</strong>. Dient auch als Gruppenkopfzeilen in Teilnehmerlisten.</li></ol>
+<hr>
+<h2>Anleitung 13 — Kalender</h2>
+<ol><li>Monatliches Raster. <strong>Grüne Pillen</strong> = Ankünfte, <strong>Bernsteinpillen</strong> = Abreisen.</li><li>Filter: Typologie, Einzeln/Gruppe, Gruppenname.</li><li>Klicken Sie auf einen Tag → Seitenpanel mit Ereigniskarten. Klicken Sie auf eine Karte → zum Teilnehmer gehen.</li></ol>
+<div class="tip"><p><strong>Tipp:</strong> Überprüfen Sie den Kalender wöchentlich, um Transfers und Check-ins zu koordinieren.</p></div>
+<hr>
+<h2>Anleitung 14 — Dashboard</h2>
+<ol><li>KPI-Karten: Gesamtteilnehmer, Gesamtzuschuss, Gesamtmarge (alle anklickbar).</li><li>Kreisdiagramm (Eingehend vs. Ausgehend) — Klicken Sie auf Scheiben. Balkendiagramm (Länder) — Klicken Sie auf Balken.</li><li>Zusammenfassungszeile: Eingehend, Ausgehend, Durchschnittlicher Zuschuss (anklickbar).</li></ol>
+<hr>
+<h2>Anleitung 15 — Finanzielle Daten</h2>
+<ol><li>Zusammenfassungskarten für Gesamtzuschuss und Gesamtmarge.</li><li>Tabelle: 13 Spalten einschließlich Zuschuss, alle Kosten und <strong>Marge</strong>.</li><li><strong>Grün</strong> = positive Marge. <strong>Rot</strong> = negativ (überprüfen Sie das Budget).</li><li>Aktualisieren Sie über den Abschnitt Finanzielle Informationen des Teilnehmers auf der Seite Personen.</li></ol>
+<hr>
+<h2>Anleitung 16 — Transferanbieter</h2>
+<ol><li><strong>"+ Neu"</strong>: Name, Kontakt, Telefon, E-Mail, Standardpreis (EUR), Notizen. <strong>"Speichern"</strong>.</li></ol>
+<hr>
+<h2>Anleitung 17 — Versicherungsanbieter</h2>
+<ol><li><strong>"+ Neu"</strong>: Name, Status (Aktiv/Inaktiv/Ausstehend), Kontakt, Telefon, E-Mail, Adresse, Stadt.</li><li>Abzeichen: <strong>Grün</strong>=Aktiv, <strong>Rot</strong>=Inaktiv, <strong>Gelb</strong>=Ausstehend.</li></ol>
+<hr>
+<h2>Anleitung 18 — Sprachkursanbieter</h2>
+<ol><li><strong>"+ Neu"</strong>: Name, Unterrichtete Sprache, Kontakt, E-Mail, Telefon, Website, Adresse, Stadt, Land. <strong>"Speichern"</strong>.</li></ol>
+<hr>
+<h2>Anleitung 19 — Mobilitätsdienstleister</h2>
+<ol><li>4 Abschnitte: Organisation (Name, PIC, Bereich, Website), Adresse, Kontakt, Kapazität und Spezialitäten.</li><li><strong>"Speichern"</strong>.</li></ol>
+<hr>
+<h2>Anleitung 20 — Reisedetails</h2>
+<p>Schreibgeschützte Tabelle: Teilnehmer, Transportart (✈🚆🚗), Flug-/Zugnummer, Abfahrt/Ankunft, Ticketpreis. Aktualisieren Sie über den Teilnehmerdatensatz.</p>
+<hr>
+<h2>Empfohlener Arbeitsablauf</h2>
+<table><thead><tr><th>Schritt</th><th>Aktion</th><th>Wo</th></tr></thead><tbody>
+<tr><td>1</td><td>Anbieter registrieren</td><td>Startseite → Schritt 3</td></tr>
+<tr><td>2</td><td>Teilnehmer erstellen</td><td>Startseite → Schritt 1</td></tr>
+<tr><td>3</td><td>Dienste zuweisen</td><td>Startseite → Schritt 2</td></tr>
+<tr><td>4</td><td>Profile vervollständigen</td><td>Personen → Bearbeiten</td></tr>
+<tr><td>5</td><td>Finanzdaten eingeben</td><td>Personen → Finanzielle Informationen</td></tr>
+<tr><td>6</td><td>Budget überwachen</td><td>Finanzielle Informationen</td></tr>
+<tr><td>7</td><td>Logistik überprüfen</td><td>Kalender</td></tr>
+<tr><td>8</td><td>PDFs generieren</td><td>Personen → PDF-Schaltflächen</td></tr>
+</tbody></table>
+<hr>
+<h2>Unterstützung</h2>
+<p>Kontaktieren Sie ETN International: <strong>claudio@etninternational.com</strong></p>
+<p><em>Diese Anleitung ist für externe Partner von ETN International bestimmt.</em></p>
+`;};
+T.sv=function(){return`
+<h1>Managemob — Operativ handledning för partners</h1>
+<p class="version"><strong>Version 1.0 — Mars 2026</strong> | <strong>Förberedd av:</strong> ETN International</p>
+<hr>
+<h2>Innan du börjar</h2>
+<p>Du behöver: 1) Plattformens <strong>URL</strong>; 2) Din <strong>e-post</strong> och <strong>lösenord</strong> (båda tillhandahållna av ETN International). Managemob fungerar i alla moderna webbläsare. Ingen installation krävs.</p>
+<hr>
+<h2>Handledning 1 — Logga in och välj ditt språk</h2>
+<ol><li>Öppna plattformens URL i din webbläsare.</li><li>Skriv in din <strong>e-post</strong> och ditt <strong>lösenord</strong>.</li><li>Klicka på <strong>"Logga in"</strong>.</li><li>Om det är korrekt omdirigeras du till startsidan. Om inte visas ett rött felmeddelande.</li></ol>
+<h3>Ändra språk</h3><p>Stöder: Engelska, italienska, franska, spanska, tyska, svenska, portugisiska. <strong>Inloggningssida:</strong> klicka på en flaggikon. <strong>Inne i appen:</strong> använd språkväljaren längst ner i sidofältet.</p>
+<h3>Logga ut</h3><p>Klicka på <strong>pilen (↩)</strong> bredvid din profil längst ned till vänster.</p>
+<hr>
+<h2>Handledning 2 — Navigation</h2>
+<ul><li><strong>Instrumentpanel</strong> — KPI-kort och diagram (skrivskyddad).</li><li><strong>Managemob inkommande</strong> — Individer, grupper, avsändande organisationer, värdföretag, boende, reseinformation, transport, finansiell information, mobilitätstjänsteleverantörer.</li><li><strong>Managemob utgående</strong> — Samma undersidor för utgående mobiliteter.</li></ul>
+<blockquote><p>Inkommande och utgående visar endast data för den mobilitetsriktningen.</p></blockquote>
+<hr>
+<h2>Handledning 3 — Layouten på startsidan</h2>
+<p>Statistikfält (totalt, inkommande, utgående, senaste), snabbnavigeringsknapprar (kalender, instrumentpanel), lägesväljare (individuell/grupp) och en <strong>3-stegsassistent</strong>: skapa deltagare → tilldela tjänster → hantera leverantörer.</p>
+<hr>
+<h2>Handledning 4 — Registrera en individuell deltagare</h2>
+<ol><li>Gå till <strong>Hem</strong>, välj <strong>"Individuell"</strong>.</li><li>Fyll i: Förnamn*, Efternamn*, Kön, Födelsedatum, Nationalitet, E-post, Telefon, Typologi (inkommande/utgående), ankomst-/avresadatum, destination, program, projekt.</li><li>Klicka på <strong>"Spara"</strong>.</li></ol>
+<hr>
+<h2>Handledning 5 — Registrera en grupp</h2>
+<h3>Alternativ A — Klistra in namn</h3>
+<ol><li>Välj <strong>"Grupp"</strong>. Fyll i delade detaljer (gruppnamn, typologi, datum...).</li><li>Klistra in namn ett per rad. Klicka på <strong>"Tolka namn"</strong>.</li><li>Granska tabell, klicka på <strong>"Skapa grupp"</strong>.</li></ol>
+<h3>Alternativ B — CSV-uppladdning</h3>
+<ol><li>Klicka på fliken <strong>"CSV-uppladdning"</strong>. Ladda upp fil, mappa kolumner.</li><li>Verifiera förhandsvisning, klicka på <strong>"Skapa grupp"</strong>.</li></ol>
+<hr>
+<h2>Handledning 6 — Tilldela tjänster (steg 2)</h2>
+<ol><li>Steg 2: sök och välj en deltagare.</li><li>Tilldela via listrutor: avsändande organisation, värdföretag, boende (med datum), försäkring, transport, språkkurs, mobilitetsväljare.</li><li>Markera <strong>"Applicera på hela gruppen"</strong> om det behövs. Klicka på <strong>"Spara"</strong>.</li></ol>
+<hr>
+<h2>Handledning 7 — Lägg till en leverantör (steg 3)</h2>
+<ol><li>Steg 3: klicka på <strong>"+ Snabba addition"</strong> bredvid den önskade kategorin.</li><li>Fyll i formuläret. Klicka på <strong>"Spara"</strong>. Omedelbar tillgänglig i alla listrutor.</li></ol>
+<hr>
+<h2>Handledning 8 — Visa och redigera deltagare</h2>
+<ol><li><strong>Inkommande > Individer</strong>. Klicka på ett namn.</li><li>Höger panel visar: personlig information, kontakt, dokument, språk, utbildning, bank, mobilitet, leverantörer, språkkurs, praktik, boende, ekonomi.</li><li><strong>"Redigera"</strong> för att ändra (veckor beräknas automatiskt). <strong>"Spara"</strong> för att bekräfta.</li><li><strong>"+ Ny"</strong> för att skapa. <strong>"Radera"</strong> (röd) = permanent.</li></ol>
+<hr>
+<h2>Handledning 9 — Generera PDF-filer</h2>
+<ol><li>Välj en deltagare.</li><li>Klicka på <strong>"Informationskupong"</strong> (blågrön), <strong>"Finansiell rapport"</strong> (blå) eller <strong>"Certifikat"</strong> (grå).</li><li>PDF öppnas i en ny flik.</li></ol>
+<hr>
+<h2>Handledning 10 — Värdföretag</h2>
+<ol><li><strong>"+ Ny"</strong>: företagsnamn, adress, stad, sektor, kontakt, e-post, telefon.</li><li><strong>Praktikhandledare</strong> avsnitt: handledare namn, telefon, e-post.</li><li><strong>"Spara"</strong>.</li></ol>
+<hr>
+<h2>Handledning 11 — Boende</h2>
+<ol><li><strong>"+ Ny"</strong>: namn, typologi (vandrarhem/hotell/bed & breakfast/värdförvara/delad lägenhet/hyresgäst), kontakt, adress.</li><li>Funktioner (växlar), rumsdetaljer, boardalternativ (upp till 3 med veckovisa pris), bank.</li><li><strong>"Spara"</strong>. Färgkodat efter typologi.</li></ol>
+<hr>
+<h2>Handledning 12 — Avsändande organisationer</h2>
+<ol><li><strong>"+ Ny"</strong>: namn, kontaktperson, e-post, telefon, adress, stad, land.</li><li><strong>"Spara"</strong>. Fungerar också som grupprubriker i deltagarnlistor.</li></ol>
+<hr>
+<h2>Handledning 13 — Kalender</h2>
+<ol><li>Månatligt rutnät. <strong>Gröna märken</strong> = ankomster, <strong>bärnstensärgade märken</strong> = avfarder.</li><li>Filter: typologi, individuell/grupp, gruppnamn.</li><li>Klicka på en dag → sidopanel med eventkort. Klicka på ett kort → gå till deltagare.</li></ol>
+<div class="tip"><p><strong>Tips:</strong> Kontrollera kalendern varje vecka för att samordna transporter och incheckning.</p></div>
+<hr>
+<h2>Handledning 14 — Instrumentpanel</h2>
+<ol><li>KPI-kort: totala deltagare, totala bidrag, total marginal (alla klickbara).</li><li>Cirkeldiagram (inkommande vs utgående) — klicka på skivor. Stapeldiagram (länder) — klicka på staplar.</li><li>Sammanfattningsrad: inkommande, utgående, genomsnittligt bidrag (klickbar).</li></ol>
+<hr>
+<h2>Handledning 15 — Finansiell data</h2>
+<ol><li>Sammanfattningskort för totalt bidrag och total marginal.</li><li>Tabell: 13 kolumner inklusive bidrag, alla kostnader och <strong>marginal</strong>.</li><li><strong>Grön</strong> = positiv marginal. <strong>Röd</strong> = negativ (granska budget).</li><li>Uppdatera via deltargarens finansavsnitt på individsidan.</li></ol>
+<hr>
+<h2>Handledning 16 — Transportleverantörer</h2>
+<ol><li><strong>"+ Ny"</strong>: namn, kontakt, telefon, e-post, standardpris (EUR), anteckningar. <strong>"Spara"</strong>.</li></ol>
+<hr>
+<h2>Handledning 17 — Försäkringsleverantörer</h2>
+<ol><li><strong>"+ Ny"</strong>: namn, status (aktiv/inaktiv/väntande), kontakt, telefon, e-post, adress, stad.</li><li>Märken: <strong>grön</strong>=aktiv, <strong>röd</strong>=inaktiv, <strong>gul</strong>=väntande.</li></ol>
+<hr>
+<h2>Handledning 18 — Språkkursleverantörer</h2>
+<ol><li><strong>"+ Ny"</strong>: namn, undervisat språk, kontakt, e-post, telefon, webbplats, adress, stad, land. <strong>"Spara"</strong>.</li></ol>
+<hr>
+<h2>Handledning 19 — Mobilitätstjänsteleverantörer</h2>
+<ol><li>4 avsnitt: organisation (namn, PIC, område, webbplats), adress, kontakt, kapacitet och specialiteter.</li><li><strong>"Spara"</strong>.</li></ol>
+<hr>
+<h2>Handledning 20 — Reseinformation</h2>
+<p>Skrivskyddad tabell: deltagare, transporttyp (✈🚆🚗), flyg-/tågnummer, ankomst/avresa, biljettspris. Uppdatera via deltagarpostering.</p>
+<hr>
+<h2>Rekommenderat arbetsflöde</h2>
+<table><thead><tr><th>Steg</th><th>Åtgärd</th><th>Var</th></tr></thead><tbody>
+<tr><td>1</td><td>Registrera leverantörer</td><td>Hem → steg 3</td></tr>
+<tr><td>2</td><td>Skapa deltagare</td><td>Hem → steg 1</td></tr>
+<tr><td>3</td><td>Tilldela tjänster</td><td>Hem → steg 2</td></tr>
+<tr><td>4</td><td>Slutför profiler</td><td>Individer → redigera</td></tr>
+<tr><td>5</td><td>Ange finansiell data</td><td>Individer → ekonomi</td></tr>
+<tr><td>6</td><td>Övervaka budget</td><td>Finansiell information</td></tr>
+<tr><td>7</td><td>Kontrollera logistik</td><td>Kalender</td></tr>
+<tr><td>8</td><td>Generera PDF-filer</td><td>Individer → PDF-knappar</td></tr>
+</tbody></table>
+<hr>
+<h2>Stöd</h2>
+<p>Kontakta ETN International: <strong>claudio@etninternational.com</strong></p>
+<p><em>Den här guiden är avsedd för externa partners för ETN International.</em></p>
+`;};
+T.pt=function(){return`
+<h1>Managemob — Tutorial Operacional para Parceiros</h1>
+<p class="version"><strong>Versão 1.0 — Março de 2026</strong> | <strong>Preparado por:</strong> ETN International</p>
+<hr>
+<h2>Antes de Começar</h2>
+<p>Necessita de: 1) O <strong>URL</strong> da plataforma; 2) Seu <strong>e-mail</strong> e <strong>palavra-passe</strong> (ambos fornecidos pela ETN International). Managemob funciona em qualquer navegador moderno. Nenhuma instalação necessária.</p>
+<hr>
+<h2>Tutorial 1 — Iniciar Sessão e Escolher Seu Idioma</h2>
+<ol><li>Abra o URL da plataforma no seu navegador.</li><li>Digite seu <strong>e-mail</strong> e sua <strong>palavra-passe</strong>.</li><li>Clique em <strong>"Iniciar sessão"</strong>.</li><li>Se correto, será redirecionado para a página inicial. Caso contrário, uma faixa de erro vermelha aparece.</li></ol>
+<h3>Alterar idioma</h3><p>Suporta: Inglês, italiano, francês, espanhol, alemão, sueco, português. <strong>Página de início de sessão:</strong> clique num ícone de bandeira. <strong>Dentro da aplicação:</strong> use o seletor de idioma na parte inferior da barra lateral.</p>
+<h3>Terminar sessão</h3><p>Clique na <strong>seta (↩)</strong> ao lado do seu perfil no canto inferior esquerdo.</p>
+<hr>
+<h2>Tutorial 2 — Navegação</h2>
+<ul><li><strong>Painel de Controlo</strong> — Cartões KPI e gráficos (apenas leitura).</li><li><strong>Managemob Entrada</strong> — Indivíduos, grupos, organizações de envio, empresas anfitriãs, alojamento, detalhes de viagem, transferência, informações financeiras, fornecedores de serviços de mobilidade.</li><li><strong>Managemob Saída</strong> — Mesmas subpáginas para mobilidades de saída.</li></ul>
+<blockquote><p>Entrada e saída mostram apenas dados para essa direção de mobilidade.</p></blockquote>
+<hr>
+<h2>Tutorial 3 — Layout da Página Inicial</h2>
+<p>Barra de estatísticas (total, entrada, saída, recente), botões de navegação rápida (calendário, painel de controlo), seletor de modo (individual/grupo) e um <strong>assistente de 3 passos</strong>: criar participantes → atribuir serviços → gerir fornecedores.</p>
+<hr>
+<h2>Tutorial 4 — Registar um Participante Individual</h2>
+<ol><li>Vá a <strong>Início</strong>, selecione <strong>"Individual"</strong>.</li><li>Preencha: Primeiro Nome*, Apelido*, Sexo, Data de Nascimento, Nacionalidade, E-mail, Telefone, Tipologia (Entrada/Saída), Datas de Chegada/Partida, Destino, Programa, Projeto.</li><li>Clique em <strong>"Guardar"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 5 — Registar um Grupo</h2>
+<h3>Opção A — Colar Nomes</h3>
+<ol><li>Selecione <strong>"Grupo"</strong>. Preencha os detalhes partilhados (nome do grupo, tipologia, datas...).</li><li>Cole nomes um por linha. Clique em <strong>"Analisar Nomes"</strong>.</li><li>Revise a tabela, clique em <strong>"Criar Grupo"</strong>.</li></ol>
+<h3>Opção B — Carregamento de CSV</h3>
+<ol><li>Clique no separador <strong>"Carregamento de CSV"</strong>. Carregue o ficheiro, mapeie colunas.</li><li>Verifique a pré-visualização, clique em <strong>"Criar Grupo"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 6 — Atribuir Serviços (Passo 2)</h2>
+<ol><li>Passo 2: procure e selecione um participante.</li><li>Atribua através de listas suspensas: organização de envio, empresa anfitriã, alojamento (com datas), seguro, transferência, curso de idioma, fornecedor de mobilidade.</li><li>Marque <strong>"Aplicar a todo o grupo"</strong> se necessário. Clique em <strong>"Guardar"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 7 — Adicionar um Fornecedor (Passo 3)</h2>
+<ol><li>Passo 3: clique em <strong>"+ Adição Rápida"</strong> ao lado da categoria pretendida.</li><li>Preencha o formulário. Clique em <strong>"Guardar"</strong>. Imediatamente disponível em todas as listas suspensas.</li></ol>
+<hr>
+<h2>Tutorial 8 — Ver e Editar Participantes</h2>
+<ol><li><strong>Entrada > Indivíduos</strong>. Clique num nome.</li><li>O painel direito mostra: informações pessoais, contacto, documentos, idiomas, educação, banco, mobilidade, fornecedores, curso de idioma, estágio, alojamento, informações financeiras.</li><li><strong>"Editar"</strong> para modificar (semanas calculadas automaticamente). <strong>"Guardar"</strong> para confirmar.</li><li><strong>"+ Novo"</strong> para criar. <strong>"Apagar"</strong> (vermelho) = permanente.</li></ol>
+<hr>
+<h2>Tutorial 9 — Gerar PDFs</h2>
+<ol><li>Selecione um participante.</li><li>Clique em <strong>"Voucher de Informação"</strong> (azul-petróleo), <strong>"Relatório Financeiro"</strong> (azul) ou <strong>"Certificado"</strong> (cinzento).</li><li>PDF abre numa nova abas.</li></ol>
+<hr>
+<h2>Tutorial 10 — Empresas Anfitriãs</h2>
+<ol><li><strong>"+ Novo"</strong>: nome da empresa, endereço, cidade, sector, contacto, e-mail, telefone.</li><li>Secção <strong>Orientador de Estágio</strong>: nome do orientador, telefone, e-mail.</li><li><strong>"Guardar"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 11 — Alojamento</h2>
+<ol><li><strong>"+ Novo"</strong>: nome, tipologia (albergue/hotel/B&B/família anfitriã/apartamento partilhado/inquilino), contacto, endereço.</li><li>Características (interruptores), detalhes do quarto, opções de refeição (até 3 com preço semanal), banco.</li><li><strong>"Guardar"</strong>. Codificado por cores conforme tipologia.</li></ol>
+<hr>
+<h2>Tutorial 12 — Organizações de Envio</h2>
+<ol><li><strong>"+ Novo"</strong>: nome, pessoa de contacto, e-mail, telefone, endereço, cidade, país.</li><li><strong>"Guardar"</strong>. Também serve como cabeçalhos de grupo nas listas de participantes.</li></ol>
+<hr>
+<h2>Tutorial 13 — Calendário</h2>
+<ol><li>Grelha mensal. <strong>Marcadores verdes</strong> = chegadas, <strong>marcadores âmbar</strong> = partidas.</li><li>Filtros: tipologia, individual/grupo, nome do grupo.</li><li>Clique num dia → painel lateral com cartões de eventos. Clique num cartão → vá para participante.</li></ol>
+<div class="tip"><p><strong>Dica:</strong> Verifique o calendário semanalmente para coordenar transferências e check-ins.</p></div>
+<hr>
+<h2>Tutorial 14 — Painel de Controlo</h2>
+<ol><li>Cartões KPI: total de participantes, subsídio total, margem total (todos clicáveis).</li><li>Gráfico de pizza (entrada vs saída) — clique em fatias. Gráfico de barras (países) — clique em barras.</li><li>Linha de resumo: entrada, saída, subsídio médio (clicável).</li></ol>
+<hr>
+<h2>Tutorial 15 — Dados Financeiros</h2>
+<ol><li>Cartões de resumo de subsídio total e margem total.</li><li>Tabela: 13 colunas incluindo subsídio, todos os custos e <strong>margem</strong>.</li><li><strong>Verde</strong> = margem positiva. <strong>Vermelho</strong> = negativa (reveja orçamento).</li><li>Atualize através da secção de informações financeiras do participante na página de indivíduos.</li></ol>
+<hr>
+<h2>Tutorial 16 — Fornecedores de Transferência</h2>
+<ol><li><strong>"+ Novo"</strong>: nome, contacto, telefone, e-mail, preço padrão (EUR), notas. <strong>"Guardar"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 17 — Fornecedores de Seguro</h2>
+<ol><li><strong>"+ Novo"</strong>: nome, status (ativo/inativo/pendente), contacto, telefone, e-mail, endereço, cidade.</li><li>Crachás: <strong>verde</strong>=ativo, <strong>vermelho</strong>=inativo, <strong>amarelo</strong>=pendente.</li></ol>
+<hr>
+<h2>Tutorial 18 — Fornecedores de Cursos de Idioma</h2>
+<ol><li><strong>"+ Novo"</strong>: nome, idioma ensinado, contacto, e-mail, telefone, website, endereço, cidade, país. <strong>"Guardar"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 19 — Fornecedores de Serviços de Mobilidade</h2>
+<ol><li>4 secções: organização (nome, PIC, área, website), endereço, contacto, capacidade e especialidades.</li><li><strong>"Guardar"</strong>.</li></ol>
+<hr>
+<h2>Tutorial 20 — Detalhes de Viagem</h2>
+<p>Tabela apenas de leitura: participante, tipo de transporte (✈🚆🚗), número de voo/comboio, partida/chegada, preço da passagem. Atualize através do registo do participante.</p>
+<hr>
+<h2>Fluxo de Trabalho Recomendado</h2>
+<table><thead><tr><th>Passo</th><th>Ação</th><th>Onde</th></tr></thead><tbody>
+<tr><td>1</td><td>Registar fornecedores</td><td>Início → passo 3</td></tr>
+<tr><td>2</td><td>Criar participantes</td><td>Início → passo 1</td></tr>
+<tr><td>3</td><td>Atribuir serviços</td><td>Início → passo 2</td></tr>
+<tr><td>4</td><td>Completar perfis</td><td>Indivíduos → editar</td></tr>
+<tr><td>5</td><td>Introduzir dados financeiros</td><td>Indivíduos → informações financeiras</td></tr>
+<tr><td>6</td><td>Monitorizar orçamento</td><td>Dados financeiros</td></tr>
+<tr><td>7</td><td>Verificar logística</td><td>Calendário</td></tr>
+<tr><td>8</td><td>Gerar PDFs</td><td>Indivíduos → botões PDF</td></tr>
+</tbody></table>
+<hr>
+<h2>Suporte</h2>
+<p>Contacte ETN International: <strong>claudio@etninternational.com</strong></p>
+<p><em>Este guia é destinado a parceiros externos da ETN International.</em></p>
+`;};
+
+function switchLang(lang){
+  currentLang=lang;
+  document.getElementById('guide-content').innerHTML=T[lang]();
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.classList.toggle('active',b.textContent.trim().endsWith(lang.toUpperCase()));
+  });
+  window.scrollTo(0,0);
+}
+
+function exportPDF(){
+  var btn=document.getElementById('pdfBtn');
+  btn.disabled=true;btn.textContent='⏳ Generating...';
+  var el=document.getElementById('guide-content');
+  var opt={margin:[10,10,10,10],filename:'Managemob_Guide_'+currentLang.toUpperCase()+'.pdf',image:{type:'jpeg',quality:0.95},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}};
+  html2pdf().set(opt).from(el).save().then(function(){
+    btn.disabled=false;btn.textContent='📄 PDF';
+  }).catch(function(){btn.disabled=false;btn.textContent='📄 PDF';});
+}
+
+function exportWord(){
+  var btn=document.getElementById('wordBtn');
+  btn.disabled=true;btn.textContent='⏳ Generating...';
+  var content=document.getElementById('guide-content').innerHTML;
+  var html='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><style>body{font-family:Calibri,sans-serif;line-height:1.6;color:#1a1a2e}h1,h2{color:#0d6b5e}h1{font-size:22pt;border-bottom:2px solid #0d6b5e;padding-bottom:6px}h2{font-size:16pt;border-bottom:1px solid #ccc;padding-bottom:4px}h3{font-size:13pt;color:#333}table{border-collapse:collapse;width:100%}th{background:#0d6b5e;color:#fff;padding:8px;text-align:left}td{padding:6px 8px;border-bottom:1px solid #ddd}strong{color:#0d6b5e}blockquote{border-left:3px solid #0d6b5e;padding-left:12px;background:#e8f5e9}</style></head><body>'+content+'</body></html>';
+  var blob=new Blob(['\ufeff',html],{type:'application/msword'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='Managemob_Guide_'+currentLang.toUpperCase()+'.doc';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  btn.disabled=false;btn.textContent='📝 Word';
+}
+
+switchLang('en');
+</script>
+</body>
+</html>
