@@ -1,5 +1,7 @@
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useT } from '../lib/i18n'
+import { exportPageToPdf, exportPageToWord } from '../lib/exportPage'
 
 interface Section {
   id: string
@@ -9,8 +11,22 @@ interface Section {
 }
 
 export default function ManualPage() {
-  const { t } = useT()
+  const { t, lang } = useT()
   const navigate = useNavigate()
+  const contentRef = useRef<HTMLDivElement>(null)
+  const [exporting, setExporting] = useState(false)
+
+  const handlePdf = async () => {
+    if (!contentRef.current) return
+    setExporting(true)
+    try { await exportPageToPdf(contentRef.current, `Managemob_Manual_${lang.toUpperCase()}.pdf`) }
+    finally { setExporting(false) }
+  }
+
+  const handleWord = () => {
+    if (!contentRef.current) return
+    exportPageToWord(contentRef.current, `Managemob_Manual_${lang.toUpperCase()}.doc`)
+  }
 
   const sections: Section[] = [
     {
@@ -97,15 +113,31 @@ export default function ManualPage() {
     <div className="page-container" style={{ height: '100vh', overflow: 'auto' }}>
       <div style={{ maxWidth: 900, margin: '0 auto', padding: '32px 24px' }}>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 32 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 32, flexWrap: 'wrap' }}>
           <button className="btn btn-secondary btn-sm" onClick={() => navigate('/')}>
             {'\u2190'} Home
           </button>
           <button className="btn btn-secondary btn-sm" onClick={() => navigate('/guide')}>
             {t('nav_guide')}
           </button>
+          <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
+            <button
+              disabled={exporting}
+              onClick={handlePdf}
+              style={{ padding: '6px 16px', border: 'none', borderRadius: 6, fontSize: 13, fontWeight: 600, cursor: 'pointer', background: '#e53935', color: '#fff', display: 'flex', alignItems: 'center', gap: 6, opacity: exporting ? 0.6 : 1 }}
+            >
+              {exporting ? '\u23F3' : '\u{1F4C4}'} PDF
+            </button>
+            <button
+              onClick={handleWord}
+              style={{ padding: '6px 16px', border: 'none', borderRadius: 6, fontSize: 13, fontWeight: 600, cursor: 'pointer', background: '#1565c0', color: '#fff', display: 'flex', alignItems: 'center', gap: 6 }}
+            >
+              {'\u{1F4C4}'} Word
+            </button>
+          </div>
         </div>
 
+        <div ref={contentRef}>
         <h1 style={{ fontSize: 28, fontWeight: 800, color: 'var(--text)', marginBottom: 8 }}>
           {t('manual_page_title')}
         </h1>
@@ -159,6 +191,7 @@ export default function ManualPage() {
         ))}
 
         <div style={{ height: 48 }} />
+        </div>{/* end contentRef */}
       </div>
     </div>
   )

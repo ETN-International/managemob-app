@@ -588,6 +588,7 @@ const de: Record<TranslationKeys, string> = {
   home_operational_guide_desc: 'Vollständige mehrsprachige Betriebsanleitung (neuer Tab)',
   home_github_guide: 'GitHub Template-Anleitung',
   home_github_guide_desc: 'Schritt-für-Schritt: vom GitHub-Template zur Produktion (neuer Tab)',
+  eu_disclaimer: 'Kofinanziert von der Europäischen Union. Die geäußerten Ansichten und Meinungen entsprechen jedoch ausschließlich denen des Autors bzw. der Autoren und spiegeln nicht zwingend die der Europäischen Union oder der Europäischen Exekutivagentur für Bildung und Kultur (EACEA) wider. Weder die Europäische Union noch die EACEA können dafür verantwortlich gemacht werden.',
 }
 
 export default de

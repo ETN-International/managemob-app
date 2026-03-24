@@ -856,6 +856,27 @@ export default function GuidedHomePage() {
         </a>
       </div>
 
+      {/* ── EU Co-funding Banner ─────────────────────────────────────────── */}
+      <div style={{
+        margin: '0 32px 32px',
+        padding: '20px 24px',
+        background: '#f0f4fa',
+        border: '1px solid #d0d9e8',
+        borderRadius: 12,
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: 16,
+      }}>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg"
+          alt="EU Flag"
+          style={{ width: 48, height: 32, objectFit: 'cover', borderRadius: 3, flexShrink: 0, marginTop: 2 }}
+        />
+        <p style={{ fontSize: 11, color: '#4a5568', lineHeight: 1.6, margin: 0 }}>
+          {t('eu_disclaimer')}
+        </p>
+      </div>
+
       {/* ══════════════════════════════════════════════════════════════════════ */}
       {/* MODAL: Add Participant                                                */}
       {/* ══════════════════════════════════════════════════════════════════════ */}
