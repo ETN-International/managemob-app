@@ -472,6 +472,7 @@ const de: Record<TranslationKeys, string> = {
   guide_tip_test: 'Testen Sie immer mit einem Teilnehmer bevor Sie einen Stapel generieren',
   guide_tip_combine: 'Kombinieren Sie mehrere Tags: {name} {surname} kommt am {arrival_date}',
   guide_tip_check: 'Überprüfen Sie die Vollständigkeit der Daten vor der Generierung',
+  doc_export_placeholders: 'Platzhalter exportieren (CSV)',
 }
 
 export default de

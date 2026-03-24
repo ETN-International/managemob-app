@@ -511,6 +511,7 @@ const en = {
   guide_tip_test: 'Always test with one participant before generating a batch',
   guide_tip_combine: 'You can combine multiple tags: {name} {surname} arrives on {arrival_date}',
   guide_tip_check: 'Check that participant data is complete before generating — empty fields produce blank spaces',
+  doc_export_placeholders: 'Export Placeholders (CSV)',
 } as const
 
 export default en

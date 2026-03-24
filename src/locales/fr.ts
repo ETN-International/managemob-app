@@ -472,6 +472,7 @@ const fr: Record<TranslationKeys, string> = {
   guide_tip_test: 'Testez toujours avec un participant avant de générer en lot',
   guide_tip_combine: 'Combinez plusieurs balises : {name} {surname} arrive le {arrival_date}',
   guide_tip_check: 'Vérifiez que les données sont complètes avant de générer',
+  doc_export_placeholders: 'Exporter Balises (CSV)',
 }
 
 export default fr

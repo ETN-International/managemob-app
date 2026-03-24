@@ -503,6 +503,7 @@ const sv = {
   guide_tip_test: 'Testa alltid med en deltagare innan du genererar i batch',
   guide_tip_combine: 'Kombinera flera taggar: {name} {surname} anländer {arrival_date}',
   guide_tip_check: 'Kontrollera att deltagardata är komplett innan generering',
+  doc_export_placeholders: 'Exportera Taggar (CSV)',
 } as const
 
 export default sv

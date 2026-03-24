@@ -472,6 +472,7 @@ const pt: Record<TranslationKeys, string> = {
   guide_tip_test: 'Teste sempre com um participante antes de gerar em lote',
   guide_tip_combine: 'Combine várias etiquetas: {name} {surname} chega em {arrival_date}',
   guide_tip_check: 'Verifique que os dados estão completos antes de gerar',
+  doc_export_placeholders: 'Exportar Etiquetas (CSV)',
 }
 
 export default pt

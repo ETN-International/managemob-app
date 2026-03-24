@@ -181,19 +181,39 @@ export default function DocumentsPage() {
     setSelectedParticipants(new Set())
   }
 
+  // ─── Export Placeholders ──────────────────────────────────────────────────
+
+  function exportPlaceholders() {
+    const header = 'Tag,Description,Category\n'
+    const rows = TEMPLATE_VARIABLES.map(v =>
+      `"{${v.tag}}","${v.label}","${CATEGORY_LABELS[v.category as keyof typeof CATEGORY_LABELS]}"`
+    ).join('\n')
+    const blob = new Blob([header + rows], { type: 'text/csv;charset=utf-8' })
+    saveAs(blob, 'managemob_placeholders.csv')
+  }
+
   // ─── Placeholder Reference ────────────────────────────────────────────────
 
   function renderPlaceholderReference() {
     return (
       <div style={{ marginTop: 16 }}>
-        <button
-          className="btn btn-secondary btn-sm"
-          onClick={() => setShowPlaceholders(p => !p)}
-          style={{ display: 'flex', alignItems: 'center', gap: 6 }}
-        >
-          <span>{showPlaceholders ? '\u25BE' : '\u25B8'}</span>
-          <span>{t('doc_placeholders')}</span>
-        </button>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button
+            className="btn btn-secondary btn-sm"
+            onClick={() => setShowPlaceholders(p => !p)}
+            style={{ display: 'flex', alignItems: 'center', gap: 6 }}
+          >
+            <span>{showPlaceholders ? '\u25BE' : '\u25B8'}</span>
+            <span>{t('doc_placeholders')}</span>
+          </button>
+          <button
+            className="btn btn-secondary btn-sm"
+            onClick={exportPlaceholders}
+            style={{ display: 'flex', alignItems: 'center', gap: 6 }}
+          >
+            {t('doc_export_placeholders')}
+          </button>
+        </div>
         {showPlaceholders && (
           <div style={{ marginTop: 12 }}>
             <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 12 }}>

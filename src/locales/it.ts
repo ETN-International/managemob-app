@@ -473,6 +473,7 @@ const it: Record<TranslationKeys, string> = {
   guide_tip_test: 'Testa sempre con un partecipante di prova prima di generare in batch',
   guide_tip_combine: 'Puoi combinare più tag: {name} {surname} arriva il {arrival_date}',
   guide_tip_check: 'Verifica che i dati dei partecipanti siano completi prima di generare — i campi vuoti producono spazi bianchi',
+  doc_export_placeholders: 'Esporta Placeholder (CSV)',
 }
 
 export default it
