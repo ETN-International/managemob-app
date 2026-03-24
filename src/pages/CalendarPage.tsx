@@ -281,6 +281,9 @@ export default function CalendarPage() {
           <h1 className="cal-page-title">{t('cal_title')}</h1>
           <p className="cal-page-subtitle">{t('cal_subtitle')}</p>
         </div>
+        <button className="btn btn-secondary btn-sm" onClick={() => navigate('/')}>
+          {t('nav_home')}
+        </button>
       </div>
 
       {/* ── Filters bar ───────────────────────────────────────────────────── */}
