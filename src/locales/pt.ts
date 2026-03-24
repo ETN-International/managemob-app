@@ -582,6 +582,10 @@ const pt: Record<TranslationKeys, string> = {
   manual_dashboard_title: 'Painel',
   manual_dashboard_1: 'O Painel mostra cartões KPI (total participantes, bolsa total, margem total, empresas de acolhimento, alojamentos), um gráfico circular de tipologia de mobilidade e um gráfico de barras de países de destino.',
   manual_dashboard_2: 'A linha de resumo inferior mostra o número de entradas, saídas e a bolsa média por participante.',
+  home_help_resources: 'Ajuda e Recursos',
+  home_guide_desc: 'Conceitos, workflow e visão geral das secções',
+  home_operational_guide: 'Guia Operacional',
+  home_operational_guide_desc: 'Guia operacional multilingue completo (novo separador)',
 }
 
 export default pt

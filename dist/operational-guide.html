@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Managemob &mdash; Manuale Operativo</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;color:#1a1a2e;background:#f8f9fa}
+.top-bar{position:sticky;top:0;z-index:100;background:#0d6b5e;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.lang-switcher{display:flex;gap:4px;flex-wrap:wrap}
+.lang-btn{padding:6px 14px;border:2px solid rgba(255,255,255,.3);border-radius:6px;background:0 0;color:#fff;cursor:pointer;font-size:14px;font-weight:500;transition:all .2s}
+.lang-btn:hover{background:rgba(255,255,255,.15)}
+.lang-btn.active{background:#fff;color:#0d6b5e;border-color:#fff;font-weight:700}
+.export-btns{display:flex;gap:8px}
+.export-btn{padding:8px 18px;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
+.export-btn:hover{transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.btn-pdf{background:#e53935;color:#fff}
+.btn-word{background:#1565c0;color:#fff}
+.btn-pdf:disabled,.btn-word:disabled{opacity:.6;cursor:wait}
+#guide-content{max-width:900px;margin:0 auto;padding:40px 20px 60px}
+h1{font-size:2em;color:#0d6b5e;margin-bottom:8px;border-bottom:3px solid #0d6b5e;padding-bottom:8px}
+h2{font-size:1.5em;color:#0d6b5e;margin-top:40px;margin-bottom:12px;border-bottom:1px solid #ddd;padding-bottom:6px}
+h3{font-size:1.15em;color:#333;margin-top:20px;margin-bottom:8px}
+p{margin-bottom:10px}
+ol,ul{padding-left:28px;margin-bottom:12px}
+li{margin-bottom:6px}
+strong{color:#0d6b5e}
+code{background:#e8f5e9;padding:2px 6px;border-radius:3px;font-size:.9em}
+.info-box{background:#e8f5e9;border-left:4px solid #0d6b5e;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+.warn-box{background:#fff3e0;border-left:4px solid #ff9800;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{border:1px solid #ddd;padding:10px 14px;text-align:left}
+th{background:#0d6b5e;color:#fff}
+tr:nth-child(even){background:#f9f9f9}
+.lang-section{display:none}
+.lang-section.active{display:block}
+footer{text-align:center;padding:30px;color:#888;font-size:.85em;border-top:1px solid #ddd;margin-top:40px}
+@media print{.top-bar{display:none!important}}
+</style>
+</head>
+<body>
+<div class="top-bar">
+<a href="/" class="export-btn" style="background:#fff;color:#0d6b5e;text-decoration:none;font-weight:700;margin-right:8px">&larr; Home</a>
+<div class="lang-switcher">
+<button class="lang-btn active" onclick="switchLang('en')">EN</button>
+<button class="lang-btn" onclick="switchLang('it')">IT</button>
+<button class="lang-btn" onclick="switchLang('fr')">FR</button>
+<button class="lang-btn" onclick="switchLang('es')">ES</button>
+<button class="lang-btn" onclick="switchLang('de')">DE</button>
+<button class="lang-btn" onclick="switchLang('sv')">SV</button>
+<button class="lang-btn" onclick="switchLang('pt')">PT</button>
+</div>
+<div class="export-btns">
+<button class="export-btn btn-pdf" onclick="exportPDF(this)">&#128196; PDF</button>
+<button class="export-btn btn-word" onclick="exportWord(this)">&#128196; Word</button>
+</div>
+</div>
+
+<div id="guide-content">
+
+<!-- ==================== ENGLISH ==================== -->
+<div class="lang-section active" id="lang-en">
+<h1>Managemob &mdash; Operational Manual</h1>
+<p><em>Last updated: March 2026</em></p>
+<p>This manual provides step-by-step procedures for using the <strong>Managemob</strong> mobility management platform.</p>
+
+<div class="info-box"><strong>Platform URL:</strong> <a href="https://managemob.netlify.app">https://managemob.netlify.app</a></div>
+
+<h2>1. Logging In</h2>
+<ol>
+<li>Open your web browser and navigate to <code>https://managemob.netlify.app</code>.</li>
+<li>You will see the <strong>Login</strong> page with the Managemob logo.</li>
+<li>Enter the <strong>Email</strong> address provided by your project coordinator.</li>
+<li>Enter the <strong>Password</strong> associated with your account.</li>
+<li>Click the <strong>Sign In</strong> button.</li>
+<li>If credentials are correct, you will be redirected to the <strong>Dashboard</strong>.</li>
+</ol>
+<div class="warn-box"><strong>Note:</strong> If you have forgotten your password, contact your project coordinator to request a reset.</div>
+
+<h2>2. Understanding the Sidebar Navigation</h2>
+<p>After logging in, you will see a <strong>dark green sidebar</strong> on the left. The sidebar is divided into three sections:</p>
+<ol>
+<li><strong>MAIN</strong> &mdash; Contains the <strong>Dashboard</strong> link only.</li>
+<li><strong>MANAGEMOB INCOMING</strong> &mdash; Contains 9 sub-pages for managing incoming mobility participants.</li>
+<li><strong>MANAGEMOB OUTGOING</strong> &mdash; Contains the same 9 sub-pages for managing outgoing mobility participants.</li>
+</ol>
+<p>The 9 sub-pages available under both Incoming and Outgoing are:</p>
+<table>
+<tr><th>#</th><th>Page</th><th>Description</th></tr>
+<tr><td>1</td><td>Individuals</td><td>Individual participant records with detailed profiles</td></tr>
+<tr><td>2</td><td>Groups</td><td>Group-based participant records</td></tr>
+<tr><td>3</td><td>Sending Organisations</td><td>Organisations sending participants</td></tr>
+<tr><td>4</td><td>Host companies</td><td>Companies hosting participants</td></tr>
+<tr><td>5</td><td>Accommodation</td><td>Accommodation facilities assigned to participants</td></tr>
+<tr><td>6</td><td>Travel Details</td><td>Arrival and departure travel information</td></tr>
+<tr><td>7</td><td>Transfer</td><td>Transfer arrangements between locations</td></tr>
+<tr><td>8</td><td>Financial info</td><td>Grant amounts and expense breakdowns</td></tr>
+<tr><td>9</td><td>Mobility Service Provider</td><td>Organisations providing mobility services</td></tr>
+</table>
+
+<h2>3. Using the Dashboard</h2>
+<ol>
+<li>Click <strong>Dashboard</strong> in the sidebar under MAIN.</li>
+<li>The dashboard displays the <strong>Participants</strong> section at the top, showing three key figures:
+  <ul>
+  <li><strong>Total Participants</strong> &mdash; The total number of registered participants.</li>
+  <li><strong>Total Grant</strong> &mdash; The sum of all grants allocated (in EUR).</li>
+  <li><strong>Total Margin</strong> &mdash; The remaining margin amount (in EUR).</li>
+  </ul>
+</li>
+<li>Below the summary cards, you will find two charts:
+  <ul>
+  <li><strong>Mobility Typology</strong> (pie chart) &mdash; Shows the percentage split between Incoming and Outgoing participants.</li>
+  <li><strong>Countries</strong> (horizontal bar chart) &mdash; Shows the distribution of participants by country.</li>
+  </ul>
+</li>
+<li>Use the <strong>Search</strong> box in the top-right corner to quickly filter records by keyword.</li>
+<li>The <strong>record counter</strong> (e.g. &ldquo;7 records&rdquo;) is displayed next to the search box.</li>
+</ol>
+
+<h2>4. Viewing Individual Participants</h2>
+<ol>
+<li>Click <strong>Individuals</strong> under either MANAGEMOB INCOMING or MANAGEMOB OUTGOING in the sidebar.</li>
+<li>The page shows a <strong>split-panel layout</strong>:
+  <ul>
+  <li><strong>Left panel</strong> &mdash; A scrollable list of all participants, showing their name and email address. Each entry has a coloured avatar with initials.</li>
+  <li><strong>Right panel</strong> &mdash; The detailed profile of the currently selected participant.</li>
+  </ul>
+</li>
+<li>Click on any participant name in the left panel to load their details on the right.</li>
+<li>The header of the detail panel shows:
+  <ul>
+  <li>The participant&rsquo;s <strong>full name</strong> and avatar.</li>
+  <li>Coloured <strong>tags</strong> indicating their mobility type (Incoming/Outgoing), category (Individual/Group), and status (Student/Trainee/etc.).</li>
+  <li>An <strong>Information Voucher</strong> button (top-right corner) to generate a summary document.</li>
+  </ul>
+</li>
+<li>Scroll down the right panel to view the participant&rsquo;s information sections:
+  <ul>
+  <li><strong>Personal Information</strong> &mdash; Sex, Status, Date of Birth, Place of Birth, Nationality, Marital Status, Driving Licence.</li>
+  <li><strong>Contact Information</strong> &mdash; Email, Phone, Mobile Phone, Address, City, Postcode, Country.</li>
+  <li><strong>Documents</strong> &mdash; Passport Number, Passport Expiring Date.</li>
+  <li><strong>Language Skills</strong> &mdash; Individual CEFR levels per language (English, Spanish, German, French, Italian), Language Test Score, Language Test Validated, Language Test Certificate.</li>
+  <li><strong>Education</strong> &mdash; Last Validated Diploma, Year Obtained, Diploma Certificate.</li>
+  <li><strong>Bank Details</strong> &mdash; Swift Code, IBAN.</li>
+  <li><strong>Mobility Details</strong> &mdash; Destination Country, Destination City, Arrivals Date, Departure Date.</li>
+  <li><strong>Language Course</strong> &mdash; Language Course Provider, Course Start Date, Course End Date, Course Weeks.</li>
+  <li><strong>Internship</strong> &mdash; Internship Start Date, Internship End Date, Internship Weeks.</li>
+  <li><strong>Host Company</strong> &mdash; Host Company, Address, Sector, HC Tutor, Tutor Mobile Phone, Tutor E-mail.</li>
+  <li><strong>Accommodation</strong> &mdash; Accommodation 1, Start Date 1, End Date 1, Accommodation/Week, Accommodation 1 Cost, Accommodation 2, Start Date 2, End Date 2, Accommodation 2 Week, Accommodation 2 Cost.</li>
+  <li><strong>Financial Information</strong> &mdash; Grant Amount, Transfer Cost, Insurance.</li>
+  <li><strong>Project Information</strong> &mdash; Project Name, Group Name, Insurance Provider, Transfer Provider, Sending Organisation.</li>
+  </ul>
+</li>
+<li>Use the <strong>Previous</strong> / <strong>Next</strong> navigation buttons at the bottom to move between participants.</li>
+</ol>
+
+<h2>5. Generating an Information Voucher</h2>
+<ol>
+<li>Navigate to <strong>Individuals</strong> (Incoming or Outgoing).</li>
+<li>Select a participant from the list on the left.</li>
+<li>Click the <strong>Information Voucher</strong> button in the top-right corner of the detail panel.</li>
+<li>A PDF summary document will be generated containing all key information about the selected participant.</li>
+<li>Save or print the voucher as needed for administrative purposes.</li>
+</ol>
+
+<h2>6. Viewing Groups</h2>
+<ol>
+<li>Click <strong>Groups</strong> in the sidebar under INCOMING or OUTGOING.</li>
+<li>The layout is identical to the Individuals page (split-panel with list and detail).</li>
+<li>Select a group record from the left panel to view its details on the right.</li>
+<li>Group records contain the same information sections as individual participants.</li>
+<li>Use the <strong>Information Voucher</strong> button to generate a group summary document.</li>
+</ol>
+
+<h2>7. Viewing Sending Organisations</h2>
+<ol>
+<li>Click <strong>Sending Organisations</strong> in the sidebar.</li>
+<li>The page displays a <strong>sortable table</strong> with columns:
+  <ul>
+  <li><strong>Name</strong> &mdash; Organisation name.</li>
+  <li><strong>Contact Person</strong> &mdash; Primary contact name.</li>
+  <li><strong>E-mail</strong> &mdash; Contact email (clickable link).</li>
+  <li><strong>Tel</strong> &mdash; Contact phone number (clickable link).</li>
+  <li><strong>Address</strong> &mdash; Full address.</li>
+  <li><strong>City</strong> &mdash; City name.</li>
+  <li><strong>Country</strong> &mdash; Country name.</li>
+  </ul>
+</li>
+<li>Click any <strong>column header</strong> to sort the table. Click again to reverse the sort order.</li>
+<li>Use the <strong>Search</strong> box (top-right) to filter records by keyword.</li>
+<li>The <strong>record counter</strong> shows the total number of organisations.</li>
+</ol>
+
+<h2>8. Viewing Host Companies</h2>
+<ol>
+<li>Click <strong>Host companies</strong> in the sidebar.</li>
+<li>The page displays a <strong>sortable table</strong> with columns:
+  <ul>
+  <li><strong>Host Company</strong> &mdash; Company name.</li>
+  <li><strong>Address</strong> &mdash; Company address.</li>
+  <li><strong>City</strong> &mdash; City name.</li>
+  <li><strong>Sector</strong> &mdash; Business sector of the company.</li>
+  </ul>
+</li>
+<li>Click column headers to sort and use the Search box to filter records.</li>
+</ol>
+
+<h2>9. Viewing Accommodation</h2>
+<ol>
+<li>Click <strong>Accommodation</strong> in the sidebar.</li>
+<li>The page displays a table with columns:
+  <ul>
+  <li><strong>Accommodation</strong> &mdash; Facility name.</li>
+  <li><strong>Participants</strong> &mdash; Name tags of all participants assigned to this accommodation, displayed as coloured chips.</li>
+  <li><strong>Type</strong> &mdash; Accommodation type (Hotel, Hostel, B&amp;B, Shared Flat, etc.), shown as a coloured badge.</li>
+  <li><strong>Contact Person</strong> &mdash; Primary contact name.</li>
+  <li><strong>E-mail</strong> &mdash; Contact email (clickable link).</li>
+  </ul>
+</li>
+<li>Use the Search box and column headers for filtering and sorting.</li>
+</ol>
+
+<h2>10. Viewing Travel Details</h2>
+<ol>
+<li>Click <strong>Travel Details</strong> in the sidebar.</li>
+<li>The page displays a table with columns:
+  <ul>
+  <li><strong>ID Name</strong> &mdash; Participant name.</li>
+  <li><strong>Arrivals Date</strong> &mdash; Date of arrival.</li>
+  <li><strong>Departure Date</strong> &mdash; Date of departure.</li>
+  <li><strong>Mobility</strong> &mdash; Incoming or Outgoing (coloured badge).</li>
+  <li><strong>Indiv./Group</strong> &mdash; Individual or Group (coloured badge).</li>
+  <li><strong>Sending Org</strong> &mdash; Name of the sending organisation.</li>
+  </ul>
+</li>
+<li>Sort by any column to organize travel schedules chronologically.</li>
+</ol>
+
+<h2>11. Viewing Transfer Information</h2>
+<ol>
+<li>Click <strong>Transfer</strong> in the sidebar.</li>
+<li>The page displays a table of transfer arrangements with an <strong>Incoming</strong> or <strong>Outgoing</strong> badge, a search box, and a record counter.</li>
+<li>Use sorting and search as with other table pages.</li>
+</ol>
+
+<h2>12. Viewing Financial Information</h2>
+<ol>
+<li>Click <strong>Financial info</strong> in the sidebar.</li>
+<li>The page displays a detailed financial table with columns:
+  <ul>
+  <li><strong>Participant</strong> &mdash; Participant name.</li>
+  <li><strong>Grant</strong> &mdash; Total grant amount in EUR.</li>
+  <li><strong>Accommodation</strong> &mdash; Accommodation expense.</li>
+  <li><strong>Accommodation 2</strong> &mdash; Secondary accommodation expense.</li>
+  <li><strong>Food Allowance</strong> &mdash; Food-related expenses.</li>
+  <li><strong>Insurance</strong> &mdash; Insurance costs.</li>
+  <li><strong>Other Expenses</strong> &mdash; Miscellaneous costs.</li>
+  <li><strong>Note Other Exp.</strong> &mdash; Notes on other expenses.</li>
+  <li><strong>Transfer</strong> &mdash; Transfer costs.</li>
+  <li><strong>Int. Transport</strong> &mdash; International transport costs.</li>
+  <li><strong>Local Transport</strong> &mdash; Local transport costs.</li>
+  </ul>
+</li>
+<li>All amounts are displayed in EUR with the &euro; symbol.</li>
+<li>Use column sorting and search to find specific financial records.</li>
+</ol>
+
+<h2>13. Viewing Mobility Service Providers</h2>
+<ol>
+<li>Click <strong>Mobility Service Provider</strong> in the sidebar.</li>
+<li>The page shows a table with columns: <strong>Name</strong>, <strong>PIC Number</strong>, <strong>Address</strong>, <strong>Postcode</strong>.</li>
+<li>PIC numbers and phone numbers are displayed as clickable links.</li>
+<li>Use Search and column sorting as with other table pages.</li>
+</ol>
+
+<h2>14. Using Search and Sorting</h2>
+<ol>
+<li>Every page has a <strong>Search</strong> box in the top-right corner.</li>
+<li>Type any keyword to instantly filter the visible records.</li>
+<li>The <strong>record counter</strong> updates in real time to show how many records match your search.</li>
+<li>On table pages, click any <strong>column header</strong> to sort ascending. Click the same header again to sort descending.</li>
+<li>A small <strong>arrow icon</strong> next to the column header indicates the current sort direction.</li>
+</ol>
+
+<h2>15. Switching Between Incoming and Outgoing</h2>
+<ol>
+<li>The sidebar contains two identical sets of 9 pages: one under <strong>MANAGEMOB INCOMING</strong> and one under <strong>MANAGEMOB OUTGOING</strong>.</li>
+<li>To view incoming participant data, click any page under MANAGEMOB INCOMING.</li>
+<li>To view outgoing participant data, click the corresponding page under MANAGEMOB OUTGOING.</li>
+<li>The page title displays an <strong>Incoming</strong> or <strong>Outgoing</strong> badge to indicate which dataset you are viewing.</li>
+</ol>
+
+<h2>Quick Reference: Common Workflows</h2>
+<table>
+<tr><th>Task</th><th>Steps</th></tr>
+<tr><td>Find a specific participant</td><td>Go to Individuals &rarr; Use Search box &rarr; Click participant name</td></tr>
+<tr><td>Generate an Information Voucher</td><td>Go to Individuals &rarr; Select participant &rarr; Click Information Voucher</td></tr>
+<tr><td>Check accommodation assignments</td><td>Go to Accommodation &rarr; Review participant chips in the table</td></tr>
+<tr><td>Review travel schedules</td><td>Go to Travel Details &rarr; Sort by Arrivals Date column</td></tr>
+<tr><td>Check financial breakdown</td><td>Go to Financial info &rarr; Review grant and expenses per participant</td></tr>
+<tr><td>Find a sending organisation</td><td>Go to Sending Organisations &rarr; Use Search or sort by Country</td></tr>
+</table>
+
+<footer>Managemob Operational Manual &copy; 2026 &mdash; Pessoa Academy</footer>
+</div>
+
+<!-- ==================== ITALIANO ==================== -->
+<div class="lang-section" id="lang-it">
+<h1>Managemob &mdash; Manuale Operativo</h1>
+<p><em>Ultimo aggiornamento: Marzo 2026</em></p>
+<p>Questo manuale fornisce procedure passo-passo per l'utilizzo della piattaforma <strong>Managemob</strong> per la gestione della mobilit&agrave;.</p>
+
+<div class="info-box"><strong>URL della piattaforma:</strong> <a href="https://managemob.netlify.app">https://managemob.netlify.app</a></div>
+
+<h2>1. Accesso alla Piattaforma</h2>
+<ol>
+<li>Aprire il browser e navigare su <code>https://managemob.netlify.app</code>.</li>
+<li>Viene visualizzata la pagina di <strong>Login</strong> con il logo Managemob.</li>
+<li>Inserire l'<strong>Email</strong> fornita dal coordinatore del progetto.</li>
+<li>Inserire la <strong>Password</strong> associata al proprio account.</li>
+<li>Cliccare sul pulsante <strong>Sign In</strong>.</li>
+<li>Se le credenziali sono corrette, si viene reindirizzati alla <strong>Dashboard</strong>.</li>
+</ol>
+<div class="warn-box"><strong>Nota:</strong> In caso di password dimenticata, contattare il coordinatore del progetto per richiedere il reset.</div>
+
+<h2>2. Navigazione nella Barra Laterale</h2>
+<p>Dopo l'accesso, si visualizza una <strong>barra laterale verde scuro</strong> sulla sinistra, divisa in tre sezioni:</p>
+<ol>
+<li><strong>MAIN</strong> &mdash; Contiene solo il link alla <strong>Dashboard</strong>.</li>
+<li><strong>MANAGEMOB INCOMING</strong> &mdash; 9 sotto-pagine per la gestione dei partecipanti in mobilit&agrave; in entrata.</li>
+<li><strong>MANAGEMOB OUTGOING</strong> &mdash; Le stesse 9 sotto-pagine per i partecipanti in mobilit&agrave; in uscita.</li>
+</ol>
+<p>Le 9 sotto-pagine disponibili sotto Incoming e Outgoing sono:</p>
+<table>
+<tr><th>#</th><th>Pagina</th><th>Descrizione</th></tr>
+<tr><td>1</td><td>Individuals</td><td>Schede individuali dei partecipanti con profili dettagliati</td></tr>
+<tr><td>2</td><td>Groups</td><td>Schede dei partecipanti basate su gruppi</td></tr>
+<tr><td>3</td><td>Sending Organisations</td><td>Organizzazioni che inviano i partecipanti</td></tr>
+<tr><td>4</td><td>Host companies</td><td>Aziende che ospitano i partecipanti</td></tr>
+<tr><td>5</td><td>Accommodation</td><td>Strutture di alloggio assegnate ai partecipanti</td></tr>
+<tr><td>6</td><td>Travel Details</td><td>Informazioni di viaggio (arrivo e partenza)</td></tr>
+<tr><td>7</td><td>Transfer</td><td>Organizzazione dei trasferimenti tra le sedi</td></tr>
+<tr><td>8</td><td>Financial info</td><td>Importi delle sovvenzioni e ripartizione delle spese</td></tr>
+<tr><td>9</td><td>Mobility Service Provider</td><td>Organizzazioni che forniscono servizi di mobilit&agrave;</td></tr>
+</table>
+
+<h2>3. Utilizzo della Dashboard</h2>
+<ol>
+<li>Cliccare <strong>Dashboard</strong> nella barra laterale sotto MAIN.</li>
+<li>La dashboard mostra la sezione <strong>Participants</strong> in alto con tre cifre chiave:
+  <ul>
+  <li><strong>Total Participants</strong> &mdash; Numero totale dei partecipanti registrati.</li>
+  <li><strong>Total Grant</strong> &mdash; Somma totale delle sovvenzioni allocate (in EUR).</li>
+  <li><strong>Total Margin</strong> &mdash; Importo del margine rimanente (in EUR).</li>
+  </ul>
+</li>
+<li>Sotto le schede riepilogative si trovano due grafici:
+  <ul>
+  <li><strong>Mobility Typology</strong> (grafico a torta) &mdash; Percentuale tra partecipanti Incoming e Outgoing.</li>
+  <li><strong>Countries</strong> (grafico a barre orizzontali) &mdash; Distribuzione dei partecipanti per paese.</li>
+  </ul>
+</li>
+<li>Usare la casella <strong>Search</strong> in alto a destra per filtrare rapidamente i record.</li>
+<li>Il <strong>contatore record</strong> mostra il numero di risultati.</li>
+</ol>
+
+<h2>4. Visualizzazione dei Partecipanti Individuali</h2>
+<ol>
+<li>Cliccare <strong>Individuals</strong> sotto MANAGEMOB INCOMING o OUTGOING.</li>
+<li>La pagina mostra un <strong>layout a pannello diviso</strong>:
+  <ul>
+  <li><strong>Pannello sinistro</strong> &mdash; Lista scorrevole di tutti i partecipanti con nome ed email. Ogni voce ha un avatar colorato con le iniziali.</li>
+  <li><strong>Pannello destro</strong> &mdash; Profilo dettagliato del partecipante selezionato.</li>
+  </ul>
+</li>
+<li>Cliccare sul nome di un partecipante nel pannello sinistro per caricarne i dettagli.</li>
+<li>L'intestazione del pannello dettaglio mostra nome completo, avatar e <strong>tag colorati</strong> (tipo mobilit&agrave;, categoria, stato).</li>
+<li>In alto a destra si trova il pulsante <strong>Information Voucher</strong> per generare un documento riepilogativo.</li>
+<li>Scorrere verso il basso per visualizzare le sezioni informative del partecipante:
+  <ul>
+  <li><strong>Personal Information</strong> &mdash; Sex, Status, Date of Birth, Place of Birth, Nationality, Marital Status, Driving Licence.</li>
+  <li><strong>Contact Information</strong> &mdash; Email, Phone, Mobile Phone, Address, City, Postcode, Country.</li>
+  <li><strong>Documents</strong> &mdash; Passport Number, Passport Expiring Date.</li>
+  <li><strong>Language Skills</strong> &mdash; Livelli CEFR per ogni lingua (English, Spanish, German, French, Italian), Language Test Score, Language Test Validated, Language Test Certificate.</li>
+  <li><strong>Education</strong> &mdash; Last Validated Diploma, Year Obtained, Diploma Certificate.</li>
+  <li><strong>Bank Details</strong> &mdash; Swift Code, IBAN.</li>
+  <li><strong>Mobility Details</strong> &mdash; Destination Country, Destination City, Arrivals Date, Departure Date.</li>
+  <li><strong>Language Course</strong> &mdash; Language Course Provider, Course Start Date, Course End Date, Course Weeks.</li>
+  <li><strong>Internship</strong> &mdash; Internship Start Date, Internship End Date, Internship Weeks.</li>
+  <li><strong>Host Company</strong> &mdash; Host Company, Address, Sector, HC Tutor, Tutor Mobile Phone, Tutor E-mail.</li>
+  <li><strong>Accommodation</strong> &mdash; Accommodation 1, Start Date 1, End Date 1, Accommodation/Week, Accommodation 1 Cost, Accommodation 2, Start Date 2, End Date 2, Accommodation 2 Week, Accommodation 2 Cost.</li>
+  <li><strong>Financial Information</strong> &mdash; Grant Amount, Transfer Cost, Insurance.</li>
+  <li><strong>Project Information</strong> &mdash; Project Name, Group Name, Insurance Provider, Transfer Provider, Sending Organisation.</li>
+  </ul>
+</li>
+<li>Usare i pulsanti <strong>Previous</strong> / <strong>Next</strong> in basso per spostarsi tra i partecipanti.</li>
+</ol>
+
+<h2>5. Generazione del Voucher Informativo</h2>
+<ol>
+<li>Navigare su <strong>Individuals</strong> (Incoming o Outgoing).</li>
+<li>Selezionare un partecipante dalla lista a sinistra.</li>
+<li>Cliccare il pulsante <strong>Information Voucher</strong> in alto a destra.</li>
+<li>Verr&agrave; generato un documento PDF riepilogativo con tutte le informazioni chiave.</li>
+<li>Salvare o stampare il voucher per scopi amministrativi.</li>
+</ol>
+
+<h2>6. Visualizzazione dei Gruppi</h2>
+<ol>
+<li>Cliccare <strong>Groups</strong> nella barra laterale sotto INCOMING o OUTGOING.</li>
+<li>Il layout &egrave; identico alla pagina Individuals (pannello diviso con lista e dettaglio).</li>
+<li>Selezionare un gruppo dalla lista per visualizzarne i dettagli.</li>
+<li>I record di gruppo contengono le stesse sezioni informative dei partecipanti individuali.</li>
+</ol>
+
+<h2>7. Sending Organisations</h2>
+<ol>
+<li>Cliccare <strong>Sending Organisations</strong> nella barra laterale.</li>
+<li>La pagina mostra una <strong>tabella ordinabile</strong> con colonne:
+  <ul>
+  <li><strong>Name</strong> &mdash; Nome dell'organizzazione.</li>
+  <li><strong>Contact Person</strong> &mdash; Persona di contatto.</li>
+  <li><strong>E-mail</strong> &mdash; Email di contatto (link cliccabile).</li>
+  <li><strong>Tel</strong> &mdash; Numero di telefono (link cliccabile).</li>
+  <li><strong>Address</strong> &mdash; Indirizzo completo.</li>
+  <li><strong>City</strong> &mdash; Citt&agrave;.</li>
+  <li><strong>Country</strong> &mdash; Paese.</li>
+  </ul>
+</li>
+<li>Cliccare sulle intestazioni di colonna per ordinare. Usare <strong>Search</strong> per filtrare.</li>
+</ol>
+
+<h2>8. Host Companies</h2>
+<ol>
+<li>Cliccare <strong>Host companies</strong> nella barra laterale.</li>
+<li>La pagina mostra una <strong>tabella ordinabile</strong> con colonne:
+  <ul>
+  <li><strong>Host Company</strong> &mdash; Nome dell'azienda.</li>
+  <li><strong>Address</strong> &mdash; Indirizzo.</li>
+  <li><strong>City</strong> &mdash; Citt&agrave;.</li>
+  <li><strong>Sector</strong> &mdash; Settore di attivit&agrave; dell'azienda.</li>
+  </ul>
+</li>
+<li>Usare le intestazioni di colonna per ordinare e la casella Search per filtrare.</li>
+</ol>
+
+<h2>9. Accommodation</h2>
+<ol>
+<li>Cliccare <strong>Accommodation</strong> nella barra laterale.</li>
+<li>La tabella mostra:
+  <ul>
+  <li><strong>Accommodation</strong> &mdash; Nome della struttura.</li>
+  <li><strong>Participants</strong> &mdash; Chip colorati con i nomi dei partecipanti assegnati.</li>
+  <li><strong>Type</strong> &mdash; Tipo di alloggio (Hotel, Hostel, B&amp;B, Shared Flat, ecc.).</li>
+  <li><strong>Contact Person</strong> &mdash; Persona di contatto.</li>
+  <li><strong>E-mail</strong> &mdash; Email di contatto.</li>
+  </ul>
+</li>
+</ol>
+
+<h2>10. Travel Details</h2>
+<ol>
+<li>Cliccare <strong>Travel Details</strong> nella barra laterale.</li>
+<li>La tabella mostra:
+  <ul>
+  <li><strong>ID Name</strong> &mdash; Nome del partecipante.</li>
+  <li><strong>Arrivals Date</strong> &mdash; Data di arrivo.</li>
+  <li><strong>Departure Date</strong> &mdash; Data di partenza.</li>
+  <li><strong>Mobility</strong> &mdash; Incoming o Outgoing (badge colorato).</li>
+  <li><strong>Indiv./Group</strong> &mdash; Individual o Group (badge colorato).</li>
+  <li><strong>Sending Org</strong> &mdash; Organizzazione di invio.</li>
+  </ul>
+</li>
+</ol>
+
+<h2>11. Transfer</h2>
+<ol>
+<li>Cliccare <strong>Transfer</strong> nella barra laterale.</li>
+<li>La pagina mostra una tabella dei trasferimenti con badge <strong>Incoming</strong>/<strong>Outgoing</strong>, casella di ricerca e contatore record.</li>
+<li>Usare ordinamento e ricerca come nelle altre pagine tabellari.</li>
+</ol>
+
+<h2>12. Financial Info</h2>
+<ol>
+<li>Cliccare <strong>Financial info</strong> nella barra laterale.</li>
+<li>La tabella mostra il dettaglio finanziario con colonne:
+  <ul>
+  <li><strong>Participant</strong>, <strong>Grant</strong>, <strong>Accommodation</strong>, <strong>Accommodation 2</strong>, <strong>Food Allowance</strong>, <strong>Insurance</strong>, <strong>Other Expenses</strong>, <strong>Note Other Exp.</strong>, <strong>Transfer</strong>, <strong>Int. Transport</strong>, <strong>Local Transport</strong>.</li>
+  </ul>
+</li>
+<li>Tutti gli importi sono in EUR con il simbolo &euro;.</li>
+</ol>
+
+<h2>13. Mobility Service Provider</h2>
+<ol>
+<li>Cliccare <strong>Mobility Service Provider</strong> nella barra laterale.</li>
+<li>La tabella mostra: <strong>Name</strong>, <strong>PIC Number</strong>, <strong>Address</strong>, <strong>Postcode</strong>.</li>
+<li>I numeri PIC e i numeri di telefono sono visualizzati come link cliccabili.</li>
+</ol>
+
+<h2>14. Ricerca e Ordinamento</h2>
+<ol>
+<li>Ogni pagina ha una casella <strong>Search</strong> in alto a destra.</li>
+<li>Digitare qualsiasi parola chiave per filtrare i record visibili in tempo reale.</li>
+<li>Nelle pagine tabellari, cliccare sull'<strong>intestazione di colonna</strong> per ordinare. Cliccare di nuovo per invertire l'ordine.</li>
+<li>Una piccola <strong>freccia</strong> accanto all'intestazione indica la direzione corrente dell'ordinamento.</li>
+</ol>
+
+<h2>15. Passaggio tra Incoming e Outgoing</h2>
+<ol>
+<li>La barra laterale contiene due set identici di 9 pagine: uno sotto <strong>MANAGEMOB INCOMING</strong> e uno sotto <strong>MANAGEMOB OUTGOING</strong>.</li>
+<li>Per visualizzare i dati dei partecipanti in entrata, cliccare su una pagina sotto MANAGEMOB INCOMING.</li>
+<li>Per visualizzare i dati dei partecipanti in uscita, cliccare sulla pagina corrispondente sotto MANAGEMOB OUTGOING.</li>
+<li>Il titolo della pagina mostra un badge <strong>Incoming</strong> o <strong>Outgoing</strong> per indicare quale set di dati si sta visualizzando.</li>
+</ol>
+
+<h2>Riferimento Rapido: Flussi di Lavoro Comuni</h2>
+<table>
+<tr><th>Attivit&agrave;</th><th>Passaggi</th></tr>
+<tr><td>Trovare un partecipante</td><td>Individuals &rarr; Casella Search &rarr; Cliccare sul nome</td></tr>
+<tr><td>Generare un Information Voucher</td><td>Individuals &rarr; Selezionare partecipante &rarr; Information Voucher</td></tr>
+<tr><td>Verificare assegnazioni alloggio</td><td>Accommodation &rarr; Controllare i chip dei partecipanti</td></tr>
+<tr><td>Controllare i programmi di viaggio</td><td>Travel Details &rarr; Ordinare per Arrivals Date</td></tr>
+<tr><td>Verificare il dettaglio finanziario</td><td>Financial info &rarr; Controllare grant e spese per partecipante</td></tr>
+<tr><td>Trovare un'organizzazione di invio</td><td>Sending Organisations &rarr; Search o ordinare per Country</td></tr>
+</table>
+
+<footer>Manuale Operativo Managemob &copy; 2026 &mdash; Pessoa Academy</footer>
+</div>
+
+<!-- ==================== FRAN&Ccedil;AIS ==================== -->
+<div class="lang-section" id="lang-fr">
+<h1>Managemob &mdash; Manuel Op&eacute;rationnel</h1>
+<p><em>Derni&egrave;re mise &agrave; jour : Mars 2026</em></p>
+<p>Ce manuel fournit des proc&eacute;dures &eacute;tape par &eacute;tape pour utiliser la plateforme <strong>Managemob</strong> de gestion de la mobilit&eacute;.</p>
+
+<div class="info-box"><strong>URL de la plateforme :</strong> <a href="https://managemob.netlify.app">https://managemob.netlify.app</a></div>
+
+<h2>1. Connexion</h2>
+<ol>
+<li>Ouvrir le navigateur et acc&eacute;der &agrave; <code>https://managemob.netlify.app</code>.</li>
+<li>Saisir l'<strong>Email</strong> fourni par le coordinateur du projet.</li>
+<li>Saisir le <strong>Mot de passe</strong> associ&eacute; au compte.</li>
+<li>Cliquer sur <strong>Sign In</strong>.</li>
+<li>Vous serez redirig&eacute; vers le <strong>Dashboard</strong>.</li>
+</ol>
+<div class="warn-box"><strong>Note :</strong> En cas de mot de passe oubli&eacute;, contacter le coordinateur du projet.</div>
+
+<h2>2. Navigation dans la Barre Lat&eacute;rale</h2>
+<p>La barre lat&eacute;rale verte fonc&eacute;e &agrave; gauche comprend trois sections :</p>
+<ol>
+<li><strong>MAIN</strong> &mdash; Lien vers le Dashboard.</li>
+<li><strong>MANAGEMOB INCOMING</strong> &mdash; 9 sous-pages pour les participants en mobilit&eacute; entrante.</li>
+<li><strong>MANAGEMOB OUTGOING</strong> &mdash; 9 sous-pages pour les participants en mobilit&eacute; sortante.</li>
+</ol>
+<p>Les 9 sous-pages sont : Individuals, Groups, Sending Organisations, Host companies, Accommodation, Travel Details, Transfer, Financial info, Mobility Service Provider.</p>
+
+<h2>3. Utilisation du Dashboard</h2>
+<ol>
+<li>Cliquer sur <strong>Dashboard</strong>. Trois indicateurs : Total Participants, Total Grant, Total Margin.</li>
+<li>Deux graphiques : <strong>Mobility Typology</strong> (camembert Incoming/Outgoing) et <strong>Countries</strong> (barres horizontales par pays).</li>
+<li>Utiliser la zone <strong>Search</strong> pour filtrer les enregistrements.</li>
+</ol>
+
+<h2>4. Consultation des Participants Individuels</h2>
+<ol>
+<li>Cliquer sur <strong>Individuals</strong> sous INCOMING ou OUTGOING.</li>
+<li>Le panneau gauche affiche la liste des participants. Le panneau droit affiche le profil d&eacute;taill&eacute;.</li>
+<li>Cliquer sur un nom pour charger son profil.</li>
+<li>L'en-t&ecirc;te montre le nom, l'avatar et des <strong>&eacute;tiquettes color&eacute;es</strong> (type de mobilit&eacute;, cat&eacute;gorie, statut).</li>
+<li>Le bouton <strong>Information Voucher</strong> g&eacute;n&egrave;re un document r&eacute;capitulatif PDF.</li>
+<li>Sections du profil :
+  <ul>
+  <li><strong>Personal Information</strong> &mdash; Sex, Status, Date of Birth, Place of Birth, Nationality, Marital Status, Driving Licence.</li>
+  <li><strong>Contact Information</strong> &mdash; Email, Phone, Mobile Phone, Address, City, Postcode, Country.</li>
+  <li><strong>Documents</strong> &mdash; Passport Number, Passport Expiring Date.</li>
+  <li><strong>Language Skills</strong> &mdash; Niveaux CECR par langue (English, Spanish, German, French, Italian), Language Test Score, Language Test Validated, Language Test Certificate.</li>
+  <li><strong>Education</strong> &mdash; Last Validated Diploma, Year Obtained, Diploma Certificate.</li>
+  <li><strong>Bank Details</strong> &mdash; Swift Code, IBAN.</li>
+  <li><strong>Mobility Details</strong> &mdash; Destination Country, Destination City, Arrivals Date, Departure Date.</li>
+  <li><strong>Language Course</strong> &mdash; Language Course Provider, Course Start Date, Course End Date, Course Weeks.</li>
+  <li><strong>Internship</strong> &mdash; Internship Start Date, Internship End Date, Internship Weeks.</li>
+  <li><strong>Host Company</strong> &mdash; Host Company, Address, Sector, HC Tutor, Tutor Mobile Phone, Tutor E-mail.</li>
+  <li><strong>Accommodation</strong> &mdash; Accommodation 1, Start Date 1, End Date 1, Accommodation/Week, Accommodation 1 Cost, Accommodation 2, Start Date 2, End Date 2, Accommodation 2 Week, Accommodation 2 Cost.</li>
+  <li><strong>Financial Information</strong> &mdash; Grant Amount, Transfer Cost, Insurance.</li>
+  <li><strong>Project Information</strong> &mdash; Project Name, Group Name, Insurance Provider, Transfer Provider, Sending Organisation.</li>
+  </ul>
+</li>
+<li>Boutons <strong>Previous</strong> / <strong>Next</strong> en bas pour naviguer entre les participants.</li>
+</ol>
+
+<h2>5. G&eacute;n&eacute;ration du Voucher Informatif</h2>
+<ol>
+<li>Aller dans <strong>Individuals</strong> &rarr; s&eacute;lectionner un participant &rarr; cliquer sur <strong>Information Voucher</strong>.</li>
+<li>Un document PDF r&eacute;capitulatif est g&eacute;n&eacute;r&eacute;.</li>
+</ol>
+
+<h2>6. Groupes</h2>
+<ol>
+<li>Cliquer sur <strong>Groups</strong>. M&ecirc;me disposition que Individuals (panneau divis&eacute;).</li>
+<li>Les enregistrements de groupe contiennent les m&ecirc;mes sections que les participants individuels.</li>
+</ol>
+
+<h2>7. Sending Organisations</h2>
+<ol>
+<li>Tableau triable avec colonnes : <strong>Name</strong>, <strong>Contact Person</strong>, <strong>E-mail</strong>, <strong>Tel</strong>, <strong>Address</strong>, <strong>City</strong>, <strong>Country</strong>.</li>
+</ol>
+
+<h2>8. Host Companies</h2>
+<ol>
+<li>Tableau triable avec colonnes : <strong>Host Company</strong>, <strong>Address</strong>, <strong>City</strong>, <strong>Sector</strong>.</li>
+</ol>
+
+<h2>9. Accommodation</h2>
+<ol>
+<li>Tableau avec : <strong>Accommodation</strong>, <strong>Participants</strong> (chips color&eacute;s), <strong>Type</strong>, <strong>Contact Person</strong>, <strong>E-mail</strong>.</li>
+</ol>
+
+<h2>10. Travel Details</h2>
+<ol>
+<li>Tableau avec : <strong>ID Name</strong>, <strong>Arrivals Date</strong>, <strong>Departure Date</strong>, <strong>Mobility</strong>, <strong>Indiv./Group</strong>, <strong>Sending Org</strong>.</li>
+</ol>
+
+<h2>11. Transfer</h2>
+<ol>
+<li>Tableau des transferts avec badge <strong>Incoming</strong>/<strong>Outgoing</strong>, recherche et compteur d'enregistrements.</li>
+</ol>
+
+<h2>12. Financial Info</h2>
+<ol>
+<li>Colonnes : <strong>Participant</strong>, <strong>Grant</strong>, <strong>Accommodation</strong>, <strong>Accommodation 2</strong>, <strong>Food Allowance</strong>, <strong>Insurance</strong>, <strong>Other Expenses</strong>, <strong>Note Other Exp.</strong>, <strong>Transfer</strong>, <strong>Int. Transport</strong>, <strong>Local Transport</strong>.</li>
+<li>Montants en EUR.</li>
+</ol>
+
+<h2>13. Mobility Service Provider</h2>
+<ol>
+<li>Colonnes : <strong>Name</strong>, <strong>PIC Number</strong>, <strong>Address</strong>, <strong>Postcode</strong>.</li>
+</ol>
+
+<h2>14. Recherche et Tri</h2>
+<ol>
+<li>Zone <strong>Search</strong> en haut &agrave; droite de chaque page.</li>
+<li>Cliquer sur les en-t&ecirc;tes de colonnes pour trier. Cliquer &agrave; nouveau pour inverser.</li>
+<li>Le compteur d'enregistrements se met &agrave; jour en temps r&eacute;el.</li>
+</ol>
+
+<h2>15. Basculer entre Incoming et Outgoing</h2>
+<ol>
+<li>La barre lat&eacute;rale contient deux ensembles identiques de 9 pages.</li>
+<li>Le titre de la page affiche un badge <strong>Incoming</strong> ou <strong>Outgoing</strong>.</li>
+</ol>
+
+<h2>R&eacute;f&eacute;rence Rapide</h2>
+<table>
+<tr><th>T&acirc;che</th><th>&Eacute;tapes</th></tr>
+<tr><td>Trouver un participant</td><td>Individuals &rarr; Search &rarr; Cliquer sur le nom</td></tr>
+<tr><td>G&eacute;n&eacute;rer un voucher</td><td>Individuals &rarr; S&eacute;lectionner &rarr; Information Voucher</td></tr>
+<tr><td>V&eacute;rifier l'h&eacute;bergement</td><td>Accommodation &rarr; V&eacute;rifier les chips participants</td></tr>
+<tr><td>Consulter les finances</td><td>Financial info &rarr; V&eacute;rifier grant et d&eacute;penses</td></tr>
+<tr><td>Trouver une organisation</td><td>Sending Organisations &rarr; Search ou trier par Country</td></tr>
+</table>
+
+<footer>Manuel Op&eacute;rationnel Managemob &copy; 2026 &mdash; Pessoa Academy</footer>
+</div>
+
+<!-- ==================== ESPA&Ntilde;OL ==================== -->
+<div class="lang-section" id="lang-es">
+<h1>Managemob &mdash; Manual Operativo</h1>
+<p><em>&Uacute;ltima actualizaci&oacute;n: Marzo 2026</em></p>
+<p>Este manual proporciona procedimientos paso a paso para utilizar la plataforma <strong>Managemob</strong> de gesti&oacute;n de la movilidad.</p>
+
+<div class="info-box"><strong>URL de la plataforma:</strong> <a href="https://managemob.netlify.app">https://managemob.netlify.app</a></div>
+
+<h2>1. Inicio de Sesi&oacute;n</h2>
+<ol>
+<li>Abrir el navegador y acceder a <code>https://managemob.netlify.app</code>.</li>
+<li>Introducir el <strong>Email</strong> proporcionado por el coordinador del proyecto.</li>
+<li>Introducir la <strong>Contrase&ntilde;a</strong>.</li>
+<li>Hacer clic en <strong>Sign In</strong>.</li>
+<li>Se redirigir&aacute; al <strong>Dashboard</strong>.</li>
+</ol>
+<div class="warn-box"><strong>Nota:</strong> Si ha olvidado la contrase&ntilde;a, contacte con el coordinador del proyecto.</div>
+
+<h2>2. Navegaci&oacute;n en la Barra Lateral</h2>
+<p>La barra lateral verde oscuro a la izquierda tiene tres secciones:</p>
+<ol>
+<li><strong>MAIN</strong> &mdash; Dashboard.</li>
+<li><strong>MANAGEMOB INCOMING</strong> &mdash; 9 sub-p&aacute;ginas para movilidad entrante.</li>
+<li><strong>MANAGEMOB OUTGOING</strong> &mdash; 9 sub-p&aacute;ginas para movilidad saliente.</li>
+</ol>
+<p>Las 9 sub-p&aacute;ginas son: Individuals, Groups, Sending Organisations, Host companies, Accommodation, Travel Details, Transfer, Financial info, Mobility Service Provider.</p>
+
+<h2>3. Dashboard</h2>
+<ol>
+<li>Hacer clic en <strong>Dashboard</strong>. Tres indicadores: Total Participants, Total Grant, Total Margin.</li>
+<li>Dos gr&aacute;ficos: <strong>Mobility Typology</strong> (circular) y <strong>Countries</strong> (barras horizontales por pa&iacute;s).</li>
+<li>Usar <strong>Search</strong> para filtrar registros.</li>
+</ol>
+
+<h2>4. Participantes Individuales</h2>
+<ol>
+<li>Hacer clic en <strong>Individuals</strong> bajo INCOMING o OUTGOING.</li>
+<li>Panel izquierdo: lista de participantes con nombre y email. Panel derecho: perfil detallado.</li>
+<li>Hacer clic en un nombre para cargar su perfil.</li>
+<li>La cabecera muestra nombre, avatar y <strong>etiquetas de colores</strong> (tipo de movilidad, categor&iacute;a, estado).</li>
+<li>Bot&oacute;n <strong>Information Voucher</strong> para generar un PDF resumen.</li>
+<li>Secciones del perfil:
+  <ul>
+  <li><strong>Personal Information</strong> &mdash; Sex, Status, Date of Birth, Place of Birth, Nationality, Marital Status, Driving Licence.</li>
+  <li><strong>Contact Information</strong> &mdash; Email, Phone, Mobile Phone, Address, City, Postcode, Country.</li>
+  <li><strong>Documents</strong> &mdash; Passport Number, Passport Expiring Date.</li>
+  <li><strong>Language Skills</strong> &mdash; Niveles MCER por idioma (English, Spanish, German, French, Italian), Language Test Score, Language Test Validated, Language Test Certificate.</li>
+  <li><strong>Education</strong> &mdash; Last Validated Diploma, Year Obtained, Diploma Certificate.</li>
+  <li><strong>Bank Details</strong> &mdash; Swift Code, IBAN.</li>
+  <li><strong>Mobility Details</strong> &mdash; Destination Country, Destination City, Arrivals Date, Departure Date.</li>
+  <li><strong>Language Course</strong> &mdash; Language Course Provider, Course Start Date, Course End Date, Course Weeks.</li>
+  <li><strong>Internship</strong> &mdash; Internship Start Date, Internship End Date, Internship Weeks.</li>
+  <li><strong>Host Company</strong> &mdash; Host Company, Address, Sector, HC Tutor, Tutor Mobile Phone, Tutor E-mail.</li>
+  <li><strong>Accommodation</strong> &mdash; Accommodation 1, Start Date 1, End Date 1, Accommodation/Week, Accommodation 1 Cost, Accommodation 2, Start Date 2, End Date 2, Accommodation 2 Week, Accommodation 2 Cost.</li>
+  <li><strong>Financial Information</strong> &mdash; Grant Amount, Transfer Cost, Insurance.</li>
+  <li><strong>Project Information</strong> &mdash; Project Name, Group Name, Insurance Provider, Transfer Provider, Sending Organisation.</li>
+  </ul>
+</li>
+<li>Botones <strong>Previous</strong> / <strong>Next</strong> para navegar entre participantes.</li>
+</ol>
+
+<h2>5. Generaci&oacute;n del Voucher Informativo</h2>
+<ol>
+<li>Ir a <strong>Individuals</strong> &rarr; seleccionar participante &rarr; clic en <strong>Information Voucher</strong>.</li>
+<li>Se genera un PDF resumen.</li>
+</ol>
+
+<h2>6. Grupos</h2>
+<ol>
+<li>Hacer clic en <strong>Groups</strong>. Misma disposici&oacute;n que Individuals.</li>
+<li>Los registros de grupo contienen las mismas secciones que los participantes individuales.</li>
+</ol>
+
+<h2>7. Sending Organisations</h2>
+<ol><li>Tabla ordenable: <strong>Name</strong>, <strong>Contact Person</strong>, <strong>E-mail</strong>, <strong>Tel</strong>, <strong>Address</strong>, <strong>City</strong>, <strong>Country</strong>.</li></ol>
+
+<h2>8. Host Companies</h2>
+<ol><li>Tabla ordenable: <strong>Host Company</strong>, <strong>Address</strong>, <strong>City</strong>, <strong>Sector</strong>.</li></ol>
+
+<h2>9. Accommodation</h2>
+<ol><li>Tabla: <strong>Accommodation</strong>, <strong>Participants</strong> (chips de colores), <strong>Type</strong>, <strong>Contact Person</strong>, <strong>E-mail</strong>.</li></ol>
+
+<h2>10. Travel Details</h2>
+<ol><li>Tabla: <strong>ID Name</strong>, <strong>Arrivals Date</strong>, <strong>Departure Date</strong>, <strong>Mobility</strong>, <strong>Indiv./Group</strong>, <strong>Sending Org</strong>.</li></ol>
+
+<h2>11. Transfer</h2>
+<ol><li>Tabla de transferencias con badge <strong>Incoming</strong>/<strong>Outgoing</strong>, b&uacute;squeda y contador de registros.</li></ol>
+
+<h2>12. Financial Info</h2>
+<ol>
+<li>Columnas: <strong>Participant</strong>, <strong>Grant</strong>, <strong>Accommodation</strong>, <strong>Accommodation 2</strong>, <strong>Food Allowance</strong>, <strong>Insurance</strong>, <strong>Other Expenses</strong>, <strong>Note Other Exp.</strong>, <strong>Transfer</strong>, <strong>Int. Transport</strong>, <strong>Local Transport</strong>.</li>
+<li>Importes en EUR.</li>
+</ol>
+
+<h2>13. Mobility Service Provider</h2>
+<ol><li>Columnas: <strong>Name</strong>, <strong>PIC Number</strong>, <strong>Address</strong>, <strong>Postcode</strong>.</li></ol>
+
+<h2>14. B&uacute;squeda y Ordenamiento</h2>
+<ol>
+<li>Cada p&aacute;gina tiene una casilla <strong>Search</strong> arriba a la derecha.</li>
+<li>Hacer clic en los encabezados de columna para ordenar. Clic de nuevo para invertir.</li>
+<li>El contador de registros se actualiza en tiempo real.</li>
+</ol>
+
+<h2>15. Cambio entre Incoming y Outgoing</h2>
+<ol>
+<li>La barra lateral tiene dos conjuntos id&eacute;nticos de 9 p&aacute;ginas.</li>
+<li>El t&iacute;tulo de la p&aacute;gina muestra un badge <strong>Incoming</strong> o <strong>Outgoing</strong>.</li>
+</ol>
+
+<h2>Referencia R&aacute;pida</h2>
+<table>
+<tr><th>Tarea</th><th>Pasos</th></tr>
+<tr><td>Buscar un participante</td><td>Individuals &rarr; Search &rarr; Clic en el nombre</td></tr>
+<tr><td>Generar un voucher</td><td>Individuals &rarr; Seleccionar &rarr; Information Voucher</td></tr>
+<tr><td>Verificar alojamiento</td><td>Accommodation &rarr; Verificar chips de participantes</td></tr>
+<tr><td>Consultar finanzas</td><td>Financial info &rarr; Verificar grant y gastos</td></tr>
+<tr><td>Buscar una organizaci&oacute;n</td><td>Sending Organisations &rarr; Search o ordenar por Country</td></tr>
+</table>
+
+<footer>Manual Operativo Managemob &copy; 2026 &mdash; Pessoa Academy</footer>
+</div>
+
+<!-- ==================== DEUTSCH ==================== -->
+<div class="lang-section" id="lang-de">
+<h1>Managemob &mdash; Betriebshandbuch</h1>
+<p><em>Letzte Aktualisierung: M&auml;rz 2026</em></p>
+<p>Dieses Handbuch bietet Schritt-f&uuml;r-Schritt-Verfahren zur Nutzung der <strong>Managemob</strong>-Plattform f&uuml;r die Mobilit&auml;tsverwaltung.</p>
+
+<div class="info-box"><strong>Plattform-URL:</strong> <a href="https://managemob.netlify.app">https://managemob.netlify.app</a></div>
+
+<h2>1. Anmeldung</h2>
+<ol>
+<li>Browser &ouml;ffnen und <code>https://managemob.netlify.app</code> aufrufen.</li>
+<li>Die vom Projektkoordinator bereitgestellte <strong>E-Mail</strong> eingeben.</li>
+<li>Das zugeh&ouml;rige <strong>Passwort</strong> eingeben.</li>
+<li>Auf <strong>Sign In</strong> klicken.</li>
+<li>Sie werden zum <strong>Dashboard</strong> weitergeleitet.</li>
+</ol>
+<div class="warn-box"><strong>Hinweis:</strong> Bei vergessenem Passwort den Projektkoordinator kontaktieren.</div>
+
+<h2>2. Seitenleisten-Navigation</h2>
+<p>Die dunkelgr&uuml;ne Seitenleiste links enth&auml;lt drei Bereiche:</p>
+<ol>
+<li><strong>MAIN</strong> &mdash; Dashboard.</li>
+<li><strong>MANAGEMOB INCOMING</strong> &mdash; 9 Unterseiten f&uuml;r eingehende Mobilit&auml;t.</li>
+<li><strong>MANAGEMOB OUTGOING</strong> &mdash; 9 Unterseiten f&uuml;r ausgehende Mobilit&auml;t.</li>
+</ol>
+<p>Die 9 Unterseiten sind: Individuals, Groups, Sending Organisations, Host companies, Accommodation, Travel Details, Transfer, Financial info, Mobility Service Provider.</p>
+
+<h2>3. Dashboard</h2>
+<ol>
+<li>Auf <strong>Dashboard</strong> klicken. Drei Kennzahlen: Total Participants, Total Grant, Total Margin.</li>
+<li>Zwei Diagramme: <strong>Mobility Typology</strong> (Kreisdiagramm) und <strong>Countries</strong> (horizontale Balken).</li>
+<li><strong>Search</strong>-Feld zum Filtern verwenden.</li>
+</ol>
+
+<h2>4. Einzelne Teilnehmer</h2>
+<ol>
+<li>Auf <strong>Individuals</strong> unter INCOMING oder OUTGOING klicken.</li>
+<li>Linker Bereich: Teilnehmerliste mit Name und E-Mail. Rechter Bereich: Detailprofil.</li>
+<li>Auf einen Namen klicken, um das Profil zu laden.</li>
+<li>Die Kopfzeile zeigt Name, Avatar und <strong>farbige Tags</strong> (Mobilit&auml;tstyp, Kategorie, Status).</li>
+<li><strong>Information Voucher</strong>-Button f&uuml;r PDF-Zusammenfassung.</li>
+<li>Profilabschnitte:
+  <ul>
+  <li><strong>Personal Information</strong> &mdash; Sex, Status, Date of Birth, Place of Birth, Nationality, Marital Status, Driving Licence.</li>
+  <li><strong>Contact Information</strong> &mdash; Email, Phone, Mobile Phone, Address, City, Postcode, Country.</li>
+  <li><strong>Documents</strong> &mdash; Passport Number, Passport Expiring Date.</li>
+  <li><strong>Language Skills</strong> &mdash; Individuelle GER-Niveaus pro Sprache (English, Spanish, German, French, Italian), Language Test Score, Language Test Validated, Language Test Certificate.</li>
+  <li><strong>Education</strong> &mdash; Last Validated Diploma, Year Obtained, Diploma Certificate.</li>
+  <li><strong>Bank Details</strong> &mdash; Swift Code, IBAN.</li>
+  <li><strong>Mobility Details</strong> &mdash; Destination Country, Destination City, Arrivals Date, Departure Date.</li>
+  <li><strong>Language Course</strong> &mdash; Language Course Provider, Course Start Date, Course End Date, Course Weeks.</li>
+  <li><strong>Internship</strong> &mdash; Internship Start Date, Internship End Date, Internship Weeks.</li>
+  <li><strong>Host Company</strong> &mdash; Host Company, Address, Sector, HC Tutor, Tutor Mobile Phone, Tutor E-mail.</li>
+  <li><strong>Accommodation</strong> &mdash; Accommodation 1, Start Date 1, End Date 1, Accommodation/Week, Accommodation 1 Cost, Accommodation 2, Start Date 2, End Date 2, Accommodation 2 Week, Accommodation 2 Cost.</li>
+  <li><strong>Financial Information</strong> &mdash; Grant Amount, Transfer Cost, Insurance.</li>
+  <li><strong>Project Information</strong> &mdash; Project Name, Group Name, Insurance Provider, Transfer Provider, Sending Organisation.</li>
+  </ul>
+</li>
+<li><strong>Previous</strong> / <strong>Next</strong> Buttons zur Navigation zwischen Teilnehmern.</li>
+</ol>
+
+<h2>5. Information Voucher generieren</h2>
+<ol>
+<li><strong>Individuals</strong> &rarr; Teilnehmer ausw&auml;hlen &rarr; <strong>Information Voucher</strong> klicken.</li>
+<li>Ein PDF-Zusammenfassungsdokument wird erstellt.</li>
+</ol>
+
+<h2>6. Gruppen</h2>
+<ol>
+<li>Auf <strong>Groups</strong> klicken. Gleiche Darstellung wie Individuals.</li>
+<li>Gruppendatens&auml;tze enthalten die gleichen Abschnitte wie Einzelteilnehmer.</li>
+</ol>
+
+<h2>7. Sending Organisations</h2>
+<ol><li>Sortierbare Tabelle: <strong>Name</strong>, <strong>Contact Person</strong>, <strong>E-mail</strong>, <strong>Tel</strong>, <strong>Address</strong>, <strong>City</strong>, <strong>Country</strong>.</li></ol>
+
+<h2>8. Host Companies</h2>
+<ol><li>Sortierbare Tabelle: <strong>Host Company</strong>, <strong>Address</strong>, <strong>City</strong>, <strong>Sector</strong>.</li></ol>
+
+<h2>9. Accommodation</h2>
+<ol><li>Tabelle: <strong>Accommodation</strong>, <strong>Participants</strong> (farbige Chips), <strong>Type</strong>, <strong>Contact Person</strong>, <strong>E-mail</strong>.</li></ol>
+
+<h2>10. Travel Details</h2>
+<ol><li>Tabelle: <strong>ID Name</strong>, <strong>Arrivals Date</strong>, <strong>Departure Date</strong>, <strong>Mobility</strong>, <strong>Indiv./Group</strong>, <strong>Sending Org</strong>.</li></ol>
+
+<h2>11. Transfer</h2>
+<ol><li>Transfertabelle mit <strong>Incoming</strong>/<strong>Outgoing</strong>-Badge, Suche und Datensatzz&auml;hler.</li></ol>
+
+<h2>12. Financial Info</h2>
+<ol>
+<li>Spalten: <strong>Participant</strong>, <strong>Grant</strong>, <strong>Accommodation</strong>, <strong>Accommodation 2</strong>, <strong>Food Allowance</strong>, <strong>Insurance</strong>, <strong>Other Expenses</strong>, <strong>Note Other Exp.</strong>, <strong>Transfer</strong>, <strong>Int. Transport</strong>, <strong>Local Transport</strong>.</li>
+<li>Betr&auml;ge in EUR.</li>
+</ol>
+
+<h2>13. Mobility Service Provider</h2>
+<ol><li>Spalten: <strong>Name</strong>, <strong>PIC Number</strong>, <strong>Address</strong>, <strong>Postcode</strong>.</li></ol>
+
+<h2>14. Suche und Sortierung</h2>
+<ol>
+<li>Jede Seite hat ein <strong>Search</strong>-Feld oben rechts.</li>
+<li>Spalten&uuml;berschrift anklicken zum Sortieren. Erneut klicken zum Umkehren.</li>
+<li>Der Datensatzz&auml;hler aktualisiert sich in Echtzeit.</li>
+</ol>
+
+<h2>15. Wechsel zwischen Incoming und Outgoing</h2>
+<ol>
+<li>Die Seitenleiste enth&auml;lt zwei identische S&auml;tze von 9 Seiten.</li>
+<li>Der Seitentitel zeigt ein <strong>Incoming</strong>- oder <strong>Outgoing</strong>-Badge.</li>
+</ol>
+
+<h2>Kurzreferenz</h2>
+<table>
+<tr><th>Aufgabe</th><th>Schritte</th></tr>
+<tr><td>Teilnehmer finden</td><td>Individuals &rarr; Search &rarr; Name anklicken</td></tr>
+<tr><td>Voucher generieren</td><td>Individuals &rarr; Ausw&auml;hlen &rarr; Information Voucher</td></tr>
+<tr><td>Unterkunft pr&uuml;fen</td><td>Accommodation &rarr; Teilnehmer-Chips pr&uuml;fen</td></tr>
+<tr><td>Finanzen einsehen</td><td>Financial info &rarr; Grant und Ausgaben pr&uuml;fen</td></tr>
+<tr><td>Organisation finden</td><td>Sending Organisations &rarr; Search oder nach Country sortieren</td></tr>
+</table>
+
+<footer>Managemob Betriebshandbuch &copy; 2026 &mdash; Pessoa Academy</footer>
+</div>
+
+<!-- ==================== SVENSKA ==================== -->
+<div class="lang-section" id="lang-sv">
+<h1>Managemob &mdash; Drifthandbok</h1>
+<p><em>Senast uppdaterad: Mars 2026</em></p>
+<p>Denna handbok ger steg-f&ouml;r-steg-procedurer f&ouml;r att anv&auml;nda <strong>Managemob</strong>-plattformen f&ouml;r mobilitetshantering.</p>
+
+<div class="info-box"><strong>Plattforms-URL:</strong> <a href="https://managemob.netlify.app">https://managemob.netlify.app</a></div>
+
+<h2>1. Inloggning</h2>
+<ol>
+<li>&Ouml;ppna webbl&auml;saren och g&aring; till <code>https://managemob.netlify.app</code>.</li>
+<li>Ange <strong>e-postadressen</strong> fr&aring;n projektkoordinatorn.</li>
+<li>Ange <strong>l&ouml;senordet</strong>.</li>
+<li>Klicka p&aring; <strong>Sign In</strong>.</li>
+<li>Du omdirigeras till <strong>Dashboard</strong>.</li>
+</ol>
+<div class="warn-box"><strong>Obs:</strong> Vid gl&ouml;mt l&ouml;senord, kontakta projektkoordinatorn.</div>
+
+<h2>2. Sidof&auml;ltsnavigering</h2>
+<p>Det m&ouml;rkgr&ouml;na sidof&auml;ltet till v&auml;nster inneh&aring;ller tre avsnitt:</p>
+<ol>
+<li><strong>MAIN</strong> &mdash; Dashboard.</li>
+<li><strong>MANAGEMOB INCOMING</strong> &mdash; 9 undersidor f&ouml;r inkommande mobilitet.</li>
+<li><strong>MANAGEMOB OUTGOING</strong> &mdash; 9 undersidor f&ouml;r utg&aring;ende mobilitet.</li>
+</ol>
+<p>De 9 undersidorna &auml;r: Individuals, Groups, Sending Organisations, Host companies, Accommodation, Travel Details, Transfer, Financial info, Mobility Service Provider.</p>
+
+<h2>3. Dashboard</h2>
+<ol>
+<li>Klicka p&aring; <strong>Dashboard</strong>. Tre nyckeltal: Total Participants, Total Grant, Total Margin.</li>
+<li>Tv&aring; diagram: <strong>Mobility Typology</strong> (cirkeldiagram) och <strong>Countries</strong> (horisontella staplar).</li>
+<li>Anv&auml;nd <strong>Search</strong>-f&auml;ltet f&ouml;r att filtrera.</li>
+</ol>
+
+<h2>4. Enskilda Deltagare</h2>
+<ol>
+<li>Klicka p&aring; <strong>Individuals</strong> under INCOMING eller OUTGOING.</li>
+<li>V&auml;nster panel: deltagarlista med namn och e-post. H&ouml;ger panel: detaljerad profil.</li>
+<li>Klicka p&aring; ett namn f&ouml;r att ladda profilen.</li>
+<li>Huvudet visar namn, avatar och <strong>f&auml;rgade taggar</strong> (mobilitetstyp, kategori, status).</li>
+<li><strong>Information Voucher</strong>-knappen genererar en PDF-sammanfattning.</li>
+<li>Profilsektioner:
+  <ul>
+  <li><strong>Personal Information</strong> &mdash; Sex, Status, Date of Birth, Place of Birth, Nationality, Marital Status, Driving Licence.</li>
+  <li><strong>Contact Information</strong> &mdash; Email, Phone, Mobile Phone, Address, City, Postcode, Country.</li>
+  <li><strong>Documents</strong> &mdash; Passport Number, Passport Expiring Date.</li>
+  <li><strong>Language Skills</strong> &mdash; Individuella GERS-niv&aring;er per spr&aring;k (English, Spanish, German, French, Italian), Language Test Score, Language Test Validated, Language Test Certificate.</li>
+  <li><strong>Education</strong> &mdash; Last Validated Diploma, Year Obtained, Diploma Certificate.</li>
+  <li><strong>Bank Details</strong> &mdash; Swift Code, IBAN.</li>
+  <li><strong>Mobility Details</strong> &mdash; Destination Country, Destination City, Arrivals Date, Departure Date.</li>
+  <li><strong>Language Course</strong> &mdash; Language Course Provider, Course Start Date, Course End Date, Course Weeks.</li>
+  <li><strong>Internship</strong> &mdash; Internship Start Date, Internship End Date, Internship Weeks.</li>
+  <li><strong>Host Company</strong> &mdash; Host Company, Address, Sector, HC Tutor, Tutor Mobile Phone, Tutor E-mail.</li>
+  <li><strong>Accommodation</strong> &mdash; Accommodation 1, Start Date 1, End Date 1, Accommodation/Week, Accommodation 1 Cost, Accommodation 2, Start Date 2, End Date 2, Accommodation 2 Week, Accommodation 2 Cost.</li>
+  <li><strong>Financial Information</strong> &mdash; Grant Amount, Transfer Cost, Insurance.</li>
+  <li><strong>Project Information</strong> &mdash; Project Name, Group Name, Insurance Provider, Transfer Provider, Sending Organisation.</li>
+  </ul>
+</li>
+<li><strong>Previous</strong> / <strong>Next</strong> knappar f&ouml;r att navigera mellan deltagare.</li>
+</ol>
+
+<h2>5. Generera Information Voucher</h2>
+<ol>
+<li><strong>Individuals</strong> &rarr; v&auml;lj deltagare &rarr; klicka p&aring; <strong>Information Voucher</strong>.</li>
+<li>Ett PDF-sammanfattningsdokument genereras.</li>
+</ol>
+
+<h2>6. Grupper</h2>
+<ol>
+<li>Klicka p&aring; <strong>Groups</strong>. Samma layout som Individuals.</li>
+<li>Grupposter inneh&aring;ller samma sektioner som enskilda deltagare.</li>
+</ol>
+
+<h2>7. Sending Organisations</h2>
+<ol><li>Sorterbar tabell: <strong>Name</strong>, <strong>Contact Person</strong>, <strong>E-mail</strong>, <strong>Tel</strong>, <strong>Address</strong>, <strong>City</strong>, <strong>Country</strong>.</li></ol>
+
+<h2>8. Host Companies</h2>
+<ol><li>Sorterbar tabell: <strong>Host Company</strong>, <strong>Address</strong>, <strong>City</strong>, <strong>Sector</strong>.</li></ol>
+
+<h2>9. Accommodation</h2>
+<ol><li>Tabell: <strong>Accommodation</strong>, <strong>Participants</strong> (f&auml;rgade chips), <strong>Type</strong>, <strong>Contact Person</strong>, <strong>E-mail</strong>.</li></ol>
+
+<h2>10. Travel Details</h2>
+<ol><li>Tabell: <strong>ID Name</strong>, <strong>Arrivals Date</strong>, <strong>Departure Date</strong>, <strong>Mobility</strong>, <strong>Indiv./Group</strong>, <strong>Sending Org</strong>.</li></ol>
+
+<h2>11. Transfer</h2>
+<ol><li>Transfertabell med <strong>Incoming</strong>/<strong>Outgoing</strong>-badge, s&ouml;kning och postz&auml;hlare.</li></ol>
+
+<h2>12. Financial Info</h2>
+<ol>
+<li>Kolumner: <strong>Participant</strong>, <strong>Grant</strong>, <strong>Accommodation</strong>, <strong>Accommodation 2</strong>, <strong>Food Allowance</strong>, <strong>Insurance</strong>, <strong>Other Expenses</strong>, <strong>Note Other Exp.</strong>, <strong>Transfer</strong>, <strong>Int. Transport</strong>, <strong>Local Transport</strong>.</li>
+<li>Belopp i EUR.</li>
+</ol>
+
+<h2>13. Mobility Service Provider</h2>
+<ol><li>Kolumner: <strong>Name</strong>, <strong>PIC Number</strong>, <strong>Address</strong>, <strong>Postcode</strong>.</li></ol>
+
+<h2>14. S&ouml;kning och Sortering</h2>
+<ol>
+<li>Varje sida har ett <strong>Search</strong>-f&auml;lt uppe till h&ouml;ger.</li>
+<li>Klicka p&aring; kolumnrubriker f&ouml;r att sortera. Klicka igen f&ouml;r att v&auml;nda ordningen.</li>
+<li>Postz&auml;hlaren uppdateras i realtid.</li>
+</ol>
+
+<h2>15. V&auml;xla mellan Incoming och Outgoing</h2>
+<ol>
+<li>Sidof&auml;ltet inneh&aring;ller tv&aring; identiska upps&auml;ttningar av 9 sidor.</li>
+<li>Sidans titel visar en <strong>Incoming</strong>- eller <strong>Outgoing</strong>-badge.</li>
+</ol>
+
+<h2>Snabbreferens</h2>
+<table>
+<tr><th>Uppgift</th><th>Steg</th></tr>
+<tr><td>Hitta en deltagare</td><td>Individuals &rarr; Search &rarr; Klicka p&aring; namn</td></tr>
+<tr><td>Generera voucher</td><td>Individuals &rarr; V&auml;lj &rarr; Information Voucher</td></tr>
+<tr><td>Kontrollera boende</td><td>Accommodation &rarr; Kontrollera deltagarechips</td></tr>
+<tr><td>Se ekonomi</td><td>Financial info &rarr; Kontrollera grant och utgifter</td></tr>
+<tr><td>Hitta organisation</td><td>Sending Organisations &rarr; Search eller sortera efter Country</td></tr>
+</table>
+
+<footer>Managemob Drifthandbok &copy; 2026 &mdash; Pessoa Academy</footer>
+</div>
+
+<!-- ==================== PORTUGU&Ecirc;S ==================== -->
+<div class="lang-section" id="lang-pt">
+<h1>Managemob &mdash; Manual Operacional</h1>
+<p><em>&Uacute;ltima atualiza&ccedil;&atilde;o: Mar&ccedil;o 2026</em></p>
+<p>Este manual fornece procedimentos passo a passo para utilizar a plataforma <strong>Managemob</strong> de gest&atilde;o de mobilidade.</p>
+
+<div class="info-box"><strong>URL da plataforma:</strong> <a href="https://managemob.netlify.app">https://managemob.netlify.app</a></div>
+
+<h2>1. Iniciar Sess&atilde;o</h2>
+<ol>
+<li>Abrir o navegador e aceder a <code>https://managemob.netlify.app</code>.</li>
+<li>Introduzir o <strong>Email</strong> fornecido pelo coordenador do projeto.</li>
+<li>Introduzir a <strong>Palavra-passe</strong>.</li>
+<li>Clicar em <strong>Sign In</strong>.</li>
+<li>Ser&aacute; redirecionado para o <strong>Dashboard</strong>.</li>
+</ol>
+<div class="warn-box"><strong>Nota:</strong> Se esqueceu a palavra-passe, contacte o coordenador do projeto.</div>
+
+<h2>2. Navega&ccedil;&atilde;o na Barra Lateral</h2>
+<p>A barra lateral verde escura &agrave; esquerda cont&eacute;m tr&ecirc;s sec&ccedil;&otilde;es:</p>
+<ol>
+<li><strong>MAIN</strong> &mdash; Dashboard.</li>
+<li><strong>MANAGEMOB INCOMING</strong> &mdash; 9 sub-p&aacute;ginas para mobilidade de entrada.</li>
+<li><strong>MANAGEMOB OUTGOING</strong> &mdash; 9 sub-p&aacute;ginas para mobilidade de sa&iacute;da.</li>
+</ol>
+<p>As 9 sub-p&aacute;ginas s&atilde;o: Individuals, Groups, Sending Organisations, Host companies, Accommodation, Travel Details, Transfer, Financial info, Mobility Service Provider.</p>
+
+<h2>3. Dashboard</h2>
+<ol>
+<li>Clicar em <strong>Dashboard</strong>. Tr&ecirc;s indicadores: Total Participants, Total Grant, Total Margin.</li>
+<li>Dois gr&aacute;ficos: <strong>Mobility Typology</strong> (circular) e <strong>Countries</strong> (barras horizontais).</li>
+<li>Usar a caixa <strong>Search</strong> para filtrar.</li>
+</ol>
+
+<h2>4. Participantes Individuais</h2>
+<ol>
+<li>Clicar em <strong>Individuals</strong> sob INCOMING ou OUTGOING.</li>
+<li>Painel esquerdo: lista de participantes com nome e email. Painel direito: perfil detalhado.</li>
+<li>Clicar num nome para carregar o perfil.</li>
+<li>O cabe&ccedil;alho mostra nome, avatar e <strong>etiquetas coloridas</strong> (tipo de mobilidade, categoria, estado).</li>
+<li>Bot&atilde;o <strong>Information Voucher</strong> para gerar resumo PDF.</li>
+<li>Sec&ccedil;&otilde;es do perfil:
+  <ul>
+  <li><strong>Personal Information</strong> &mdash; Sex, Status, Date of Birth, Place of Birth, Nationality, Marital Status, Driving Licence.</li>
+  <li><strong>Contact Information</strong> &mdash; Email, Phone, Mobile Phone, Address, City, Postcode, Country.</li>
+  <li><strong>Documents</strong> &mdash; Passport Number, Passport Expiring Date.</li>
+  <li><strong>Language Skills</strong> &mdash; N&iacute;veis QECR individuais por l&iacute;ngua (English, Spanish, German, French, Italian), Language Test Score, Language Test Validated, Language Test Certificate.</li>
+  <li><strong>Education</strong> &mdash; Last Validated Diploma, Year Obtained, Diploma Certificate.</li>
+  <li><strong>Bank Details</strong> &mdash; Swift Code, IBAN.</li>
+  <li><strong>Mobility Details</strong> &mdash; Destination Country, Destination City, Arrivals Date, Departure Date.</li>
+  <li><strong>Language Course</strong> &mdash; Language Course Provider, Course Start Date, Course End Date, Course Weeks.</li>
+  <li><strong>Internship</strong> &mdash; Internship Start Date, Internship End Date, Internship Weeks.</li>
+  <li><strong>Host Company</strong> &mdash; Host Company, Address, Sector, HC Tutor, Tutor Mobile Phone, Tutor E-mail.</li>
+  <li><strong>Accommodation</strong> &mdash; Accommodation 1, Start Date 1, End Date 1, Accommodation/Week, Accommodation 1 Cost, Accommodation 2, Start Date 2, End Date 2, Accommodation 2 Week, Accommodation 2 Cost.</li>
+  <li><strong>Financial Information</strong> &mdash; Grant Amount, Transfer Cost, Insurance.</li>
+  <li><strong>Project Information</strong> &mdash; Project Name, Group Name, Insurance Provider, Transfer Provider, Sending Organisation.</li>
+  </ul>
+</li>
+<li>Bot&otilde;es <strong>Previous</strong> / <strong>Next</strong> para navegar entre participantes.</li>
+</ol>
+
+<h2>5. Gerar Information Voucher</h2>
+<ol>
+<li><strong>Individuals</strong> &rarr; selecionar participante &rarr; clicar em <strong>Information Voucher</strong>.</li>
+<li>&Eacute; gerado um documento PDF resumo.</li>
+</ol>
+
+<h2>6. Grupos</h2>
+<ol>
+<li>Clicar em <strong>Groups</strong>. Mesma disposi&ccedil;&atilde;o que Individuals.</li>
+<li>Os registos de grupo cont&ecirc;m as mesmas sec&ccedil;&otilde;es que os participantes individuais.</li>
+</ol>
+
+<h2>7. Sending Organisations</h2>
+<ol><li>Tabela orden&aacute;vel: <strong>Name</strong>, <strong>Contact Person</strong>, <strong>E-mail</strong>, <strong>Tel</strong>, <strong>Address</strong>, <strong>City</strong>, <strong>Country</strong>.</li></ol>
+
+<h2>8. Host Companies</h2>
+<ol><li>Tabela orden&aacute;vel: <strong>Host Company</strong>, <strong>Address</strong>, <strong>City</strong>, <strong>Sector</strong>.</li></ol>
+
+<h2>9. Accommodation</h2>
+<ol><li>Tabela: <strong>Accommodation</strong>, <strong>Participants</strong> (chips coloridos), <strong>Type</strong>, <strong>Contact Person</strong>, <strong>E-mail</strong>.</li></ol>
+
+<h2>10. Travel Details</h2>
+<ol><li>Tabela: <strong>ID Name</strong>, <strong>Arrivals Date</strong>, <strong>Departure Date</strong>, <strong>Mobility</strong>, <strong>Indiv./Group</strong>, <strong>Sending Org</strong>.</li></ol>
+
+<h2>11. Transfer</h2>
+<ol><li>Tabela de transfer&ecirc;ncias com badge <strong>Incoming</strong>/<strong>Outgoing</strong>, pesquisa e contador de registos.</li></ol>
+
+<h2>12. Financial Info</h2>
+<ol>
+<li>Colunas: <strong>Participant</strong>, <strong>Grant</strong>, <strong>Accommodation</strong>, <strong>Accommodation 2</strong>, <strong>Food Allowance</strong>, <strong>Insurance</strong>, <strong>Other Expenses</strong>, <strong>Note Other Exp.</strong>, <strong>Transfer</strong>, <strong>Int. Transport</strong>, <strong>Local Transport</strong>.</li>
+<li>Valores em EUR.</li>
+</ol>
+
+<h2>13. Mobility Service Provider</h2>
+<ol><li>Colunas: <strong>Name</strong>, <strong>PIC Number</strong>, <strong>Address</strong>, <strong>Postcode</strong>.</li></ol>
+
+<h2>14. Pesquisa e Ordena&ccedil;&atilde;o</h2>
+<ol>
+<li>Cada p&aacute;gina tem uma caixa <strong>Search</strong> no canto superior direito.</li>
+<li>Clicar nos cabe&ccedil;alhos das colunas para ordenar. Clicar novamente para inverter.</li>
+<li>O contador de registos atualiza-se em tempo real.</li>
+</ol>
+
+<h2>15. Alternar entre Incoming e Outgoing</h2>
+<ol>
+<li>A barra lateral cont&eacute;m dois conjuntos id&ecirc;nticos de 9 p&aacute;ginas.</li>
+<li>O t&iacute;tulo da p&aacute;gina mostra um badge <strong>Incoming</strong> ou <strong>Outgoing</strong>.</li>
+</ol>
+
+<h2>Refer&ecirc;ncia R&aacute;pida</h2>
+<table>
+<tr><th>Tarefa</th><th>Passos</th></tr>
+<tr><td>Encontrar um participante</td><td>Individuals &rarr; Search &rarr; Clicar no nome</td></tr>
+<tr><td>Gerar voucher</td><td>Individuals &rarr; Selecionar &rarr; Information Voucher</td></tr>
+<tr><td>Verificar alojamento</td><td>Accommodation &rarr; Verificar chips de participantes</td></tr>
+<tr><td>Consultar finan&ccedil;as</td><td>Financial info &rarr; Verificar grant e despesas</td></tr>
+<tr><td>Encontrar organiza&ccedil;&atilde;o</td><td>Sending Organisations &rarr; Search ou ordenar por Country</td></tr>
+</table>
+
+<footer>Manual Operacional Managemob &copy; 2026 &mdash; Pessoa Academy</footer>
+</div>
+
+</div><!-- end guide-content -->
+
+<script>
+function switchLang(lang){
+  document.querySelectorAll('.lang-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('lang-'+lang).classList.add('active');
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.toggle('active',b.textContent.trim().toLowerCase()===lang);
+  });
+}
+
+function exportPDF(btn){
+  btn.disabled=true;
+  btn.innerHTML='&#9203; Generating...';
+  const sections=document.querySelectorAll('.lang-section');
+  sections.forEach(s=>s.style.display='block');
+  const el=document.getElementById('guide-content');
+  const opt={margin:[10,10,10,10],filename:'Managemob_Manual_All_Languages.pdf',image:{type:'jpeg',quality:0.95},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['avoid-all','css','legacy']}};
+  html2pdf().set(opt).from(el).save().then(()=>{
+    sections.forEach(s=>{if(!s.classList.contains('active'))s.style.display='none';});
+    btn.disabled=false;btn.innerHTML='&#128196; PDF';
+  });
+}
+
+function exportWord(btn){
+  btn.disabled=true;
+  btn.innerHTML='&#9203; Generating...';
+  const sections=document.querySelectorAll('.lang-section');
+  let allContent='';
+  sections.forEach(s=>{allContent+=s.innerHTML+'<div style="page-break-before:always"></div>';});
+  const html='<html><head><meta charset="utf-8"><style>body{font-family:Calibri,sans-serif;line-height:1.6}h1{color:#0d6b5e;border-bottom:2px solid #0d6b5e;page-break-before:always}h1:first-child{page-break-before:avoid}h2{color:#0d6b5e;border-bottom:1px solid #ddd}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px}th{background:#0d6b5e;color:#fff}.info-box{background:#e8f5e9;border-left:4px solid #0d6b5e;padding:8px;margin:8px 0}.warn-box{background:#fff3e0;border-left:4px solid #ff9800;padding:8px;margin:8px 0}</style></head><body>'+allContent+'</body></html>';
+  const blob=new Blob(['\ufeff',html],{type:'application/msword'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='Managemob_Manual_All_Languages.doc';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  btn.disabled=false;btn.innerHTML='&#128196; Word';
+}
+</script>
+</body>
+</html>

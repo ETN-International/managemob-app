@@ -580,6 +580,10 @@ const it: Record<TranslationKeys, string> = {
   manual_dashboard_title: 'Dashboard',
   manual_dashboard_1: 'La Dashboard mostra card KPI (totale partecipanti, grant totale, margine totale, aziende ospitanti, alloggi), un grafico a torta per tipologia e un grafico a barre per paesi di destinazione.',
   manual_dashboard_2: 'La riga riassuntiva in basso mostra conteggio incoming, outgoing e grant medio per partecipante.',
+  home_help_resources: 'Aiuto e Risorse',
+  home_guide_desc: 'Concetti, workflow e panoramica delle sezioni',
+  home_operational_guide: 'Guida Operativa',
+  home_operational_guide_desc: 'Guida operativa multilingue completa (apre in nuova scheda)',
 }
 
 export default it

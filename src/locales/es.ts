@@ -582,6 +582,10 @@ const es: Record<TranslationKeys, string> = {
   manual_dashboard_title: 'Panel de control',
   manual_dashboard_1: 'El Panel muestra tarjetas KPI (total participantes, grant total, margen total, empresas de acogida, alojamientos), un gráfico circular de tipología de movilidad y un gráfico de barras de países de destino.',
   manual_dashboard_2: 'La fila de resumen inferior muestra el recuento de entrantes, salientes y el grant promedio por participante.',
+  home_help_resources: 'Ayuda y Recursos',
+  home_guide_desc: 'Conceptos, workflow y resumen de secciones',
+  home_operational_guide: 'Guía Operativa',
+  home_operational_guide_desc: 'Guía operativa multilingüe completa (nueva pestaña)',
 }
 
 export default es

@@ -621,6 +621,10 @@ const en = {
   manual_dashboard_title: 'Dashboard',
   manual_dashboard_1: 'The Dashboard shows KPI cards (total participants, total grant, total margin, host companies, accommodations), a mobility typology pie chart, and a destination countries bar chart.',
   manual_dashboard_2: 'The summary row at the bottom shows incoming count, outgoing count, and average grant per participant.',
+  home_help_resources: 'Help & Resources',
+  home_guide_desc: 'Concepts, workflow and app sections overview',
+  home_operational_guide: 'Operational Guide',
+  home_operational_guide_desc: 'Complete multilingual operational guide (opens in new tab)',
 } as const
 
 export default en

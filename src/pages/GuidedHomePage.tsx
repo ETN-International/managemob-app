@@ -777,12 +777,6 @@ export default function GuidedHomePage() {
           <button className="hm-hero-btn" onClick={() => navigate('/calendar')}>
             {t('home_btn_calendar')}
           </button>
-          <button className="hm-hero-btn" onClick={() => navigate('/guide')}>
-            {t('nav_guide')}
-          </button>
-          <button className="hm-hero-btn" onClick={() => navigate('/manual')}>
-            {t('nav_manual')}
-          </button>
         </div>
       </div>
 
@@ -813,6 +807,39 @@ export default function GuidedHomePage() {
             <div className="hm-card-arrow" style={{ color: card.color }}>&#8250;</div>
           </button>
         ))}
+      </div>
+
+      {/* ── Help & Resources ──────────────────────────────────────────────── */}
+      <div className="hm-section-header">
+        <h2 className="hm-section-title">{t('home_help_resources')}</h2>
+      </div>
+      <div style={{ display: 'flex', gap: 12, padding: '0 32px 32px', flexWrap: 'wrap' }}>
+        <button
+          className="hm-action-card"
+          onClick={() => navigate('/guide')}
+          style={{ borderLeft: '4px solid #2D7A6F', flex: '1 1 200px' }}
+        >
+          <div className="hm-card-icon" style={{ background: '#2D7A6F14', color: '#2D7A6F' }}>{'\u{1F4D6}'}</div>
+          <div className="hm-card-body">
+            <h3 className="hm-card-title">{t('nav_guide')}</h3>
+            <p className="hm-card-desc">{t('home_guide_desc')}</p>
+          </div>
+          <div className="hm-card-arrow" style={{ color: '#2D7A6F' }}>&#8250;</div>
+        </button>
+        <a
+          className="hm-action-card"
+          href="/operational-guide.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ borderLeft: '4px solid #1D72B8', flex: '1 1 200px', textDecoration: 'none' }}
+        >
+          <div className="hm-card-icon" style={{ background: '#1D72B818', color: '#1D72B8' }}>{'\u{1F4CB}'}</div>
+          <div className="hm-card-body">
+            <h3 className="hm-card-title">{t('home_operational_guide')}</h3>
+            <p className="hm-card-desc">{t('home_operational_guide_desc')}</p>
+          </div>
+          <div className="hm-card-arrow" style={{ color: '#1D72B8' }}>&#8250;</div>
+        </a>
       </div>
 
       {/* ══════════════════════════════════════════════════════════════════════ */}

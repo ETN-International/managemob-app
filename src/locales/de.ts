@@ -582,6 +582,10 @@ const de: Record<TranslationKeys, string> = {
   manual_dashboard_title: 'Dashboard',
   manual_dashboard_1: 'Das Dashboard zeigt KPI-Karten (Gesamtteilnehmer, Gesamtförderung, Gesamtmarge, Gastunternehmen, Unterkünfte), ein Kreisdiagramm der Mobilitätstypologie und ein Balkendiagramm der Zielländer.',
   manual_dashboard_2: 'Die Zusammenfassungszeile unten zeigt die Anzahl eingehender, ausgehender Teilnehmer und die durchschnittliche Förderung pro Teilnehmer.',
+  home_help_resources: 'Hilfe & Ressourcen',
+  home_guide_desc: 'Konzepte, Workflow und Abschnittsübersicht',
+  home_operational_guide: 'Betriebsanleitung',
+  home_operational_guide_desc: 'Vollständige mehrsprachige Betriebsanleitung (neuer Tab)',
 }
 
 export default de

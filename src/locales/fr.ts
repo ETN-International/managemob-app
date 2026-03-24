@@ -582,6 +582,10 @@ const fr: Record<TranslationKeys, string> = {
   manual_dashboard_title: 'Tableau de bord',
   manual_dashboard_1: 'Le tableau de bord affiche des cartes KPI (total participants, grant total, marge totale, entreprises d\'accueil, hébergements), un graphique en camembert de la typologie de mobilité et un graphique en barres des pays de destination.',
   manual_dashboard_2: 'La ligne de résumé en bas affiche le nombre d\'entrants, de sortants et le grant moyen par participant.',
+  home_help_resources: 'Aide et Ressources',
+  home_guide_desc: 'Concepts, workflow et aperçu des sections',
+  home_operational_guide: 'Guide Opérationnel',
+  home_operational_guide_desc: 'Guide opérationnel multilingue complet (nouvel onglet)',
 }
 
 export default fr

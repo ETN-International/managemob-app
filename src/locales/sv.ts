@@ -613,6 +613,10 @@ const sv = {
   manual_dashboard_title: 'Dashboard',
   manual_dashboard_1: 'Dashboard visar KPI-kort (totalt deltagare, totalt bidrag, total marginal, värdföretag, boenden), ett cirkeldiagram för mobilitetstyp och ett stapeldiagram för destinationsländer.',
   manual_dashboard_2: 'Sammanfattningsraden längst ner visar antal inkommande, utgående och genomsnittsbidrag per deltagare.',
+  home_help_resources: 'Hjälp & Resurser',
+  home_guide_desc: 'Koncept, arbetsflöde och sektionsöversikt',
+  home_operational_guide: 'Driftguide',
+  home_operational_guide_desc: 'Komplett flerspråkig driftguide (ny flik)',
 } as const
 
 export default sv
