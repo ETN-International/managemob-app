@@ -403,6 +403,22 @@ const fr: Record<TranslationKeys, string> = {
   pdf_voucher: '📄 Bon d\'information',
   pdf_financial: '📊 Rapport financier',
   pdf_certificate: '🎓 Certificat',
+
+  card_add_participant: 'Ajouter Participant',
+  card_add_participant_desc: 'Créer un nouveau participant individuel avec données personnelles et de mobilité',
+  card_add_group: 'Ajouter Groupe',
+  card_add_group_desc: 'Créer plusieurs participants à la fois par collage ou import CSV',
+  card_assign_services: 'Associer Services',
+  card_assign_services_desc: 'Lier les fournisseurs et services aux participants existants',
+  card_manage_providers: 'Gérer Fournisseurs',
+  card_manage_providers_desc: 'Ajouter et gérer organisations, entreprises d\'accueil, hébergements et plus',
+  card_group_info: 'Informations du Groupe',
+  card_group_members: 'Membres du Groupe',
+  card_group_paste_placeholder: 'Collez un nom par ligne\nEx. :\nJean Dupont\nMarie Martin',
+  card_group_csv_select: 'Sélectionner fichier CSV',
+  card_services_for: 'Services pour',
+  card_provider_added: 'Fournisseur ajouté avec succès !',
+  home_quick_actions: 'Actions Rapides',
 }
 
 export default fr

@@ -439,6 +439,23 @@ const en = {
   pdf_voucher: '📄 Info Voucher',
   pdf_financial: '📊 Financial Report',
   pdf_certificate: '🎓 Certificate',
+
+  // Home cards + modals
+  card_add_participant: 'Add Participant',
+  card_add_participant_desc: 'Create a new individual participant with personal and mobility data',
+  card_add_group: 'Add Group',
+  card_add_group_desc: 'Create multiple participants at once via paste or CSV import',
+  card_assign_services: 'Assign Services',
+  card_assign_services_desc: 'Link providers and services to existing participants',
+  card_manage_providers: 'Manage Providers',
+  card_manage_providers_desc: 'Add and manage sending orgs, host companies, accommodation and more',
+  card_group_info: 'Group Information',
+  card_group_members: 'Group Members',
+  card_group_paste_placeholder: 'Paste one name per line\ne.g.:\nJohn Smith\nJane Doe',
+  card_group_csv_select: 'Select CSV file',
+  card_services_for: 'Services for',
+  card_provider_added: 'Provider added successfully!',
+  home_quick_actions: 'Quick Actions',
 } as const
 
 export default en

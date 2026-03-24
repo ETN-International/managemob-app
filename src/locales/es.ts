@@ -403,6 +403,22 @@ const es: Record<TranslationKeys, string> = {
   pdf_voucher: '📄 Vale informativo',
   pdf_financial: '📊 Informe financiero',
   pdf_certificate: '🎓 Certificado',
+
+  card_add_participant: 'Agregar Participante',
+  card_add_participant_desc: 'Crear un nuevo participante individual con datos personales y de movilidad',
+  card_add_group: 'Agregar Grupo',
+  card_add_group_desc: 'Crear múltiples participantes a la vez mediante pegado o importación CSV',
+  card_assign_services: 'Asignar Servicios',
+  card_assign_services_desc: 'Vincular proveedores y servicios a los participantes existentes',
+  card_manage_providers: 'Gestionar Proveedores',
+  card_manage_providers_desc: 'Agregar y gestionar organizaciones, empresas anfitrionas, alojamientos y más',
+  card_group_info: 'Información del Grupo',
+  card_group_members: 'Miembros del Grupo',
+  card_group_paste_placeholder: 'Pega un nombre por línea\nEj.:\nJuan García\nMaría López',
+  card_group_csv_select: 'Seleccionar archivo CSV',
+  card_services_for: 'Servicios para',
+  card_provider_added: '¡Proveedor agregado con éxito!',
+  home_quick_actions: 'Acciones Rápidas',
 }
 
 export default es

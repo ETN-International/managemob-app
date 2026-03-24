@@ -403,6 +403,22 @@ const de: Record<TranslationKeys, string> = {
   pdf_voucher: '📄 Infovoucher',
   pdf_financial: '📊 Finanzbericht',
   pdf_certificate: '🎓 Zertifikat',
+
+  card_add_participant: 'Teilnehmer hinzufügen',
+  card_add_participant_desc: 'Neuen Einzelteilnehmer mit persönlichen und Mobilitätsdaten erstellen',
+  card_add_group: 'Gruppe hinzufügen',
+  card_add_group_desc: 'Mehrere Teilnehmer gleichzeitig per Einfügen oder CSV-Import erstellen',
+  card_assign_services: 'Dienste zuweisen',
+  card_assign_services_desc: 'Anbieter und Dienste mit bestehenden Teilnehmern verknüpfen',
+  card_manage_providers: 'Anbieter verwalten',
+  card_manage_providers_desc: 'Organisationen, Gastunternehmen, Unterkünfte und mehr hinzufügen und verwalten',
+  card_group_info: 'Gruppeninformationen',
+  card_group_members: 'Gruppenmitglieder',
+  card_group_paste_placeholder: 'Einen Namen pro Zeile einfügen\nz.B.:\nMax Mustermann\nErika Musterfrau',
+  card_group_csv_select: 'CSV-Datei auswählen',
+  card_services_for: 'Dienste für',
+  card_provider_added: 'Anbieter erfolgreich hinzugefügt!',
+  home_quick_actions: 'Schnellaktionen',
 }
 
 export default de

@@ -66,8 +66,11 @@ const EMPTY_PARTICIPANT: Partial<Participant> = {
   grant_amount: null, lang_english: '', lang_spanish: '', lang_french: '', lang_german: '', lang_italian: '',
 }
 
+type ViewMode = 'list' | 'detail'
+
 export default function ParticipantsPage({ typology, groupView = false }: ParticipantsPageProps) {
   const { t } = useT()
+  const [viewMode, setViewMode] = useState<ViewMode>('list')
   const [participants, setParticipants] = useState<Participant[]>([])
   const [selected, setSelected] = useState<Participant | null>(null)
   const [search, setSearch] = useState('')
@@ -215,6 +218,103 @@ export default function ParticipantsPage({ typology, groupView = false }: Partic
   const sel = selected
   const fv = (f: keyof Participant) => editing ? (ed[f] as any ?? '') : (sel?.[f] as any ?? '')
 
+  const openInDetail = (p: Participant) => {
+    selectParticipant(p)
+    setViewMode('detail')
+  }
+
+  // ── LIST VIEW ──────────────────────────────────────────────────────────────
+  if (viewMode === 'list') {
+    return (
+      <div className="page-container" style={{ height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        {showConfirm && (
+          <ConfirmDialog
+            message={`${t('confirm_delete')} ${sel?.name} ${sel?.surname}? ${t('confirm_irrev')}`}
+            onConfirm={handleDelete}
+            onCancel={() => setShowConfirm(false)}
+          />
+        )}
+
+        {/* Header bar */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
+          <div style={{ flex: 1, minWidth: 200 }}>
+            <h1 className="page-title">{groupView ? t('page_groups') : t('page_individuals')} — {typology}</h1>
+            <p className="page-subtitle">{filtered.length} {t('home_stats_total').toLowerCase()}</p>
+          </div>
+          <input
+            type="text"
+            className="form-input"
+            placeholder={t('part_search')}
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            style={{ width: 260 }}
+          />
+          <button className="btn btn-accent btn-sm" onClick={startNew}>{t('part_new_btn')}</button>
+          <button
+            className="btn btn-secondary btn-sm"
+            onClick={() => setViewMode('detail')}
+            title="Detail view"
+          >
+            &#9776;
+          </button>
+        </div>
+
+        {/* Table */}
+        {loading ? (
+          <div className="page-loading"><div className="spinner" /></div>
+        ) : (
+          <div className="table-container" style={{ flex: 1, overflow: 'auto' }}>
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>{t('fld_surname')}</th>
+                  <th>{t('fld_name')}</th>
+                  <th>{t('fld_nationality')}</th>
+                  <th>{t('fld_dest_city')}</th>
+                  <th>{t('fld_arrival')}</th>
+                  <th>{t('fld_departure')}</th>
+                  <th>{t('fld_sending_org')}</th>
+                  <th>{t('fld_host_company')}</th>
+                  <th>{t('fld_group_name')}</th>
+                  <th>{t('fld_indiv_group')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filtered.length === 0 && (
+                  <tr><td colSpan={10} className="empty-cell">{t('list_empty')}</td></tr>
+                )}
+                {filtered.map(p => (
+                  <tr
+                    key={p.id}
+                    onClick={() => openInDetail(p)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <td style={{ fontWeight: 600 }}>{p.surname || '\u2014'}</td>
+                    <td>{p.name || '\u2014'}</td>
+                    <td>{p.nationality || '\u2014'}</td>
+                    <td>{p.destination_city || '\u2014'}</td>
+                    <td>{p.arrival_date || '\u2014'}</td>
+                    <td>{p.departure_date || '\u2014'}</td>
+                    <td>{p.sending_organisations?.name || '\u2014'}</td>
+                    <td>{p.host_companies?.name || '\u2014'}</td>
+                    <td>{p.group_name || '\u2014'}</td>
+                    <td>
+                      <Badge
+                        text={p.indiv_group || 'Individual'}
+                        color={p.indiv_group === 'Group' ? '#8B5CF6' : '#2D7A6F'}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  // ── DETAIL VIEW (original split layout) ────────────────────────────────────
   return (
     <div className="split-layout">
       {showConfirm && (
@@ -234,6 +334,7 @@ export default function ParticipantsPage({ typology, groupView = false }: Partic
         <div className="search-bar" style={{ display: 'flex', gap: 6 }}>
           <input type="text" className="form-input" placeholder={t('part_search')} value={search} onChange={e => setSearch(e.target.value)} style={{ flex: 1 }} />
           <button className="btn btn-accent btn-sm" onClick={startNew} title={t('part_new')}>{t('btn_new')}</button>
+          <button className="btn btn-secondary btn-sm" onClick={() => setViewMode('list')} title="List view" style={{ padding: '5px 8px' }}>&#9776;</button>
         </div>
         {loading ? <div className="list-loading"><div className="spinner-sm"></div></div> : (
           <div className="participant-list">

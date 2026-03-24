@@ -402,6 +402,23 @@ const it: Record<TranslationKeys, string> = {
   pdf_voucher: '📄 Info Voucher',
   pdf_financial: '📊 Financial Report',
   pdf_certificate: '🎓 Certificato',
+
+  // Home cards + modals
+  card_add_participant: 'Aggiungi Partecipante',
+  card_add_participant_desc: 'Crea un nuovo partecipante individuale con dati personali e di mobilità',
+  card_add_group: 'Aggiungi Gruppo',
+  card_add_group_desc: 'Crea più partecipanti contemporaneamente tramite incolla o importa CSV',
+  card_assign_services: 'Associa Servizi',
+  card_assign_services_desc: 'Collega provider e servizi ai partecipanti esistenti',
+  card_manage_providers: 'Gestisci Provider',
+  card_manage_providers_desc: 'Aggiungi e gestisci organizzazioni, aziende ospitanti, alloggi e altro',
+  card_group_info: 'Informazioni Gruppo',
+  card_group_members: 'Membri del Gruppo',
+  card_group_paste_placeholder: 'Incolla un nome per riga\nEs:\nMario Rossi\nGiulia Bianchi',
+  card_group_csv_select: 'Seleziona file CSV',
+  card_services_for: 'Servizi per',
+  card_provider_added: 'Provider aggiunto con successo!',
+  home_quick_actions: 'Azioni Rapide',
 }
 
 export default it

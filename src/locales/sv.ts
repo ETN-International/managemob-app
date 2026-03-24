@@ -434,6 +434,22 @@ const sv = {
   pdf_voucher: '📄 Info Voucher',
   pdf_financial: '📊 Ekonomisk rapport',
   pdf_certificate: '🎓 Certifikat',
+
+  card_add_participant: 'Lägg till Deltagare',
+  card_add_participant_desc: 'Skapa en ny enskild deltagare med personliga och mobilitetsuppgifter',
+  card_add_group: 'Lägg till Grupp',
+  card_add_group_desc: 'Skapa flera deltagare samtidigt via inklistring eller CSV-import',
+  card_assign_services: 'Tilldela Tjänster',
+  card_assign_services_desc: 'Koppla leverantörer och tjänster till befintliga deltagare',
+  card_manage_providers: 'Hantera Leverantörer',
+  card_manage_providers_desc: 'Lägg till och hantera organisationer, värdföretag, boende och mer',
+  card_group_info: 'Gruppinformation',
+  card_group_members: 'Gruppmedlemmar',
+  card_group_paste_placeholder: 'Klistra in ett namn per rad\nt.ex.:\nAnna Svensson\nErik Johansson',
+  card_group_csv_select: 'Välj CSV-fil',
+  card_services_for: 'Tjänster för',
+  card_provider_added: 'Leverantör tillagd!',
+  home_quick_actions: 'Snabbåtgärder',
 } as const
 
 export default sv
