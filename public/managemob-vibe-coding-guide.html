@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Managemob · Vibe Coding Guide · Pessoa Academy</title>
+<meta name="description" content="Step-by-step procedure to create your own customized version of Managemob in 7 languages, with the Vibe Coding Workflow™. By Pessoa Academy.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --paper: #f5f0e8;
+  --paper-dark: #ede7d9;
+  --paper-darker: #e4ddd0;
+  --ink: #1a1714;
+  --ink-light: #4a4440;
+  --ink-muted: #7a726e;
+  --accent: #c8420a;
+  --accent2: #1a6b52;
+  --accent3: #2d4a8a;
+  --dark: #1a1714;
+  --dark2: #242018;
+  --dark-card: #1a1714;
+  --dark-card2: #242018;
+  --border: rgba(26, 23, 20, 0.10);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  font-size: 16px;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0.03 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .4;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ---------- Header ---------- */
+header {
+  position: sticky; top: 0; z-index: 100;
+  height: 60px;
+  background: var(--dark);
+  color: #fff;
+  display: flex; align-items: center;
+  padding: 0 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.header-brand {
+  display: flex; align-items: center; gap: 0.7rem;
+}
+
+.header-logo {
+  width: 28px; height: 28px;
+  background: var(--accent);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.header-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.95);
+}
+
+.header-spacer { flex: 1; }
+
+.lang-switch {
+  display: flex; gap: 0.25rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 3px;
+}
+
+.lang-pill {
+  padding: 0.35rem 0.6rem;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,0.55);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+.lang-pill:hover { color: #fff; background: rgba(255,255,255,0.06); }
+.lang-pill.active {
+  color: var(--paper);
+  background: var(--accent);
+}
+
+/* ---------- Layout ---------- */
+.wrap {
+  display: flex;
+  min-height: calc(100vh - 60px);
+}
+
+.sidebar {
+  width: 270px;
+  background: var(--dark-card);
+  color: rgba(255,255,255,0.85);
+  position: sticky; top: 60px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+.sidebar-inner { padding: 1.6rem 1.2rem 2rem; }
+
+.sidebar-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  padding: 0 0.6rem;
+  margin-bottom: 0.7rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.sidebar-eyebrow::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+
+.nav-list { list-style: none; }
+.nav-item {
+  display: flex; gap: 0.7rem;
+  padding: 0.55rem 0.8rem;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  transition: all 0.2s;
+  align-items: baseline;
+}
+.nav-item .nav-num {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  color: rgba(255,255,255,0.45);
+  font-size: 0.95rem;
+  min-width: 1.4em;
+}
+.nav-item .nav-text { flex: 1; line-height: 1.35; }
+.nav-item:hover { color: #fff; background: rgba(255,255,255,0.04); }
+.nav-item.active {
+  color: #fff;
+  background: rgba(200, 66, 10, 0.10);
+  border-left-color: var(--accent);
+}
+.nav-item.active .nav-num { color: var(--accent); }
+
+.sidebar-foot {
+  margin-top: 1.5rem;
+  padding: 1rem 0.8rem 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+/* ---------- Main ---------- */
+main {
+  flex: 1;
+  padding: 3rem 4rem 5rem;
+  max-width: 920px;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.4rem;
+  display: flex; align-items: center; gap: 0.7rem;
+}
+.hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.4rem, 4.5vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 1.6rem;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-body {
+  font-size: 1.05rem;
+  color: var(--ink-light);
+  max-width: 64ch;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.creator-line {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.4rem;
+}
+
+.tools-line {
+  font-size: 0.86rem;
+  color: var(--ink-light);
+  margin-bottom: 2.4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.6rem;
+}
+.stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  font-style: italic;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  line-height: 1.4;
+}
+
+/* Principle / quote */
+.principle {
+  background: var(--paper-dark);
+  border-left: 3px solid var(--accent);
+  padding: 1.6rem 1.8rem;
+  margin: 0 0 3rem;
+}
+.principle-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.principle-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin-bottom: 0.7rem;
+}
+.principle-title em { font-style: italic; color: var(--accent); }
+.principle-body {
+  color: var(--ink-light);
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+
+/* Download CTA */
+.download-cta {
+  background: var(--dark-card);
+  color: #fff;
+  padding: 1.7rem 1.9rem;
+  border-radius: 12px;
+  margin: 0 0 3.5rem;
+  display: flex; align-items: center; gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.download-text {
+  flex: 1; min-width: 260px;
+}
+.download-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 0.4rem;
+}
+.download-headline {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: #fff;
+}
+.download-btn {
+  background: var(--accent);
+  color: #fff;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.4rem;
+  border-radius: 8px;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  transition: transform 0.15s, opacity 0.15s;
+  white-space: nowrap;
+}
+.download-btn:hover { transform: translateY(-1px); opacity: 0.95; }
+.download-btn svg { width: 14px; height: 14px; }
+
+/* Section labels */
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.7rem;
+  display: flex; align-items: center; gap: 0.7rem;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* Steps */
+.step {
+  margin-top: 3.4rem;
+  scroll-margin-top: 80px;
+}
+
+.step-head {
+  display: flex; gap: 1.1rem; align-items: baseline;
+  margin-bottom: 1.4rem;
+}
+.step-num {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 2.5rem;
+  color: var(--accent);
+  line-height: 1;
+  min-width: 2.4rem;
+}
+.step-meta {
+  flex: 1;
+}
+.step-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.4rem;
+}
+.step-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.65rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.step-title em { font-style: italic; color: var(--accent); }
+
+.step-body {
+  padding-left: 3.5rem;
+}
+
+.why-block {
+  background: rgba(26, 107, 82, 0.06);
+  border-left: 2px solid var(--accent2);
+  padding: 0.95rem 1.2rem;
+  margin-bottom: 1.4rem;
+  border-radius: 0 6px 6px 0;
+}
+.why-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin-bottom: 0.4rem;
+}
+.why-text {
+  color: var(--ink-light);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.actions-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.6rem;
+}
+
+ol.actions {
+  list-style: none;
+  counter-reset: act;
+  padding: 0;
+}
+ol.actions > li {
+  counter-increment: act;
+  position: relative;
+  padding-left: 2.6rem;
+  margin-bottom: 0.85rem;
+  color: var(--ink-light);
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+ol.actions > li::before {
+  content: counter(act, decimal-leading-zero);
+  position: absolute;
+  left: 0; top: 0;
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-size: 1rem;
+  width: 2rem;
+  text-align: left;
+}
+
+.subsec {
+  margin-top: 1.6rem;
+}
+.subsec-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.7rem;
+  font-weight: 500;
+}
+
+/* Prompt box (DM Mono on dark) */
+.prompt-box {
+  background: var(--dark-card);
+  border-left: 4px solid var(--accent);
+  color: #fff;
+  padding: 1.1rem 1.3rem;
+  margin: 1.4rem 0;
+  border-radius: 0 8px 8px 0;
+  position: relative;
+}
+.prompt-box::before {
+  content: attr(data-label);
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #f0c070;
+  margin-bottom: 0.6rem;
+}
+.prompt-text {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.95);
+}
+
+/* Tip box */
+.tip-box {
+  background: rgba(45, 74, 138, 0.06);
+  border: 1px solid rgba(45, 74, 138, 0.18);
+  padding: 0.9rem 1.2rem;
+  border-radius: 8px;
+  margin: 1.2rem 0 0;
+  color: var(--ink-light);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+.tip-label {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent3);
+  margin-bottom: 0.4rem;
+}
+
+/* Checklist */
+.checklist-box {
+  background: var(--dark-card);
+  color: #fff;
+  padding: 1.2rem 1.4rem;
+  border-radius: 10px;
+  margin-top: 0.8rem;
+}
+.checklist-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.7rem;
+}
+.checklist-list {
+  list-style: none;
+  padding: 0;
+}
+.checklist-list li {
+  padding: 0.45rem 0 0.45rem 1.7rem;
+  position: relative;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.9);
+  border-bottom: 1px dashed rgba(255,255,255,0.08);
+}
+.checklist-list li:last-child { border-bottom: 0; }
+.checklist-list li::before {
+  content: '☐';
+  position: absolute;
+  left: 0; top: 0.45rem;
+  color: var(--accent);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.checklist-list li.checked {
+  color: rgba(255,255,255,0.45);
+  text-decoration: line-through;
+}
+.checklist-list li.checked::before {
+  content: '☑';
+  color: var(--accent);
+}
+.checklist-list li { cursor: pointer; user-select: none; }
+
+/* Conclusion */
+.conclusion {
+  margin-top: 4rem;
+  padding-top: 2.4rem;
+  border-top: 1px solid var(--border);
+}
+.conclusion-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.conclusion-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.7rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.conclusion-title em { font-style: italic; color: var(--accent); }
+.conclusion-body {
+  color: var(--ink-light);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+/* Tags */
+.tags {
+  margin-top: 2.4rem;
+  display: flex; flex-wrap: wrap; gap: 0.45rem;
+}
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.7rem;
+  background: rgba(200, 66, 10, 0.06);
+  border: 1px solid rgba(200, 66, 10, 0.18);
+  color: var(--accent);
+  border-radius: 999px;
+}
+
+/* Footer */
+footer {
+  background: var(--dark);
+  color: rgba(255,255,255,0.5);
+  padding: 2rem 4rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: flex; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+  margin-left: 270px;
+}
+
+/* Code */
+code {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.86em;
+  background: rgba(26,23,20,0.06);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.prompt-box code, .checklist-box code {
+  background: rgba(255,255,255,0.10);
+  color: #f0c070;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  main { padding: 2rem 1.5rem 3rem; }
+  footer { margin-left: 0; padding: 2rem 1.5rem; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .step-body { padding-left: 0; }
+  .step-num { font-size: 2rem; }
+  .download-cta { padding: 1.4rem; }
+  header { padding: 0 1rem; }
+  .header-name { display: none; }
+}
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat-num { font-size: 1.6rem; }
+  .hero-title { font-size: 2.2rem; }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <a class="header-brand" href="#it">
+    <span class="header-logo">VC</span>
+    <span class="header-name">Vibe Coding Workflow™ · Managemob</span>
+  </a>
+  <span class="header-spacer"></span>
+  <div id="lang-switch" class="lang-switch" aria-label="Language"></div>
+</header>
+
+<div class="wrap">
+  <aside class="sidebar"><div id="sidebar-inner" class="sidebar-inner"></div></aside>
+
+  <main>
+    <div id="hero-eyebrow" class="hero-eyebrow"></div>
+    <h1 id="hero-title" class="hero-title"></h1>
+    <p id="hero-body" class="hero-body"></p>
+    <div id="creator-line" class="creator-line"></div>
+    <div id="tools-line" class="tools-line"></div>
+
+    <div id="stats" class="stats"></div>
+
+    <div class="principle">
+      <div id="principle-label" class="principle-label"></div>
+      <h2 id="principle-title" class="principle-title"></h2>
+      <p id="principle-body" class="principle-body"></p>
+    </div>
+
+    <div id="steps"></div>
+
+    <div class="conclusion">
+      <div id="conclusion-label" class="conclusion-label"></div>
+      <h2 id="conclusion-title" class="conclusion-title"></h2>
+      <p id="conclusion-body" class="conclusion-body"></p>
+      <div id="tags" class="tags"></div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <span id="footer-creator"></span>
+  <span id="footer-brand"></span>
+</footer>
+
+<script>
+
+(function () {
+  const DATA = {"it": {"lang": "it", "page_title": "Procedura passo passo · Crea la tua versione di Managemob", "doc_title": "Crea la tua versione di Managemob", "doc_subtitle": "Procedura passo passo, in 7 lingue, senza scrivere codice.", "creator_line": "Una guida di Pessoa Academy · Vibe Coding Workflow™", "tools_line": "Visual Studio Code + assistente AI gratuito + GitHub Desktop + Supabase + Netlify", "hero_eyebrow": "Vibe Coding Workflow™", "hero_title_html": "Costruisci <em>Managemob</em> a tua immagine", "hero_body": "Managemob è una piattaforma per gestire mobilità formative (Erasmus+, ESC, scambi). Questa guida ti accompagna passo dopo passo a creare la TUA versione personalizzata: logo, colori, testi nelle tue lingue, documenti automatici. Non serve saper programmare: l'assistente AI scrive, tu decidi.", "stats": [["10", "passi"], ["7", "lingue già pronte"], ["0", "righe di codice scritte a mano"], ["~2 h", "tempo medio"]], "principle_label": "Principio Vibe Coding", "principle_title_html": "Tu sei il <em>regista</em>, l'AI è il dattilografo", "principle_body": "Tutta la guida si basa su una sola idea: tu spieghi cosa vuoi a parole, l'assistente AI scrive il codice nel tuo editor. Quando vedi una sezione PROMPT, copia la frase e incollala nel chat dell'assistente AI dentro Visual Studio Code.", "lang_switch_label": "Lingua", "steps": [{"n": "01", "label": "PRIMA DI INIZIARE", "title_html": "Prepara la <em>cassetta degli attrezzi</em>", "why": "Ti servono pochi strumenti gratuiti. Pensa a loro come a una cassetta degli attrezzi: GitHub conserva il codice online, Visual Studio Code è il programma dove vedi e modifichi i file, l'assistente AI scrive il codice al posto tuo, GitHub Desktop sposta i file fra il tuo computer e GitHub senza usare comandi da terminale.", "actions": ["Crea un account gratuito su <strong>github.com</strong>. Sarà il \"deposito\" del tuo codice online.", "Scarica e installa <strong>Visual Studio Code</strong> da code.visualstudio.com. È il programma che apri ogni volta che lavori al sito.", "Apri Visual Studio Code, clicca l'icona Extensions a sinistra (un quadrato con quattro tasselli) e cerca un assistente AI gratuito. Scelta semplice: <strong>Gemini Code Assist</strong> di Google. Vanno bene anche <strong>Codeium</strong>, <strong>Continue</strong>, <strong>Cody</strong> di Sourcegraph, o qualsiasi altro assistente AI gratuito che preferisci. Installalo e fai login con il tuo account.", "Scarica e installa <strong>GitHub Desktop</strong> da desktop.github.com. Aprilo e fai login con lo stesso account GitHub.", "Crea un account gratuito su <strong>supabase.com</strong>. Sarà il \"magazzino\" dove l'app salva i dati (utenti, partecipanti, mobilità).", "Crea un account gratuito su <strong>netlify.com</strong>. È il servizio che metterà il tuo sito online.", "Scarica e installa <strong>Node.js</strong> versione LTS da nodejs.org. Serve a far girare il sito sul tuo computer mentre lo provi."], "tip_label": "Bonus", "tip_body": "Tutti questi strumenti sono gratuiti. Non serve carta di credito per iniziare."}, {"n": "02", "label": "FORK & CLONE", "title_html": "Crea la tua <em>copia personale</em> del progetto", "why": "\"Forkare\" significa fare una copia personale del progetto Managemob su GitHub. Così puoi modificarla senza toccare l'originale. \"Clonare\" significa scaricare quella copia sul tuo computer.", "actions": ["Vai sulla pagina GitHub del template Managemob — es. <a href=\"https://github.com/ETN-International/managemob-app\" target=\"_blank\" rel=\"noopener\">github.com/ETN-International/managemob-app</a>, oppure l'URL del template che ti è stato fornito. Clicca <strong>Fork</strong> in alto a destra. Scegli un nome (es. <em>pessoa-mobility</em>). Aspetta qualche secondo: ora hai una copia tutta tua.", "Sulla pagina del tuo fork, clicca il bottone verde <strong>&lt;&gt; Code</strong> e scegli <strong>Open with GitHub Desktop</strong>.", "GitHub Desktop chiede dove salvare la cartella. Scegli un percorso (es. Documenti) e clicca <strong>Clone</strong>. Pochi secondi e la copia è sul tuo computer.", "In alto a destra in GitHub Desktop clicca <strong>Open in Visual Studio Code</strong>. Si apre la cartella del progetto in VS Code.", "In VS Code apri il <strong>Terminale</strong>: menu <em>View → Terminal</em> (oppure premi <code>Ctrl+`</code> su Windows/Linux, <code>Cmd+`</code> su Mac). Nel terminale digita <code>npm install</code> e premi Invio. Aspetta che finisca: sta scaricando le librerie del progetto."], "prompt_label": "Prompt da incollare nell'assistente AI", "prompt_body": "\"Leggi la struttura della cartella src/ e spiegami in un paragrafo cosa fa ogni cartella di primo livello (pages, components, locales, lib, styles, data, types). Non modificare niente per ora.\""}, {"n": "03", "label": "DATABASE SUPABASE", "title_html": "Prepara il <em>magazzino dei dati</em>", "why": "Supabase è il magazzino online dove l'app salva utenti, partecipanti, mobilità. Senza Supabase l'app non sa dove conservare le informazioni.", "actions": ["Vai su supabase.com → accedi → <strong>New project</strong>. Scegli un nome, regione Europa, e una password robusta. <strong>Salva la password</strong> in un posto sicuro: serve solo a te per il database.", "Aspetta 1-2 minuti che il progetto sia pronto.", "Nella sidebar di Supabase, vai in <strong>Project Settings → API</strong>. Trovi due valori: <strong>Project URL</strong> e <strong>anon public key</strong>. Copiali e tienili da parte: serviranno al passo 04.", "Sidebar → <strong>SQL Editor → New query</strong>. In Visual Studio Code apri il file <code>supabase/schema.sql</code>, copia tutto, incollalo nel SQL Editor di Supabase e clicca <strong>Run</strong>. Sta creando le tabelle dell'app.", "Sidebar → <strong>Authentication → Providers</strong> → attiva <strong>Email</strong>. Per i test, disattiva <em>Confirm email</em> così non devi confermare ogni utente di prova.", "Sidebar → <strong>Authentication → Users → Add user</strong>: crea il primo amministratore con un'email e password che ricordi.", "<strong>Importante — non saltare:</strong> apri la chat dell'assistente AI in VS Code, copia e incolla il prompt qui sotto, esegui l'SQL che ti restituisce dentro il SQL Editor di Supabase. Senza questo passo chiunque conosca la chiave anon può scrivere nel tuo database."], "prompt_label": "Prompt da incollare nell'assistente AI", "prompt_body": "\"Genera lo SQL per attivare Row Level Security su tutte le tabelle pubbliche di Managemob, in modo che solo gli utenti autenticati possano leggere e scrivere. Output: un singolo blocco SQL.\""}, {"n": "04", "label": "CONFIGURA .env", "title_html": "Collega il sito al <em>tuo database</em>", "why": "Il file <code>.env</code> contiene le credenziali (URL e chiave) che dicono al sito come parlare con Supabase. Senza questo file l'app non sa dove cercare i dati.", "actions": ["In Visual Studio Code, nella lista dei file a sinistra (Explorer), trova <code>.env.example</code>.", "Click destro su <code>.env.example</code> → <strong>Copy</strong>. Click destro nella stessa cartella → <strong>Paste</strong>. Apparirà un file tipo <em>.env.example copy</em>.", "Click destro sul nuovo file → <strong>Rename</strong> → cambialo in <code>.env</code> (esattamente, con il punto davanti).", "Aprilo e riempi i due valori con quelli copiati da Supabase:<br><code>VITE_SUPABASE_URL=https://&lt;tuo-progetto&gt;.supabase.co</code><br><code>VITE_SUPABASE_ANON_KEY=&lt;la tua anon key&gt;</code>", "Salva (<code>Ctrl+S</code> / <code>Cmd+S</code>).", "Apri il file <code>.gitignore</code> e controlla che dentro ci sia la riga <code>.env</code>. Se non c'è, aggiungila. Questo evita di pubblicare per sbaglio le tue credenziali su GitHub."]}, {"n": "05", "label": "PROVA SUL TUO COMPUTER", "title_html": "Vedi il sito girare in <em>locale</em>", "why": "Prima di metterlo online conviene provarlo sul tuo computer. Se qualcosa non va lo vedi subito senza fare danni agli utenti veri.", "actions": ["In VS Code apri il terminale (View → Terminal). Digita <code>npm run dev</code> e premi Invio.", "Nel terminale Vite stamperà una riga tipo <code>➜ Local: http://localhost:XXXX</code>. Apri quell'indirizzo nel browser (di solito è <code>http://localhost:3000</code>; se la porta è occupata Vite ne sceglie un'altra e te la mostra).", "Vedrai la schermata di login. Accedi con email e password dell'amministratore creato al passo 03.", "Crea un partecipante di prova. Aggiorna la pagina (F5): se rimane lì, Supabase sta funzionando.", "Clicca il selettore di lingua nella schermata di login e nella sidebar: deve cambiare la lingua dell'interfaccia."], "prompt_label": "Se qualcosa non va, prompt utile", "prompt_body": "\"Se npm run dev dà errore, leggi il messaggio nel terminale e proponimi una correzione minima. Non modificare nessun file senza la mia autorizzazione.\""}, {"n": "06", "label": "TRADUCI I TESTI", "title_html": "Personalizza in <em>7 lingue</em>", "why": "Managemob parla già 7 lingue. Tu devi solo cambiare i testi visibili (etichette, titoli, frasi) per la TUA organizzazione, mantenendo le chiavi tecniche intatte.", "actions": ["In VS Code apri la cartella <code>src/locales/</code>. Trovi sette file: <code>it.ts</code>, <code>en.ts</code>, <code>es.ts</code>, <code>fr.ts</code>, <code>de.ts</code>, <code>pt.ts</code>, <code>se.ts</code>.", "Apri un file alla volta. Modifica <strong>solo i valori</strong> (la parte dopo i due punti). <strong>Non toccare le chiavi</strong> (la parte prima dei due punti).", "Esempio:<br>PRIMA: <code>login_title: \"Accedi a Managemob\"</code><br>DOPO: <code>login_title: \"Accedi a Pessoa Academy\"</code>"], "prompt_label": "Prompt da incollare nell'assistente AI", "prompt_body": "\"Apri src/locales/it.ts. Senza modificare le chiavi, riscrivi ogni stringa visibile con un tono adatto al brand 'Pessoa Academy'. Poi rifletti le stesse modifiche negli altri sei file di lingua (en, es, fr, de, pt, se).\"", "tip_label": "Aggiungere una 8ª lingua", "tip_body": "Duplica <code>en.ts</code> come <code>pl.ts</code> (per il polacco), traduci i valori, registra il nuovo locale e aggiungi la bandierina nel selettore. Chiedi all'AI di farlo per te."}, {"n": "07", "label": "LOGO E COLORI", "title_html": "Dai la <em>tua identità visiva</em>", "why": "L'aspetto è ciò che vedono gli utenti. Cambiando logo e colori il sito diventa visibilmente \"tuo\".", "actions": ["Nella cartella <code>public/</code> sostituisci <code>logo.svg</code> (o <code>logo.png</code>) con il tuo. Formato quadrato, almeno 256×256 pixel.", "Apri <code>src/components/Sidebar.tsx</code> e <code>src/pages/Login.tsx</code>. Cerca la lettera \"M\" che fa da logo placeholder e sostituiscila con: <code>&lt;img src=\"/logo.svg\" alt=\"Pessoa Academy\" /&gt;</code>", "Apri <code>src/styles/main.css</code>. In cima al file, dentro <code>:root { ... }</code>, trovi le variabili colore: <code>--primary</code> (colore principale dell'app, blu di default), <code>--accent</code>, <code>--sidebar-bg</code> (sfondo della barra laterale, teal di default) e <code>--teal</code>. Sostituisci i valori con i colori della tua palette.", "Apri <code>index.html</code> nella radice del progetto: cambia il testo dentro <code>&lt;title&gt;...&lt;/title&gt;</code> (es. da \"Managemob\" a \"Pessoa Academy\") e nel tag <code>&lt;link rel=\"icon\" ... href=\"/vite.svg\" /&gt;</code> sostituisci <code>/vite.svg</code> con il percorso del tuo logo (es. <code>/logo.svg</code>)."], "prompt_label": "Prompt da incollare nell'assistente AI", "prompt_body": "\"Rebrand per 'Pessoa Academy' con primario #XXXXXX e secondario #YYYYYY. Aggiorna le variabili CSS in src/styles/, sostituisci la M con /logo.svg in Sidebar.tsx e Login.tsx, cambia il title in index.html, aggiorna login_title e login_footer in tutti i file di src/locales/.\""}, {"n": "08", "label": "TEMPLATE WORD", "title_html": "Automatizza i tuoi <em>documenti</em>", "why": "Managemob può prendere un documento Word (es. Learning Agreement, Europass Mobility) e compilarlo automaticamente con i dati dei partecipanti. Devi solo dirgli quali \"buchi\" riempire.", "actions": ["Apri il documento Word che vuoi automatizzare.", "Trova le zone dove vanno i dati (nome, date, azienda...). Sostituiscile con tag tra parentesi graffe. Esempi:<br>[Nome] [Cognome] → <code>{name} {surname}</code><br>[Data inizio] → <code>{arrival_date}</code><br>[Email] → <code>{email}</code><br>[Azienda] → <code>{host_company_name}</code>", "Salva in formato <strong>.docx</strong> (non .doc, non .pdf).", "Nell'app: <em>Documenti → Carica Template</em> → dai un nome → carica il file.", "Seleziona il template, scegli uno o più partecipanti, clicca <strong>Genera</strong>. Il file scaricato avrà i tag sostituiti dai dati reali."], "tip_label": "Regole importanti", "tip_body": "I tag sono case-sensitive: scrivi <code>{name}</code>, non <code>{Name}</code>. Niente spazi dentro le parentesi. La formattazione (grassetto, corsivo) viene mantenuta. Lista completa dei tag nella pagina Documenti dell'app."}, {"n": "09", "label": "PUBBLICA ONLINE", "title_html": "Metti il sito <em>su Netlify</em>", "why": "Per ora il sito gira solo sul tuo computer. Per condividerlo con il mondo lo metti online su Netlify, gratuito, collegato direttamente al tuo repository GitHub. Ogni volta che caricherai modifiche su GitHub, Netlify ricostruirà il sito automaticamente.", "subsections": [{"title": "A · Carica le modifiche su GitHub (con GitHub Desktop)", "items": ["Apri GitHub Desktop. Vedrai la lista dei file modificati.", "In basso a sinistra, scrivi un breve messaggio (es. \"Personalizzazione Pessoa Academy\") e clicca <strong>Commit to main</strong>.", "In alto, clicca <strong>Push origin</strong>. Le tue modifiche sono ora online sul TUO repository GitHub."]}, {"title": "B · Pubblica su Netlify (collegato al tuo repository)", "items": ["Vai su netlify.com → <strong>Add new site → Import an existing project</strong>. Scegli <strong>GitHub</strong> come provider.", "La prima volta Netlify chiede l'autorizzazione: accettala, poi seleziona il <strong>tuo fork</strong> creato al passo 02.", "Netlify riconosce automaticamente che è un progetto Vite. Verifica che <em>Build command</em> sia <code>npm run build</code> e <em>Publish directory</em> sia <code>dist</code>.", "Apri <strong>Show advanced → Add environment variable</strong>. Aggiungi <code>VITE_SUPABASE_URL</code> e <code>VITE_SUPABASE_ANON_KEY</code> con i valori del passo 03.", "Click <strong>Deploy</strong>. Aspetta 1-3 minuti il primo build.", "Netlify ti dà un indirizzo tipo <code>https://&lt;nome-casuale&gt;.netlify.app</code>. Quello è il tuo sito online!", "Da <em>Site settings → Change site name</em> puoi rinominarlo. Da <em>Domain management</em> puoi collegare un dominio tuo (es. mobility.pessoa-academy.com)."]}], "prompt_label": "Prompt da incollare nell'assistente AI", "prompt_body": "\"Verifica il routing della SPA: serve un file netlify.toml per evitare errori 404 quando aggiorno una sotto-pagina come /dashboard?\""}, {"n": "10", "label": "CONTROLLO FINALE", "title_html": "Sei <em>online</em>, ultima verifica", "why": "Prima di dare il sito agli utenti reali, controlla rapidamente che tutto funzioni dall'URL pubblico Netlify (non dal tuo localhost).", "checklist": ["Login dall'URL Netlify funziona.", "Il selettore di lingua funziona in tutte e 7 le lingue.", "Aggiungo un partecipante e dopo F5 è ancora lì.", "Genero un documento Word con un partecipante: i tag sono compilati.", "Il Calendar mostra il partecipante alle date corrette.", "Aggiornare /dashboard non dà errore 404.", "Il logout torna alla schermata di login."], "tip_label": "Prima del go-live ufficiale", "tip_body": "Riattiva la <strong>conferma email</strong> in Supabase Authentication. Ruota la <strong>password DB</strong> di Supabase. Invita gli utenti reali. Cancella l'amministratore di test. Fai un backup."}], "conclusion_label": "Conclusione", "conclusion_title_html": "Una piattaforma <em>tua</em>, in 7 lingue, senza scrivere codice", "conclusion_body": "Visual Studio Code apre i file. L'assistente AI scrive il codice. GitHub Desktop sincronizza. Supabase conserva i dati. Netlify mette il sito online. Tu coordini il tutto e prendi le decisioni che contano: nome, colori, testi, documenti. È il Vibe Coding Workflow™.", "tags": ["Vibe Coding", "Pessoa Academy", "Managemob", "VS Code", "Gemini Code Assist", "GitHub Desktop", "Supabase", "Netlify", "Erasmus+", "Mobilità formativa"], "footer_creator": "© Pessoa Academy", "footer_brand": "Managemob × Vibe Coding Workflow™"}, "en": {"lang": "en", "page_title": "Step by step procedure · Build your own Managemob", "doc_title": "Build your own version of Managemob", "doc_subtitle": "Step by step procedure, in 7 languages, without writing code.", "creator_line": "A guide by Pessoa Academy · Vibe Coding Workflow™", "tools_line": "Visual Studio Code + free AI assistant + GitHub Desktop + Supabase + Netlify", "hero_eyebrow": "Vibe Coding Workflow™", "hero_title_html": "Shape <em>Managemob</em> in your own image", "hero_body": "Managemob is a platform for managing learning mobilities (Erasmus+, ESC, exchanges). This guide walks you through creating YOUR own customized version step by step: logo, colors, text in your languages, automated documents. You don't need to know how to code — the AI assistant types, you decide.", "stats": [["10", "steps"], ["7", "languages ready"], ["0", "lines of code written by hand"], ["~2 h", "average time"]], "principle_label": "Vibe Coding Principle", "principle_title_html": "You are the <em>director</em>, the AI is the typist", "principle_body": "The whole guide rests on one idea: you describe what you want in plain language, the AI assistant writes the code in your editor. Whenever you see a PROMPT section, copy the sentence and paste it into the AI assistant chat inside Visual Studio Code.", "lang_switch_label": "Language", "steps": [{"n": "01", "label": "BEFORE YOU START", "title_html": "Set up your <em>toolbox</em>", "why": "You only need a few free tools. Think of them as a toolbox: GitHub stores the code online, Visual Studio Code is the program where you see and edit files, the AI assistant writes the code for you, GitHub Desktop moves files between your computer and GitHub without any command line.", "actions": ["Create a free account on <strong>github.com</strong>. It is the online \"warehouse\" for your code.", "Download and install <strong>Visual Studio Code</strong> from code.visualstudio.com. This is the program you open every time you work on the site.", "Open Visual Studio Code, click the Extensions icon on the left (a square with four tiles), and search for a free AI assistant. Easy choice: <strong>Gemini Code Assist</strong> by Google. <strong>Codeium</strong>, <strong>Continue</strong>, <strong>Cody</strong> by Sourcegraph or any other free AI assistant also work fine. Install it and sign in with your account.", "Download and install <strong>GitHub Desktop</strong> from desktop.github.com. Open it and sign in with the same GitHub account.", "Create a free account on <strong>supabase.com</strong>. It will be the \"warehouse\" where the app stores data (users, participants, mobilities).", "Create a free account on <strong>netlify.com</strong>. This is the service that will put your site online.", "Download and install <strong>Node.js</strong> LTS from nodejs.org. It is needed to run the site on your computer while you test it."], "tip_label": "Bonus", "tip_body": "All these tools are free. No credit card needed to start."}, {"n": "02", "label": "FORK & CLONE", "title_html": "Make your <em>personal copy</em> of the project", "why": "\"Forking\" means making a personal copy of the Managemob project on GitHub, so you can edit it without touching the original. \"Cloning\" means downloading that copy onto your own computer.", "actions": ["Open the GitHub page of the Managemob template — e.g. <a href=\"https://github.com/ETN-International/managemob-app\" target=\"_blank\" rel=\"noopener\">github.com/ETN-International/managemob-app</a>, or the template URL you've been given. Click <strong>Fork</strong> in the top right. Pick a name (e.g. <em>pessoa-mobility</em>). Wait a few seconds: now you have your own copy.", "On your fork's page click the green <strong>&lt;&gt; Code</strong> button and choose <strong>Open with GitHub Desktop</strong>.", "GitHub Desktop asks where to save the folder. Pick a path (e.g. Documents) and click <strong>Clone</strong>. A few seconds later the copy is on your computer.", "Top right in GitHub Desktop click <strong>Open in Visual Studio Code</strong>. The project folder opens in VS Code.", "In VS Code open the <strong>Terminal</strong>: <em>View → Terminal</em> (or press <code>Ctrl+`</code> on Windows/Linux, <code>Cmd+`</code> on Mac). Type <code>npm install</code> and press Enter. Wait until it finishes — it is downloading the project's libraries."], "prompt_label": "Prompt to paste into the AI assistant", "prompt_body": "\"Read the structure of the src/ folder and explain in one paragraph what each top-level folder does (pages, components, locales, lib, styles, data, types). Don't change anything yet.\""}, {"n": "03", "label": "SUPABASE DATABASE", "title_html": "Prepare the <em>data warehouse</em>", "why": "Supabase is the online warehouse where the app stores users, participants and mobilities. Without Supabase the app has nowhere to save information.", "actions": ["Go to supabase.com → sign in → <strong>New project</strong>. Pick a name, Europe region, and a strong password. <strong>Save the password</strong> somewhere safe — it is only for you.", "Wait 1–2 minutes for the project to be ready.", "In the Supabase sidebar go to <strong>Project Settings → API</strong>. You'll see two values: <strong>Project URL</strong> and <strong>anon public key</strong>. Copy them and keep them aside — you'll need them in step 04.", "Sidebar → <strong>SQL Editor → New query</strong>. In Visual Studio Code open <code>supabase/schema.sql</code>, copy everything, paste it into the Supabase SQL Editor and click <strong>Run</strong>. This creates the app's tables.", "Sidebar → <strong>Authentication → Providers</strong> → enable <strong>Email</strong>. For testing, disable <em>Confirm email</em> so you don't have to confirm every test user.", "Sidebar → <strong>Authentication → Users → Add user</strong>: create your first administrator with an email and a password you'll remember.", "<strong>Important — don't skip:</strong> open the AI assistant chat in VS Code, copy and paste the prompt below, then run the SQL it returns inside Supabase SQL Editor. Without this step, anyone with the anon key can write to your database."], "prompt_label": "Prompt to paste into the AI assistant", "prompt_body": "\"Generate the SQL to enable Row Level Security on every public table of Managemob, so that only authenticated users can read and write. Output: a single SQL block.\""}, {"n": "04", "label": "CONFIGURE .env", "title_html": "Connect the site to <em>your database</em>", "why": "The <code>.env</code> file holds the credentials (URL and key) that tell the site how to talk to Supabase. Without this file the app doesn't know where to look for data.", "actions": ["In Visual Studio Code, in the Explorer on the left, find <code>.env.example</code>.", "Right-click <code>.env.example</code> → <strong>Copy</strong>. Right-click in the same folder → <strong>Paste</strong>. A file like <em>.env.example copy</em> appears.", "Right-click the new file → <strong>Rename</strong> → change it to <code>.env</code> (exactly, with the dot in front).", "Open it and fill in the two values you copied from Supabase:<br><code>VITE_SUPABASE_URL=https://&lt;your-project&gt;.supabase.co</code><br><code>VITE_SUPABASE_ANON_KEY=&lt;your anon key&gt;</code>", "Save (<code>Ctrl+S</code> / <code>Cmd+S</code>).", "Open <code>.gitignore</code> and check that the line <code>.env</code> is in there. If not, add it. This prevents your credentials being uploaded to GitHub by mistake."]}, {"n": "05", "label": "TEST ON YOUR COMPUTER", "title_html": "Run the site <em>locally</em>", "why": "Before putting it online it's smart to try it on your computer. If something is wrong you'll see it immediately, with no impact on real users.", "actions": ["In VS Code open the terminal (View → Terminal). Type <code>npm run dev</code> and press Enter.", "In the terminal, Vite prints a line like <code>➜ Local: http://localhost:XXXX</code>. Open that address in your browser (usually <code>http://localhost:3000</code>; if the port is busy, Vite picks another one and shows it).", "You'll see the login screen. Sign in with the admin email/password you created in step 03.", "Create a test participant. Refresh the page (F5): if it's still there, Supabase is working.", "Click the language switcher in the login screen and in the sidebar: it should change the interface language."], "prompt_label": "If something fails, useful prompt", "prompt_body": "\"If npm run dev throws an error, read the message in the terminal and suggest a minimal fix. Don't change any file without my approval.\""}, {"n": "06", "label": "TRANSLATE TEXTS", "title_html": "Personalize across <em>7 languages</em>", "why": "Managemob already speaks 7 languages. You only need to change the visible text (labels, titles, sentences) for YOUR organization, while leaving the technical keys untouched.", "actions": ["In VS Code open the <code>src/locales/</code> folder. You'll find seven files: <code>it.ts</code>, <code>en.ts</code>, <code>es.ts</code>, <code>fr.ts</code>, <code>de.ts</code>, <code>pt.ts</code>, <code>se.ts</code>.", "Open one file at a time. Edit <strong>only the values</strong> (after the colon). <strong>Don't touch the keys</strong> (before the colon).", "Example:<br>BEFORE: <code>login_title: \"Sign in to Managemob\"</code><br>AFTER: <code>login_title: \"Sign in to Pessoa Academy\"</code>"], "prompt_label": "Prompt to paste into the AI assistant", "prompt_body": "\"Open src/locales/en.ts. Without changing the keys, rewrite each visible string with a tone that fits the brand 'Pessoa Academy'. Then mirror those edits in the other six locale files (it, es, fr, de, pt, se).\"", "tip_label": "Adding an 8th language", "tip_body": "Duplicate <code>en.ts</code> as <code>pl.ts</code> (for Polish), translate the values, register the new locale, and add the flag to the switcher. Ask the AI to do it for you."}, {"n": "07", "label": "LOGO AND COLORS", "title_html": "Give it <em>your visual identity</em>", "why": "Look-and-feel is what users see. Changing logo and colors makes the site visibly \"yours\".", "actions": ["In <code>public/</code> replace <code>logo.svg</code> (or <code>logo.png</code>) with yours. Square format, at least 256×256 pixels.", "Open <code>src/components/Sidebar.tsx</code> and <code>src/pages/Login.tsx</code>. Find the placeholder \"M\" letter and replace it with: <code>&lt;img src=\"/logo.svg\" alt=\"Pessoa Academy\" /&gt;</code>", "Open <code>src/styles/main.css</code>. At the top of the file, inside <code>:root { ... }</code>, find the colour variables: <code>--primary</code> (main app colour, default blue), <code>--accent</code>, <code>--sidebar-bg</code> (sidebar background, default teal) and <code>--teal</code>. Replace the values with your palette.", "Open <code>index.html</code> at the project root: edit the text inside <code>&lt;title&gt;...&lt;/title&gt;</code> (e.g. from \"Managemob\" to \"Pessoa Academy\") and in the tag <code>&lt;link rel=\"icon\" ... href=\"/vite.svg\" /&gt;</code> replace <code>/vite.svg</code> with the path to your logo (e.g. <code>/logo.svg</code>)."], "prompt_label": "Prompt to paste into the AI assistant", "prompt_body": "\"Rebrand for 'Pessoa Academy' with primary #XXXXXX and secondary #YYYYYY. Update the CSS variables in src/styles/, replace the M with /logo.svg in Sidebar.tsx and Login.tsx, change the title in index.html, and update login_title and login_footer in every file under src/locales/.\""}, {"n": "08", "label": "WORD TEMPLATES", "title_html": "Automate your <em>documents</em>", "why": "Managemob can take a Word document (e.g. Learning Agreement, Europass Mobility) and fill it in automatically with each participant's data. You just have to tell it which \"holes\" to fill.", "actions": ["Open the Word document you want to automate.", "Find the spots where data goes (name, dates, host company...). Replace them with tags in curly braces. Examples:<br>[Name] [Surname] → <code>{name} {surname}</code><br>[Start date] → <code>{arrival_date}</code><br>[Email] → <code>{email}</code><br>[Host company] → <code>{host_company_name}</code>", "Save as <strong>.docx</strong> (not .doc, not .pdf).", "In the app: <em>Documents → Upload Template</em> → give it a name → upload the file.", "Pick the template, choose one or more participants, click <strong>Generate</strong>. The downloaded file has the tags replaced with real data."], "tip_label": "Important rules", "tip_body": "Tags are case-sensitive: write <code>{name}</code>, not <code>{Name}</code>. No spaces inside the braces. Formatting (bold, italic) is preserved. The full tag list is in the Documents page of the app."}, {"n": "09", "label": "GO LIVE", "title_html": "Publish the site <em>on Netlify</em>", "why": "Right now the site only runs on your computer. To share it with the world you put it online on Netlify — free, connected directly to your GitHub repository. Every time you push changes to GitHub, Netlify rebuilds the site automatically.", "subsections": [{"title": "A · Push your changes to GitHub (with GitHub Desktop)", "items": ["Open GitHub Desktop. You'll see the list of changed files.", "Bottom-left, type a short message (e.g. \"Pessoa Academy customization\") and click <strong>Commit to main</strong>.", "Top, click <strong>Push origin</strong>. Your changes are now online on YOUR GitHub repository."]}, {"title": "B · Publish on Netlify (linked to your repository)", "items": ["Go to netlify.com → <strong>Add new site → Import an existing project</strong>. Pick <strong>GitHub</strong> as the provider.", "First time, Netlify asks for permission: accept it, then pick <strong>your fork</strong> created in step 02.", "Netlify automatically detects it's a Vite project. Check that <em>Build command</em> is <code>npm run build</code> and <em>Publish directory</em> is <code>dist</code>.", "Open <strong>Show advanced → Add environment variable</strong>. Add <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_ANON_KEY</code> with the values from step 03.", "Click <strong>Deploy</strong>. Wait 1–3 minutes for the first build.", "Netlify gives you an address like <code>https://&lt;random-name&gt;.netlify.app</code>. That is your live site!", "From <em>Site settings → Change site name</em> you can rename it. From <em>Domain management</em> you can connect your own domain (e.g. mobility.pessoa-academy.com)."]}], "prompt_label": "Prompt to paste into the AI assistant", "prompt_body": "\"Check the SPA routing: do I need a netlify.toml file to avoid 404 errors when I refresh on a sub-page like /dashboard?\""}, {"n": "10", "label": "FINAL CHECK", "title_html": "You're <em>online</em>, last verification", "why": "Before handing the site to real users, quickly verify everything works from the public Netlify URL (not from your localhost).", "checklist": ["Login on the Netlify URL works.", "The language switcher works in all 7 languages.", "I add a participant and after F5 it's still there.", "I generate a Word document with a participant: tags are filled in.", "Calendar shows the participant on the right dates.", "Refreshing /dashboard does not give a 404 error.", "Logout returns to the login screen."], "tip_label": "Before official go-live", "tip_body": "Re-enable <strong>email confirmation</strong> in Supabase Auth. Rotate the <strong>DB password</strong>. Invite the real users. Delete the test admin. Take a backup."}], "conclusion_label": "Conclusion", "conclusion_title_html": "A platform <em>that's yours</em>, in 7 languages, no code written by hand", "conclusion_body": "Visual Studio Code opens the files. The AI assistant writes the code. GitHub Desktop syncs. Supabase stores the data. Netlify puts the site online. You coordinate everything and make the decisions that matter: name, colors, text, documents. That's the Vibe Coding Workflow™.", "tags": ["Vibe Coding", "Pessoa Academy", "Managemob", "VS Code", "Gemini Code Assist", "GitHub Desktop", "Supabase", "Netlify", "Erasmus+", "Learning Mobility"], "footer_creator": "© Pessoa Academy", "footer_brand": "Managemob × Vibe Coding Workflow™"}, "es": {"lang": "es", "page_title": "Procedimiento paso a paso · Crea tu propia versión de Managemob", "doc_title": "Crea tu propia versión de Managemob", "doc_subtitle": "Procedimiento paso a paso, en 7 idiomas, sin escribir código.", "creator_line": "Una guía de Pessoa Academy · Vibe Coding Workflow™", "tools_line": "Visual Studio Code + asistente IA gratuito + GitHub Desktop + Supabase + Netlify", "hero_eyebrow": "Vibe Coding Workflow™", "hero_title_html": "Construye <em>Managemob</em> a tu imagen", "hero_body": "Managemob es una plataforma para gestionar movilidades formativas (Erasmus+, ESC, intercambios). Esta guía te lleva paso a paso a crear TU versión personalizada: logo, colores, textos en tus idiomas, documentos automatizados. No necesitas saber programar: la IA escribe, tú decides.", "stats": [["10", "pasos"], ["7", "idiomas listos"], ["0", "líneas escritas a mano"], ["~2 h", "tiempo medio"]], "principle_label": "Principio Vibe Coding", "principle_title_html": "Tú eres el <em>director</em>, la IA es el mecanógrafo", "principle_body": "Toda la guía descansa en una idea: tú describes lo que quieres en lenguaje claro, el asistente IA escribe el código en tu editor. Cuando veas una sección PROMPT, copia la frase y pégala en el chat del asistente IA dentro de Visual Studio Code.", "lang_switch_label": "Idioma", "steps": [{"n": "01", "label": "ANTES DE EMPEZAR", "title_html": "Prepara tu <em>caja de herramientas</em>", "why": "Solo necesitas unas pocas herramientas gratuitas. Piénsalas como una caja: GitHub guarda el código en línea, Visual Studio Code es el programa donde editas los archivos, el asistente IA escribe el código por ti, GitHub Desktop mueve los archivos entre tu ordenador y GitHub sin terminal.", "actions": ["Crea una cuenta gratuita en <strong>github.com</strong>. Será el \"almacén\" online de tu código.", "Descarga e instala <strong>Visual Studio Code</strong> desde code.visualstudio.com. Es el programa que abrirás cada vez que trabajes en el sitio.", "Abre VS Code, haz clic en el icono Extensions a la izquierda y busca un asistente IA gratuito. Opción fácil: <strong>Gemini Code Assist</strong> de Google. También sirven <strong>Codeium</strong>, <strong>Continue</strong>, <strong>Cody</strong> de Sourcegraph o cualquier otro asistente IA gratuito. Instálalo e inicia sesión.", "Descarga e instala <strong>GitHub Desktop</strong> desde desktop.github.com. Ábrelo e inicia sesión con la misma cuenta GitHub.", "Crea una cuenta gratuita en <strong>supabase.com</strong>. Será el \"almacén\" donde la app guarda los datos (usuarios, participantes, movilidades).", "Crea una cuenta gratuita en <strong>netlify.com</strong>. Es el servicio que pondrá tu sitio online.", "Descarga e instala <strong>Node.js</strong> versión LTS desde nodejs.org. Sirve para ejecutar el sitio en tu ordenador mientras lo pruebas."], "tip_label": "Bonus", "tip_body": "Todas estas herramientas son gratuitas. No hace falta tarjeta para empezar."}, {"n": "02", "label": "FORK Y CLON", "title_html": "Crea tu <em>copia personal</em> del proyecto", "why": "\"Forkear\" significa hacer una copia personal del proyecto Managemob en GitHub, así puedes modificarla sin tocar el original. \"Clonar\" es descargar esa copia a tu ordenador.", "actions": ["Ve a la página GitHub del template Managemob — ej. <a href=\"https://github.com/ETN-International/managemob-app\" target=\"_blank\" rel=\"noopener\">github.com/ETN-International/managemob-app</a>, o la URL del template que te hayan facilitado. Pulsa <strong>Fork</strong> arriba a la derecha. Elige un nombre (ej. <em>pessoa-mobility</em>). Espera unos segundos: ya tienes tu copia.", "En la página de tu fork, pulsa el botón verde <strong>&lt;&gt; Code</strong> y elige <strong>Open with GitHub Desktop</strong>.", "GitHub Desktop pregunta dónde guardar la carpeta. Elige una ruta (ej. Documentos) y pulsa <strong>Clone</strong>.", "Arriba a la derecha en GitHub Desktop pulsa <strong>Open in Visual Studio Code</strong>.", "En VS Code abre la <strong>Terminal</strong>: <em>View → Terminal</em> (o <code>Ctrl+`</code> / <code>Cmd+`</code>). Escribe <code>npm install</code> y pulsa Enter. Espera a que termine: descarga las librerías del proyecto."], "prompt_label": "Prompt para pegar en el asistente IA", "prompt_body": "\"Lee la estructura de la carpeta src/ y explícame en un párrafo qué hace cada carpeta de primer nivel (pages, components, locales, lib, styles, data, types). No cambies nada todavía.\""}, {"n": "03", "label": "BASE DE DATOS SUPABASE", "title_html": "Prepara el <em>almacén de datos</em>", "why": "Supabase es el almacén online donde la app guarda usuarios, participantes y movilidades. Sin Supabase la app no tiene dónde guardar la información.", "actions": ["Ve a supabase.com → inicia sesión → <strong>New project</strong>. Elige nombre, región Europa y una contraseña fuerte. <strong>Guarda la contraseña</strong> en lugar seguro.", "Espera 1–2 minutos a que el proyecto esté listo.", "Sidebar → <strong>Project Settings → API</strong>. Verás <strong>Project URL</strong> y <strong>anon public key</strong>. Cópialos y guárdalos: los necesitarás en el paso 04.", "Sidebar → <strong>SQL Editor → New query</strong>. En VS Code abre <code>supabase/schema.sql</code>, copia todo, pégalo en el SQL Editor y pulsa <strong>Run</strong>. Crea las tablas.", "Sidebar → <strong>Authentication → Providers</strong> → activa <strong>Email</strong>. Para pruebas, desactiva <em>Confirm email</em>.", "Sidebar → <strong>Authentication → Users → Add user</strong>: crea el primer administrador con email y contraseña que recuerdes.", "<strong>Importante — no te lo saltes:</strong> abre el chat del asistente AI en VS Code, copia y pega el prompt de abajo, ejecuta el SQL que te devuelva en el SQL Editor de Supabase. Sin este paso, cualquiera con la anon key puede escribir en tu base de datos."], "prompt_label": "Prompt para pegar en el asistente IA", "prompt_body": "\"Genera el SQL para activar Row Level Security en todas las tablas públicas de Managemob, de modo que solo los usuarios autenticados puedan leer y escribir. Salida: un único bloque SQL.\""}, {"n": "04", "label": "CONFIGURAR .env", "title_html": "Conecta el sitio a <em>tu base de datos</em>", "why": "El archivo <code>.env</code> contiene las credenciales (URL y clave) que dicen al sitio cómo hablar con Supabase. Sin él la app no sabe dónde buscar los datos.", "actions": ["En VS Code, en el Explorer a la izquierda, busca <code>.env.example</code>.", "Clic derecho en <code>.env.example</code> → <strong>Copy</strong>. Clic derecho en la misma carpeta → <strong>Paste</strong>.", "Clic derecho en el nuevo archivo → <strong>Rename</strong> → cámbialo a <code>.env</code> (con el punto delante).", "Ábrelo y rellena los dos valores copiados de Supabase:<br><code>VITE_SUPABASE_URL=https://&lt;tu-proyecto&gt;.supabase.co</code><br><code>VITE_SUPABASE_ANON_KEY=&lt;tu anon key&gt;</code>", "Guarda (<code>Ctrl+S</code> / <code>Cmd+S</code>).", "Abre <code>.gitignore</code> y comprueba que contiene la línea <code>.env</code>. Si no, añádela. Esto evita publicar tus credenciales en GitHub por error."]}, {"n": "05", "label": "PRUEBA EN TU ORDENADOR", "title_html": "Ejecuta el sitio <em>en local</em>", "why": "Antes de subirlo, conviene probarlo en tu ordenador. Si algo falla, lo ves al instante sin afectar a usuarios reales.", "actions": ["En VS Code abre el terminal (View → Terminal). Escribe <code>npm run dev</code> y pulsa Enter.", "En el terminal Vite mostrará una línea tipo <code>➜ Local: http://localhost:XXXX</code>. Ábrela en el navegador (suele ser <code>http://localhost:3000</code>; si el puerto está ocupado Vite elige otro y lo muestra).", "Verás la pantalla de login. Entra con el email/contraseña del admin del paso 03.", "Crea un participante de prueba. Refresca (F5): si sigue ahí, Supabase funciona.", "Pulsa el selector de idioma en login y sidebar: la interfaz debe cambiar de idioma."], "prompt_label": "Si algo falla, prompt útil", "prompt_body": "\"Si npm run dev da error, lee el mensaje del terminal y propónme una corrección mínima. No modifiques ningún archivo sin mi aprobación.\""}, {"n": "06", "label": "TRADUCE LOS TEXTOS", "title_html": "Personaliza en <em>7 idiomas</em>", "why": "Managemob ya habla 7 idiomas. Solo tienes que cambiar los textos visibles (etiquetas, títulos, frases) para TU organización, sin tocar las claves técnicas.", "actions": ["En VS Code abre la carpeta <code>src/locales/</code>. Hay siete archivos: <code>it.ts</code>, <code>en.ts</code>, <code>es.ts</code>, <code>fr.ts</code>, <code>de.ts</code>, <code>pt.ts</code>, <code>se.ts</code>.", "Abre uno cada vez. Edita <strong>solo los valores</strong> (después de los dos puntos). <strong>No toques las claves</strong>.", "Ejemplo:<br>ANTES: <code>login_title: \"Acceder a Managemob\"</code><br>DESPUÉS: <code>login_title: \"Acceder a Pessoa Academy\"</code>"], "prompt_label": "Prompt para pegar en el asistente IA", "prompt_body": "\"Abre src/locales/es.ts. Sin modificar las claves, reescribe cada string visible con un tono adecuado a la marca 'Pessoa Academy'. Replica los mismos cambios en los otros seis archivos de idioma (it, en, fr, de, pt, se).\"", "tip_label": "Añadir un 8º idioma", "tip_body": "Duplica <code>en.ts</code> como <code>pl.ts</code>, traduce los valores, registra el nuevo locale y añade la bandera al selector. Pídelo a la IA."}, {"n": "07", "label": "LOGO Y COLORES", "title_html": "Pon tu <em>identidad visual</em>", "why": "El aspecto es lo que ven los usuarios. Cambiando logo y colores, el sitio pasa a ser visiblemente \"tuyo\".", "actions": ["En <code>public/</code> reemplaza <code>logo.svg</code> (o <code>logo.png</code>) por el tuyo. Formato cuadrado, mínimo 256×256 px.", "Abre <code>src/components/Sidebar.tsx</code> y <code>src/pages/Login.tsx</code>. Sustituye la \"M\" placeholder por: <code>&lt;img src=\"/logo.svg\" alt=\"Pessoa Academy\" /&gt;</code>", "Abre <code>src/styles/main.css</code>. Arriba del archivo, dentro de <code>:root { ... }</code>, están las variables de color: <code>--primary</code> (color principal, azul por defecto), <code>--accent</code>, <code>--sidebar-bg</code> (fondo del sidebar, teal por defecto) y <code>--teal</code>. Sustituye los valores por los de tu paleta.", "Abre <code>index.html</code> en la raíz: cambia el texto dentro de <code>&lt;title&gt;...&lt;/title&gt;</code> (ej. de \"Managemob\" a \"Pessoa Academy\") y en <code>&lt;link rel=\"icon\" ... href=\"/vite.svg\" /&gt;</code> sustituye <code>/vite.svg</code> por la ruta de tu logo (ej. <code>/logo.svg</code>)."], "prompt_label": "Prompt para pegar en el asistente IA", "prompt_body": "\"Rebrand para 'Pessoa Academy' con primario #XXXXXX y secundario #YYYYYY. Actualiza las variables CSS, sustituye la M por /logo.svg en Sidebar.tsx y Login.tsx, cambia el title en index.html y actualiza login_title y login_footer en cada archivo de src/locales/.\""}, {"n": "08", "label": "PLANTILLAS WORD", "title_html": "Automatiza tus <em>documentos</em>", "why": "Managemob puede coger un documento Word (Learning Agreement, Europass Mobility) y rellenarlo automáticamente con los datos de cada participante. Solo tienes que decirle qué \"huecos\" rellenar.", "actions": ["Abre el documento Word a automatizar.", "Encuentra los lugares donde van los datos. Sustitúyelos por etiquetas entre llaves. Ejemplos:<br>[Nombre] [Apellido] → <code>{name} {surname}</code><br>[Fecha inicio] → <code>{arrival_date}</code><br>[Email] → <code>{email}</code><br>[Empresa] → <code>{host_company_name}</code>", "Guarda como <strong>.docx</strong>.", "En la app: <em>Documentos → Subir Plantilla</em> → ponle nombre → carga el archivo.", "Selecciona la plantilla, escoge participantes y pulsa <strong>Generar</strong>."], "tip_label": "Reglas importantes", "tip_body": "Las etiquetas distinguen mayúsculas: usa <code>{name}</code>, no <code>{Name}</code>. Sin espacios dentro de las llaves. La negrita/cursiva se conserva. Lista completa en la página Documentos."}, {"n": "09", "label": "PUBLICAR ONLINE", "title_html": "Pon el sitio <em>en Netlify</em>", "why": "Por ahora el sitio solo corre en tu ordenador. Para compartirlo lo publicas en Netlify, gratis y conectado directamente a tu repositorio GitHub. Cada vez que subas cambios a GitHub, Netlify reconstruirá el sitio automáticamente.", "subsections": [{"title": "A · Sube los cambios a GitHub (con GitHub Desktop)", "items": ["Abre GitHub Desktop. Verás los archivos modificados.", "Abajo a la izquierda, escribe un mensaje breve (\"Personalización Pessoa Academy\") y pulsa <strong>Commit to main</strong>.", "Arriba, pulsa <strong>Push origin</strong>. Tus cambios están en TU repositorio GitHub."]}, {"title": "B · Publica en Netlify (conectado a tu repositorio)", "items": ["Ve a netlify.com → <strong>Add new site → Import an existing project</strong>. Elige <strong>GitHub</strong>.", "Acepta el permiso y selecciona <strong>tu fork</strong> del paso 02.", "Netlify detecta Vite. Comprueba <em>Build command</em> = <code>npm run build</code> y <em>Publish directory</em> = <code>dist</code>.", "<strong>Show advanced → Add environment variable</strong>. Añade <code>VITE_SUPABASE_URL</code> y <code>VITE_SUPABASE_ANON_KEY</code> con los valores del paso 03.", "Pulsa <strong>Deploy</strong>. Espera 1–3 minutos.", "Netlify te da una URL <code>https://&lt;nombre&gt;.netlify.app</code>. ¡Tu sitio está online!", "Desde <em>Site settings → Change site name</em> puedes renombrarlo. Desde <em>Domain management</em> puedes conectar tu propio dominio."]}], "prompt_label": "Prompt para pegar en el asistente IA", "prompt_body": "\"Verifica el routing SPA: ¿necesito un netlify.toml para evitar errores 404 al refrescar en /dashboard?\""}, {"n": "10", "label": "CONTROL FINAL", "title_html": "Estás <em>online</em>, última verificación", "why": "Antes de entregar el sitio a usuarios reales, comprueba rápido que todo va desde la URL pública de Netlify.", "checklist": ["El login en la URL Netlify funciona.", "El selector de idioma funciona en los 7 idiomas.", "Añado un participante y tras F5 sigue ahí.", "Genero un Word con un participante: las etiquetas están rellenadas.", "El Calendar muestra al participante en las fechas correctas.", "Refrescar /dashboard no da 404.", "Logout vuelve a la pantalla de login."], "tip_label": "Antes del go-live oficial", "tip_body": "Reactiva la <strong>confirmación email</strong> en Supabase Auth. Rota la <strong>contraseña DB</strong>. Invita a los usuarios reales. Borra el admin de prueba. Haz un backup."}], "conclusion_label": "Conclusión", "conclusion_title_html": "Una plataforma <em>tuya</em>, en 7 idiomas, sin código a mano", "conclusion_body": "Visual Studio Code abre los archivos. La IA escribe el código. GitHub Desktop sincroniza. Supabase guarda los datos. Netlify pone el sitio online. Tú coordinas y tomas las decisiones que importan: nombre, colores, textos, documentos. Eso es Vibe Coding Workflow™.", "tags": ["Vibe Coding", "Pessoa Academy", "Managemob", "VS Code", "Gemini Code Assist", "GitHub Desktop", "Supabase", "Netlify", "Erasmus+", "Movilidad formativa"], "footer_creator": "© Pessoa Academy", "footer_brand": "Managemob × Vibe Coding Workflow™"}, "fr": {"lang": "fr", "page_title": "Procédure pas à pas · Créez votre version de Managemob", "doc_title": "Créez votre version de Managemob", "doc_subtitle": "Procédure pas à pas, en 7 langues, sans écrire de code.", "creator_line": "Un guide de Pessoa Academy · Vibe Coding Workflow™", "tools_line": "Visual Studio Code + assistant IA gratuit + GitHub Desktop + Supabase + Netlify", "hero_eyebrow": "Vibe Coding Workflow™", "hero_title_html": "Façonnez <em>Managemob</em> à votre image", "hero_body": "Managemob est une plateforme pour gérer les mobilités formatives (Erasmus+, ESC, échanges). Ce guide vous accompagne étape par étape pour créer VOTRE version personnalisée : logo, couleurs, textes dans vos langues, documents automatisés. Pas besoin de savoir coder : l'IA tape, vous décidez.", "stats": [["10", "étapes"], ["7", "langues prêtes"], ["0", "ligne écrite à la main"], ["~2 h", "temps moyen"]], "principle_label": "Principe Vibe Coding", "principle_title_html": "Vous êtes le <em>metteur en scène</em>, l'IA est le dactylographe", "principle_body": "Tout le guide repose sur une seule idée : vous décrivez ce que vous voulez en langage naturel, l'assistant IA écrit le code dans votre éditeur. Quand vous voyez une section PROMPT, copiez la phrase et collez-la dans le chat de l'assistant IA dans Visual Studio Code.", "lang_switch_label": "Langue", "steps": [{"n": "01", "label": "AVANT DE COMMENCER", "title_html": "Préparez votre <em>boîte à outils</em>", "why": "Il vous faut peu d'outils, tous gratuits. Pensez-les comme une boîte à outils : GitHub stocke le code en ligne, Visual Studio Code est le logiciel où vous voyez et modifiez les fichiers, l'assistant IA écrit le code à votre place, GitHub Desktop transfère les fichiers entre votre ordinateur et GitHub sans terminal.", "actions": ["Créez un compte gratuit sur <strong>github.com</strong>. Ce sera l'\"entrepôt\" en ligne de votre code.", "Téléchargez et installez <strong>Visual Studio Code</strong> depuis code.visualstudio.com. C'est le logiciel que vous ouvrirez à chaque fois.", "Ouvrez VS Code, cliquez sur l'icône Extensions à gauche et cherchez un assistant IA gratuit. Choix simple : <strong>Gemini Code Assist</strong> de Google. <strong>Codeium</strong>, <strong>Continue</strong>, <strong>Cody</strong> de Sourcegraph ou tout autre assistant IA gratuit conviennent aussi. Installez et connectez-vous.", "Téléchargez et installez <strong>GitHub Desktop</strong> depuis desktop.github.com. Connectez-vous avec le même compte GitHub.", "Créez un compte gratuit sur <strong>supabase.com</strong>. Ce sera l'\"entrepôt\" où l'app stocke les données (utilisateurs, participants, mobilités).", "Créez un compte gratuit sur <strong>netlify.com</strong>. C'est le service qui mettra votre site en ligne.", "Téléchargez et installez <strong>Node.js</strong> LTS depuis nodejs.org. Sert à faire tourner le site sur votre ordinateur pendant les tests."], "tip_label": "Bonus", "tip_body": "Tous ces outils sont gratuits. Aucune carte bancaire pour démarrer."}, {"n": "02", "label": "FORK & CLONE", "title_html": "Faites votre <em>copie personnelle</em> du projet", "why": "\"Forker\" = faire une copie personnelle du projet Managemob sur GitHub. Vous pouvez la modifier sans toucher à l'original. \"Cloner\" = télécharger cette copie sur votre ordinateur.", "actions": ["Allez sur la page GitHub du template Managemob — par ex. <a href=\"https://github.com/ETN-International/managemob-app\" target=\"_blank\" rel=\"noopener\">github.com/ETN-International/managemob-app</a>, ou l'URL du template qui vous a été fournie. Cliquez <strong>Fork</strong> en haut à droite. Choisissez un nom (ex. <em>pessoa-mobility</em>). Patientez : vous avez votre copie.", "Sur la page de votre fork, cliquez le bouton vert <strong>&lt;&gt; Code</strong> et choisissez <strong>Open with GitHub Desktop</strong>.", "GitHub Desktop demande où sauvegarder. Choisissez un chemin (ex. Documents) et cliquez <strong>Clone</strong>.", "En haut à droite dans GitHub Desktop, cliquez <strong>Open in Visual Studio Code</strong>.", "Dans VS Code, ouvrez le <strong>Terminal</strong> : <em>View → Terminal</em> (ou <code>Ctrl+`</code> / <code>Cmd+`</code>). Tapez <code>npm install</code> et appuyez sur Entrée. Attendez la fin : il télécharge les bibliothèques."], "prompt_label": "Prompt à coller dans l'assistant IA", "prompt_body": "« Lis la structure du dossier src/ et explique-moi en un paragraphe ce que fait chaque dossier de premier niveau (pages, components, locales, lib, styles, data, types). Ne change rien encore. »"}, {"n": "03", "label": "BASE DE DONNÉES SUPABASE", "title_html": "Préparez l'<em>entrepôt de données</em>", "why": "Supabase stocke en ligne utilisateurs, participants et mobilités. Sans Supabase, l'app n'a pas où sauver les informations.", "actions": ["Allez sur supabase.com → connexion → <strong>New project</strong>. Choisissez nom, région Europe, mot de passe robuste. <strong>Sauvegardez le mot de passe</strong>.", "Patientez 1–2 minutes.", "Sidebar → <strong>Project Settings → API</strong>. Vous voyez <strong>Project URL</strong> et <strong>anon public key</strong>. Copiez-les pour l'étape 04.", "Sidebar → <strong>SQL Editor → New query</strong>. Dans VS Code, ouvrez <code>supabase/schema.sql</code>, copiez tout, collez et cliquez <strong>Run</strong>.", "Sidebar → <strong>Authentication → Providers</strong> → activez <strong>Email</strong>. Désactivez <em>Confirm email</em> pour les tests.", "Sidebar → <strong>Authentication → Users → Add user</strong> : créez le premier administrateur.", "<strong>Important — ne pas sauter :</strong> ouvrez le chat de l'agent IA dans VS Code, copiez-collez le prompt ci-dessous, exécutez le SQL qu'il renvoie dans le SQL Editor de Supabase. Sans cette étape, n'importe qui avec la clé anon peut écrire dans votre base."], "prompt_label": "Prompt à coller dans l'assistant IA", "prompt_body": "« Génère le SQL pour activer Row Level Security sur toutes les tables publiques de Managemob, autorisant lecture/écriture seulement aux utilisateurs authentifiés. Sortie : un seul bloc SQL. »"}, {"n": "04", "label": "CONFIGURER .env", "title_html": "Connectez le site à <em>votre base</em>", "why": "Le fichier <code>.env</code> contient les identifiants (URL et clé) qui disent au site comment parler à Supabase. Sans lui, l'app ne sait pas où chercher.", "actions": ["Dans VS Code, dans l'Explorer à gauche, repérez <code>.env.example</code>.", "Clic droit sur <code>.env.example</code> → <strong>Copy</strong>. Clic droit dans le même dossier → <strong>Paste</strong>.", "Clic droit sur le nouveau fichier → <strong>Rename</strong> → renommez-le <code>.env</code> (avec le point devant).", "Ouvrez-le et remplissez :<br><code>VITE_SUPABASE_URL=https://&lt;votre-projet&gt;.supabase.co</code><br><code>VITE_SUPABASE_ANON_KEY=&lt;votre anon key&gt;</code>", "Sauvegardez (<code>Ctrl+S</code> / <code>Cmd+S</code>).", "Ouvrez <code>.gitignore</code> et vérifiez que la ligne <code>.env</code> y figure. Sinon, ajoutez-la."]}, {"n": "05", "label": "TESTEZ EN LOCAL", "title_html": "Faites tourner le site <em>sur votre ordinateur</em>", "why": "Avant la mise en ligne, testez sur votre machine. Si quelque chose casse, vous le voyez tout de suite.", "actions": ["Dans VS Code, terminal (View → Terminal). Tapez <code>npm run dev</code>.", "Dans le terminal, Vite affiche une ligne <code>➜ Local: http://localhost:XXXX</code>. Ouvrez cette adresse dans votre navigateur (généralement <code>http://localhost:3000</code> ; si le port est occupé, Vite en choisit un autre et l'affiche).", "Connectez-vous avec l'admin créé à l'étape 03.", "Créez un participant test. Rafraîchissez (F5) : s'il reste, Supabase fonctionne.", "Testez le sélecteur de langue dans le login et la sidebar."], "prompt_label": "Si ça plante, prompt utile", "prompt_body": "« Si npm run dev échoue, lis l'erreur dans le terminal et propose-moi un correctif minimal. Ne modifie aucun fichier sans mon autorisation. »"}, {"n": "06", "label": "TRADUISEZ LES TEXTES", "title_html": "Personnalisez en <em>7 langues</em>", "why": "Managemob parle déjà 7 langues. Vous changez seulement les textes visibles pour VOTRE organisation, sans toucher aux clés techniques.", "actions": ["Dans VS Code ouvrez <code>src/locales/</code>. Sept fichiers : <code>it.ts</code>, <code>en.ts</code>, <code>es.ts</code>, <code>fr.ts</code>, <code>de.ts</code>, <code>pt.ts</code>, <code>se.ts</code>.", "Modifiez <strong>uniquement les valeurs</strong> (après les deux-points). <strong>Pas les clés</strong>.", "Exemple :<br>AVANT : <code>login_title: \"Connexion à Managemob\"</code><br>APRÈS : <code>login_title: \"Connexion à Pessoa Academy\"</code>"], "prompt_label": "Prompt à coller dans l'assistant IA", "prompt_body": "« Ouvre src/locales/fr.ts. Sans modifier les clés, traduis chaque chaîne visible avec un ton brand-aligned pour 'Pessoa Academy'. Reproduis les mêmes éditions dans les six autres fichiers de langue (it, en, es, de, pt, se). »", "tip_label": "Ajouter une 8e langue", "tip_body": "Dupliquez <code>en.ts</code> en <code>pl.ts</code>, traduisez, enregistrez le locale, ajoutez le drapeau au sélecteur. Demandez à l'IA."}, {"n": "07", "label": "LOGO ET COULEURS", "title_html": "Donnez-lui <em>votre identité visuelle</em>", "why": "L'apparence est ce que voient vos utilisateurs. Logo et couleurs rendent le site visiblement \"vôtre\".", "actions": ["Dans <code>public/</code> remplacez <code>logo.svg</code> par le vôtre. Carré, ≥256×256 px.", "Ouvrez <code>src/components/Sidebar.tsx</code> et <code>src/pages/Login.tsx</code>. Remplacez le \"M\" placeholder par : <code>&lt;img src=\"/logo.svg\" alt=\"Pessoa Academy\" /&gt;</code>", "Ouvrez <code>src/styles/main.css</code>. En haut du fichier, dans <code>:root { ... }</code>, vous trouvez les variables de couleur : <code>--primary</code> (couleur principale, bleu par défaut), <code>--accent</code>, <code>--sidebar-bg</code> (fond de la barre latérale, teal par défaut) et <code>--teal</code>. Remplacez les valeurs par celles de votre palette.", "Ouvrez <code>index.html</code> à la racine : modifiez le texte dans <code>&lt;title&gt;...&lt;/title&gt;</code> (ex. \"Managemob\" → \"Pessoa Academy\") et dans <code>&lt;link rel=\"icon\" ... href=\"/vite.svg\" /&gt;</code> remplacez <code>/vite.svg</code> par le chemin de votre logo (ex. <code>/logo.svg</code>)."], "prompt_label": "Prompt à coller dans l'assistant IA", "prompt_body": "« Rebrand pour 'Pessoa Academy' avec primaire #XXXXXX et secondaire #YYYYYY. Mets à jour les variables CSS, remplace le M par /logo.svg dans Sidebar.tsx et Login.tsx, change le title dans index.html, et mets à jour login_title et login_footer dans chaque fichier de src/locales/. »"}, {"n": "08", "label": "MODÈLES WORD", "title_html": "Automatisez vos <em>documents</em>", "why": "Managemob peut prendre un document Word et le remplir automatiquement avec les données du participant. Dites-lui juste quels \"trous\" remplir.", "actions": ["Ouvrez le document Word à automatiser.", "Remplacez les zones variables par des tags entre accolades. Exemples :<br>[Prénom] [Nom] → <code>{name} {surname}</code><br>[Date arrivée] → <code>{arrival_date}</code><br>[Email] → <code>{email}</code><br>[Entreprise] → <code>{host_company_name}</code>", "Sauvegardez en <strong>.docx</strong>.", "Dans l'app : <em>Documents → Charger Modèle</em> → nom et upload.", "Choisissez le modèle, les participants, cliquez <strong>Générer</strong>."], "tip_label": "Règles importantes", "tip_body": "Tags sensibles à la casse : écrivez <code>{name}</code>, pas <code>{Name}</code>. Pas d'espaces dans les accolades. Mise en forme préservée. Liste complète dans la page Documents."}, {"n": "09", "label": "EN LIGNE", "title_html": "Publiez le site <em>sur Netlify</em>", "why": "Pour l'instant le site tourne uniquement sur votre machine. Pour le partager, vous le publiez sur Netlify, gratuit, connecté directement à votre repository GitHub. À chaque push GitHub, Netlify rebuild automatiquement.", "subsections": [{"title": "A · Push vos changements vers GitHub (avec GitHub Desktop)", "items": ["Ouvrez GitHub Desktop. Liste des fichiers modifiés.", "En bas à gauche, message court (\"Personnalisation Pessoa Academy\") puis <strong>Commit to main</strong>.", "En haut, <strong>Push origin</strong>. Vos changements sont sur VOTRE repo GitHub."]}, {"title": "B · Publier sur Netlify (lié à votre repo)", "items": ["netlify.com → <strong>Add new site → Import an existing project</strong>. Choisissez <strong>GitHub</strong>.", "Acceptez l'autorisation, sélectionnez <strong>votre fork</strong> de l'étape 02.", "Netlify détecte Vite. Vérifiez <em>Build command</em> = <code>npm run build</code> et <em>Publish directory</em> = <code>dist</code>.", "<strong>Show advanced → Add environment variable</strong>. Ajoutez <code>VITE_SUPABASE_URL</code> et <code>VITE_SUPABASE_ANON_KEY</code>.", "Cliquez <strong>Deploy</strong>. Patientez 1–3 minutes.", "Netlify donne une URL <code>https://&lt;nom&gt;.netlify.app</code>. Votre site est en ligne !", "<em>Site settings → Change site name</em> pour renommer. <em>Domain management</em> pour brancher votre propre domaine."]}], "prompt_label": "Prompt à coller dans l'assistant IA", "prompt_body": "« Vérifie le routage SPA : faut-il un netlify.toml pour que le refresh sur /dashboard ne donne pas 404 ? »"}, {"n": "10", "label": "VÉRIFICATION FINALE", "title_html": "Vous êtes <em>en ligne</em>, dernière vérification", "why": "Avant de remettre le site aux utilisateurs réels, vérifiez vite que tout marche depuis l'URL Netlify publique.", "checklist": ["Login sur l'URL Netlify fonctionne.", "Le sélecteur de langue marche pour 7 langues.", "J'ajoute un participant et après F5 il est encore là.", "Je génère un Word avec un participant : tags remplis.", "Le Calendar affiche le participant aux bonnes dates.", "Refresh sur /dashboard ne donne pas 404.", "Le logout retourne à l'écran de connexion."], "tip_label": "Avant le go-live officiel", "tip_body": "Réactivez la <strong>confirmation email</strong> dans Supabase. Faites tourner le <strong>mot de passe DB</strong>. Invitez les vrais utilisateurs. Supprimez l'admin de test. Faites un backup."}], "conclusion_label": "Conclusion", "conclusion_title_html": "Une plateforme <em>à vous</em>, en 7 langues, sans code à la main", "conclusion_body": "Visual Studio Code ouvre les fichiers. L'IA écrit le code. GitHub Desktop synchronise. Supabase stocke les données. Netlify met le site en ligne. Vous coordonnez et prenez les décisions qui comptent : nom, couleurs, textes, documents. C'est le Vibe Coding Workflow™.", "tags": ["Vibe Coding", "Pessoa Academy", "Managemob", "VS Code", "Gemini Code Assist", "GitHub Desktop", "Supabase", "Netlify", "Erasmus+", "Mobilité formative"], "footer_creator": "© Pessoa Academy", "footer_brand": "Managemob × Vibe Coding Workflow™"}, "de": {"lang": "de", "page_title": "Schritt-für-Schritt-Anleitung · Erstellen Sie Ihre eigene Managemob-Version", "doc_title": "Erstellen Sie Ihre eigene Version von Managemob", "doc_subtitle": "Schritt-für-Schritt-Anleitung, in 7 Sprachen, ohne Code zu schreiben.", "creator_line": "Eine Anleitung von Pessoa Academy · Vibe Coding Workflow™", "tools_line": "Visual Studio Code + kostenloser KI-Assistent + GitHub Desktop + Supabase + Netlify", "hero_eyebrow": "Vibe Coding Workflow™", "hero_title_html": "Formen Sie <em>Managemob</em> nach Ihrem Bild", "hero_body": "Managemob ist eine Plattform zur Verwaltung von Bildungsmobilitäten (Erasmus+, ESC, Austauschprogramme). Diese Anleitung führt Sie Schritt für Schritt zu IHRER eigenen, angepassten Version: Logo, Farben, Texte in Ihren Sprachen, automatisierte Dokumente. Sie müssen nicht programmieren können – die KI tippt, Sie entscheiden.", "stats": [["10", "Schritte"], ["7", "Sprachen bereit"], ["0", "handgeschriebene Zeilen"], ["~2 Std.", "Durchschnittszeit"]], "principle_label": "Vibe-Coding-Prinzip", "principle_title_html": "Sie sind der <em>Regisseur</em>, die KI ist der Tippende", "principle_body": "Die ganze Anleitung beruht auf einer Idee: Sie beschreiben in einfachen Worten, was Sie wollen, der KI-Assistent schreibt den Code in Ihrem Editor. Wenn Sie einen PROMPT-Abschnitt sehen, kopieren Sie den Satz und fügen ihn in den Chat des KI-Assistenten in Visual Studio Code ein.", "lang_switch_label": "Sprache", "steps": [{"n": "01", "label": "BEVOR SIE STARTEN", "title_html": "Bereiten Sie Ihren <em>Werkzeugkasten</em> vor", "why": "Sie brauchen nur wenige kostenlose Werkzeuge. Stellen Sie sich diese wie einen Werkzeugkasten vor: GitHub speichert den Code online, Visual Studio Code ist das Programm, in dem Sie Dateien sehen und bearbeiten, der KI-Assistent schreibt den Code für Sie, GitHub Desktop verschiebt Dateien zwischen Ihrem Computer und GitHub ohne Terminal.", "actions": ["Eröffnen Sie ein kostenloses Konto auf <strong>github.com</strong>. Das ist Ihr Online-\"Lager\" für den Code.", "Laden Sie <strong>Visual Studio Code</strong> von code.visualstudio.com. Das ist das Programm, das Sie jedes Mal öffnen.", "Öffnen Sie VS Code, klicken Sie links auf das Extensions-Symbol und suchen Sie einen kostenlosen KI-Assistenten. Einfache Wahl: <strong>Gemini Code Assist</strong> von Google. Auch <strong>Codeium</strong>, <strong>Continue</strong>, <strong>Cody</strong> von Sourcegraph oder andere kostenlose KI-Assistenten funktionieren. Installieren und anmelden.", "Laden Sie <strong>GitHub Desktop</strong> von desktop.github.com. Mit demselben GitHub-Konto anmelden.", "Eröffnen Sie ein kostenloses Konto auf <strong>supabase.com</strong>. Das wird das \"Lager\", wo die App Daten speichert.", "Eröffnen Sie ein kostenloses Konto auf <strong>netlify.com</strong>. Das ist der Dienst, der Ihre Website online stellt.", "Laden Sie <strong>Node.js</strong> LTS von nodejs.org. Wird benötigt, um die Website beim Testen lokal laufen zu lassen."], "tip_label": "Bonus", "tip_body": "Alle diese Werkzeuge sind kostenlos. Keine Kreditkarte nötig zum Start."}, {"n": "02", "label": "FORK & CLONE", "title_html": "Erstellen Sie Ihre <em>persönliche Kopie</em>", "why": "\"Forken\" = persönliche Kopie des Projekts auf GitHub anlegen, ohne das Original zu berühren. \"Klonen\" = diese Kopie auf Ihren Computer herunterladen.", "actions": ["Auf die GitHub-Seite der Managemob-Vorlage gehen — z.&nbsp;B. <a href=\"https://github.com/ETN-International/managemob-app\" target=\"_blank\" rel=\"noopener\">github.com/ETN-International/managemob-app</a>, oder die URL der Vorlage, die Ihnen bereitgestellt wurde. Auf <strong>Fork</strong> klicken (oben rechts). Namen wählen (z.&nbsp;B. <em>pessoa-mobility</em>).", "Auf der Fork-Seite den grünen Button <strong>&lt;&gt; Code</strong> → <strong>Open with GitHub Desktop</strong>.", "GitHub Desktop fragt nach dem Speicherpfad. Wählen (z.&nbsp;B. Dokumente) → <strong>Clone</strong>.", "Oben rechts in GitHub Desktop <strong>Open in Visual Studio Code</strong>.", "In VS Code <strong>Terminal</strong> öffnen: <em>View → Terminal</em> (oder <code>Ctrl+`</code> / <code>Cmd+`</code>). Tippen Sie <code>npm install</code> und Enter. Wartet bis fertig – die Bibliotheken werden geladen."], "prompt_label": "Prompt für den KI-Assistenten", "prompt_body": "„Lies die Struktur des Ordners src/ und erkläre mir in einem Absatz, was jeder Top-Level-Ordner macht (pages, components, locales, lib, styles, data, types). Ändere noch nichts."}, {"n": "03", "label": "SUPABASE-DATENBANK", "title_html": "Bereiten Sie das <em>Datenlager</em> vor", "why": "Supabase ist das Online-Lager, in dem die App Benutzer, Teilnehmer und Mobilitäten speichert. Ohne Supabase hat die App keinen Speicherort.", "actions": ["supabase.com → einloggen → <strong>New project</strong>. Name, Region Europa, starkes Passwort wählen. <strong>Passwort sicher aufbewahren</strong>.", "1–2 Minuten warten.", "Sidebar → <strong>Project Settings → API</strong>. <strong>Project URL</strong> und <strong>anon public key</strong> kopieren – brauchen Sie für Schritt 04.", "Sidebar → <strong>SQL Editor → New query</strong>. In VS Code <code>supabase/schema.sql</code> öffnen, alles kopieren, in den SQL Editor einfügen, <strong>Run</strong>.", "Sidebar → <strong>Authentication → Providers</strong> → <strong>Email</strong> aktivieren. Für Tests <em>Confirm email</em> deaktivieren.", "Sidebar → <strong>Authentication → Users → Add user</strong>: ersten Administrator anlegen.", "<strong>Wichtig — nicht überspringen:</strong> KI-Assistent-Chat in VS Code öffnen, den unteren Prompt kopieren und einfügen, das zurückgegebene SQL im Supabase SQL Editor ausführen. Ohne diesen Schritt kann jeder mit dem anon-Key in Ihre Datenbank schreiben."], "prompt_label": "Prompt für den KI-Assistenten", "prompt_body": "„Erzeuge das SQL, um Row Level Security auf allen public-Tabellen von Managemob zu aktivieren, sodass nur authentifizierte Nutzer lesen/schreiben können. Output: ein einziger SQL-Block.“"}, {"n": "04", "label": ".env KONFIGURIEREN", "title_html": "Verbinden Sie die Site mit <em>Ihrer Datenbank</em>", "why": "Die Datei <code>.env</code> enthält die Zugangsdaten (URL und Key), die der Site sagen, wie sie mit Supabase spricht.", "actions": ["In VS Code im Explorer links <code>.env.example</code> finden.", "Rechtsklick auf <code>.env.example</code> → <strong>Copy</strong>. Rechtsklick im selben Ordner → <strong>Paste</strong>.", "Rechtsklick auf neue Datei → <strong>Rename</strong> → in <code>.env</code> umbenennen (mit Punkt vorne).", "Öffnen und ausfüllen:<br><code>VITE_SUPABASE_URL=https://&lt;ihr-projekt&gt;.supabase.co</code><br><code>VITE_SUPABASE_ANON_KEY=&lt;ihr anon key&gt;</code>", "Speichern (<code>Ctrl+S</code> / <code>Cmd+S</code>).", "<code>.gitignore</code> öffnen, Zeile <code>.env</code> prüfen. Fehlt sie, hinzufügen."]}, {"n": "05", "label": "LOKAL TESTEN", "title_html": "Lassen Sie die Site <em>lokal laufen</em>", "why": "Vor der Veröffentlichung lieber lokal testen. Wenn etwas schiefgeht, sehen Sie es sofort, ohne echte Nutzer zu beeinträchtigen.", "actions": ["In VS Code Terminal öffnen. <code>npm run dev</code> tippen, Enter.", "Im Terminal zeigt Vite eine Zeile wie <code>➜ Local: http://localhost:XXXX</code>. Öffnen Sie diese Adresse im Browser (meist <code>http://localhost:3000</code>; ist der Port belegt, wählt Vite einen anderen und zeigt ihn an).", "Mit dem Admin aus Schritt 03 einloggen.", "Test-Teilnehmer anlegen. F5 drücken: bleibt er, funktioniert Supabase.", "Sprachumschalter in Login und Sidebar testen."], "prompt_label": "Wenn etwas fehlschlägt, nützlicher Prompt", "prompt_body": "„Wenn npm run dev einen Fehler wirft, lies die Meldung im Terminal und schlage einen minimalen Fix vor. Ändere keine Datei ohne meine Freigabe.“"}, {"n": "06", "label": "TEXTE ÜBERSETZEN", "title_html": "Personalisieren in <em>7 Sprachen</em>", "why": "Managemob spricht bereits 7 Sprachen. Sie ändern nur die sichtbaren Texte für IHRE Organisation, ohne die technischen Schlüssel anzufassen.", "actions": ["In VS Code <code>src/locales/</code> öffnen. Sieben Dateien: <code>it.ts</code>, <code>en.ts</code>, <code>es.ts</code>, <code>fr.ts</code>, <code>de.ts</code>, <code>pt.ts</code>, <code>se.ts</code>.", "Eine Datei nach der anderen öffnen. Nur die <strong>Werte</strong> bearbeiten (nach dem Doppelpunkt). <strong>Keys</strong> nicht anfassen.", "Beispiel:<br>VORHER: <code>login_title: \"Bei Managemob anmelden\"</code><br>NACHHER: <code>login_title: \"Bei Pessoa Academy anmelden\"</code>"], "prompt_label": "Prompt für den KI-Assistenten", "prompt_body": "„Öffne src/locales/de.ts. Ohne die Schlüssel zu ändern, übersetze jeden sichtbaren String in einem brand-aligned Ton für 'Pessoa Academy'. Spiegele dieselben Änderungen in den anderen sechs Locale-Dateien (it, en, es, fr, pt, se).“", "tip_label": "Eine 8. Sprache hinzufügen", "tip_body": "<code>en.ts</code> als <code>pl.ts</code> duplizieren, Werte übersetzen, Locale registrieren, Flagge im Switcher hinzufügen. Lassen Sie es die KI machen."}, {"n": "07", "label": "LOGO UND FARBEN", "title_html": "Geben Sie ihr <em>Ihre visuelle Identität</em>", "why": "Das Aussehen ist, was Nutzer sehen. Logo und Farben machen die Site sichtbar zu IHRER.", "actions": ["In <code>public/</code> <code>logo.svg</code> durch Ihr Logo ersetzen. Quadratisch, mindestens 256×256 px.", "<code>src/components/Sidebar.tsx</code> und <code>src/pages/Login.tsx</code> öffnen. Den Platzhalter \"M\" ersetzen durch: <code>&lt;img src=\"/logo.svg\" alt=\"Pessoa Academy\" /&gt;</code>", "<code>src/styles/main.css</code> öffnen. Oben in der Datei, innerhalb von <code>:root { ... }</code>, finden Sie die Farbvariablen: <code>--primary</code> (Hauptfarbe, standardmäßig Blau), <code>--accent</code>, <code>--sidebar-bg</code> (Seitenleiste-Hintergrund, standardmäßig Teal) und <code>--teal</code>. Werte durch Ihre Palette ersetzen.", "<code>index.html</code> im Projekt-Root öffnen: den Text in <code>&lt;title&gt;...&lt;/title&gt;</code> ändern (z.&nbsp;B. \"Managemob\" → \"Pessoa Academy\") und in <code>&lt;link rel=\"icon\" ... href=\"/vite.svg\" /&gt;</code> <code>/vite.svg</code> durch den Pfad Ihres Logos ersetzen (z.&nbsp;B. <code>/logo.svg</code>)."], "prompt_label": "Prompt für den KI-Assistenten", "prompt_body": "„Rebrand für 'Pessoa Academy' mit Primärfarbe #XXXXXX und Sekundärfarbe #YYYYYY. Aktualisiere die CSS-Variablen, ersetze das M durch /logo.svg in Sidebar.tsx und Login.tsx, ändere den Title in index.html und aktualisiere login_title und login_footer in jedem File von src/locales/.“"}, {"n": "08", "label": "WORD-VORLAGEN", "title_html": "Automatisieren Sie Ihre <em>Dokumente</em>", "why": "Managemob kann ein Word-Dokument nehmen und es automatisch mit den Teilnehmerdaten füllen. Sie sagen ihm nur, welche \"Lücken\" auszufüllen sind.", "actions": ["Word-Dokument öffnen, das automatisiert werden soll.", "Variable Bereiche durch Tags in geschweiften Klammern ersetzen. Beispiele:<br>[Vorname] [Nachname] → <code>{name} {surname}</code><br>[Anreisedatum] → <code>{arrival_date}</code><br>[Email] → <code>{email}</code><br>[Gastunternehmen] → <code>{host_company_name}</code>", "Als <strong>.docx</strong> speichern.", "In der App: <em>Dokumente → Vorlage hochladen</em> → Name vergeben → Datei hochladen.", "Vorlage wählen, Teilnehmer auswählen, <strong>Generieren</strong>."], "tip_label": "Wichtige Regeln", "tip_body": "Tags sind case-sensitive: <code>{name}</code>, nicht <code>{Name}</code>. Keine Leerzeichen in den Klammern. Formatierung bleibt erhalten. Vollständige Liste auf der Dokumente-Seite."}, {"n": "09", "label": "ONLINE GEHEN", "title_html": "Veröffentlichen Sie die Site <em>auf Netlify</em>", "why": "Bisher läuft die Site nur auf Ihrem Computer. Um sie zu teilen, stellen Sie sie auf Netlify online – kostenlos, direkt mit Ihrem GitHub-Repository verbunden. Bei jedem Push baut Netlify automatisch neu.", "subsections": [{"title": "A · Änderungen zu GitHub pushen (mit GitHub Desktop)", "items": ["GitHub Desktop öffnen. Liste der geänderten Dateien.", "Unten links eine kurze Nachricht (\"Pessoa Academy Anpassung\") und <strong>Commit to main</strong>.", "Oben <strong>Push origin</strong>. Ihre Änderungen sind in IHREM GitHub-Repo."]}, {"title": "B · Auf Netlify veröffentlichen (mit Ihrem Repo verbunden)", "items": ["netlify.com → <strong>Add new site → Import an existing project</strong>. <strong>GitHub</strong> wählen.", "Berechtigung erlauben, <strong>Ihren Fork</strong> aus Schritt 02 wählen.", "Netlify erkennt Vite. Prüfen: <em>Build command</em> = <code>npm run build</code>, <em>Publish directory</em> = <code>dist</code>.", "<strong>Show advanced → Add environment variable</strong>. <code>VITE_SUPABASE_URL</code> und <code>VITE_SUPABASE_ANON_KEY</code> hinzufügen.", "<strong>Deploy</strong>. 1–3 Minuten warten.", "Netlify gibt eine URL <code>https://&lt;name&gt;.netlify.app</code>. Ihre Site ist live!", "<em>Site settings → Change site name</em> umbenennen. <em>Domain management</em> → eigene Domain anbinden."]}], "prompt_label": "Prompt für den KI-Assistenten", "prompt_body": "„Prüfe das SPA-Routing: brauche ich eine netlify.toml, damit Refresh auf /dashboard kein 404 ergibt?“"}, {"n": "10", "label": "ABSCHLUSSCHECK", "title_html": "Sie sind <em>online</em>, letzte Prüfung", "why": "Bevor Sie die Site echten Nutzern übergeben, prüfen Sie schnell, dass alles von der öffentlichen Netlify-URL aus funktioniert.", "checklist": ["Login auf der Netlify-URL funktioniert.", "Sprachumschalter funktioniert in allen 7 Sprachen.", "Teilnehmer hinzugefügt und nach F5 noch da.", "Word-Dokument mit Teilnehmer generiert: Tags ausgefüllt.", "Calendar zeigt Teilnehmer an den richtigen Daten.", "Refresh auf /dashboard kein 404.", "Logout führt zur Login-Maske zurück."], "tip_label": "Vor dem offiziellen Go-live", "tip_body": "<strong>E-Mail-Bestätigung</strong> in Supabase Auth wieder aktivieren. <strong>DB-Passwort</strong> rotieren. Echte Nutzer einladen. Test-Admin löschen. Backup machen."}], "conclusion_label": "Schluss", "conclusion_title_html": "Eine Plattform, die <em>Ihnen</em> gehört, in 7 Sprachen, ohne Handarbeit", "conclusion_body": "Visual Studio Code öffnet die Dateien. Die KI schreibt den Code. GitHub Desktop synchronisiert. Supabase speichert die Daten. Netlify stellt die Site online. Sie koordinieren alles und treffen die Entscheidungen, die zählen: Name, Farben, Texte, Dokumente. Das ist der Vibe Coding Workflow™.", "tags": ["Vibe Coding", "Pessoa Academy", "Managemob", "VS Code", "Gemini Code Assist", "GitHub Desktop", "Supabase", "Netlify", "Erasmus+", "Bildungsmobilität"], "footer_creator": "© Pessoa Academy", "footer_brand": "Managemob × Vibe Coding Workflow™"}, "pt": {"lang": "pt", "page_title": "Procedimento passo a passo · Crie a sua versão de Managemob", "doc_title": "Crie a sua própria versão do Managemob", "doc_subtitle": "Procedimento passo a passo, em 7 línguas, sem escrever código.", "creator_line": "Um guia da Pessoa Academy · Vibe Coding Workflow™", "tools_line": "Visual Studio Code + assistente de IA gratuito + GitHub Desktop + Supabase + Netlify", "hero_eyebrow": "Vibe Coding Workflow™", "hero_title_html": "Molde o <em>Managemob</em> à sua imagem", "hero_body": "Managemob é uma plataforma para gerir mobilidades formativas (Erasmus+, ESC, intercâmbios). Este guia leva-o passo a passo para criar a SUA versão personalizada: logótipo, cores, textos nas suas línguas, documentos automatizados. Não precisa saber programar: a IA escreve, você decide.", "stats": [["10", "passos"], ["7", "línguas prontas"], ["0", "linhas escritas à mão"], ["~2 h", "tempo médio"]], "principle_label": "Princípio Vibe Coding", "principle_title_html": "Você é o <em>realizador</em>, a IA é o dactilógrafo", "principle_body": "Todo o guia assenta numa só ideia: você descreve em linguagem clara o que quer, o assistente de IA escreve o código no seu editor. Sempre que vir uma secção PROMPT, copie a frase e cole-a no chat do assistente de IA dentro do Visual Studio Code.", "lang_switch_label": "Língua", "steps": [{"n": "01", "label": "ANTES DE COMEÇAR", "title_html": "Prepare a sua <em>caixa de ferramentas</em>", "why": "Só precisa de algumas ferramentas gratuitas. Pense nelas como uma caixa: GitHub guarda o código online, Visual Studio Code é onde edita os ficheiros, o assistente de IA escreve o código por si, GitHub Desktop move os ficheiros entre o seu computador e o GitHub sem terminal.", "actions": ["Crie uma conta gratuita em <strong>github.com</strong>. Será o \"armazém\" online do seu código.", "Descarregue e instale <strong>Visual Studio Code</strong> em code.visualstudio.com. É o programa que abre sempre que trabalhar no site.", "Abra o VS Code, clique no ícone Extensions à esquerda e procure um assistente de IA gratuito. Escolha simples: <strong>Gemini Code Assist</strong> da Google. Também servem <strong>Codeium</strong>, <strong>Continue</strong>, <strong>Cody</strong> da Sourcegraph ou qualquer outro assistente de IA gratuito. Instale e faça login.", "Descarregue e instale <strong>GitHub Desktop</strong> em desktop.github.com. Faça login com a mesma conta GitHub.", "Crie uma conta gratuita em <strong>supabase.com</strong>. Será o \"armazém\" onde a app guarda os dados.", "Crie uma conta gratuita em <strong>netlify.com</strong>. É o serviço que põe o site online.", "Descarregue e instale <strong>Node.js</strong> versão LTS em nodejs.org. Serve para correr o site no seu computador enquanto o testa."], "tip_label": "Bónus", "tip_body": "Todas estas ferramentas são gratuitas. Não é preciso cartão de crédito para começar."}, {"n": "02", "label": "FORK & CLONE", "title_html": "Crie a sua <em>cópia pessoal</em> do projeto", "why": "\"Forkar\" significa fazer uma cópia pessoal do projeto Managemob no GitHub, para o poder modificar sem tocar no original. \"Clonar\" é descarregar essa cópia para o seu computador.", "actions": ["Vá à página GitHub do template Managemob — ex. <a href=\"https://github.com/ETN-International/managemob-app\" target=\"_blank\" rel=\"noopener\">github.com/ETN-International/managemob-app</a>, ou o URL do template que lhe foi fornecido. Clique <strong>Fork</strong> no canto superior direito. Escolha um nome (ex. <em>pessoa-mobility</em>).", "Na página do seu fork, clique no botão verde <strong>&lt;&gt; Code</strong> e escolha <strong>Open with GitHub Desktop</strong>.", "GitHub Desktop pergunta onde guardar. Escolha um caminho (ex. Documentos) e clique <strong>Clone</strong>.", "No canto superior direito do GitHub Desktop, clique <strong>Open in Visual Studio Code</strong>.", "No VS Code abra o <strong>Terminal</strong>: <em>View → Terminal</em> (ou <code>Ctrl+`</code> / <code>Cmd+`</code>). Escreva <code>npm install</code> e Enter. Aguarde — está a descarregar as bibliotecas."], "prompt_label": "Prompt para colar no assistente de IA", "prompt_body": "\"Lê a estrutura da pasta src/ e explica-me num parágrafo o que faz cada pasta de primeiro nível (pages, components, locales, lib, styles, data, types). Não alteres nada por agora.\""}, {"n": "03", "label": "BASE DE DADOS SUPABASE", "title_html": "Prepare o <em>armazém de dados</em>", "why": "Supabase é o armazém online onde a app guarda utilizadores, participantes e mobilidades. Sem Supabase a app não tem onde guardar a informação.", "actions": ["Vá a supabase.com → entre → <strong>New project</strong>. Escolha nome, região Europa, palavra-passe forte. <strong>Guarde a palavra-passe</strong>.", "Aguarde 1–2 minutos até o projeto ficar pronto.", "Sidebar → <strong>Project Settings → API</strong>. Copie <strong>Project URL</strong> e <strong>anon public key</strong> — vai precisar no passo 04.", "Sidebar → <strong>SQL Editor → New query</strong>. No VS Code abra <code>supabase/schema.sql</code>, copie tudo, cole no SQL Editor, clique <strong>Run</strong>.", "Sidebar → <strong>Authentication → Providers</strong> → ative <strong>Email</strong>. Para testes, desative <em>Confirm email</em>.", "Sidebar → <strong>Authentication → Users → Add user</strong>: crie o primeiro administrador.", "<strong>Importante — não salte:</strong> abra o chat do assistente AI no VS Code, copie e cole o prompt abaixo, execute o SQL devolvido no SQL Editor do Supabase. Sem este passo, qualquer pessoa com a anon key pode escrever na sua base de dados."], "prompt_label": "Prompt para colar no assistente de IA", "prompt_body": "\"Gera o SQL para ativar Row Level Security em todas as tabelas públicas do Managemob, permitindo leitura/escrita só a utilizadores autenticados. Saída: um único bloco SQL.\""}, {"n": "04", "label": "CONFIGURAR .env", "title_html": "Ligue o site à <em>sua base de dados</em>", "why": "O ficheiro <code>.env</code> contém as credenciais (URL e chave) que dizem ao site como falar com Supabase.", "actions": ["No VS Code, no Explorer à esquerda, encontre <code>.env.example</code>.", "Botão direito em <code>.env.example</code> → <strong>Copy</strong>. Botão direito na mesma pasta → <strong>Paste</strong>.", "Botão direito no novo ficheiro → <strong>Rename</strong> → mude para <code>.env</code> (com o ponto à frente).", "Abra-o e preencha:<br><code>VITE_SUPABASE_URL=https://&lt;seu-projeto&gt;.supabase.co</code><br><code>VITE_SUPABASE_ANON_KEY=&lt;a sua anon key&gt;</code>", "Guarde (<code>Ctrl+S</code> / <code>Cmd+S</code>).", "Abra <code>.gitignore</code> e verifique que tem a linha <code>.env</code>. Se não, acrescente."]}, {"n": "05", "label": "TESTE NO SEU COMPUTADOR", "title_html": "Corra o site <em>localmente</em>", "why": "Antes de pôr online, convém testar no seu computador. Se algo falhar, vê logo, sem afetar utilizadores reais.", "actions": ["No VS Code abra o terminal. Escreva <code>npm run dev</code> e Enter.", "No terminal, o Vite mostrará uma linha tipo <code>➜ Local: http://localhost:XXXX</code>. Abra esse endereço no browser (normalmente <code>http://localhost:3000</code>; se a porta estiver ocupada, o Vite escolhe outra e mostra-a).", "Entre com o admin do passo 03.", "Crie um participante de teste. F5: se ficar lá, Supabase funciona.", "Teste o seletor de língua no login e na sidebar."], "prompt_label": "Se algo falhar, prompt útil", "prompt_body": "\"Se o npm run dev der erro, lê a mensagem no terminal e propõe-me uma correção mínima. Não alteres nenhum ficheiro sem a minha aprovação.\""}, {"n": "06", "label": "TRADUZA OS TEXTOS", "title_html": "Personalize em <em>7 línguas</em>", "why": "O Managemob já fala 7 línguas. Só precisa de mudar os textos visíveis para a SUA organização, sem mexer nas chaves técnicas.", "actions": ["No VS Code abra <code>src/locales/</code>. Sete ficheiros: <code>it.ts</code>, <code>en.ts</code>, <code>es.ts</code>, <code>fr.ts</code>, <code>de.ts</code>, <code>pt.ts</code>, <code>se.ts</code>.", "Abra um de cada vez. Edite só os <strong>valores</strong> (depois dos dois pontos). <strong>Não toque nas chaves</strong>.", "Exemplo:<br>ANTES: <code>login_title: \"Entrar no Managemob\"</code><br>DEPOIS: <code>login_title: \"Entrar na Pessoa Academy\"</code>"], "prompt_label": "Prompt para colar no assistente de IA", "prompt_body": "\"Abre src/locales/pt.ts. Sem alterar as chaves, reescreve cada string visível com um tom alinhado com a marca 'Pessoa Academy'. Replica as mesmas alterações nos outros seis ficheiros de língua (it, en, es, fr, de, se).\"", "tip_label": "Adicionar uma 8ª língua", "tip_body": "Duplique <code>en.ts</code> como <code>pl.ts</code> (polaco), traduza os valores, registe o locale e adicione a bandeira ao seletor. Peça à IA."}, {"n": "07", "label": "LOGÓTIPO E CORES", "title_html": "Dê-lhe <em>a sua identidade visual</em>", "why": "A aparência é o que os utilizadores vêem. Mudando logótipo e cores o site fica visivelmente \"seu\".", "actions": ["Em <code>public/</code> substitua <code>logo.svg</code> pelo seu. Quadrado, ≥256×256 px.", "Abra <code>src/components/Sidebar.tsx</code> e <code>src/pages/Login.tsx</code>. Substitua o \"M\" placeholder por: <code>&lt;img src=\"/logo.svg\" alt=\"Pessoa Academy\" /&gt;</code>", "Abra <code>src/styles/main.css</code>. No topo do ficheiro, dentro de <code>:root { ... }</code>, encontrará as variáveis de cor: <code>--primary</code> (cor principal, azul por defeito), <code>--accent</code>, <code>--sidebar-bg</code> (fundo da sidebar, teal por defeito) e <code>--teal</code>. Substitua os valores pelos da sua paleta.", "Abra <code>index.html</code> na raiz: altere o texto dentro de <code>&lt;title&gt;...&lt;/title&gt;</code> (ex. de \"Managemob\" para \"Pessoa Academy\") e em <code>&lt;link rel=\"icon\" ... href=\"/vite.svg\" /&gt;</code> substitua <code>/vite.svg</code> pelo caminho do seu logo (ex. <code>/logo.svg</code>)."], "prompt_label": "Prompt para colar no assistente de IA", "prompt_body": "\"Rebrand para 'Pessoa Academy' com primário #XXXXXX e secundário #YYYYYY. Atualiza as variáveis CSS, substitui o M por /logo.svg em Sidebar.tsx e Login.tsx, muda o title em index.html, atualiza login_title e login_footer em cada ficheiro de src/locales/.\""}, {"n": "08", "label": "MODELOS WORD", "title_html": "Automatize os seus <em>documentos</em>", "why": "Managemob pode pegar num documento Word e preenchê-lo automaticamente com os dados de cada participante. Só tem de lhe dizer quais os \"buracos\" a preencher.", "actions": ["Abra o documento Word a automatizar.", "Encontre as zonas onde vão dados. Substitua por tags entre chavetas. Exemplos:<br>[Nome] [Apelido] → <code>{name} {surname}</code><br>[Data início] → <code>{arrival_date}</code><br>[Email] → <code>{email}</code><br>[Empresa] → <code>{host_company_name}</code>", "Guarde como <strong>.docx</strong>.", "Na app: <em>Documentos → Carregar Modelo</em> → dê nome → upload.", "Selecione modelo, escolha participantes, clique <strong>Gerar</strong>."], "tip_label": "Regras importantes", "tip_body": "Tags são case-sensitive: <code>{name}</code>, não <code>{Name}</code>. Sem espaços dentro das chavetas. Formatação preservada. Lista completa na página Documentos."}, {"n": "09", "label": "PÔR ONLINE", "title_html": "Publique o site <em>no Netlify</em>", "why": "Por agora o site só corre no seu computador. Para o partilhar, publica-o no Netlify, gratuito, ligado diretamente ao seu repositório GitHub. Cada vez que faça push para o GitHub, o Netlify reconstrói automaticamente.", "subsections": [{"title": "A · Faça push das alterações para o GitHub (com GitHub Desktop)", "items": ["Abra o GitHub Desktop. Verá a lista dos ficheiros alterados.", "Em baixo à esquerda, escreva uma mensagem curta (\"Personalização Pessoa Academy\") e clique <strong>Commit to main</strong>.", "No topo, clique <strong>Push origin</strong>. As alterações estão no SEU repositório GitHub."]}, {"title": "B · Publicar no Netlify (ligado ao seu repositório)", "items": ["netlify.com → <strong>Add new site → Import an existing project</strong>. Escolha <strong>GitHub</strong>.", "Aceite a autorização e selecione <strong>o seu fork</strong> do passo 02.", "Netlify deteta Vite. Verifique <em>Build command</em> = <code>npm run build</code> e <em>Publish directory</em> = <code>dist</code>.", "<strong>Show advanced → Add environment variable</strong>. Adicione <code>VITE_SUPABASE_URL</code> e <code>VITE_SUPABASE_ANON_KEY</code>.", "Clique <strong>Deploy</strong>. Aguarde 1–3 minutos.", "Netlify dá-lhe um URL <code>https://&lt;nome&gt;.netlify.app</code>. O seu site está online!", "<em>Site settings → Change site name</em> para renomear. <em>Domain management</em> para ligar o seu próprio domínio."]}], "prompt_label": "Prompt para colar no assistente de IA", "prompt_body": "\"Verifica o routing SPA: preciso de um netlify.toml para evitar erros 404 ao recarregar /dashboard?\""}, {"n": "10", "label": "VERIFICAÇÃO FINAL", "title_html": "Está <em>online</em>, última verificação", "why": "Antes de entregar o site a utilizadores reais, verifique rápido que tudo funciona a partir do URL público do Netlify.", "checklist": ["Login pelo URL Netlify funciona.", "O seletor de língua funciona nas 7 línguas.", "Adiciono um participante e após F5 continua lá.", "Gero um Word com um participante: tags preenchidas.", "O Calendar mostra o participante nas datas certas.", "Recarregar /dashboard não dá 404.", "Logout volta ao ecrã de login."], "tip_label": "Antes do go-live oficial", "tip_body": "Reative a <strong>confirmação de email</strong> em Supabase Auth. Rotacione a <strong>palavra-passe DB</strong>. Convide os utilizadores reais. Apague o admin de teste. Faça backup."}], "conclusion_label": "Conclusão", "conclusion_title_html": "Uma plataforma <em>sua</em>, em 7 línguas, sem código à mão", "conclusion_body": "Visual Studio Code abre os ficheiros. A IA escreve o código. GitHub Desktop sincroniza. Supabase guarda os dados. Netlify põe o site online. Você coordena tudo e toma as decisões importantes: nome, cores, textos, documentos. É o Vibe Coding Workflow™.", "tags": ["Vibe Coding", "Pessoa Academy", "Managemob", "VS Code", "Gemini Code Assist", "GitHub Desktop", "Supabase", "Netlify", "Erasmus+", "Mobilidade formativa"], "footer_creator": "© Pessoa Academy", "footer_brand": "Managemob × Vibe Coding Workflow™"}, "sv": {"lang": "sv", "page_title": "Steg-för-steg-guide · Bygg din egen Managemob", "doc_title": "Bygg din egen version av Managemob", "doc_subtitle": "Steg-för-steg-guide, på 7 språk, utan att skriva kod.", "creator_line": "En guide från Pessoa Academy · Vibe Coding Workflow™", "tools_line": "Visual Studio Code + gratis AI-assistent + GitHub Desktop + Supabase + Netlify", "hero_eyebrow": "Vibe Coding Workflow™", "hero_title_html": "Forma <em>Managemob</em> efter dig", "hero_body": "Managemob är en plattform för att hantera utbildningsmobilitet (Erasmus+, ESC, utbyten). Den här guiden tar dig steg för steg till DIN egen anpassade version: logotyp, färger, texter på dina språk, automatiserade dokument. Du behöver inte kunna programmera – AI:n skriver, du bestämmer.", "stats": [["10", "steg"], ["7", "språk klara"], ["0", "rader skrivna för hand"], ["~2 h", "snittid"]], "principle_label": "Vibe Coding-principen", "principle_title_html": "Du är <em>regissören</em>, AI:n är skrivmaskinisten", "principle_body": "Hela guiden vilar på en idé: du beskriver i vanligt språk vad du vill ha, AI-assistenten skriver koden i din editor. När du ser ett PROMPT-avsnitt, kopiera meningen och klistra in den i AI-assistentens chatt i Visual Studio Code.", "lang_switch_label": "Språk", "steps": [{"n": "01", "label": "INNAN DU BÖRJAR", "title_html": "Förbered din <em>verktygslåda</em>", "why": "Du behöver bara några gratisverktyg. Tänk dem som en verktygslåda: GitHub lagrar koden online, Visual Studio Code är där du redigerar filerna, AI-assistenten skriver koden åt dig, GitHub Desktop flyttar filer mellan din dator och GitHub utan terminal.", "actions": ["Skapa ett gratiskonto på <strong>github.com</strong>. Det blir din kods online-\"lager\".", "Ladda ner och installera <strong>Visual Studio Code</strong> från code.visualstudio.com.", "Öppna VS Code, klicka på Extensions-ikonen till vänster och sök efter en gratis AI-assistent. Enkel: <strong>Gemini Code Assist</strong> från Google. Även <strong>Codeium</strong>, <strong>Continue</strong>, <strong>Cody</strong> från Sourcegraph eller någon annan gratis AI-assistent fungerar. Installera och logga in.", "Ladda ner och installera <strong>GitHub Desktop</strong> från desktop.github.com. Logga in med samma GitHub-konto.", "Skapa ett gratiskonto på <strong>supabase.com</strong>. Blir lagret där appen sparar data.", "Skapa ett gratiskonto på <strong>netlify.com</strong>. Tjänsten som lägger ut din sajt online.", "Ladda ner och installera <strong>Node.js</strong> LTS från nodejs.org. Behövs för att köra sajten på din dator under tester."], "tip_label": "Bonus", "tip_body": "Alla dessa verktyg är gratis. Inget kreditkort behövs."}, {"n": "02", "label": "FORK & CLONE", "title_html": "Skapa din <em>personliga kopia</em> av projektet", "why": "\"Forka\" = göra en personlig kopia av Managemob-projektet på GitHub. Du kan ändra utan att röra originalet. \"Klona\" = ladda ner kopian till din dator.", "actions": ["Gå till GitHub-sidan för Managemob-mallen — t.ex. <a href=\"https://github.com/ETN-International/managemob-app\" target=\"_blank\" rel=\"noopener\">github.com/ETN-International/managemob-app</a>, eller den mall-URL du fått. Klicka <strong>Fork</strong> (uppe till höger). Välj namn (t.ex. <em>pessoa-mobility</em>).", "På din fork-sida klicka gröna knappen <strong>&lt;&gt; Code</strong> → <strong>Open with GitHub Desktop</strong>.", "GitHub Desktop frågar var du vill spara. Välj sökväg (t.ex. Dokument) → <strong>Clone</strong>.", "Uppe till höger i GitHub Desktop, klicka <strong>Open in Visual Studio Code</strong>.", "I VS Code öppna <strong>Terminal</strong>: <em>View → Terminal</em> (eller <code>Ctrl+`</code> / <code>Cmd+`</code>). Skriv <code>npm install</code> och Enter. Vänta tills klart – biblioteken laddas ner."], "prompt_label": "Prompt att klistra in i AI-assistenten", "prompt_body": "\"Läs strukturen i mappen src/ och förklara i ett stycke vad varje toppnivåmapp gör (pages, components, locales, lib, styles, data, types). Ändra inget än.\""}, {"n": "03", "label": "SUPABASE-DATABAS", "title_html": "Förbered <em>datalagret</em>", "why": "Supabase är online-lagret där appen sparar användare, deltagare och mobiliteter. Utan Supabase har appen ingenstans att spara informationen.", "actions": ["supabase.com → logga in → <strong>New project</strong>. Välj namn, region Europa, starkt lösenord. <strong>Spara lösenordet</strong> säkert.", "Vänta 1–2 minuter.", "Sidebar → <strong>Project Settings → API</strong>. Kopiera <strong>Project URL</strong> och <strong>anon public key</strong> – behövs i steg 04.", "Sidebar → <strong>SQL Editor → New query</strong>. I VS Code öppna <code>supabase/schema.sql</code>, kopiera allt, klistra in i SQL Editor och klicka <strong>Run</strong>.", "Sidebar → <strong>Authentication → Providers</strong> → aktivera <strong>Email</strong>. För tester, stäng av <em>Confirm email</em>.", "Sidebar → <strong>Authentication → Users → Add user</strong>: skapa första administratören.", "<strong>Viktigt — hoppa inte över:</strong> öppna AI-assistentchatten i VS Code, kopiera och klistra in prompten nedan, kör SQL:en som returneras i Supabase SQL Editor. Utan detta steg kan vem som helst med anon-nyckeln skriva i din databas."], "prompt_label": "Prompt att klistra in i AI-assistenten", "prompt_body": "\"Generera SQL för att aktivera Row Level Security på alla publika Managemob-tabeller, så att bara autentiserade användare kan läsa/skriva. Output: ett enda SQL-block.\""}, {"n": "04", "label": "KONFIGURERA .env", "title_html": "Koppla sajten till <em>din databas</em>", "why": "Filen <code>.env</code> innehåller credentials (URL och nyckel) som talar om för sajten hur den pratar med Supabase.", "actions": ["I VS Code, i Explorer till vänster, hitta <code>.env.example</code>.", "Högerklick på <code>.env.example</code> → <strong>Copy</strong>. Högerklick i samma mapp → <strong>Paste</strong>.", "Högerklick på den nya filen → <strong>Rename</strong> → byt namn till <code>.env</code> (med punkt först).", "Öppna och fyll i:<br><code>VITE_SUPABASE_URL=https://&lt;ditt-projekt&gt;.supabase.co</code><br><code>VITE_SUPABASE_ANON_KEY=&lt;din anon key&gt;</code>", "Spara (<code>Ctrl+S</code> / <code>Cmd+S</code>).", "Öppna <code>.gitignore</code> och kontrollera att raden <code>.env</code> finns. Annars lägg till."]}, {"n": "05", "label": "TESTA PÅ DIN DATOR", "title_html": "Kör sajten <em>lokalt</em>", "why": "Innan du publicerar är det bra att testa lokalt. Om något inte fungerar ser du det direkt utan att påverka riktiga användare.", "actions": ["I VS Code öppna terminalen. Skriv <code>npm run dev</code> och Enter.", "I terminalen visar Vite en rad som <code>➜ Local: http://localhost:XXXX</code>. Öppna den adressen i webbläsaren (vanligen <code>http://localhost:3000</code>; om porten är upptagen väljer Vite en annan och visar den).", "Logga in med admin från steg 03.", "Skapa en testdeltagare. F5: om den finns kvar fungerar Supabase.", "Testa språkväljaren i login och sidebar."], "prompt_label": "Om något fallerar, användbar prompt", "prompt_body": "\"Om npm run dev ger fel, läs meddelandet i terminalen och föreslå en minimal fix. Ändra ingen fil utan mitt godkännande.\""}, {"n": "06", "label": "ÖVERSÄTT TEXTERNA", "title_html": "Anpassa på <em>7 språk</em>", "why": "Managemob talar redan 7 språk. Du behöver bara byta de synliga texterna för DIN organisation, utan att röra de tekniska nycklarna.", "actions": ["I VS Code öppna mappen <code>src/locales/</code>. Sju filer: <code>it.ts</code>, <code>en.ts</code>, <code>es.ts</code>, <code>fr.ts</code>, <code>de.ts</code>, <code>pt.ts</code>, <code>se.ts</code>.", "Öppna en fil i taget. Ändra bara <strong>värdena</strong> (efter kolon). <strong>Rör inte nycklarna</strong>.", "Exempel:<br>FÖRE: <code>login_title: \"Logga in på Managemob\"</code><br>EFTER: <code>login_title: \"Logga in på Pessoa Academy\"</code>"], "prompt_label": "Prompt att klistra in i AI-assistenten", "prompt_body": "\"Öppna src/locales/se.ts. Utan att ändra nycklarna, skriv om varje synlig sträng med en ton som passar varumärket 'Pessoa Academy'. Spegla samma ändringar i de andra sex språkfilerna (it, en, es, fr, de, pt).\"", "tip_label": "Lägga till ett 8:e språk", "tip_body": "Duplicera <code>en.ts</code> som <code>pl.ts</code> (polska), översätt värdena, registrera locale, lägg till flagga i väljaren. Be AI:n göra det."}, {"n": "07", "label": "LOGOTYP OCH FÄRGER", "title_html": "Ge den <em>din visuella identitet</em>", "why": "Utseendet är vad användarna ser. Logotyp och färger gör sajten synligt \"din\".", "actions": ["I <code>public/</code> ersätt <code>logo.svg</code> med din. Kvadratisk, minst 256×256 px.", "Öppna <code>src/components/Sidebar.tsx</code> och <code>src/pages/Login.tsx</code>. Ersätt placeholder-\"M\" med: <code>&lt;img src=\"/logo.svg\" alt=\"Pessoa Academy\" /&gt;</code>", "Öppna <code>src/styles/main.css</code>. Högst upp i filen, inuti <code>:root { ... }</code>, hittar du färgvariablerna: <code>--primary</code> (huvudfärg, blå som standard), <code>--accent</code>, <code>--sidebar-bg</code> (sidopanel-bakgrund, teal som standard) och <code>--teal</code>. Ersätt värdena med din palett.", "Öppna <code>index.html</code> i projektroten: ändra texten i <code>&lt;title&gt;...&lt;/title&gt;</code> (t.ex. från \"Managemob\" till \"Pessoa Academy\") och i <code>&lt;link rel=\"icon\" ... href=\"/vite.svg\" /&gt;</code> ersätt <code>/vite.svg</code> med sökvägen till din logga (t.ex. <code>/logo.svg</code>)."], "prompt_label": "Prompt att klistra in i AI-assistenten", "prompt_body": "\"Rebrand för 'Pessoa Academy' med primär #XXXXXX och sekundär #YYYYYY. Uppdatera CSS-variablerna, ersätt M med /logo.svg i Sidebar.tsx och Login.tsx, ändra title i index.html, uppdatera login_title och login_footer i varje fil i src/locales/.\""}, {"n": "08", "label": "WORD-MALLAR", "title_html": "Automatisera dina <em>dokument</em>", "why": "Managemob kan ta ett Word-dokument och fylla det automatiskt med varje deltagares data. Du behöver bara säga vilka \"hål\" som ska fyllas.", "actions": ["Öppna Word-dokumentet som ska automatiseras.", "Hitta zonerna där data ska in. Ersätt med taggar i klammerparenteser. Exempel:<br>[Förnamn] [Efternamn] → <code>{name} {surname}</code><br>[Startdatum] → <code>{arrival_date}</code><br>[Email] → <code>{email}</code><br>[Företag] → <code>{host_company_name}</code>", "Spara som <strong>.docx</strong>.", "I appen: <em>Dokument → Ladda upp mall</em> → ge namn → ladda upp.", "Välj mall, välj deltagare, klicka <strong>Generera</strong>."], "tip_label": "Viktiga regler", "tip_body": "Taggar är skiftlägeskänsliga: <code>{name}</code>, inte <code>{Name}</code>. Inga mellanslag inom klammerparenteserna. Formatering bevaras. Full lista finns på Dokument-sidan."}, {"n": "09", "label": "GÅ LIVE", "title_html": "Publicera sajten <em>på Netlify</em>", "why": "Just nu körs sajten bara på din dator. För att dela med världen publicerar du på Netlify – gratis, direktkopplat till ditt GitHub-repo. Varje gång du pushar till GitHub bygger Netlify om automatiskt.", "subsections": [{"title": "A · Pusha ändringar till GitHub (med GitHub Desktop)", "items": ["Öppna GitHub Desktop. Lista över ändrade filer.", "Nere till vänster, kort meddelande (\"Pessoa Academy-anpassning\") och <strong>Commit to main</strong>.", "Uppe, klicka <strong>Push origin</strong>. Dina ändringar ligger nu på DITT GitHub-repo."]}, {"title": "B · Publicera på Netlify (kopplat till ditt repo)", "items": ["netlify.com → <strong>Add new site → Import an existing project</strong>. Välj <strong>GitHub</strong>.", "Acceptera tillstånd, välj <strong>din fork</strong> från steg 02.", "Netlify upptäcker Vite. Verifiera <em>Build command</em> = <code>npm run build</code> och <em>Publish directory</em> = <code>dist</code>.", "<strong>Show advanced → Add environment variable</strong>. Lägg till <code>VITE_SUPABASE_URL</code> och <code>VITE_SUPABASE_ANON_KEY</code>.", "Klicka <strong>Deploy</strong>. Vänta 1–3 minuter.", "Netlify ger en URL <code>https://&lt;namn&gt;.netlify.app</code>. Din sajt är live!", "<em>Site settings → Change site name</em> för att byta namn. <em>Domain management</em> för egen domän."]}], "prompt_label": "Prompt att klistra in i AI-assistenten", "prompt_body": "\"Kontrollera SPA-routningen: behöver jag en netlify.toml för att slippa 404 vid omladdning av /dashboard?\""}, {"n": "10", "label": "SLUTKONTROLL", "title_html": "Du är <em>online</em>, sista verifikationen", "why": "Innan du lämnar sajten till riktiga användare, kontrollera snabbt att allt fungerar från den publika Netlify-URL:en.", "checklist": ["Login på Netlify-URL:en fungerar.", "Språkväljaren fungerar för alla 7 språk.", "Lägger till en deltagare och efter F5 finns den kvar.", "Genererar Word med deltagare: taggar fyllda.", "Calendar visar deltagaren på rätt datum.", "Omladdning av /dashboard ger inte 404.", "Logout återgår till login-skärmen."], "tip_label": "Innan officiell go-live", "tip_body": "Aktivera <strong>email-bekräftelse</strong> i Supabase Auth igen. Rotera <strong>DB-lösenordet</strong>. Bjud in riktiga användare. Radera test-admin. Ta backup."}], "conclusion_label": "Avslutning", "conclusion_title_html": "En plattform <em>som är din</em>, på 7 språk, utan handskriven kod", "conclusion_body": "Visual Studio Code öppnar filerna. AI:n skriver koden. GitHub Desktop synkar. Supabase lagrar datan. Netlify lägger sajten online. Du koordinerar allt och tar besluten som spelar roll: namn, färger, texter, dokument. Det är Vibe Coding Workflow™.", "tags": ["Vibe Coding", "Pessoa Academy", "Managemob", "VS Code", "Gemini Code Assist", "GitHub Desktop", "Supabase", "Netlify", "Erasmus+", "Utbildningsmobilitet"], "footer_creator": "© Pessoa Academy", "footer_brand": "Managemob × Vibe Coding Workflow™"}};
+  const ORDER = ["it", "en", "es", "fr", "de", "pt", "sv"];
+  const NAMES = {"it": "Italiano", "en": "English", "es": "Español", "fr": "Français", "de": "Deutsch", "pt": "Português", "sv": "Svenska"};
+
+  function $(sel) { return document.querySelector(sel); }
+  function $all(sel) { return Array.from(document.querySelectorAll(sel)); }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  // Render an inline action that may contain trusted HTML (the content
+  // dictionaries supply pre-marked-up strings with <strong>, <code>, <em>,
+  // <br>). We pass them through unchanged.
+  function actionHtml(s) { return s; }
+
+  function renderStep(step, loc) {
+    const subsections = (step.subsections || []).map(sub => {
+      const items = sub.items.map(it => `<li>${actionHtml(it)}</li>`).join('');
+      return `
+        <div class="subsec">
+          <div class="subsec-title">${escapeHtml(sub.title)}</div>
+          <ol class="actions">${items}</ol>
+        </div>`;
+    }).join('');
+
+    const actions = (step.actions || []).map(a => `<li>${actionHtml(a)}</li>`).join('');
+    const actionsBlock = step.actions
+      ? `<div class="actions-label">${escapeHtml(loc.actions)}</div>
+         <ol class="actions">${actions}</ol>`
+      : '';
+
+    const promptBlock = step.prompt_body
+      ? `<div class="prompt-box" data-label="${escapeHtml(step.prompt_label || loc.prompt)}">
+           <div class="prompt-text">${actionHtml(step.prompt_body)}</div>
+         </div>`
+      : '';
+
+    const tipBlock = step.tip_body
+      ? `<div class="tip-box">
+           <span class="tip-label">${escapeHtml(step.tip_label || loc.tip)}</span>
+           ${actionHtml(step.tip_body)}
+         </div>`
+      : '';
+
+    const checklistBlock = step.checklist
+      ? `<div class="checklist-box">
+           <div class="checklist-label">${escapeHtml(loc.checklist)}</div>
+           <ul class="checklist-list">
+             ${step.checklist.map(c => `<li>${actionHtml(c)}</li>`).join('')}
+           </ul>
+         </div>`
+      : '';
+
+    return `
+      <section class="step" id="step-${step.n}">
+        <div class="step-head">
+          <div class="step-num">${escapeHtml(step.n)}</div>
+          <div class="step-meta">
+            <div class="step-label">${escapeHtml(step.label)}</div>
+            <h2 class="step-title">${actionHtml(step.title_html)}</h2>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="why-block">
+            <div class="why-label">${escapeHtml(loc.why)}</div>
+            <div class="why-text">${actionHtml(step.why)}</div>
+          </div>
+          ${actionsBlock}
+          ${subsections}
+          ${promptBlock}
+          ${tipBlock}
+          ${checklistBlock}
+        </div>
+      </section>`;
+  }
+
+  function renderNav(content) {
+    const items = content.steps.map(s => `
+      <li class="nav-item" data-target="step-${s.n}">
+        <span class="nav-num">${escapeHtml(s.n)}</span>
+        <span class="nav-text">${escapeHtml(s.label)}</span>
+      </li>
+    `).join('');
+    return `
+      <div class="sidebar-eyebrow">${escapeHtml(content.lang_switch_label || 'Index')}</div>
+      <ul class="nav-list">${items}</ul>
+      <div class="sidebar-foot">
+        ${escapeHtml(content.footer_creator)}<br>
+        ${escapeHtml(content.footer_brand)}
+      </div>
+    `;
+  }
+
+  function applyLang(lang) {
+    const c = DATA[lang];
+    if (!c) return;
+    document.documentElement.lang = lang;
+    document.title = c.page_title;
+
+    // Header brand stays static; just switch lang pill state
+    $all('.lang-pill').forEach(p => p.classList.toggle('active', p.dataset.lang === lang));
+
+    // Sidebar
+    $('#sidebar-inner').innerHTML = renderNav(c);
+
+    // Hero
+    $('#hero-eyebrow').textContent = c.hero_eyebrow;
+    $('#hero-title').innerHTML = c.hero_title_html;
+    $('#hero-body').textContent = c.hero_body;
+    $('#creator-line').textContent = c.creator_line;
+    $('#tools-line').textContent = c.tools_line;
+
+    // Stats
+    $('#stats').innerHTML = c.stats.map(([num, label]) => `
+      <div>
+        <div class="stat-num">${escapeHtml(num)}</div>
+        <div class="stat-label">${escapeHtml(label)}</div>
+      </div>
+    `).join('');
+
+    // Principle
+    $('#principle-label').textContent = c.principle_label;
+    $('#principle-title').innerHTML = c.principle_title_html;
+    $('#principle-body').textContent = c.principle_body;
+
+    // Steps
+    const localized = {
+      why: ({it:'Perché lo fai',en:'Why',es:'Por qué',fr:'Pourquoi',de:'Warum',pt:'Porquê',sv:'Varför'})[lang],
+      actions: ({it:'Cosa fai',en:'What you do',es:'Qué haces',fr:'Ce que tu fais',de:'Was du tust',pt:'O que fazer',sv:'Vad du gör'})[lang],
+      prompt: ({it:'Prompt da incollare',en:'Prompt to paste',es:'Prompt para pegar',fr:'Prompt à coller',de:'Prompt zum Einfügen',pt:'Prompt para colar',sv:'Prompt att klistra in'})[lang],
+      tip: ({it:'Suggerimento',en:'Tip',es:'Consejo',fr:'Astuce',de:'Tipp',pt:'Dica',sv:'Tips'})[lang],
+      checklist: ({it:'Checklist finale',en:'Final checklist',es:'Lista final',fr:'Checklist finale',de:'Abschlussliste',pt:'Checklist final',sv:'Slutlig checklista'})[lang],
+    };
+
+    $('#steps').innerHTML = c.steps.map(s => renderStep(s, localized)).join('');
+
+    // Conclusion
+    $('#conclusion-label').textContent = c.conclusion_label;
+    $('#conclusion-title').innerHTML = c.conclusion_title_html;
+    $('#conclusion-body').textContent = c.conclusion_body;
+
+    // Tags
+    $('#tags').innerHTML = c.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('');
+
+    // Footer
+    $('#footer-creator').textContent = c.footer_creator;
+    $('#footer-brand').textContent = c.footer_brand;
+
+    // Wire nav clicks
+    $all('.nav-item').forEach(it => {
+      it.addEventListener('click', () => {
+        const target = document.getElementById(it.dataset.target);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Wire checklist toggle
+    $all('.checklist-list li').forEach(li => {
+      li.addEventListener('click', () => li.classList.toggle('checked'));
+    });
+
+    // Persist language
+    try { localStorage.setItem('mm_lang', lang); } catch (e) {}
+    // Update URL hash for share
+    if (location.hash !== '#' + lang) history.replaceState(null, '', '#' + lang);
+
+    // Reset scroll-spy active item to first
+    setActiveNav('step-01');
+  }
+
+  function setActiveNav(targetId) {
+    $all('.nav-item').forEach(n =>
+      n.classList.toggle('active', n.dataset.target === targetId)
+    );
+  }
+
+  // Scroll spy
+  function initScrollSpy() {
+    const observer = new IntersectionObserver((entries) => {
+      let topMost = null;
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          if (!topMost || en.boundingClientRect.top < topMost.boundingClientRect.top) {
+            topMost = en;
+          }
+        }
+      });
+      if (topMost) setActiveNav(topMost.target.id);
+    }, { rootMargin: '-100px 0px -60% 0px' });
+
+    $all('.step').forEach(s => observer.observe(s));
+  }
+
+  function init() {
+    // Build language pill bar
+    const ls = $('#lang-switch');
+    ls.innerHTML = ORDER.map(l => `<button class="lang-pill" data-lang="${l}">${l.toUpperCase()}</button>`).join('');
+    ls.addEventListener('click', (e) => {
+      const btn = e.target.closest('.lang-pill');
+      if (!btn) return;
+      applyLang(btn.dataset.lang);
+      // Re-init scroll spy since DOM was rebuilt
+      initScrollSpy();
+    });
+
+    // Determine starting lang: hash > localStorage > navigator > 'it'
+    let lang = (location.hash || '').replace('#', '');
+    if (!DATA[lang]) {
+      try { lang = localStorage.getItem('mm_lang') || ''; } catch (e) { lang = ''; }
+    }
+    if (!DATA[lang]) {
+      const navLang = (navigator.language || 'it').slice(0, 2);
+      lang = DATA[navLang] ? navLang : 'it';
+    }
+    applyLang(lang);
+    initScrollSpy();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+</script>
+</body>
+</html>

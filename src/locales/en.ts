@@ -633,6 +633,8 @@ const en = {
   home_operational_guide_desc: 'Complete multilingual operational guide (opens in new tab)',
   home_github_guide: 'GitHub Template Guide',
   home_github_guide_desc: 'Step-by-step guide: from GitHub template to production (opens in new tab)',
+  home_vibe_guide: 'Customize Your Platform',
+  home_vibe_guide_desc: 'Step-by-step procedure to create your own customized version of the platform, multilingual (opens in new tab)',
   eu_disclaimer: 'Co-funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor EACEA can be held responsible for them.',
 } as const
 

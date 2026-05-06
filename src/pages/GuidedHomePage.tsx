@@ -854,6 +854,20 @@ export default function GuidedHomePage() {
           </div>
           <div className="hm-card-arrow" style={{ color: '#8B5CF6' }}>&#8250;</div>
         </a>
+        <a
+          className="hm-action-card"
+          href="/managemob-vibe-coding-guide.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ borderLeft: '4px solid #F59E0B', flex: '1 1 200px', textDecoration: 'none' }}
+        >
+          <div className="hm-card-icon" style={{ background: '#F59E0B14', color: '#F59E0B' }}>{'\u{1F3A8}'}</div>
+          <div className="hm-card-body">
+            <h3 className="hm-card-title">{t('home_vibe_guide')}</h3>
+            <p className="hm-card-desc">{t('home_vibe_guide_desc')}</p>
+          </div>
+          <div className="hm-card-arrow" style={{ color: '#F59E0B' }}>&#8250;</div>
+        </a>
       </div>
 
       {/* ── EU Co-funding Banner ─────────────────────────────────────────── */}

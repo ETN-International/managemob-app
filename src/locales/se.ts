@@ -625,6 +625,8 @@ const se = {
   home_operational_guide_desc: 'Komplett flerspråkig driftguide (ny flik)',
   home_github_guide: 'GitHub Mallguide',
   home_github_guide_desc: 'Steg-för-steg: från GitHub-mall till produktion (ny flik)',
+  home_vibe_guide: 'Anpassa din Plattform',
+  home_vibe_guide_desc: 'Steg-för-steg-procedur för att skapa din egen anpassade version av plattformen, flerspråkig (ny flik)',
   eu_disclaimer: 'Medfinansieras av Europeiska unionen. De synpunkter och åsikter som uttrycks är dock endast författarens/författarnas egna och återspeglar inte nödvändigtvis Europeiska unionens eller Europeiska genomförandeorganet för utbildning och kulturs (EACEA) åsikter. Varken Europeiska unionen eller EACEA kan hållas ansvariga för dem.',
 } as const
 

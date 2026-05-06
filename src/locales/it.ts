@@ -592,6 +592,8 @@ const it: Record<TranslationKeys, string> = {
   home_operational_guide_desc: 'Guida operativa multilingue completa (apre in nuova scheda)',
   home_github_guide: 'Guida Template GitHub',
   home_github_guide_desc: 'Guida passo passo: dal template GitHub alla produzione (nuova scheda)',
+  home_vibe_guide: 'Personalizza la Piattaforma',
+  home_vibe_guide_desc: 'Procedura passo passo per creare la tua versione personalizzata della piattaforma, multilingue (nuova scheda)',
   eu_disclaimer: 'Cofinanziato dall\'Unione Europea. I punti di vista e le opinioni espresse sono tuttavia esclusivamente quelli dell\'autore o degli autori e non riflettono necessariamente quelli dell\'Unione Europea o dell\'Agenzia esecutiva europea per l\'istruzione e la cultura (EACEA). Né l\'Unione Europea né l\'EACEA possono esserne ritenute responsabili.',
 }
 
