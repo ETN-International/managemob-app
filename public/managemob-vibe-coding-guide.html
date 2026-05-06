@@ -888,7 +888,99 @@ code.code-block {
     sv: 'Tillbaka till Managemob',
   };
 
-  function downloadPDF() {
+  // CSS injected into the cloned DOM during PDF capture only.
+  // Fixes layout: kills overlays, resets main width, replaces clamp/vw font
+  // sizes with fixed pixel sizes, forces long code/URLs to wrap.
+  const PDF_CLONE_CSS = `
+    body::before, body::after { display: none !important; }
+    .wrap { display: block !important; min-height: 0 !important; }
+    header, .sidebar, footer { display: none !important; }
+    main {
+      flex: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    /* Hero */
+    .hero-eyebrow { font-size: 10px !important; margin-bottom: 12px !important; letter-spacing: 0.18em !important; }
+    .hero-title {
+      font-size: 30px !important;
+      line-height: 1.15 !important;
+      margin-bottom: 14px !important;
+    }
+    .hero-body { font-size: 13px !important; line-height: 1.6 !important; max-width: 100% !important; }
+    .creator-line { font-size: 10px !important; margin-top: 18px !important; }
+    .tools-line { font-size: 11px !important; margin-top: 8px !important; }
+    /* Stats */
+    .stats { grid-template-columns: repeat(4, 1fr) !important; gap: 12px !important; margin: 22px 0 !important; }
+    .stat-num { font-size: 22px !important; }
+    .stat-label { font-size: 9px !important; }
+    /* Principle */
+    .principle { padding: 14px 18px !important; margin: 22px 0 !important; }
+    .principle-label { font-size: 9px !important; margin-bottom: 6px !important; }
+    .principle-title { font-size: 18px !important; line-height: 1.2 !important; margin-bottom: 6px !important; }
+    .principle-body { font-size: 12.5px !important; line-height: 1.55 !important; }
+    /* Steps */
+    .step { margin-top: 26px !important; }
+    .step-head { margin-bottom: 12px !important; gap: 14px !important; }
+    .step-num { font-size: 26px !important; min-width: 28px !important; }
+    .step-label { font-size: 9px !important; margin-bottom: 4px !important; }
+    .step-title { font-size: 17px !important; line-height: 1.25 !important; }
+    .step-body { padding-left: 28px !important; }
+    /* Why / actions / checklist / prompt / tip */
+    .why-block { padding: 10px 14px !important; margin-bottom: 12px !important; }
+    .why-label { font-size: 9px !important; margin-bottom: 4px !important; }
+    .why-text { font-size: 12.5px !important; line-height: 1.55 !important; }
+    .actions-label { font-size: 9px !important; margin: 12px 0 6px !important; }
+    .actions, .actions ol { font-size: 12.5px !important; line-height: 1.6 !important; padding-left: 18px !important; }
+    .actions li { margin-bottom: 8px !important; }
+    .subsec { margin-top: 12px !important; }
+    .subsec-title { font-size: 13px !important; margin-bottom: 8px !important; }
+    .prompt-box { padding: 12px 16px !important; margin-top: 14px !important; }
+    .prompt-label { font-size: 9px !important; margin-bottom: 6px !important; }
+    .prompt-text { font-size: 13.5px !important; line-height: 1.5 !important; }
+    .tip-box { padding: 10px 14px !important; margin-top: 12px !important; font-size: 12px !important; line-height: 1.55 !important; }
+    .tip-label { font-size: 9px !important; margin-bottom: 4px !important; }
+    .checklist-box { padding: 12px 16px !important; margin-top: 12px !important; }
+    .checklist-label { font-size: 9px !important; margin-bottom: 8px !important; }
+    .checklist-list li { font-size: 12.5px !important; padding: 6px 0 !important; line-height: 1.5 !important; }
+    /* Conclusion */
+    .conclusion { padding: 18px 22px !important; margin-top: 28px !important; }
+    .conclusion-label { font-size: 9px !important; }
+    .conclusion-title { font-size: 18px !important; line-height: 1.2 !important; margin: 8px 0 !important; }
+    .conclusion-body { font-size: 13px !important; line-height: 1.6 !important; }
+    .tags { font-size: 9px !important; margin-top: 16px !important; }
+    /* Code: long URLs and prompts MUST wrap */
+    code {
+      font-size: 10.5px !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+      white-space: normal !important;
+    }
+    code.code-block {
+      display: block !important;
+      font-size: 10px !important;
+      line-height: 1.6 !important;
+      padding: 10px 12px !important;
+      margin: 8px 0 !important;
+      white-space: pre-wrap !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+    }
+    /* Links: solid black underlined for print readability */
+    a { color: #1a1714 !important; text-decoration: underline !important; }
+    /* Page break hints */
+    .step, .step-head, .why-block, .tip-box, .checklist-box,
+    .prompt-box, .subsec, code.code-block, .principle, .conclusion {
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
+    .step-head { page-break-after: avoid !important; break-after: avoid !important; }
+  `;
+
+  async function downloadPDF() {
     const btn = $('#pdf-btn');
     const target = document.querySelector('main');
     if (!target || btn.disabled) return;
@@ -896,28 +988,50 @@ code.code-block {
     const originalLabel = $('#pdf-btn-label').textContent;
     $('#pdf-btn-label').textContent = '…';
     const filename = `Managemob-Vibe-Guide-${currentLang.toUpperCase()}.pdf`;
-    html2pdf()
-      .set({
-        margin: [14, 12, 16, 12],
-        filename,
-        image: { type: 'jpeg', quality: 0.95 },
-        html2canvas: { scale: 2, useCORS: true, backgroundColor: '#f5f0e8', windowWidth: 900 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
-        pagebreak: {
-          mode: ['css', 'legacy'],
-          avoid: ['.why-block', '.tip-box', '.checklist-box', '.subsec', 'code.code-block', '.actions li', '.prompt-box', '.step-head'],
-        },
-      })
-      .from(target)
-      .save()
-      .then(() => {
-        btn.disabled = false;
-        $('#pdf-btn-label').textContent = originalLabel;
-      })
-      .catch(() => {
-        btn.disabled = false;
-        $('#pdf-btn-label').textContent = originalLabel;
-      });
+
+    try {
+      // Wait for web fonts to be ready — otherwise html2canvas may snapshot
+      // the page before custom fonts load, producing a wrong-metric layout.
+      if (document.fonts && document.fonts.ready) {
+        await document.fonts.ready;
+      }
+
+      await html2pdf()
+        .set({
+          margin: [12, 12, 14, 12],
+          filename,
+          image: { type: 'jpeg', quality: 0.92 },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#f5f0e8',
+            windowWidth: 1100,
+            // onclone runs against the cloned DOM html2canvas creates for capture
+            // — perfect place to swap in print-specific styles without touching
+            // what the user sees on screen.
+            onclone: (clonedDoc) => {
+              const style = clonedDoc.createElement('style');
+              style.textContent = PDF_CLONE_CSS;
+              clonedDoc.head.appendChild(style);
+            },
+          },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
+          pagebreak: {
+            mode: ['css', 'legacy'],
+            avoid: [
+              '.step', '.step-head', '.why-block', '.tip-box',
+              '.checklist-box', '.subsec', '.prompt-box',
+              'code.code-block', '.principle', '.conclusion',
+              '.actions li', '.checklist-list li',
+            ],
+          },
+        })
+        .from(target)
+        .save();
+    } finally {
+      btn.disabled = false;
+      $('#pdf-btn-label').textContent = originalLabel;
+    }
   }
 
   function applyLang(lang) {
