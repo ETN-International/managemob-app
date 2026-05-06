@@ -509,7 +509,10 @@ document.querySelectorAll('.lang-btn').forEach(btn=>{
   btn.addEventListener('click',()=>applyLang(btn.dataset.lang));
 });
 
-applyLang('it');
+(function(){
+  var h=(location.hash||'').replace('#','');
+  applyLang(['it','en','fr','es','de','sv','pt'].indexOf(h)>=0 ? h : 'it');
+})();
 
 function downloadPDF(){
   const el=document.querySelector('.page');

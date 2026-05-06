@@ -1172,6 +1172,11 @@ function switchLang(lang){
   });
 }
 
+(function(){
+  var h=(location.hash||'').replace('#','');
+  if(['en','it','fr','es','de','se','pt'].indexOf(h)>=0) switchLang(h);
+})();
+
 function exportPDF(btn){
   btn.disabled=true;
   btn.innerHTML='&#9203; Generating...';

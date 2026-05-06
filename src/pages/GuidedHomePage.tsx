@@ -128,7 +128,8 @@ type ProviderModalType = 'so' | 'hc' | 'acc' | 'ins' | 'tr' | 'lc' | 'msp' | nul
 
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function GuidedHomePage() {
-  const { t } = useT()
+  const { t, lang } = useT()
+  const guideLang = lang === 'se' ? 'sv' : lang
   const navigate = useNavigate()
 
   // ── UI state ────────────────────────────────────────────────────────────────
@@ -828,7 +829,7 @@ export default function GuidedHomePage() {
         </button>
         <a
           className="hm-action-card"
-          href="/operational-guide.html"
+          href={`/operational-guide.html#${lang}`}
           target="_blank"
           rel="noopener noreferrer"
           style={{ borderLeft: '4px solid #1D72B8', flex: '1 1 200px', textDecoration: 'none' }}
@@ -842,7 +843,7 @@ export default function GuidedHomePage() {
         </a>
         <a
           className="hm-action-card"
-          href="/template-guide-github.html"
+          href={`/template-guide-github.html#${guideLang}`}
           target="_blank"
           rel="noopener noreferrer"
           style={{ borderLeft: '4px solid #8B5CF6', flex: '1 1 200px', textDecoration: 'none' }}
@@ -856,7 +857,7 @@ export default function GuidedHomePage() {
         </a>
         <a
           className="hm-action-card"
-          href="/managemob-vibe-coding-guide.html"
+          href={`/managemob-vibe-coding-guide.html#${guideLang}`}
           target="_blank"
           rel="noopener noreferrer"
           style={{ borderLeft: '4px solid #F59E0B', flex: '1 1 200px', textDecoration: 'none' }}
