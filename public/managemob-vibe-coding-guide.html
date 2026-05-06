@@ -6,7 +6,6 @@
 <title>Managemob · Vibe Coding Guide · Pessoa Academy</title>
 <meta name="description" content="Step-by-step procedure to create your own customized version of Managemob in 7 languages, with the Vibe Coding Workflow™. By Pessoa Academy.">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 
 :root {
@@ -106,26 +105,6 @@ header {
 }
 .back-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
 .back-btn svg { width: 12px; height: 12px; }
-
-.pdf-btn {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  padding: 0.4rem 0.75rem;
-  margin-right: 0.6rem;
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 6px;
-  background: var(--accent);
-  color: #fff;
-  font-family: 'DM Mono', monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.15s, transform 0.15s;
-}
-.pdf-btn:hover { opacity: 0.92; transform: translateY(-1px); }
-.pdf-btn:disabled { opacity: 0.6; cursor: wait; }
-.pdf-btn svg { width: 12px; height: 12px; }
 
 .lang-switch {
   display: flex; gap: 0.25rem;
@@ -682,20 +661,6 @@ code.code-block {
   color: var(--ink);
 }
 
-/* Print / PDF rules */
-@media print {
-  body::before { display: none; }
-  .why-block, .tip-box, .checklist-box, .actions li,
-  .prompt-box, .subsec, code.code-block {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-  .step-head { break-after: avoid; page-break-after: avoid; }
-  .step { break-inside: auto; }
-  a { color: inherit !important; text-decoration: underline; }
-  main { padding: 0 !important; max-width: 100% !important; }
-}
-
 /* Responsive */
 @media (max-width: 900px) {
   .sidebar { display: none; }
@@ -729,10 +694,6 @@ code.code-block {
     <span class="header-name">Vibe Coding Workflow™ · Managemob</span>
   </a>
   <span class="header-spacer"></span>
-  <button id="pdf-btn" class="pdf-btn" type="button" aria-label="Download PDF">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg>
-    <span id="pdf-btn-label">PDF</span>
-  </button>
   <div id="lang-switch" class="lang-switch" aria-label="Language"></div>
 </header>
 
@@ -872,12 +833,6 @@ code.code-block {
 
   let currentLang = 'it';
 
-  const PDF_LABELS = {
-    it: 'Scarica PDF', en: 'Download PDF', es: 'Descargar PDF',
-    fr: 'Télécharger PDF', de: 'PDF herunterladen', pt: 'Descarregar PDF',
-    sv: 'Ladda ner PDF',
-  };
-
   const BACK_LABELS = {
     it: 'Torna a Managemob',
     en: 'Back to Managemob',
@@ -888,404 +843,12 @@ code.code-block {
     sv: 'Tillbaka till Managemob',
   };
 
-  // CSS applied to the off-screen print clone that we feed to html2canvas.
-  // Scoped to a single container so it never affects the live page.
-  const PDF_PRINT_CSS = `
-    .pdf-root {
-      width: 800px;
-      padding: 24px 32px;
-      background: #f5f0e8;
-      color: #1a1714;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      line-height: 1.6;
-      box-sizing: border-box;
-    }
-    .pdf-root * { box-sizing: border-box; }
-    /* Hero */
-    .pdf-root .hero-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: #c8420a; margin-bottom: 12px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .pdf-root .hero-eyebrow::before { content: ''; width: 22px; height: 1px; background: #c8420a; }
-    .pdf-root .hero-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 28px; line-height: 1.15; margin-bottom: 14px; color: #1a1714;
-    }
-    .pdf-root .hero-title em { font-style: italic; color: #c8420a; }
-    .pdf-root .hero-body { font-size: 13px; line-height: 1.6; color: #4a4440; max-width: 100%; }
-    .pdf-root .creator-line {
-      font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em;
-      text-transform: uppercase; color: #7a726e; margin-top: 16px;
-    }
-    .pdf-root .tools-line { font-size: 11px; color: #4a4440; margin-top: 6px; }
-    /* Stats */
-    .pdf-root .stats {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 12px; margin: 22px 0; padding-top: 20px; border-top: 1px solid rgba(26,23,20,0.10);
-    }
-    .pdf-root .stat-num {
-      font-family: 'DM Serif Display', serif; font-style: italic;
-      font-size: 22px; color: #c8420a; line-height: 1; margin-bottom: 4px;
-    }
-    .pdf-root .stat-label {
-      font-family: 'DM Mono', monospace; font-size: 9px;
-      letter-spacing: 0.16em; text-transform: uppercase; color: #7a726e;
-    }
-    /* Principle */
-    .pdf-root .principle {
-      background: rgba(26, 107, 82, 0.06); border-left: 2px solid #1a6b52;
-      padding: 14px 18px; margin: 22px 0; border-radius: 0 6px 6px 0;
-    }
-    .pdf-root .principle-label {
-      font-family: 'DM Mono', monospace; font-size: 9px;
-      letter-spacing: 0.18em; text-transform: uppercase; color: #1a6b52; margin-bottom: 6px;
-    }
-    .pdf-root .principle-title {
-      font-family: 'DM Serif Display', serif; font-size: 18px; line-height: 1.2;
-      color: #1a1714; margin-bottom: 6px;
-    }
-    .pdf-root .principle-title em { font-style: italic; color: #c8420a; }
-    .pdf-root .principle-body { font-size: 12.5px; line-height: 1.55; color: #4a4440; }
-    /* Steps */
-    .pdf-root .step { margin-top: 24px; }
-    .pdf-root .step-head {
-      display: flex; gap: 14px; align-items: baseline;
-      margin-bottom: 12px;
-      page-break-after: avoid; break-after: avoid;
-    }
-    .pdf-root .step-num {
-      font-family: 'DM Serif Display', serif; font-style: italic;
-      font-size: 26px; color: #c8420a; line-height: 1; min-width: 28px;
-    }
-    .pdf-root .step-meta { flex: 1; }
-    .pdf-root .step-label {
-      font-family: 'DM Mono', monospace; font-size: 9px;
-      letter-spacing: 0.18em; text-transform: uppercase; color: #7a726e; margin-bottom: 4px;
-    }
-    .pdf-root .step-title {
-      font-family: 'DM Serif Display', serif; font-size: 17px; line-height: 1.25; color: #1a1714;
-    }
-    .pdf-root .step-title em { font-style: italic; color: #c8420a; }
-    .pdf-root .step-body { padding-left: 28px; }
-    /* Why */
-    .pdf-root .why-block {
-      background: rgba(26, 107, 82, 0.06); border-left: 2px solid #1a6b52;
-      padding: 10px 14px; margin-bottom: 12px; border-radius: 0 6px 6px 0;
-      page-break-inside: avoid; break-inside: avoid;
-    }
-    .pdf-root .why-label {
-      font-family: 'DM Mono', monospace; font-size: 9px;
-      letter-spacing: 0.18em; text-transform: uppercase; color: #1a6b52; margin-bottom: 4px;
-    }
-    .pdf-root .why-text { font-size: 12.5px; line-height: 1.55; color: #4a4440; }
-    /* Actions */
-    .pdf-root .actions-label {
-      font-family: 'DM Mono', monospace; font-size: 9px;
-      letter-spacing: 0.18em; text-transform: uppercase; color: #7a726e; margin: 12px 0 6px;
-    }
-    .pdf-root .actions {
-      list-style: decimal; padding-left: 20px;
-      font-size: 12.5px; line-height: 1.6; color: #1a1714;
-    }
-    .pdf-root .actions li {
-      margin-bottom: 8px;
-      page-break-inside: avoid; break-inside: avoid;
-    }
-    /* Subsec */
-    .pdf-root .subsec {
-      margin-top: 12px;
-      page-break-inside: avoid; break-inside: avoid;
-    }
-    .pdf-root .subsec-title {
-      font-family: 'DM Serif Display', serif; font-size: 13px;
-      color: #1a1714; margin-bottom: 8px;
-    }
-    /* Prompt box */
-    .pdf-root .prompt-box {
-      background: #1a1714; color: #f5f0e8;
-      padding: 12px 16px; margin-top: 14px; border-radius: 6px;
-      page-break-inside: avoid; break-inside: avoid;
-    }
-    .pdf-root .prompt-label {
-      font-family: 'DM Mono', monospace; font-size: 9px;
-      letter-spacing: 0.18em; text-transform: uppercase; color: #f0c070; margin-bottom: 6px;
-    }
-    .pdf-root .prompt-text {
-      font-family: 'DM Serif Display', serif; font-style: italic;
-      font-size: 13.5px; line-height: 1.5; color: rgba(255,255,255,0.95);
-    }
-    /* Tip box */
-    .pdf-root .tip-box {
-      background: rgba(45, 74, 138, 0.06); border: 1px solid rgba(45, 74, 138, 0.18);
-      padding: 10px 14px; margin-top: 12px; border-radius: 8px;
-      font-size: 12px; line-height: 1.55; color: #4a4440;
-      page-break-inside: avoid; break-inside: avoid;
-    }
-    .pdf-root .tip-label {
-      display: block;
-      font-family: 'DM Mono', monospace; font-size: 9px;
-      letter-spacing: 0.18em; text-transform: uppercase; color: #2d4a8a; margin-bottom: 4px;
-    }
-    /* Checklist */
-    .pdf-root .checklist-box {
-      padding: 12px 16px; margin-top: 12px;
-      background: rgba(26,23,20,0.04); border-radius: 8px;
-      page-break-inside: avoid; break-inside: avoid;
-    }
-    .pdf-root .checklist-label {
-      font-family: 'DM Mono', monospace; font-size: 9px;
-      letter-spacing: 0.18em; text-transform: uppercase; color: #7a726e; margin-bottom: 8px;
-    }
-    .pdf-root .checklist-list {
-      list-style: none; padding: 0; margin: 0;
-    }
-    .pdf-root .checklist-list li {
-      font-size: 12.5px; line-height: 1.5; color: #1a1714;
-      padding: 6px 0 6px 22px;
-      border-bottom: 1px solid rgba(26,23,20,0.06);
-      position: relative;
-    }
-    .pdf-root .checklist-list li:last-child { border-bottom: none; }
-    .pdf-root .checklist-list li::before {
-      content: '☐'; position: absolute; left: 0; top: 5px;
-      color: #7a726e; font-size: 14px;
-    }
-    /* Conclusion */
-    .pdf-root .conclusion {
-      background: rgba(26, 107, 82, 0.06); border-left: 2px solid #1a6b52;
-      padding: 18px 22px; margin-top: 28px; border-radius: 0 6px 6px 0;
-      page-break-inside: avoid; break-inside: avoid;
-    }
-    .pdf-root .conclusion-label {
-      font-family: 'DM Mono', monospace; font-size: 9px;
-      letter-spacing: 0.18em; text-transform: uppercase; color: #1a6b52;
-    }
-    .pdf-root .conclusion-title {
-      font-family: 'DM Serif Display', serif; font-size: 18px; line-height: 1.2;
-      color: #1a1714; margin: 8px 0;
-    }
-    .pdf-root .conclusion-title em { font-style: italic; color: #c8420a; }
-    .pdf-root .conclusion-body { font-size: 13px; line-height: 1.6; color: #4a4440; }
-    /* Tags */
-    .pdf-root .tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
-    .pdf-root .tag {
-      font-family: 'DM Mono', monospace; font-size: 9px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 3px 8px; border: 1px solid rgba(26,23,20,0.18);
-      border-radius: 100px; color: #4a4440;
-    }
-    /* Inline code */
-    .pdf-root code {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.85em;
-      background: rgba(26,23,20,0.06);
-      padding: 1px 4px;
-      border-radius: 3px;
-      color: #1a1714;
-      word-break: break-word;
-      overflow-wrap: anywhere;
-      white-space: normal;
-    }
-    .pdf-root .prompt-box code,
-    .pdf-root .checklist-box code {
-      background: rgba(255,255,255,0.10);
-      color: #f0c070;
-    }
-    /* Block code (multi-line copy-paste prompts) */
-    .pdf-root code.code-block {
-      display: block;
-      font-size: 10px;
-      line-height: 1.6;
-      padding: 10px 12px;
-      margin: 8px 0;
-      background: rgba(26,23,20,0.08);
-      border-left: 3px solid #c8420a;
-      border-radius: 6px;
-      white-space: pre-wrap;
-      word-break: break-word;
-      overflow-wrap: anywhere;
-      color: #1a1714;
-      page-break-inside: avoid; break-inside: avoid;
-    }
-    /* Bold/em inside text */
-    .pdf-root strong { font-weight: 600; color: #1a1714; }
-    .pdf-root em { font-style: italic; }
-    /* Links: dark and underlined for print */
-    .pdf-root a { color: #1a1714; text-decoration: underline; }
-  `;
-
-  // Legacy onclone CSS — kept for compatibility but the main path now uses
-  // an off-screen clone (downloadPDF below) which is more reliable.
-  const PDF_CLONE_CSS = `
-    body::before, body::after { display: none !important; }
-    .wrap { display: block !important; min-height: 0 !important; }
-    header, .sidebar, footer { display: none !important; }
-    main {
-      flex: none !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      max-width: 100% !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-    }
-    /* Hero */
-    .hero-eyebrow { font-size: 10px !important; margin-bottom: 12px !important; letter-spacing: 0.18em !important; }
-    .hero-title {
-      font-size: 30px !important;
-      line-height: 1.15 !important;
-      margin-bottom: 14px !important;
-    }
-    .hero-body { font-size: 13px !important; line-height: 1.6 !important; max-width: 100% !important; }
-    .creator-line { font-size: 10px !important; margin-top: 18px !important; }
-    .tools-line { font-size: 11px !important; margin-top: 8px !important; }
-    /* Stats */
-    .stats { grid-template-columns: repeat(4, 1fr) !important; gap: 12px !important; margin: 22px 0 !important; }
-    .stat-num { font-size: 22px !important; }
-    .stat-label { font-size: 9px !important; }
-    /* Principle */
-    .principle { padding: 14px 18px !important; margin: 22px 0 !important; }
-    .principle-label { font-size: 9px !important; margin-bottom: 6px !important; }
-    .principle-title { font-size: 18px !important; line-height: 1.2 !important; margin-bottom: 6px !important; }
-    .principle-body { font-size: 12.5px !important; line-height: 1.55 !important; }
-    /* Steps */
-    .step { margin-top: 26px !important; }
-    .step-head { margin-bottom: 12px !important; gap: 14px !important; }
-    .step-num { font-size: 26px !important; min-width: 28px !important; }
-    .step-label { font-size: 9px !important; margin-bottom: 4px !important; }
-    .step-title { font-size: 17px !important; line-height: 1.25 !important; }
-    .step-body { padding-left: 28px !important; }
-    /* Why / actions / checklist / prompt / tip */
-    .why-block { padding: 10px 14px !important; margin-bottom: 12px !important; }
-    .why-label { font-size: 9px !important; margin-bottom: 4px !important; }
-    .why-text { font-size: 12.5px !important; line-height: 1.55 !important; }
-    .actions-label { font-size: 9px !important; margin: 12px 0 6px !important; }
-    .actions, .actions ol { font-size: 12.5px !important; line-height: 1.6 !important; padding-left: 18px !important; }
-    .actions li { margin-bottom: 8px !important; }
-    .subsec { margin-top: 12px !important; }
-    .subsec-title { font-size: 13px !important; margin-bottom: 8px !important; }
-    .prompt-box { padding: 12px 16px !important; margin-top: 14px !important; }
-    .prompt-label { font-size: 9px !important; margin-bottom: 6px !important; }
-    .prompt-text { font-size: 13.5px !important; line-height: 1.5 !important; }
-    .tip-box { padding: 10px 14px !important; margin-top: 12px !important; font-size: 12px !important; line-height: 1.55 !important; }
-    .tip-label { font-size: 9px !important; margin-bottom: 4px !important; }
-    .checklist-box { padding: 12px 16px !important; margin-top: 12px !important; }
-    .checklist-label { font-size: 9px !important; margin-bottom: 8px !important; }
-    .checklist-list li { font-size: 12.5px !important; padding: 6px 0 !important; line-height: 1.5 !important; }
-    /* Conclusion */
-    .conclusion { padding: 18px 22px !important; margin-top: 28px !important; }
-    .conclusion-label { font-size: 9px !important; }
-    .conclusion-title { font-size: 18px !important; line-height: 1.2 !important; margin: 8px 0 !important; }
-    .conclusion-body { font-size: 13px !important; line-height: 1.6 !important; }
-    .tags { font-size: 9px !important; margin-top: 16px !important; }
-    /* Code: long URLs and prompts MUST wrap */
-    code {
-      font-size: 10.5px !important;
-      word-break: break-word !important;
-      overflow-wrap: anywhere !important;
-      white-space: normal !important;
-    }
-    code.code-block {
-      display: block !important;
-      font-size: 10px !important;
-      line-height: 1.6 !important;
-      padding: 10px 12px !important;
-      margin: 8px 0 !important;
-      white-space: pre-wrap !important;
-      word-break: break-word !important;
-      overflow-wrap: anywhere !important;
-    }
-    /* Links: solid black underlined for print readability */
-    a { color: #1a1714 !important; text-decoration: underline !important; }
-    /* Page break hints */
-    .step, .step-head, .why-block, .tip-box, .checklist-box,
-    .prompt-box, .subsec, code.code-block, .principle, .conclusion {
-      page-break-inside: avoid !important;
-      break-inside: avoid !important;
-    }
-    .step-head { page-break-after: avoid !important; break-after: avoid !important; }
-  `;
-
-  async function downloadPDF() {
-    const btn = $('#pdf-btn');
-    if (btn.disabled) return;
-    btn.disabled = true;
-    const originalLabel = $('#pdf-btn-label').textContent;
-    $('#pdf-btn-label').textContent = '…';
-    const filename = `Managemob-Vibe-Guide-${currentLang.toUpperCase()}.pdf`;
-
-    // Build an off-screen clone with explicit width and self-contained styles.
-    // This sidesteps the live page's flex layout, sticky/fixed positioning,
-    // viewport-relative font sizes, and noise overlay — which all confuse
-    // html2canvas when it tries to capture a deeply nested element directly.
-    const printRoot = document.createElement('div');
-    printRoot.className = 'pdf-root';
-    printRoot.style.cssText = 'position:absolute; top:0; left:-99999px; z-index:-1;';
-
-    const styleEl = document.createElement('style');
-    styleEl.id = 'pdf-print-style';
-    styleEl.textContent = PDF_PRINT_CSS;
-    document.head.appendChild(styleEl);
-
-    // Clone the parts of <main> we want in the PDF — everything as-is.
-    const main = document.querySelector('main');
-    Array.from(main.children).forEach(child => {
-      printRoot.appendChild(child.cloneNode(true));
-    });
-    document.body.appendChild(printRoot);
-
-    try {
-      // Wait for web fonts so html2canvas snapshots with the right metrics.
-      if (document.fonts && document.fonts.ready) {
-        await document.fonts.ready;
-      }
-
-      await html2pdf()
-        .set({
-          margin: [12, 10, 14, 10],
-          filename,
-          image: { type: 'jpeg', quality: 0.92 },
-          html2canvas: {
-            scale: 2,
-            useCORS: true,
-            backgroundColor: '#f5f0e8',
-            // Match printRoot's explicit width so layout is deterministic.
-            windowWidth: 800,
-            scrollX: 0,
-            scrollY: 0,
-          },
-          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
-          pagebreak: {
-            mode: ['css', 'legacy'],
-            avoid: [
-              '.step-head', '.why-block', '.tip-box',
-              '.checklist-box', '.subsec', '.prompt-box',
-              'code.code-block', '.principle', '.conclusion',
-              '.actions li', '.checklist-list li',
-            ],
-          },
-        })
-        .from(printRoot)
-        .save();
-    } finally {
-      // Always clean up the off-screen clone and injected stylesheet.
-      printRoot.remove();
-      styleEl.remove();
-      btn.disabled = false;
-      $('#pdf-btn-label').textContent = originalLabel;
-    }
-  }
-
   function applyLang(lang) {
     const c = DATA[lang];
     if (!c) return;
     currentLang = lang;
     document.documentElement.lang = lang;
     document.title = c.page_title;
-    $('#pdf-btn-label').textContent = PDF_LABELS[lang] || 'PDF';
-    $('#pdf-btn').setAttribute('aria-label', PDF_LABELS[lang] || 'Download PDF');
     const backLabel = BACK_LABELS[lang] || 'Back to Managemob';
     $('#back-btn-label').textContent = backLabel;
     $('#back-btn').setAttribute('aria-label', backLabel);
@@ -1385,9 +948,6 @@ code.code-block {
   }
 
   function init() {
-    // Wire PDF button
-    $('#pdf-btn').addEventListener('click', downloadPDF);
-
     // Build language pill bar
     const ls = $('#lang-switch');
     ls.innerHTML = ORDER.map(l => `<button class="lang-pill" data-lang="${l}">${l.toUpperCase()}</button>`).join('');
