@@ -1,6 +1,6 @@
 # Managemob — Operational Tutorial for Partners
 
-**Version 1.0 — March 2026**
+**Version 1.0 — May 2026**
 **Prepared by:** ETN International
 
 ---
