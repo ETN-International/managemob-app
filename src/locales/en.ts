@@ -484,6 +484,7 @@ const en = {
   doc_generate_all: 'Select All',
   doc_generating: 'Generating...',
   doc_no_participants: 'No participants found',
+  doc_generate_error: 'Could not generate the document. The template may contain an invalid or mistyped {tag}.',
   doc_delete_confirm: 'Are you sure you want to delete this template?',
 
   // Template Guide

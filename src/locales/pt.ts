@@ -447,6 +447,7 @@ const pt: Record<TranslationKeys, string> = {
   doc_generate_all: 'Selecionar todos',
   doc_generating: 'A gerar...',
   doc_no_participants: 'Nenhum participante encontrado',
+  doc_generate_error: 'Não foi possível gerar o documento. O modelo pode conter uma {etiqueta} inválida ou mal escrita.',
   doc_delete_confirm: 'Tem a certeza de que deseja eliminar este modelo?',
   guide_title: 'Guia de templates',
   guide_intro: 'Aprenda a preparar modelos Word com etiquetas que o Managemob substituirá pelos dados dos participantes.',

@@ -145,7 +145,8 @@ export default function DocumentsPage() {
       }
     } catch (err) {
       console.error('Generation failed:', err)
-      alert('Generation failed. Check console for details.')
+      const detail = err instanceof Error ? err.message : String(err)
+      alert(`${t('doc_generate_error')}\n\n${detail}`)
     } finally {
       setGenerating(false)
       setProgress(null)

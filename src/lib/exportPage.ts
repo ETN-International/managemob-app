@@ -108,6 +108,13 @@ table{border-collapse:collapse;width:100%}
 th,td{border:1px solid #ddd;padding:8px}
 th{background:#0d6b5e;color:#fff}
 code{background:#e8f5e9;padding:2px 6px;border-radius:3px;font-size:0.9em}
+/* Guide/Manual card structure — Word has poor flex support, so use table-ish block layout */
+.tg-section{margin-bottom:18pt}
+.tg-section-title{color:#0d6b5e;font-size:14pt;font-weight:bold;border-bottom:1px solid #2D7A6F;padding-bottom:4px;margin:18pt 0 10pt}
+.tg-step,.tg-rule,.tg-example-box,.pdf-block{display:block;border:1px solid #e2e8f0;border-radius:6px;padding:10px 12px;margin-bottom:8px;background:#fff}
+.tg-step-num{display:inline-block;font-weight:bold;color:#2D7A6F;margin-right:6px}
+.tg-step-title{font-weight:bold;color:#1a1a2e}
+.tg-step-desc{color:#333}
 </style></head><body>${clone.innerHTML}</body></html>`
   const blob = new Blob(['\ufeff', html], { type: 'application/msword' })
   const url = URL.createObjectURL(blob)

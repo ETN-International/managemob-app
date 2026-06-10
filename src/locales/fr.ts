@@ -447,6 +447,7 @@ const fr: Record<TranslationKeys, string> = {
   doc_generate_all: 'Tout sélectionner',
   doc_generating: 'Génération...',
   doc_no_participants: 'Aucun participant trouvé',
+  doc_generate_error: 'Impossible de générer le document. Le modèle contient peut-être une {balise} non valide ou mal saisie.',
   doc_delete_confirm: 'Êtes-vous sûr de vouloir supprimer ce modèle ?',
   guide_title: 'Guide des modèles',
   guide_intro: 'Apprenez à préparer des modèles Word avec des balises que Managemob remplacera par les données des participants.',

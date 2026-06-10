@@ -447,6 +447,7 @@ const it: Record<TranslationKeys, string> = {
   doc_generate_all: 'Seleziona tutti',
   doc_generating: 'Generazione...',
   doc_no_participants: 'Nessun partecipante trovato',
+  doc_generate_error: 'Impossibile generare il documento. Il template potrebbe contenere un {tag} non valido o scritto male.',
   doc_delete_confirm: 'Sei sicuro di voler eliminare questo modello?',
 
   guide_title: 'Guida template',

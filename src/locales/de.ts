@@ -447,6 +447,7 @@ const de: Record<TranslationKeys, string> = {
   doc_generate_all: 'Alle auswählen',
   doc_generating: 'Wird erstellt...',
   doc_no_participants: 'Keine Teilnehmer gefunden',
+  doc_generate_error: 'Das Dokument konnte nicht erstellt werden. Die Vorlage enthält möglicherweise einen ungültigen oder falsch geschriebenen {Tag}.',
   doc_delete_confirm: 'Sind Sie sicher, dass Sie diese Vorlage löschen möchten?',
   guide_title: 'Vorlagen-Anleitung',
   guide_intro: 'Erfahren Sie, wie Sie Word-Vorlagen mit Platzhaltern vorbereiten, die Managemob durch Teilnehmerdaten ersetzt.',

@@ -5,21 +5,56 @@ import type { Participant } from '../types'
 import { flattenParticipant } from './templateVariables'
 
 /**
+ * Turn a docxtemplater error (or any error) into a readable, user-facing message.
+ * docxtemplater throws a multi-error whose `.properties.errors` lists each bad tag.
+ */
+export function describeTemplateError(error: any): string {
+  const errs = error?.properties?.errors
+  if (Array.isArray(errs) && errs.length) {
+    const details = errs
+      .map((e: any) => {
+        const p = e?.properties || {}
+        const tag = p.xtag ? `{${p.xtag}}` : ''
+        return [p.explanation || e?.message, tag].filter(Boolean).join(' ')
+      })
+      .filter(Boolean)
+    // De-duplicate identical explanations
+    return [...new Set(details)].join('\n')
+  }
+  return error?.message || String(error)
+}
+
+/**
  * Generate a filled .docx from a template ArrayBuffer and participant data.
- * Returns the output Blob.
+ * Returns the output Blob. Throws an Error with a readable message if the
+ * template is malformed (e.g. an unclosed or mistyped {tag}).
  */
 export function generateDocument(
   templateBuffer: ArrayBuffer,
   data: Record<string, string>,
 ): Blob {
-  const zip = new PizZip(templateBuffer)
-  const doc = new Docxtemplater(zip, {
-    paragraphLoop: true,
-    linebreaks: true,
-    // Don't throw on unknown tags — just leave them blank
-    nullGetter: () => '',
-  })
-  doc.render(data)
+  let zip: PizZip
+  try {
+    zip = new PizZip(templateBuffer)
+  } catch {
+    throw new Error('The uploaded file is not a valid .docx document.')
+  }
+  let doc: Docxtemplater
+  try {
+    doc = new Docxtemplater(zip, {
+      paragraphLoop: true,
+      linebreaks: true,
+      // Don't throw on unknown tags — just leave them blank
+      nullGetter: () => '',
+    })
+  } catch (error) {
+    throw new Error(describeTemplateError(error))
+  }
+  try {
+    doc.render(data)
+  } catch (error) {
+    throw new Error(describeTemplateError(error))
+  }
   const out = doc.getZip().generate({
     type: 'blob',
     mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',

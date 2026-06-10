@@ -447,6 +447,7 @@ const es: Record<TranslationKeys, string> = {
   doc_generate_all: 'Seleccionar todos',
   doc_generating: 'Generando...',
   doc_no_participants: 'No se encontraron participantes',
+  doc_generate_error: 'No se pudo generar el documento. La plantilla puede contener una {etiqueta} no válida o mal escrita.',
   doc_delete_confirm: '¿Estás seguro de que deseas eliminar esta plantilla?',
   guide_title: 'Guía de plantillas',
   guide_intro: 'Aprende a preparar plantillas Word con etiquetas que Managemob reemplazará con datos de participantes.',

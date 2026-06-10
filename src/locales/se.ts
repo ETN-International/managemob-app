@@ -478,6 +478,7 @@ const se = {
   doc_generate_all: 'Välj alla',
   doc_generating: 'Genererar...',
   doc_no_participants: 'Inga deltagare hittades',
+  doc_generate_error: 'Det gick inte att generera dokumentet. Mallen kan innehålla en ogiltig eller felstavad {tagg}.',
   doc_delete_confirm: 'Är du säker på att du vill ta bort denna mall?',
   guide_title: 'Mallguide',
   guide_intro: 'Lär dig hur du förbereder Word-mallar med taggar som Managemob ersätter med deltagardata.',
