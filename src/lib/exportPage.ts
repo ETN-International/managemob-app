@@ -1,20 +1,5 @@
 // Utility to export a page DOM element to PDF or Word
 
-let html2pdfLoaded: Promise<void> | null = null
-
-function loadHtml2Pdf(): Promise<void> {
-  if (html2pdfLoaded) return html2pdfLoaded
-  html2pdfLoaded = new Promise((resolve, reject) => {
-    if ((window as any).html2pdf) { resolve(); return }
-    const s = document.createElement('script')
-    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js'
-    s.onload = () => resolve()
-    s.onerror = () => reject(new Error('Failed to load html2pdf'))
-    document.head.appendChild(s)
-  })
-  return html2pdfLoaded
-}
-
 /** Resolve CSS custom properties to concrete values for export */
 function resolveVars(el: HTMLElement) {
   const rootStyle = getComputedStyle(document.documentElement)
@@ -29,63 +14,73 @@ function resolveVars(el: HTMLElement) {
   })
 }
 
-/** Inline all computed styles that matter for rendering */
-function inlineComputedColors(el: HTMLElement) {
-  el.querySelectorAll<HTMLElement>('*').forEach(node => {
-    const cs = getComputedStyle(node)
-    const color = cs.color
-    const bg = cs.backgroundColor
-    if (color) node.style.color = color
-    if (bg && bg !== 'rgba(0, 0, 0, 0)') node.style.backgroundColor = bg
-  })
+/** Serialize all same-origin stylesheets into a single CSS string. */
+function collectAppCss(): string {
+  let css = ''
+  for (const sheet of Array.from(document.styleSheets)) {
+    try {
+      const rules = (sheet as CSSStyleSheet).cssRules
+      if (!rules) continue
+      for (const rule of Array.from(rules)) css += rule.cssText + '\n'
+    } catch {
+      // Cross-origin stylesheet — cssRules not readable; skip.
+    }
+  }
+  return css
 }
 
+/**
+ * Export a page element to PDF using the browser's native print engine.
+ *
+ * We deliberately avoid html2canvas/html2pdf here: that pipeline rasterises the
+ * DOM and was producing blank pages for this content (offscreen clone + tall
+ * canvas issues). Native print renders real, selectable text with correct page
+ * breaks and never yields blank output — at worst it is unstyled, never empty.
+ */
 export async function exportPageToPdf(element: HTMLElement, filename: string) {
-  await loadHtml2Pdf()
-  const html2pdf = (window as any).html2pdf
-
-  // Clone the element into an offscreen container so html2canvas can measure it fully
-  const clone = element.cloneNode(true) as HTMLElement
-  clone.style.position = 'absolute'
-  clone.style.left = '-9999px'
-  clone.style.top = '0'
-  clone.style.width = '900px'
-  clone.style.overflow = 'visible'
-  clone.style.height = 'auto'
-  clone.style.background = '#fff'
-  clone.style.padding = '32px 24px'
-
-  document.body.appendChild(clone)
-
-  // Resolve CSS variables and inline computed colors on the clone
-  resolveVars(clone)
-  inlineComputedColors(clone)
-
-  const opt = {
-    margin: [10, 10, 10, 10],
-    filename,
-    // JPEG keeps the rasterised canvas small; PNG on a tall canvas can exceed
-    // canvas/toDataURL limits and produce blank pages.
-    image: { type: 'jpeg', quality: 0.95 },
-    // Keep html2canvas at the proven config: do NOT set an explicit width — the
-    // clone sits at left:-9999px, and a fixed width would crop the capture to an
-    // empty region (blank pages).
-    html2canvas: { scale: 2, useCORS: true, scrollY: 0, windowWidth: 960, backgroundColor: '#ffffff' },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
-    // Break only BETWEEN atomic blocks (steps/rules/cards/headings) instead of
-    // 'avoid-all', which pushed whole sections to new pages (big blank gaps) or
-    // cut content taller than a page. This keeps each block intact while still
-    // allowing natural page breaks in long documents.
-    pagebreak: {
-      mode: ['css', 'legacy'],
-      avoid: ['.tg-step', '.tg-rule', '.tg-example-box', '.tg-section-title', '.pdf-block', 'h1', 'h2', 'tr', 'img'],
-    },
+  const win = window.open('', '_blank', 'width=900,height=1000')
+  if (!win) {
+    alert('Enable pop-ups for this site to export the PDF, then try again.')
+    return
   }
 
-  try {
-    await html2pdf().set(opt).from(clone).save()
-  } finally {
-    document.body.removeChild(clone)
+  const title = filename.replace(/\.pdf$/i, '')
+  const appCss = collectAppCss()
+
+  win.document.open()
+  win.document.write(`<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>${title}</title>
+<style>${appCss}</style>
+<style>
+  @page { size: A4; margin: 12mm; }
+  html, body { background: #fff !important; margin: 0 !important; padding: 0 !important; }
+  /* Force background colors/badges to print */
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .pdf-root { max-width: 100%; padding: 0; }
+  /* Keep atomic blocks together and headings attached to their content */
+  .tg-step, .tg-rule, .tg-example-box, .pdf-block { break-inside: avoid; page-break-inside: avoid; }
+  h1, h2 { break-after: avoid; page-break-after: avoid; }
+</style>
+</head>
+<body><div class="pdf-root">${element.outerHTML}</div></body>
+</html>`)
+  win.document.close()
+
+  const triggerPrint = () => {
+    win.focus()
+    win.onafterprint = () => { try { win.close() } catch { /* ignore */ } }
+    win.print()
+  }
+
+  // CSS is inlined (synchronous); give the new window a moment to lay out
+  // fonts/emoji before invoking the print dialog.
+  if (win.document.readyState === 'complete') {
+    setTimeout(triggerPrint, 300)
+  } else {
+    win.onload = () => setTimeout(triggerPrint, 300)
   }
 }
 
@@ -111,7 +106,7 @@ code{background:#e8f5e9;padding:2px 6px;border-radius:3px;font-size:0.9em}
 .tg-step-title{font-weight:bold;color:#1a1a2e}
 .tg-step-desc{color:#333}
 </style></head><body>${clone.innerHTML}</body></html>`
-  const blob = new Blob(['\ufeff', html], { type: 'application/msword' })
+  const blob = new Blob(['﻿', html], { type: 'application/msword' })
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
