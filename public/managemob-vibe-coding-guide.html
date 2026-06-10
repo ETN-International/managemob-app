@@ -930,7 +930,6 @@ code.code-block {
     var cfCards = CF_LANGS.map(function(f){
       var code = f[0]==='sv'?'se':f[0];
       return '<a href="guide-pdf/coolify-managemob-guide-'+code+'.pdf" download style="display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--paper-darker);border-radius:10px;text-decoration:none;color:var(--ink);background:var(--paper-dark)">'
-        + '<span style="font-size:20px">'+f[1]+'</span>'
         + '<span style="display:flex;flex-direction:column;line-height:1.25"><span style="font-weight:600">'+escapeHtml(f[2])+'</span><span style="font-size:12px;color:var(--ink-muted)">Coolify · '+f[0].toUpperCase()+'</span></span>'
         + '<span style="margin-left:auto;font-size:16px;color:var(--accent)">⬇</span>'
         + '</a>';
@@ -950,7 +949,6 @@ code.code-block {
     var DL_FILES = [['it','🇮🇹','Italiano'],['en','🇬🇧','English'],['es','🇪🇸','Español'],['fr','🇫🇷','Français'],['de','🇩🇪','Deutsch'],['pt','🇵🇹','Português'],['sv','🇸🇪','Svenska']];
     var dlCards = DL_FILES.map(function(f){
       return '<a href="guide-pdf/managemob-guide-'+f[0]+'.pdf" download style="display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--paper-darker);border-radius:10px;text-decoration:none;color:var(--ink);background:var(--paper-dark)">'
-        + '<span style="font-size:20px">'+f[1]+'</span>'
         + '<span style="display:flex;flex-direction:column;line-height:1.25"><span style="font-weight:600">'+escapeHtml(f[2])+'</span><span style="font-size:12px;color:var(--ink-muted)">PDF \u00b7 '+f[0].toUpperCase()+'</span></span>'
         + '<span style="margin-left:auto;font-size:16px;color:var(--accent)">\u2b07</span>'
         + '</a>';
