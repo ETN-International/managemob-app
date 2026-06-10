@@ -2919,6 +2919,15 @@ textarea.form-input {
   font-size: 13px;
 }
 
+/* Keep these blocks intact across PDF/print page breaks (used by html2pdf export) */
+.pdf-block,
+.tg-step,
+.tg-rule,
+.tg-example-box {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
 /* ============================================================
    SCROLLBARS
    ============================================================ */

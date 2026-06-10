@@ -124,12 +124,12 @@ export default function GuidePage() {
         <div className="tg-section">
           <h2 className="tg-section-title">{t('guide_indiv_group_title')}</h2>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
-            <div style={{ background: '#f0fdf4', border: '2px solid #bbf7d0', borderRadius: 12, padding: 20 }}>
+            <div className="pdf-block" style={{ background: '#f0fdf4', border: '2px solid #bbf7d0', borderRadius: 12, padding: 20 }}>
               <div style={{ fontSize: 28, marginBottom: 8 }}>{'\u{1F464}'}</div>
               <div style={{ fontSize: 15, fontWeight: 700, color: '#2D7A6F', marginBottom: 4 }}>Individual</div>
               <div style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.5 }}>{t('guide_individual_desc')}</div>
             </div>
-            <div style={{ background: '#f5f3ff', border: '2px solid #ddd6fe', borderRadius: 12, padding: 20 }}>
+            <div className="pdf-block" style={{ background: '#f5f3ff', border: '2px solid #ddd6fe', borderRadius: 12, padding: 20 }}>
               <div style={{ fontSize: 28, marginBottom: 8 }}>{'\u{1F465}'}</div>
               <div style={{ fontSize: 15, fontWeight: 700, color: '#8B5CF6', marginBottom: 4 }}>Group</div>
               <div style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.5 }}>{t('guide_group_desc')}</div>
@@ -155,7 +155,7 @@ export default function GuidePage() {
               { icon: '\u{1F4B0}', name: t('page_financial'), desc: t('guide_sec_financial') },
               { icon: '\u{1F3E2}', name: t('guide_sec_providers_name'), desc: t('guide_sec_providers') },
             ].map((s, i) => (
-              <div key={i} style={{
+              <div key={i} className="pdf-block" style={{
                 display: 'flex', alignItems: 'center', gap: 12,
                 padding: '12px 16px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8,
               }}>

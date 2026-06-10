@@ -146,7 +146,7 @@ export default function ManualPage() {
         </p>
 
         {/* TOC */}
-        <div style={{
+        <div className="pdf-block" style={{
           background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12,
           padding: '16px 20px', marginBottom: 32,
         }}>
