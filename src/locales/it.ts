@@ -8,7 +8,7 @@ const it: Record<TranslationKeys, string> = {
   nav_individuals: 'Partecipanti',
   nav_travel: 'Dettagli Viaggio',
   nav_transfer: 'Transfer',
-  nav_sendingOrgs: 'Organizzazioni di Invio',
+  nav_sendingOrgs: 'Organizzazioni Mittenti',
   nav_accommodation: 'Alloggio',
   nav_financial: 'Info Finanziarie',
   nav_mobilityProviders: 'Provider di Mobilità',
@@ -274,7 +274,7 @@ const it: Record<TranslationKeys, string> = {
   page_host_companies: 'Aziende Ospitanti',
   hc_new: 'Nuova Azienda Ospitante',
   hc_hint: 'Seleziona un\'azienda o creane una nuova',
-  hc_new_title: 'Nuova Host Company',
+  hc_new_title: 'Nuova Azienda Ospitante',
   sec_hc_details: 'Dati Azienda',
   sec_hc_tutor: 'Tutor Stage',
 

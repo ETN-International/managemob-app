@@ -418,7 +418,7 @@ const es: Record<TranslationKeys, string> = {
   card_assign_services: 'Asignar servicios',
   card_assign_services_desc: 'Vincular proveedores y servicios a los participantes existentes',
   card_manage_providers: 'Gestionar proveedores',
-  card_manage_providers_desc: 'Añadir y gestionar organizaciones, empresas anfitrionas, alojamientos y más',
+  card_manage_providers_desc: 'Añadir y gestionar organizaciones, empresas de acogida, alojamientos y más',
   card_group_info: 'Información del grupo',
   card_group_members: 'Miembros del grupo',
   card_group_paste_placeholder: 'Pega un nombre por línea\nEj.:\nJuan García\nMaría López',
