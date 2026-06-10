@@ -1063,14 +1063,17 @@ a:hover { text-decoration: underline; }
   border: 2px solid transparent;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  font-size: 20px;
-  padding: 3px 5px;
-  transition: border-color 0.15s, background 0.15s;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  padding: 4px 9px;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
   line-height: 1;
 }
 
-.lang-btn:hover { background: var(--bg); }
-.lang-btn.active { border-color: var(--teal); background: #EBF4F0; }
+.lang-btn:hover { background: var(--bg); color: var(--text); }
+.lang-btn.active { border-color: var(--teal); background: #EBF4F0; color: var(--teal); }
 
 .sidebar-lang {
   padding: 8px 12px;

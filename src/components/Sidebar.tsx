@@ -114,7 +114,7 @@ export default function Sidebar({ userName, userEmail, onLogout }: SidebarProps)
       {/* Language selector */}
       <div className="sidebar-lang" style={{ position: 'relative' }}>
         <button className="sidebar-lang-btn" onClick={() => setShowLangMenu(p => !p)}>
-          <span>{currentLang?.flag}</span>
+          <span style={{ fontWeight: 700, fontSize: 11, opacity: 0.8 }}>{currentLang?.code.toUpperCase()}</span>
           <span className="sidebar-lang-label">{currentLang?.label}</span>
           <span style={{ opacity: 0.6, fontSize: 10 }}>▾</span>
         </button>
@@ -126,7 +126,7 @@ export default function Sidebar({ userName, userEmail, onLogout }: SidebarProps)
                 className={`lang-menu-item ${lang === l.code ? 'active' : ''}`}
                 onClick={() => { setLang(l.code); setShowLangMenu(false) }}
               >
-                <span>{l.flag}</span>
+                <span style={{ fontWeight: 700, fontSize: 11, minWidth: 22, opacity: 0.8 }}>{l.code.toUpperCase()}</span>
                 <span>{l.label}</span>
               </button>
             ))}

@@ -41,7 +41,7 @@ export default function Login() {
               onClick={() => setLang(l.code)}
               title={l.label}
             >
-              {l.flag}
+              {l.code.toUpperCase()}
             </button>
           ))}
         </div>
