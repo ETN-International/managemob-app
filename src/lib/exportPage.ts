@@ -64,18 +64,13 @@ export async function exportPageToPdf(element: HTMLElement, filename: string) {
   const opt = {
     margin: [10, 10, 10, 10],
     filename,
-    // PNG keeps text crisp; JPEG introduced compression blur around glyphs
-    image: { type: 'png' as const },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      scrollY: 0,
-      // Match the offscreen clone width so layout/media queries don't reflow
-      windowWidth: 900,
-      width: 900,
-      backgroundColor: '#ffffff',
-      letterRendering: true,
-    },
+    // JPEG keeps the rasterised canvas small; PNG on a tall canvas can exceed
+    // canvas/toDataURL limits and produce blank pages.
+    image: { type: 'jpeg', quality: 0.95 },
+    // Keep html2canvas at the proven config: do NOT set an explicit width — the
+    // clone sits at left:-9999px, and a fixed width would crop the capture to an
+    // empty region (blank pages).
+    html2canvas: { scale: 2, useCORS: true, scrollY: 0, windowWidth: 960, backgroundColor: '#ffffff' },
     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
     // Break only BETWEEN atomic blocks (steps/rules/cards/headings) instead of
     // 'avoid-all', which pushed whole sections to new pages (big blank gaps) or
