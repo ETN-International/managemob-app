@@ -1,6 +1,6 @@
 -- ============================================================
--- MIGRATION: Add missing columns from Airtable CSV export
--- Run this in the Supabase SQL Editor
+-- MIGRATION: Add extended provider columns
+-- Run this in the Supabase SQL Editor (after schema.sql)
 -- ============================================================
 
 -- 1. mobility_service_providers: add all missing fields

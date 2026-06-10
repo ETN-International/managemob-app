@@ -1,12 +1,12 @@
--- Migration: Add new fields to match Airtable schema
--- Run in Supabase SQL Editor
+-- Migration: Add participant cost fields and extended accommodation fields
+-- Run in Supabase SQL Editor (after schema.sql)
 
 -- Participants: add language_course_cost and cultural_activities_cost
 ALTER TABLE participants
   ADD COLUMN IF NOT EXISTS language_course_cost NUMERIC,
   ADD COLUMN IF NOT EXISTS cultural_activities_cost NUMERIC;
 
--- Accommodation: add all Airtable-missing fields
+-- Accommodation: add extended household/room fields
 ALTER TABLE accommodation
   ADD COLUMN IF NOT EXISTS bank_sort_code TEXT,
   ADD COLUMN IF NOT EXISTS num_inhabitants INTEGER,

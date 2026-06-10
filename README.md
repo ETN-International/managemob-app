@@ -21,7 +21,7 @@ Use GitHub's **Fork** (or **Use this template**) button to create your own copy.
 
 1. Sign up at [supabase.com](https://supabase.com) and create a new project.
 2. In the **SQL Editor**, run the contents of [`supabase/schema.sql`](supabase/schema.sql).
-3. Then run each file in [`supabase/migrations/`](supabase/migrations/) (this also creates the `document-templates` storage bucket used for Word templates).
+3. Then run each file in [`supabase/migrations/`](supabase/migrations/) in filename order (these add extra columns used by the app and create the `document-templates` storage bucket used for Word templates).
 
 ### 3. Configure the environment
 
@@ -46,22 +46,12 @@ Build with `npm run build` — the output in `dist/` is a static site that can b
 ## ⚠️ Security checklist before going live
 
 - **Disable public sign-up.** Each Managemob instance is meant for a single organisation: any authenticated user can read and edit all data. In the Supabase dashboard go to **Authentication → Sign In / Up → User Signups** and disable *"Allow new users to sign up"*. Create accounts for your staff manually from **Authentication → Users**.
-- **Never commit real data or secrets.** Participant data includes passports, birth dates and bank details. Keep CSV exports and generated SQL out of git (the `.gitignore` already excludes `datiAirtable/` and `import_data.sql`). Never hard-code the Supabase `service_role` key anywhere — it bypasses all security policies.
+- **Never commit real data or secrets.** Participant data includes passports, birth dates and bank details. Keep CSV exports and data dumps out of git. Never hard-code the Supabase `service_role` key anywhere — it bypasses all security policies.
 - **If a key has ever been committed,** rotate it in **Settings → API → Reset keys** (clearing files is not enough: git history keeps old versions).
 
 ## Importing existing data
 
-The `scripts/` folder contains utilities to import CSV exports (e.g. from Airtable) into Supabase. Place your CSV files in a local `datiAirtable/` folder (git-ignored) and run:
-
-```bash
-# Import using your own login (respects security policies)
-SUPABASE_URL=https://your-project.supabase.co \
-SUPABASE_ANON_KEY=your-anon-key \
-SUPABASE_EMAIL=you@example.org SUPABASE_PASSWORD=yourpassword \
-node scripts/import_csv.mjs
-```
-
-Alternatively, `scripts/generate_sql.mjs` converts the CSVs into an `import_data.sql` file you can paste into the Supabase SQL Editor.
+To bring in participants in bulk, use the **Add Group** quick action on the Home page: it accepts pasted names or a CSV file with column mapping. For other tables, the Supabase dashboard's **Table Editor** supports CSV import directly.
 
 ## Customisation
 
