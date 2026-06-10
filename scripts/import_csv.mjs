@@ -7,8 +7,14 @@ import { dirname, join } from 'path'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const DATA_DIR = join(__dirname, '..', 'datiAirtable')
 
-const SUPABASE_URL = 'https://emxgzyagctsygoqzvmuu.supabase.co'
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVteGd6eWFnY3RzeWdvcXp2bXV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MzU1MzUsImV4cCI6MjA4OTUxMTUzNX0.LM-DjuDk0haKLadjg6RNmqo67H-WM60jK1MSMmA6Oio'
+const SUPABASE_URL = process.env.SUPABASE_URL
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY
+
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  console.error('ERROR: Set SUPABASE_URL and SUPABASE_ANON_KEY environment variables.')
+  console.error('Example: SUPABASE_URL=https://xxx.supabase.co SUPABASE_ANON_KEY=xxx node scripts/import_csv.mjs')
+  process.exit(1)
+}
 
 // Use SUPABASE_SERVICE_KEY env var if available (bypasses RLS), otherwise use anon key + login
 const KEY = process.env.SUPABASE_SERVICE_KEY || SUPABASE_ANON_KEY

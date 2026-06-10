@@ -18,8 +18,14 @@ import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const CSV_DIR = resolve(__dirname, '../../Docs/airtable_export/csv')
 
-const SUPABASE_URL = 'https://emxgzyagctsygoqzvmuu.supabase.co'
-const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVteGd6eWFnY3RzeWdvcXp2bXV1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MzkzNTUzNSwiZXhwIjoyMDg5NTExNTM1fQ.7r2RI9raNEo7bnUMzhFiYKKc8kEr-qZu5kxR8uYNR4w'
+const SUPABASE_URL = process.env.SUPABASE_URL
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY
+
+if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
+  console.error('ERROR: Set SUPABASE_URL and SUPABASE_SERVICE_KEY environment variables.')
+  console.error('Example: SUPABASE_URL=https://xxx.supabase.co SUPABASE_SERVICE_KEY=xxx node scripts/import_to_supabase.mjs')
+  process.exit(1)
+}
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
