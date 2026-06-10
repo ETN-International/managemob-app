@@ -724,6 +724,8 @@ code.code-block {
       <div id="tags" class="tags"></div>
     </div>
 
+    <div id="section11" class="section11" style="margin-top:48px"></div>
+
     <div id="downloads" class="downloads" style="margin-top:48px"></div>
   </main>
 </div>
@@ -899,6 +901,37 @@ code.code-block {
 
     // Tags
     $('#tags').innerHTML = c.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('');
+
+    // Section 11+ — Coolify extension
+    var COOLIFY = {
+      it:{label:"Estensione · 11+",title:"Gestisci Managemob da un unico pannello con Coolify",body:"Coolify è una piattaforma self-hosted che riunisce deployment, variabili d'ambiente, domini e monitoraggio in un'unica dashboard. Questa estensione prosegue i passi 01–10: il codice, l'assistente AI e Supabase restano dove sono — cambia solo il livello di pubblicazione (Netlify → Coolify). Continui a non scrivere una riga di codice a mano.",s:["Prepara la tua sala di controllo","Stessa build, nuova casa","Sposta le chiavi in Coolify","Il tuo indirizzo, le tue regole"],dl:"Scarica la guida Coolify (PDF)"},
+      en:{label:"Extension · 11+",title:"Run Managemob from one panel with Coolify",body:"Coolify is a self-hosted platform that gathers deployment, environment variables, domains and monitoring in a single dashboard. This extension continues steps 01–10: your code, your AI assistant and Supabase stay where they are — only the publication layer changes (Netlify → Coolify). You still don't write a single line of code by hand.",s:["Set up your control room","Same build, new home","Move the keys into Coolify","Your address, your rules"],dl:"Download the Coolify guide (PDF)"},
+      es:{label:"Extensión · 11+",title:"Gestiona Managemob desde un único panel con Coolify",body:"Coolify es una plataforma self-hosted que reúne despliegue, variables de entorno, dominios y monitorización en un único panel. Esta extensión continúa los pasos 01–10: tu código, tu asistente de IA y Supabase se quedan donde están — solo cambia la capa de publicación (Netlify → Coolify). Sigues sin escribir ni una línea de código a mano.",s:["Prepara tu sala de control","Misma build, nueva casa","Mueve las claves a Coolify","Tu dirección, tus reglas"],dl:"Descargar la guía de Coolify (PDF)"},
+      fr:{label:"Extension · 11+",title:"Gérez Managemob depuis un seul panneau avec Coolify",body:"Coolify est une plateforme auto-hébergée qui réunit déploiement, variables d'environnement, domaines et supervision dans un seul tableau de bord. Cette extension prolonge les étapes 01–10 : votre code, votre assistant IA et Supabase restent en place — seule la couche de publication change (Netlify → Coolify). Vous n'écrivez toujours pas une ligne de code à la main.",s:["Préparez votre salle de contrôle","Même build, nouvelle maison","Déplacez les clés dans Coolify","Votre adresse, vos règles"],dl:"Télécharger le guide Coolify (PDF)"},
+      de:{label:"Erweiterung · 11+",title:"Managemob über ein einziges Panel mit Coolify betreiben",body:"Coolify ist eine selbstgehostete Plattform, die Deployment, Umgebungsvariablen, Domains und Monitoring in einem einzigen Dashboard vereint. Diese Erweiterung setzt die Schritte 01–10 fort: Ihr Code, Ihr KI-Assistent und Supabase bleiben unverändert — nur die Veröffentlichungsebene ändert sich (Netlify → Coolify). Sie schreiben weiterhin keine einzige Zeile Code von Hand.",s:["Richten Sie Ihren Kontrollraum ein","Gleicher Build, neues Zuhause","Schlüssel zu Coolify verschieben","Ihre Adresse, Ihre Regeln"],dl:"Coolify-Anleitung herunterladen (PDF)"},
+      pt:{label:"Extensão · 11+",title:"Gere o Managemob a partir de um único painel com Coolify",body:"O Coolify é uma plataforma self-hosted que reúne implementação, variáveis de ambiente, domínios e monitorização num único painel. Esta extensão dá continuidade aos passos 01–10: o teu código, o teu assistente de IA e o Supabase ficam onde estão — só muda a camada de publicação (Netlify → Coolify). Continuas a não escrever uma única linha de código à mão.",s:["Prepara a tua sala de controlo","Mesma build, nova casa","Move as chaves para o Coolify","O teu endereço, as tuas regras"],dl:"Descarregar o guia Coolify (PDF)"},
+      sv:{label:"Tillägg · 11+",title:"Kör Managemob från en enda panel med Coolify",body:"Coolify är en självhostad plattform som samlar driftsättning, miljövariabler, domäner och övervakning i en enda panel. Det här tillägget fortsätter stegen 01–10: din kod, din AI-assistent och Supabase stannar där de är — bara publiceringslagret ändras (Netlify → Coolify). Du skriver fortfarande inte en enda rad kod för hand.",s:["Ställ in ditt kontrollrum","Samma build, nytt hem","Flytta nycklarna till Coolify","Din adress, dina regler"],dl:"Ladda ner Coolify-guiden (PDF)"}
+    };
+    var CF_LANGS = [['it','🇮🇹','Italiano'],['en','🇬🇧','English'],['es','🇪🇸','Español'],['fr','🇫🇷','Français'],['de','🇩🇪','Deutsch'],['pt','🇵🇹','Português'],['sv','🇸🇪','Svenska']];
+    var cf = COOLIFY[lang] || COOLIFY.en;
+    var cfSteps = cf.s.map(function(t,i){
+      return '<div style="display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--paper-darker)"><span style="font-weight:700;color:var(--accent);min-width:30px">'+(11+i)+'</span><span style="color:var(--ink)">'+escapeHtml(t)+'</span></div>';
+    }).join('');
+    var cfCards = CF_LANGS.map(function(f){
+      var code = f[0]==='sv'?'se':f[0];
+      return '<a href="guide-pdf/coolify-managemob-guide-'+code+'.pdf" download style="display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--paper-darker);border-radius:10px;text-decoration:none;color:var(--ink);background:var(--paper-dark)">'
+        + '<span style="font-size:20px">'+f[1]+'</span>'
+        + '<span style="display:flex;flex-direction:column;line-height:1.25"><span style="font-weight:600">'+escapeHtml(f[2])+'</span><span style="font-size:12px;color:var(--ink-muted)">Coolify · '+f[0].toUpperCase()+'</span></span>'
+        + '<span style="margin-left:auto;font-size:16px;color:var(--accent)">⬇</span>'
+        + '</a>';
+    }).join('');
+    $('#section11').innerHTML =
+      '<div class="conclusion-label">'+escapeHtml(cf.label)+'</div>'
+      + '<h2 class="conclusion-title">'+escapeHtml(cf.title)+'</h2>'
+      + '<p class="conclusion-body">'+escapeHtml(cf.body)+'</p>'
+      + '<div style="margin-top:18px;margin-bottom:8px">'+cfSteps+'</div>'
+      + '<h3 style="margin-top:26px;margin-bottom:14px;font-size:1rem;color:var(--ink)">'+escapeHtml(cf.dl)+'</h3>'
+      + '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px">'+cfCards+'</div>';
 
     // PDF downloads
     var DL_TITLE = {it:'Scarica le guide (PDF)',en:'Download the guides (PDF)',es:'Descargar las guías (PDF)',fr:'Télécharger les guides (PDF)',de:'Anleitungen herunterladen (PDF)',pt:'Descarregar os guias (PDF)',sv:'Ladda ner guiderna (PDF)'};
