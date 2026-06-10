@@ -723,6 +723,8 @@ code.code-block {
       <p id="conclusion-body" class="conclusion-body"></p>
       <div id="tags" class="tags"></div>
     </div>
+
+    <div id="downloads" class="downloads" style="margin-top:48px"></div>
   </main>
 </div>
 
@@ -897,6 +899,23 @@ code.code-block {
 
     // Tags
     $('#tags').innerHTML = c.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('');
+
+    // PDF downloads
+    var DL_TITLE = {it:'Scarica le guide (PDF)',en:'Download the guides (PDF)',es:'Descargar las guías (PDF)',fr:'Télécharger les guides (PDF)',de:'Anleitungen herunterladen (PDF)',pt:'Descarregar os guias (PDF)',sv:'Ladda ner guiderna (PDF)'};
+    var DL_SUB = {it:'Versione PDF della guida operativa, in tutte le lingue.',en:'PDF version of the operational guide, in every language.',es:'Versión PDF de la guía operativa, en todos los idiomas.',fr:'Version PDF du guide opérationnel, dans toutes les langues.',de:'PDF-Version der Betriebsanleitung, in allen Sprachen.',pt:'Versão PDF do guia operacional, em todas as línguas.',sv:'PDF-version av driftguiden, på alla språk.'};
+    var DL_FILES = [['it','🇮🇹','Italiano'],['en','🇬🇧','English'],['es','🇪🇸','Español'],['fr','🇫🇷','Français'],['de','🇩🇪','Deutsch'],['pt','🇵🇹','Português'],['sv','🇸🇪','Svenska']];
+    var dlCards = DL_FILES.map(function(f){
+      return '<a href="guide-pdf/managemob-guide-'+f[0]+'.pdf" download style="display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--paper-darker);border-radius:10px;text-decoration:none;color:var(--ink);background:var(--paper-dark)">'
+        + '<span style="font-size:20px">'+f[1]+'</span>'
+        + '<span style="display:flex;flex-direction:column;line-height:1.25"><span style="font-weight:600">'+escapeHtml(f[2])+'</span><span style="font-size:12px;color:var(--ink-muted)">PDF \u00b7 '+f[0].toUpperCase()+'</span></span>'
+        + '<span style="margin-left:auto;font-size:16px;color:var(--accent)">\u2b07</span>'
+        + '</a>';
+    }).join('');
+    $('#downloads').innerHTML =
+      '<div class="conclusion-label">PDF</div>'
+      + '<h2 class="conclusion-title">' + escapeHtml(DL_TITLE[lang] || DL_TITLE.en) + '</h2>'
+      + '<p class="conclusion-body">' + escapeHtml(DL_SUB[lang] || DL_SUB.en) + '</p>'
+      + '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-top:18px">' + dlCards + '</div>';
 
     // Footer
     $('#footer-creator').textContent = c.footer_creator;
