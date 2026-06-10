@@ -827,7 +827,7 @@ code.code-block {
     `).join('');
     return `
       <div class="sidebar-eyebrow">${escapeHtml(content.lang_switch_label || 'Index')}</div>
-      <ul class="nav-list">${items}</ul>
+      <ul class="nav-list">${items}<li class="nav-item nav-item-cf" data-target="section11" style="margin-top:14px;padding-top:14px;border-top:1px dashed var(--paper-darker)"><span class="nav-num" style="color:var(--accent);font-weight:800">11+</span><span class="nav-text" style="color:var(--accent);font-weight:700">${escapeHtml(({it:"Estensione Coolify",en:"Coolify extension",es:"Extensión Coolify",fr:"Extension Coolify",de:"Coolify-Erweiterung",pt:"Extensão Coolify",sv:"Coolify-tillägg"})[content.lang]||"Coolify extension")}</span></li></ul>
       <div class="sidebar-foot">
         ${escapeHtml(content.footer_creator)}<br>
         ${escapeHtml(content.footer_brand)}
@@ -914,6 +914,16 @@ code.code-block {
     };
     var CF_LANGS = [['it','🇮🇹','Italiano'],['en','🇬🇧','English'],['es','🇪🇸','Español'],['fr','🇫🇷','Français'],['de','🇩🇪','Deutsch'],['pt','🇵🇹','Português'],['sv','🇸🇪','Svenska']];
     var cf = COOLIFY[lang] || COOLIFY.en;
+    var CF_NOTE = {
+      it:"Aggiunta facoltativa alla guida — un'ulteriore semplificazione: riunisce pubblicazione, domini, variabili e monitoraggio in un unico pannello. I passi 01–10 restano validi; qui cambia solo come pubblichi (Netlify → Coolify).",
+      en:"An optional add-on to the guide — a further simplification: it brings publishing, domains, variables and monitoring into a single panel. Steps 01–10 stay valid; only how you publish changes (Netlify → Coolify).",
+      es:"Un añadido opcional a la guía — una simplificación adicional: reúne publicación, dominios, variables y monitorización en un único panel. Los pasos 01–10 siguen siendo válidos; solo cambia cómo publicas (Netlify → Coolify).",
+      fr:"Un ajout facultatif au guide — une simplification supplémentaire : il réunit publication, domaines, variables et supervision dans un seul panneau. Les étapes 01–10 restent valables ; seule la façon de publier change (Netlify → Coolify).",
+      de:"Eine optionale Ergänzung zur Anleitung — eine weitere Vereinfachung: Sie bringt Veröffentlichung, Domains, Variablen und Monitoring in ein einziges Panel. Die Schritte 01–10 bleiben gültig; nur die Art der Veröffentlichung ändert sich (Netlify → Coolify).",
+      pt:"Um acréscimo opcional ao guia — uma simplificação adicional: reúne publicação, domínios, variáveis e monitorização num único painel. Os passos 01–10 continuam válidos; só muda a forma como publicas (Netlify → Coolify).",
+      sv:"Ett valfritt tillägg till guiden — en ytterligare förenkling: den samlar publicering, domäner, variabler och övervakning i en enda panel. Stegen 01–10 är fortfarande giltiga; bara sättet du publicerar på ändras (Netlify → Coolify)."
+    };
+    var cfNote = '<div style="margin:16px 0 6px;padding:14px 16px;border-left:4px solid var(--accent);background:rgba(0,0,0,0.035);border-radius:8px;font-size:0.95rem;line-height:1.6;color:var(--ink)"><strong style="color:var(--accent)">★ </strong>'+escapeHtml(CF_NOTE[lang]||CF_NOTE.en)+'</div>';
     var cfSteps = cf.s.map(function(t,i){
       return '<div style="display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--paper-darker)"><span style="font-weight:700;color:var(--accent);min-width:30px">'+(11+i)+'</span><span style="color:var(--ink)">'+escapeHtml(t)+'</span></div>';
     }).join('');
@@ -928,6 +938,7 @@ code.code-block {
     $('#section11').innerHTML =
       '<div class="conclusion-label">'+escapeHtml(cf.label)+'</div>'
       + '<h2 class="conclusion-title">'+escapeHtml(cf.title)+'</h2>'
+      + cfNote
       + '<p class="conclusion-body">'+escapeHtml(cf.body)+'</p>'
       + '<div style="margin-top:18px;margin-bottom:8px">'+cfSteps+'</div>'
       + '<h3 style="margin-top:26px;margin-bottom:14px;font-size:1rem;color:var(--ink)">'+escapeHtml(cf.dl)+'</h3>'
