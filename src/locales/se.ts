@@ -11,7 +11,7 @@ const se = {
   nav_accommodation: 'Boende',
   nav_financial: 'Ekonomisk info',
   nav_mobilityProviders: 'Mobilitetsaktörer',
-  nav_groups: 'Grupper och Individer',
+  nav_groups: 'Grupper och individer',
   nav_hostCompanies: 'Värdföretag',
   nav_insurance: 'Försäkring',
   nav_languageCourseProviders: 'Språkkursleverantörer',
@@ -110,7 +110,7 @@ const se = {
 
   // Participants
   page_individuals: 'Deltagare',
-  page_groups: 'Grupper och Individer',
+  page_groups: 'Grupper och individer',
   part_new: 'Ny deltagare',
   part_hint: 'Välj en deltagare eller skapa en ny',
   part_new_btn: '+ Ny deltagare',
@@ -274,7 +274,7 @@ const se = {
   fld_acc_bedroom_size4: 'Sovrum 4 storlek',
   fld_acc_toilets: 'Antal toaletter',
   fld_acc_carpet: 'Matta',
-  fld_acc_unisex: 'Unisex / Reserverat',
+  fld_acc_unisex: 'Unisex / reserverat',
   fld_acc_sheets: 'Lakan och handdukar',
   fld_acc_sort_code: 'Clearingnummer',
   fld_acc_last_contact: 'Senaste kontakt',
@@ -438,7 +438,7 @@ const se = {
   home_stats_outgoing: 'Utgående',
   home_stats_recent: 'Senaste 30 dagarna',
 
-  pdf_voucher: '📄 Info Voucher',
+  pdf_voucher: '📄 Info voucher',
   pdf_financial: '📊 Ekonomisk rapport',
   pdf_certificate: '🎓 Certifikat',
 
@@ -460,9 +460,9 @@ const se = {
   card_auto_indiv_group: 'automatiskt från Gruppnamn',
   card_group_name_hint: 'Lämna tomt för Enskild, fyll i för Grupp',
   cal_add_travel_hint: 'Lägg till resedetaljer från sidan Resedetaljer',
-  cal_open_profile: 'Öppna Profil',
-  td_new: 'Ny Resedetalj',
-  td_edit: 'Redigera Resedetalj',
+  cal_open_profile: 'Öppna profil',
+  td_new: 'Ny resedetalj',
+  td_edit: 'Redigera resedetalj',
 
   // Documents page
   doc_title: 'Dokument',
@@ -509,7 +509,7 @@ const se = {
   guide_tip_test: 'Testa alltid med en deltagare innan du genererar i batch',
   guide_tip_combine: 'Kombinera flera taggar: {name} {surname} anländer {arrival_date}',
   guide_tip_check: 'Kontrollera att deltagardata är komplett innan generering',
-  doc_export_placeholders: 'Exportera Taggar (CSV)',
+  doc_export_placeholders: 'Exportera taggar (CSV)',
 
   // Guide & Manual navigation
   nav_guide: 'Guide',
@@ -602,10 +602,10 @@ const se = {
   manual_calendar_1: 'Navigera till Kalender från sidopanelen eller startsidan. Månadsvyn visar ankomster (gröna) och avresor (orange) som piller.',
   manual_calendar_2: 'Använd filtren högst upp för att visa bara Inkommande, Utgående, Individ, Grupp eller ett specifikt gruppnamn.',
   manual_calendar_3: 'Klicka på en dag för att öppna sidopanelen med alla händelser för det datumet.',
-  manual_calendar_4: 'Klicka på ett deltagarnamn i panelen för att öppna en detaljmodal med datum, leverantörer, resedetaljer och kontakter. Använd "Öppna Profil" för att gå till posten eller "+ Resedetaljer" för att lägga till flyginformation.',
+  manual_calendar_4: 'Klicka på ett deltagarnamn i panelen för att öppna en detaljmodal med datum, leverantörer, resedetaljer och kontakter. Använd "Öppna profil" för att gå till posten eller "+ Resedetaljer" för att lägga till flyginformation.',
   manual_travel_title: 'Resedetaljer',
   manual_travel_1: 'Navigera till Inkommande > Resedetaljer eller Utgående > Resedetaljer. Tabellen visar alla reseposter.',
-  manual_travel_2: 'Klicka "+ Ny Resedetalj" för att lägga till en post: välj deltagare, transporttyp (Flyg, Tåg, Buss, Bil), ange flyg-/tågnummer, avgångs-/ankomsttider och biljettpris.',
+  manual_travel_2: 'Klicka "+ Ny resedetalj" för att lägga till en post: välj deltagare, transporttyp (Flyg, Tåg, Buss, Bil), ange flyg-/tågnummer, avgångs-/ankomsttider och biljettpris.',
   manual_travel_3: 'Varje rad har Redigera- och Ta bort-knappar för att ändra eller ta bort poster.',
   manual_financial_title: 'Ekonomisk information',
   manual_financial_1: 'Navigera till Inkommande > Ekonomisk info eller Utgående > Ekonomisk info. Sammanfattningsfältet visar Totalt bidrag och Total marginal.',
@@ -613,7 +613,7 @@ const se = {
   manual_financial_3: 'Marginalkolumnen är färgkodad: grönt för positivt (vinst), rött för negativt (förlust). Klicka Spara eller X för att avbryta.',
   manual_documents_title: 'Dokument',
   manual_documents_1: 'Navigera till Dokument i sidopanelen. Klicka "Ladda upp mall" för att lägga till en Word-mall (.docx) med {platshållare}-taggar.',
-  manual_documents_2: 'Klicka "Mallguide" för detaljerade instruktioner, eller "Exportera Taggar (CSV)" för att ladda ner taggreferensen.',
+  manual_documents_2: 'Klicka "Mallguide" för detaljerade instruktioner, eller "Exportera taggar (CSV)" för att ladda ner taggreferensen.',
   manual_documents_3: 'Välj en mall från listan, sök och markera deltagare. Klicka Generera för att ladda ner det ifyllda dokumentet.',
   manual_documents_4: 'Vid flera deltagare skapar systemet ett ZIP-arkiv med ett dokument per deltagare. Bara .docx-filer stöds (inte PDF).',
   manual_dashboard_title: 'Dashboard',
